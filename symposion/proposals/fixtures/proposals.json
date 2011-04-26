@@ -1,0 +1,167 @@
+[
+    {
+        "pk": 1, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "guido", 
+            "first_name": "", 
+            "last_name": "", 
+            "is_active": true, 
+            "is_superuser": false, 
+            "is_staff": false, 
+            "last_login": "2010-11-02 20:22:32", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "sha1$96c22$0d301d13c7ccf4c13731124b6d9074bf3c345ab7", 
+            "email": "guido@python.org", 
+            "date_joined": "2010-11-02 20:22:32"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "matz", 
+            "first_name": "", 
+            "last_name": "", 
+            "is_active": true, 
+            "is_superuser": false, 
+            "is_staff": false, 
+            "last_login": "2010-11-02 20:22:32", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "sha1$5b1c2$50163333eebd927af08ac9cae6d393cb5ceb72e0", 
+            "email": "matz@ruby.org", 
+            "date_joined": "2010-11-02 20:22:32"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "auth.user", 
+        "fields": {
+            "username": "larryw", 
+            "first_name": "", 
+            "last_name": "", 
+            "is_active": true, 
+            "is_superuser": false, 
+            "is_staff": false, 
+            "last_login": "2010-11-02 20:22:32", 
+            "groups": [], 
+            "user_permissions": [], 
+            "password": "sha1$01ff1$385f0771ec44e83f5f78cecce1253fbe9f43cac4", 
+            "email": "larry@perl.org", 
+            "date_joined": "2010-11-02 20:22:32"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "speakers.speaker", 
+        "fields": {
+            "invite_token": "", 
+            "name": "Guido van Rossum", 
+            "created": "2010-11-02 20:22:32", 
+            "photo": "", 
+            "twitter_username": "gvanrossum", 
+            "user": 1, 
+            "invite_email": null, 
+            "annotation": "", 
+            "biography": "I wrote Python, and named it after Monty Python", 
+            "biography_html": "<p>I wrote Python, and named it after Monty Python</p>\n"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "speakers.speaker", 
+        "fields": {
+            "invite_token": "", 
+            "name": "Yukihiro Matsumoto", 
+            "created": "2010-11-02 20:22:32", 
+            "photo": "", 
+            "twitter_username": "yukihiro_matz", 
+            "user": 2, 
+            "invite_email": null, 
+            "annotation": "", 
+            "biography": "I wrote Ruby, and named it after the rare gem Ruby, a pun on Perl/pearl.", 
+            "biography_html": "<p>I wrote Ruby, and named it after the rare gem Ruby, a pun on Perl/pearl.</p>\n"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "speakers.speaker", 
+        "fields": {
+            "invite_token": "", 
+            "name": "Larry Wall", 
+            "created": "2010-11-02 20:22:32", 
+            "photo": "", 
+            "twitter_username": "", 
+            "user": 3, 
+            "invite_email": null, 
+            "annotation": "", 
+            "biography": "I wrote Perl, and named it after the Parable of the Pearl", 
+            "biography_html": "<p>I wrote Perl, and named it after the Parable of the Pearl</p>\n"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "proposals.proposal", 
+        "fields": {
+            "description": "YOU CAN HAVE DJANGO ON THE GOOGLES", 
+            "classification": 2, 
+            "session_type": 1, 
+            "abstract": "", 
+            "title": "Django on AppEngine", 
+            "submitted": "2010-11-02 20:22:32", 
+            "abstract_html": "", 
+            "recording": true, 
+            "additional_notes": "", 
+            "speaker": 1, 
+            "opt_out_ads": false, 
+            "extreme_pycon": false, 
+            "cancelled": false, 
+            "additional_speakers": [], 
+            "audience_level": 1
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "proposals.proposal", 
+        "fields": {
+            "description": "Haha just kidding, what Django can learn from Rails.", 
+            "classification": 3, 
+            "session_type": 1, 
+            "abstract": "", 
+            "title": "What Rails can Learn from Django", 
+            "submitted": "2010-11-02 20:22:32", 
+            "abstract_html": "", 
+            "recording": true, 
+            "additional_notes": "", 
+            "speaker": 2, 
+            "opt_out_ads": false, 
+            "extreme_pycon": false, 
+            "cancelled": false, 
+            "additional_speakers": [], 
+            "audience_level": 2
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "proposals.proposal", 
+        "fields": {
+            "description": "You guys should totally have a syntax for them", 
+            "classification": 2, 
+            "session_type": 1, 
+            "abstract": "", 
+            "title": "Why Regular Expressions Are Awesome", 
+            "submitted": "2010-11-02 20:22:32", 
+            "abstract_html": "", 
+            "recording": true, 
+            "additional_notes": "", 
+            "speaker": 3, 
+            "opt_out_ads": false, 
+            "extreme_pycon": false, 
+            "cancelled": false, 
+            "additional_speakers": [], 
+            "audience_level": 2
+        }
+    }
+]
