@@ -47,11 +47,11 @@ def proposals_generator(request, queryset, username=None, check_speaker=True):
 def group_proposals(proposals):
     grouped = {}
     for proposal in proposals:
-        session_type = proposal.session_type
-        if session_type in grouped:
-            grouped[session_type].append(proposal)
+        kind = proposal.kind
+        if kind in grouped:
+            grouped[kind].append(proposal)
         else:
-            grouped[session_type] = [proposal]
+            grouped[kind] = [proposal]
     return grouped
 
 

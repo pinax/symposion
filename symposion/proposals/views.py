@@ -2,6 +2,7 @@ import random
 
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.mail import EmailMultiAlternatives
 from django.db.models import Q
 from django.http import Http404, HttpResponseForbidden
 from django.shortcuts import render_to_response, redirect, get_object_or_404
@@ -19,7 +20,6 @@ from emailconfirmation.models import EmailAddress
 
 from symposion.proposals.forms import ProposalSubmitForm, ProposalEditForm, AddSpeakerForm
 from symposion.proposals.models import Proposal
-from symposion.review.forms import SpeakerCommentForm
 from symposion.speakers.models import Speaker
 
 
@@ -182,43 +182,8 @@ def proposal_detail(request, pk):
     if request.user not in [p.user for p in proposal.speakers()]:
         raise Http404()
     
-    message_form = SpeakerCommentForm()
-    if request.method == "POST":
-        message_form = SpeakerCommentForm(request.POST)
-        if message_form.is_valid():
-            
-            message = message_form.save(commit=False)
-            message.user = request.user
-            message.proposal = proposal
-            message.save()
-            
-            ProposalMessage = SpeakerCommentForm.Meta.model
-            reviewers = User.objects.filter(
-                id__in=ProposalMessage.objects.filter(
-                    proposal=proposal
-                ).exclude(
-                    user=request.user
-                ).distinct().values_list("user", flat=True)
-            )
-            
-            for reviewer in reviewers:
-                ctx = {
-                    "proposal": proposal,
-                    "message": message,
-                    "reviewer": True,
-                }
-                send_email(
-                    [reviewer.email], "proposal_new_message",
-                    context = ctx
-                )
-            
-            return redirect(request.path)
-    else:
-        message_form = SpeakerCommentForm()
-    
     ctx = {
         "proposal": proposal,
-        "message_form": message_form
     }
     ctx = RequestContext(request, ctx)
     return render_to_response("proposals/proposal_detail.html", ctx)

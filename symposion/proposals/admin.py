@@ -1,16 +1,14 @@
 from django.contrib import admin
 
-from symposion.proposals.models import Proposal, ProposalSessionType
+from symposion.proposals.models import Proposal, ProposalKind
 
 
-admin.site.register(ProposalSessionType)
+admin.site.register(ProposalKind)
 admin.site.register(Proposal,
     list_display = [
         "title",
-        "session_type",
+        "kind",
         "audience_level",
         "cancelled",
-        "extreme_pycon",
-        "invited"
     ]
 )
