@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 
 from fixture_generator import fixture_generator
 
-from speakers.models import Speaker
+from symposion.speakers.models import Speaker
 
 
 @fixture_generator(Speaker, User)

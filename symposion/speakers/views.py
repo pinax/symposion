@@ -10,9 +10,9 @@ from django.contrib.auth.decorators import login_required
 
 from pinax.apps.account.forms import LoginForm
 
-from proposals.models import Proposal
-from speakers.forms import SpeakerForm, SignupForm
-from speakers.models import Speaker
+from symposion.proposals.models import Proposal
+from symposion.speakers.forms import SpeakerForm, SignupForm
+from symposion.speakers.models import Speaker
 
 
 def speaker_dashboard(request):

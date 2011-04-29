@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import *
 
 
-urlpatterns = patterns("speakers.views",
+urlpatterns = patterns("symposion.speakers.views",
     url(r"^$", "speaker_dashboard", name="speaker_dashboard"),
     url(r"^create/$", "speaker_create", name="speaker_create"),
     url(r"^create/(\w+)/$", "speaker_create_token", name="speaker_create_token"),

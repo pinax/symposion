@@ -13,10 +13,10 @@ from django.contrib.auth.models import User
 
 from emailconfirmation.models import EmailAddress
 
-from proposals.forms import ProposalSubmitForm, ProposalEditForm, AddSpeakerForm
-from proposals.models import Proposal
-from review.forms import SpeakerCommentForm
-from speakers.models import Speaker
+from symposion.proposals.forms import ProposalSubmitForm, ProposalEditForm, AddSpeakerForm
+from symposion.proposals.models import Proposal
+from symposion.review.forms import SpeakerCommentForm
+from symposion.speakers.models import Speaker
 
 from pycon_project.utils import send_email
 

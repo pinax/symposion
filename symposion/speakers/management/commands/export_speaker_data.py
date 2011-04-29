@@ -3,7 +3,7 @@ import os
 
 from django.core.management.base import BaseCommand, CommandError
 
-from speakers.models import Speaker
+from symposion.speakers.models import Speaker
 
 
 class Command(BaseCommand):

@@ -6,7 +6,7 @@ from pinax.apps.account.forms import SignupForm as PinaxSignupForm
 
 from emailconfirmation.models import EmailAddress
 
-from speakers.models import Speaker
+from symposion.speakers.models import Speaker
 
 
 class SpeakerForm(forms.ModelForm):

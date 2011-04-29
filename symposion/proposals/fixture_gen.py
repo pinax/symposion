@@ -1,7 +1,7 @@
 from fixture_generator import fixture_generator
 
-from speakers.models import Speaker
-from proposals.models import Proposal
+from symposion.speakers.models import Speaker
+from symposion.proposals.models import Proposal
 
 
 @fixture_generator(Proposal, requires=["speakers.speakers"])
