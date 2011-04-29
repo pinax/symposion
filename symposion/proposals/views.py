@@ -1,15 +1,19 @@
 import random
 
+from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
 from django.http import Http404, HttpResponseForbidden
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.template import RequestContext
+from django.template.loader import render_to_string
 from django.utils.hashcompat import sha_constructor
+from django.utils.html import strip_tags
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.contrib.sites.models import Site
 
 from emailconfirmation.models import EmailAddress
 
@@ -18,7 +22,25 @@ from symposion.proposals.models import Proposal
 from symposion.review.forms import SpeakerCommentForm
 from symposion.speakers.models import Speaker
 
-from pycon_project.utils import send_email
+
+def send_email(to, kind, **kwargs):
+    
+    current_site = Site.objects.get_current()
+    
+    ctx = {
+        "current_site": current_site,
+        "STATIC_URL": settings.STATIC_URL,
+    }
+    ctx.update(kwargs.get("context", {}))
+    subject = render_to_string("emails/%s/subject.txt" % kind, ctx).strip()
+    message_html = render_to_string("emails/%s/message.html" % kind, ctx)
+    message_plaintext = strip_tags(message_html)
+    
+    from_email = settings.DEFAULT_FROM_EMAIL
+    
+    email = EmailMultiAlternatives(subject, message_plaintext, from_email, to)
+    email.attach_alternative(message_html, "text/html")
+    email.send()
 
 
 def proposal_submit(request):

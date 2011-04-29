@@ -1,7 +1,7 @@
 from django import forms
 from django.db.models import Q
 
-from proposals.models import Proposal, ProposalSessionType
+from symposion.proposals.models import Proposal, ProposalSessionType
 
 
 class ProposalForm(forms.ModelForm):

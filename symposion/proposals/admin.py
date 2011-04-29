@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from proposals.models import Proposal, ProposalSessionType
+from symposion.proposals.models import Proposal, ProposalSessionType
 
 
 admin.site.register(ProposalSessionType)
