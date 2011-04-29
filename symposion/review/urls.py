@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import patterns, url, include, handler404, handler500
+from django.conf.urls.defaults import patterns, url, include
 
 
 urlpatterns = patterns("review.views",

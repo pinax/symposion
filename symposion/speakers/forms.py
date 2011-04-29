@@ -10,6 +10,7 @@ from speakers.models import Speaker
 
 
 class SpeakerForm(forms.ModelForm):
+    
     class Meta:
         model = Speaker
         exclude = ["user", "annotation", "invite_email", "invite_token"]
@@ -22,6 +23,7 @@ class SpeakerForm(forms.ModelForm):
 
 
 class SignupForm(PinaxSignupForm):
+    
     def save(self, speaker, request=None):
         # don't assume a username is available. it is a common removal if
         # site developer wants to use e-mail authentication.

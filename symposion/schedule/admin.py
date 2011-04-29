@@ -18,6 +18,12 @@ admin.site.register(Slot,
 )
 
 admin.site.register(Presentation,
-    list_display = ["title", "slot", "presentation_type", "audience_level", "cancelled"],
+    list_display = [
+        "title",
+        "slot",
+        "presentation_type",
+        "audience_level",
+        "cancelled"
+    ],
     raw_id_fields = ["speaker"]
 )
