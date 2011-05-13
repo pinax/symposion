@@ -31,13 +31,13 @@ class Sponsor(models.Model):
         return self.name
     
     @property
-    def website_logo_url(self):
+    def website_logo(self):
         try:
             logo = SponsorLogo.objects.get(sponsor=self, label="website")
         except SponsorLogo.DoesNotExist:
-            return u""
+            return None
         else:
-            return logo.logo.url
+            return logo.logo
 
 
 class SponsorLogo(models.Model):
