@@ -1,0 +1,522 @@
+[
+    {
+        "pk": 1, 
+        "model": "sponsors_pro.sponsor", 
+        "fields": {
+            "added": "2010-08-24 22:51:08", 
+            "name": "CCP Games", 
+            "level": 2, 
+            "applicant": null, 
+            "contact_email": "", 
+            "active": null, 
+            "contact_name": "", 
+            "annotation": "", 
+            "external_url": "http://www.ccpgames.com/"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "sponsors_pro.sponsor", 
+        "fields": {
+            "added": "2010-08-24 22:51:08", 
+            "name": "Google", 
+            "level": 1, 
+            "applicant": null, 
+            "contact_email": "", 
+            "active": null, 
+            "contact_name": "", 
+            "annotation": "", 
+            "external_url": "http://code.google.com/opensource/"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "sponsors_pro.sponsor", 
+        "fields": {
+            "added": "2010-08-24 22:51:08", 
+            "name": "Walt Disney Animation Studios", 
+            "level": 3, 
+            "applicant": null, 
+            "contact_email": "", 
+            "active": null, 
+            "contact_name": "", 
+            "annotation": "", 
+            "external_url": "http://www.disneyanimation.com/"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "sponsors_pro.sponsor", 
+        "fields": {
+            "added": "2010-08-24 22:51:08", 
+            "name": "neg-ng", 
+            "level": 3, 
+            "applicant": null, 
+            "contact_email": "", 
+            "active": null, 
+            "contact_name": "", 
+            "annotation": "", 
+            "external_url": "http://www.net-ng.com/"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "sponsors_pro.sponsor", 
+        "fields": {
+            "added": "2010-08-24 22:51:08", 
+            "name": "socialserve.com", 
+            "level": 3, 
+            "applicant": null, 
+            "contact_email": "", 
+            "active": null, 
+            "contact_name": "", 
+            "annotation": "", 
+            "external_url": "http://www.socialserve.com/"
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "sponsors_pro.sponsor", 
+        "fields": {
+            "added": "2010-08-24 22:51:08", 
+            "name": "ActiveState", 
+            "level": 3, 
+            "applicant": null, 
+            "contact_email": "", 
+            "active": null, 
+            "contact_name": "", 
+            "annotation": "", 
+            "external_url": "http://www.activestate.com/"
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "sponsors_pro.sponsor", 
+        "fields": {
+            "added": "2010-08-24 22:51:08", 
+            "name": "White Oak", 
+            "level": 3, 
+            "applicant": null, 
+            "contact_email": "", 
+            "active": null, 
+            "contact_name": "", 
+            "annotation": "", 
+            "external_url": "http://www.woti.jobs/"
+        }
+    }, 
+    {
+        "pk": 8, 
+        "model": "sponsors_pro.sponsor", 
+        "fields": {
+            "added": "2010-08-24 22:51:09", 
+            "name": "Canonical", 
+            "level": 3, 
+            "applicant": null, 
+            "contact_email": "", 
+            "active": null, 
+            "contact_name": "", 
+            "annotation": "", 
+            "external_url": "http://www.canonical.com/"
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "sponsors_pro.sponsor", 
+        "fields": {
+            "added": "2010-08-24 22:51:09", 
+            "name": "Microsoft", 
+            "level": 3, 
+            "applicant": null, 
+            "contact_email": "", 
+            "active": null, 
+            "contact_name": "", 
+            "annotation": "", 
+            "external_url": "http://ironpython.net/"
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "sponsors_pro.sponsor", 
+        "fields": {
+            "added": "2010-08-24 22:51:09", 
+            "name": "Sauce Labs", 
+            "level": 3, 
+            "applicant": null, 
+            "contact_email": "", 
+            "active": null, 
+            "contact_name": "", 
+            "annotation": "", 
+            "external_url": "http://www.saucelabs.com/"
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "sponsors_pro.sponsor", 
+        "fields": {
+            "added": "2010-08-24 22:51:09", 
+            "name": "Rackspace Cloud", 
+            "level": 3, 
+            "applicant": null, 
+            "contact_email": "", 
+            "active": null, 
+            "contact_name": "", 
+            "annotation": "", 
+            "external_url": "http://www.rackspacecloud.com/"
+        }
+    }, 
+    {
+        "pk": 12, 
+        "model": "sponsors_pro.sponsor", 
+        "fields": {
+            "added": "2010-08-24 22:51:09", 
+            "name": "ESRI", 
+            "level": 3, 
+            "applicant": null, 
+            "contact_email": "", 
+            "active": null, 
+            "contact_name": "", 
+            "annotation": "", 
+            "external_url": "http://www.esri.com/"
+        }
+    }, 
+    {
+        "pk": 13, 
+        "model": "sponsors_pro.sponsor", 
+        "fields": {
+            "added": "2010-08-24 22:51:09", 
+            "name": "Oracle", 
+            "level": 3, 
+            "applicant": null, 
+            "contact_email": "", 
+            "active": null, 
+            "contact_name": "", 
+            "annotation": "", 
+            "external_url": "http://wiki.oracle.com/page/Python"
+        }
+    }, 
+    {
+        "pk": 14, 
+        "model": "sponsors_pro.sponsor", 
+        "fields": {
+            "added": "2010-08-24 22:51:09", 
+            "name": "ZeOmega", 
+            "level": 5, 
+            "applicant": null, 
+            "contact_email": "", 
+            "active": null, 
+            "contact_name": "", 
+            "annotation": "", 
+            "external_url": "http://www.zeomega.com/"
+        }
+    }, 
+    {
+        "pk": 15, 
+        "model": "sponsors_pro.sponsor", 
+        "fields": {
+            "added": "2010-08-24 22:51:09", 
+            "name": "Linux Journal", 
+            "level": 7, 
+            "applicant": null, 
+            "contact_email": "", 
+            "active": null, 
+            "contact_name": "", 
+            "annotation": "", 
+            "external_url": "http://www.linuxjournal.com/"
+        }
+    }, 
+    {
+        "pk": 16, 
+        "model": "sponsors_pro.sponsor", 
+        "fields": {
+            "added": "2010-08-24 22:51:09", 
+            "name": "Linux Pro Magazine", 
+            "level": 7, 
+            "applicant": null, 
+            "contact_email": "", 
+            "active": null, 
+            "contact_name": "", 
+            "annotation": "", 
+            "external_url": "http://www.linuxpromagazine.com/"
+        }
+    }, 
+    {
+        "pk": 17, 
+        "model": "sponsors_pro.sponsor", 
+        "fields": {
+            "added": "2010-08-24 22:51:09", 
+            "name": "Ubuntu User", 
+            "level": 7, 
+            "applicant": null, 
+            "contact_email": "", 
+            "active": null, 
+            "contact_name": "", 
+            "annotation": "", 
+            "external_url": "http://ubuntu-user.com/"
+        }
+    }, 
+    {
+        "pk": 18, 
+        "model": "sponsors_pro.sponsor", 
+        "fields": {
+            "added": "2010-08-24 22:51:09", 
+            "name": "Code Magazine", 
+            "level": 7, 
+            "applicant": null, 
+            "contact_email": "", 
+            "active": null, 
+            "contact_name": "", 
+            "annotation": "", 
+            "external_url": "http://www.code-magazine.com/"
+        }
+    }, 
+    {
+        "pk": 19, 
+        "model": "sponsors_pro.sponsor", 
+        "fields": {
+            "added": "2010-08-24 22:51:09", 
+            "name": "Startup Riot", 
+            "level": 7, 
+            "applicant": null, 
+            "contact_email": "", 
+            "active": null, 
+            "contact_name": "", 
+            "annotation": "", 
+            "external_url": "http://startupriot.com/"
+        }
+    }, 
+    {
+        "pk": 20, 
+        "model": "sponsors_pro.sponsor", 
+        "fields": {
+            "added": "2010-08-24 22:51:09", 
+            "name": "Bit", 
+            "level": 7, 
+            "applicant": null, 
+            "contact_email": "", 
+            "active": null, 
+            "contact_name": "", 
+            "annotation": "", 
+            "external_url": "http://thebitsource.com/"
+        }
+    }, 
+    {
+        "pk": 21, 
+        "model": "sponsors_pro.sponsor", 
+        "fields": {
+            "added": "2010-08-24 22:51:09", 
+            "name": "O'Reilly", 
+            "level": 6, 
+            "applicant": null, 
+            "contact_email": "", 
+            "active": null, 
+            "contact_name": "", 
+            "annotation": "", 
+            "external_url": "http://www.oreilly.com/"
+        }
+    }, 
+    {
+        "pk": 22, 
+        "model": "sponsors_pro.sponsor", 
+        "fields": {
+            "added": "2010-08-24 22:51:09", 
+            "name": "Enthought", 
+            "level": 4, 
+            "applicant": null, 
+            "contact_email": "", 
+            "active": null, 
+            "contact_name": "", 
+            "annotation": "", 
+            "external_url": "http://www.enthought.com/"
+        }
+    }, 
+    {
+        "pk": 23, 
+        "model": "sponsors_pro.sponsor", 
+        "fields": {
+            "added": "2010-08-24 22:51:10", 
+            "name": "Wingware", 
+            "level": 4, 
+            "applicant": null, 
+            "contact_email": "", 
+            "active": null, 
+            "contact_name": "", 
+            "annotation": "", 
+            "external_url": "http://www.wingware.com/"
+        }
+    }, 
+    {
+        "pk": 24, 
+        "model": "sponsors_pro.sponsor", 
+        "fields": {
+            "added": "2010-08-24 22:51:10", 
+            "name": "Imaginary Landscape", 
+            "level": 4, 
+            "applicant": null, 
+            "contact_email": "", 
+            "active": null, 
+            "contact_name": "", 
+            "annotation": "", 
+            "external_url": "http://www.chicagopython.com/"
+        }
+    }, 
+    {
+        "pk": 25, 
+        "model": "sponsors_pro.sponsor", 
+        "fields": {
+            "added": "2010-08-24 22:51:10", 
+            "name": "Emma", 
+            "level": 4, 
+            "applicant": null, 
+            "contact_email": "", 
+            "active": null, 
+            "contact_name": "", 
+            "annotation": "", 
+            "external_url": "http://www.myemma.com/"
+        }
+    }, 
+    {
+        "pk": 26, 
+        "model": "sponsors_pro.sponsor", 
+        "fields": {
+            "added": "2010-08-24 22:51:10", 
+            "name": "Visual Numerics", 
+            "level": 4, 
+            "applicant": null, 
+            "contact_email": "", 
+            "active": null, 
+            "contact_name": "", 
+            "annotation": "", 
+            "external_url": "http://www.vni.com/"
+        }
+    }, 
+    {
+        "pk": 27, 
+        "model": "sponsors_pro.sponsor", 
+        "fields": {
+            "added": "2010-08-24 22:51:10", 
+            "name": "Hiidef", 
+            "level": 4, 
+            "applicant": null, 
+            "contact_email": "", 
+            "active": null, 
+            "contact_name": "", 
+            "annotation": "", 
+            "external_url": "http://hiidef.com/"
+        }
+    }, 
+    {
+        "pk": 28, 
+        "model": "sponsors_pro.sponsor", 
+        "fields": {
+            "added": "2010-08-24 22:51:10", 
+            "name": "Breadpig", 
+            "level": 4, 
+            "applicant": null, 
+            "contact_email": "", 
+            "active": null, 
+            "contact_name": "", 
+            "annotation": "", 
+            "external_url": "http://www.breadpig.com/"
+        }
+    }, 
+    {
+        "pk": 29, 
+        "model": "sponsors_pro.sponsor", 
+        "fields": {
+            "added": "2010-08-24 22:51:10", 
+            "name": "Accense Technology", 
+            "level": 4, 
+            "applicant": null, 
+            "contact_email": "", 
+            "active": null, 
+            "contact_name": "", 
+            "annotation": "", 
+            "external_url": "http://www.accense.com/"
+        }
+    }, 
+    {
+        "pk": 30, 
+        "model": "sponsors_pro.sponsor", 
+        "fields": {
+            "added": "2010-08-24 22:51:10", 
+            "name": "Tummy", 
+            "level": 4, 
+            "applicant": null, 
+            "contact_email": "", 
+            "active": null, 
+            "contact_name": "", 
+            "annotation": "", 
+            "external_url": "http://www.tummy.com/"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "sponsors_pro.sponsorlevel", 
+        "fields": {
+            "description": "", 
+            "cost": 10000, 
+            "name": "Diamond", 
+            "order": 0
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "sponsors_pro.sponsorlevel", 
+        "fields": {
+            "description": "", 
+            "cost": 5000, 
+            "name": "Platinum", 
+            "order": 1
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "sponsors_pro.sponsorlevel", 
+        "fields": {
+            "description": "", 
+            "cost": 2000, 
+            "name": "Gold", 
+            "order": 2
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "sponsors_pro.sponsorlevel", 
+        "fields": {
+            "description": "", 
+            "cost": 1000, 
+            "name": "Silver", 
+            "order": 3
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "sponsors_pro.sponsorlevel", 
+        "fields": {
+            "description": "", 
+            "cost": 500, 
+            "name": "Patron", 
+            "order": 4
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "sponsors_pro.sponsorlevel", 
+        "fields": {
+            "description": "", 
+            "cost": 100, 
+            "name": "Vendor I", 
+            "order": 5
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "sponsors_pro.sponsorlevel", 
+        "fields": {
+            "description": "", 
+            "cost": 0, 
+            "name": "Media", 
+            "order": 6
+        }
+    }
+]
