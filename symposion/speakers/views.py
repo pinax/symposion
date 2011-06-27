@@ -179,8 +179,14 @@ def speaker_profile(request, pk, template_name="speakers/speaker_profile.html", 
     
     speaker = get_object_or_404(Speaker, pk=pk)
     
+    # schedule may not be installed so we need to check for sessions
+    if hasattr(speaker, "sessions"):
+        sessions = speaker.sessions.exclude(slot=None).order_by("slot__start")
+    else:
+        sessions = []
+    
     return render_to_response(template_name, dict({
         "speaker": speaker,
-        "sessions": speaker.sessions.exclude(slot=None).order_by("slot__start"),
+        "sessions": sessions,
         "timezone": settings.SCHEDULE_TIMEZONE,
     }, **extra_context), context_instance=RequestContext(request))
