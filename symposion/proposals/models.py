@@ -30,9 +30,11 @@ class Proposal(models.Model):
     
     AUDIENCE_LEVEL_NOVICE = 1
     AUDIENCE_LEVEL_EXPERIENCED = 2
+    AUDIENCE_LEVEL_INTERMEDIATE = 3
     
     AUDIENCE_LEVELS = [
         (AUDIENCE_LEVEL_NOVICE, "Novice"),
+        (AUDIENCE_LEVEL_INTERMEDIATE, "Intermediate"),
         (AUDIENCE_LEVEL_EXPERIENCED, "Experienced"),
     ]
     
