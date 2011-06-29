@@ -1,6 +1,6 @@
 from fixture_generator import fixture_generator
 
-from sponsors_pro.models import SponsorLevel, Sponsor
+from symposion.sponsors_pro.models import SponsorLevel, Sponsor
 
 
 SPONSORSHIP_LEVELS = [

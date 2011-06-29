@@ -103,7 +103,7 @@ def proposal_speaker_manage(request, pk):
             # check if email is on the site now
             users = EmailAddress.objects.get_users_for(email_address)
             if users:
-                # should only be one since we enforce unique e-mail
+                # should only be one since we enforce unique email
                 user = users[0]
                 message_ctx["user"] = user
                 # look for speaker profile
@@ -112,13 +112,13 @@ def proposal_speaker_manage(request, pk):
                 except ObjectDoesNotExist:
                     speaker, token = create_speaker_token(email_address)
                     message_ctx["token"] = token
-                    # fire off e-mail to user to create profile
+                    # fire off email to user to create profile
                     send_email(
                         [email_address], "speaker_no_profile",
                         context = message_ctx
                     )
                 else:
-                    # fire off e-mail to user letting them they are loved.
+                    # fire off email to user letting them they are loved.
                     send_email(
                         [email_address], "speaker_addition",
                         context = message_ctx
@@ -126,7 +126,7 @@ def proposal_speaker_manage(request, pk):
             else:
                 speaker, token = create_speaker_token(email_address)
                 message_ctx["token"] = token
-                # fire off e-mail letting user know about site and to create
+                # fire off email letting user know about site and to create
                 # account and speaker profile
                 send_email(
                     [email_address], "speaker_invite",
@@ -198,7 +198,7 @@ def proposal_cancel(request, pk):
     if request.method == "POST":
         proposal.cancelled = True
         proposal.save()
-        # @@@ fire off e-mail to submitter and other speakers
+        # @@@ fire off email to submitter and other speakers
         messages.success(request, "%s has been cancelled" % proposal.title)
         return redirect("speaker_dashboard")
     ctx = {
@@ -218,7 +218,7 @@ def proposal_leave(request, pk):
         return HttpResponseForbidden()
     if request.method == "POST":
         proposal.additional_speakers.remove(speaker)
-        # @@@ fire off e-mail to submitter and other speakers
+        # @@@ fire off email to submitter and other speakers
         messages.success(request, "You are no longer speaking on %s" % proposal.title)
         return redirect("speaker_dashboard")
     ctx = {

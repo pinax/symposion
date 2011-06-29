@@ -451,7 +451,7 @@ def schedule_export_speaker_data(request):
     
     for speaker in speakers:
         if speaker.user_id is None:
-            data += "NO SPEAKER DATA (contact e-mail: %s)" % speaker.invite_email
+            data += "NO SPEAKER DATA (contact email: %s)" % speaker.invite_email
         else:
             data += "%s\n\n%s" % (speaker.name.strip(), speaker.biography.strip())
         data += "\n\n%s\n\n" % ("-"*80)

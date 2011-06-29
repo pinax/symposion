@@ -9,8 +9,8 @@ from django.template import RequestContext
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 
-from sponsors.forms import SponsorApplicationForm, SponsorDetailsForm, SponsorBenefitsFormSet
-from sponsors.models import Sponsor, SponsorBenefit
+from symposion.sponsors_pro.forms import SponsorApplicationForm, SponsorDetailsForm, SponsorBenefitsFormSet
+from symposion.sponsors_pro.models import Sponsor, SponsorBenefit
 
 
 def require_no_sponsorship(only_active=False):

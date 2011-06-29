@@ -26,7 +26,7 @@ class SignupForm(PinaxSignupForm):
     
     def save(self, speaker, request=None):
         # don't assume a username is available. it is a common removal if
-        # site developer wants to use e-mail authentication.
+        # site developer wants to use email authentication.
         username = self.cleaned_data.get("username")
         email = self.cleaned_data["email"]
         new_user = self.create_user(username)
@@ -35,7 +35,7 @@ class SignupForm(PinaxSignupForm):
             EmailAddress(user=new_user, email=email, verified=True, primary=True).save()
         else:
             if request:
-                messages.info(request, u"Confirmation e-mail sent to %(email)s" % {"email": email})
+                messages.info(request, u"Confirmation email sent to %(email)s" % {"email": email})
             EmailAddress.objects.add_email(new_user, email)
             new_user.is_active = False
             new_user.save()

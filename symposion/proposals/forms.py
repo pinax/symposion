@@ -40,7 +40,7 @@ class ProposalEditForm(ProposalForm):
 class AddSpeakerForm(forms.Form):
     
     email = forms.EmailField(
-        label = "E-mail address of new speaker (use their e-mail address, not yours)"
+        label = "Email address of new speaker (use their email address, not yours)"
     )
     
     def __init__(self, *args, **kwargs):
@@ -55,6 +55,6 @@ class AddSpeakerForm(forms.Form):
         ).exists()
         if exists:
             raise forms.ValidationError(
-                "This e-mail address has already been added to your talk proposal"
+                "This email address has already been added to your talk proposal"
             )
         return value

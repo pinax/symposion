@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 
 from eldarion_test import TestCase
 
-from sponsors_pro.models import Sponsor, Benefit, SponsorLevel, BenefitLevel
+from symposion.sponsors_pro.models import Sponsor, Benefit, SponsorLevel, BenefitLevel
 
 
 class SponsorTests(TestCase):

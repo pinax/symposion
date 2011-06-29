@@ -3,7 +3,7 @@ from django.forms.models import inlineformset_factory, BaseInlineFormSet
 
 from django.contrib.admin.widgets import AdminFileWidget
 
-from sponsors_pro.models import Sponsor, SponsorBenefit
+from symposion.sponsors_pro.models import Sponsor, SponsorBenefit
 
 
 class SponsorApplicationForm(forms.ModelForm):
