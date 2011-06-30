@@ -54,16 +54,20 @@ def sponsor_apply(request):
 @login_required
 def sponsor_detail(request, pk):
     sponsor = get_object_or_404(Sponsor, pk=pk)
+    
     if not sponsor.active or sponsor.applicant != request.user:
         return redirect("sponsor_index")
-
-    formset_kwargs = {'instance': sponsor,
-                      'queryset': SponsorBenefit.objects.filter(active=True)}
+    
+    formset_kwargs = {
+        "instance": sponsor,
+        "queryset": SponsorBenefit.objects.filter(active=True)
+    }
     
     if request.method == "POST":
+        
         form = SponsorDetailsForm(request.POST, instance=sponsor)
-        formset = SponsorBenefitsFormSet(request.POST, request.FILES,
-                                         **formset_kwargs)
+        formset = SponsorBenefitsFormSet(request.POST, request.FILES, **formset_kwargs)
+        
         if form.is_valid() and formset.is_valid():
             form.save()
             formset.save()
