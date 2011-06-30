@@ -32,7 +32,7 @@ class Sponsor(models.Model):
     external_url = models.URLField(_("external URL"))
     annotation = models.TextField(_("annotation"), blank=True)
     contact_name = models.CharField(_("contact name"), max_length=100)
-    contact_email = models.EmailField(_(u"Contact e\u2011mail"))
+    contact_email = models.EmailField(_(u"Contact email"))
     level = models.ForeignKey(SponsorLevel, verbose_name=_("level"), null=True)
     added = models.DateTimeField(_("added"), default=datetime.datetime.now)
     active = models.NullBooleanField(_("active"))
