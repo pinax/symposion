@@ -14,7 +14,7 @@ from symposion.utils.mail import send_email
 
 def access_not_permitted(request):
     ctx = RequestContext(request)
-    return render_to_response("reviews/access_not_permitted.html", ctx)
+    return render_to_response("review/access_not_permitted.html", ctx)
 
 
 def proposals_generator(request, queryset, username=None, check_speaker=True):
@@ -85,7 +85,7 @@ def review_list(request, username=None):
         "username": username,
     }
     ctx = RequestContext(request, ctx)
-    return render_to_response("reviews/review_list.html", ctx)
+    return render_to_response("review/review_list.html", ctx)
 
 
 @login_required
@@ -123,7 +123,7 @@ def review_tutorial_list(request, username=None):
         "username": username,
     }
     ctx = RequestContext(request, ctx)
-    return render_to_response("reviews/review_list.html", ctx)
+    return render_to_response("review/review_list.html", ctx)
 
 
 @login_required
@@ -158,7 +158,7 @@ def review_admin(request):
         "reviewers": reviewers(),
     }
     ctx = RequestContext(request, ctx)
-    return render_to_response("reviews/review_admin.html", ctx)
+    return render_to_response("review/review_admin.html", ctx)
 
 
 @login_required
@@ -255,7 +255,7 @@ def review_detail(request, pk):
     
     reviews = Review.objects.filter(proposal=proposal).order_by("-submitted_at")
     
-    return render_to_response("reviews/review_detail.html", {
+    return render_to_response("review/review_detail.html", {
         "proposal": proposal,
         "latest_vote": latest_vote,
         "reviews": reviews,
@@ -306,7 +306,7 @@ def review_stats(request, key=None):
         ctx["proposals"] = proposals
     
     ctx = RequestContext(request, ctx)
-    return render_to_response("reviews/review_stats.html", ctx)
+    return render_to_response("review/review_stats.html", ctx)
 
 
 @login_required
@@ -317,7 +317,7 @@ def review_assignments(request):
         user=request.user,
         opted_out=False
     )
-    return render_to_response("reviews/review_assignment.html", {
+    return render_to_response("review/review_assignment.html", {
         "assignments": assignments,
     }, context_instance=RequestContext(request))
 
