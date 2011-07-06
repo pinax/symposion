@@ -14,6 +14,14 @@
             "name": "reviewers-admins", 
             "permissions": []
         }
+    },
+    {
+        "pk": 3, 
+        "model": "auth.group", 
+        "fields": {
+            "name": "reviewers-tutorials", 
+            "permissions": []
+        }
     }
 ]
 

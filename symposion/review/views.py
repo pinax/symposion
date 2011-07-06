@@ -74,7 +74,7 @@ def review_list(request, username=None):
     queryset = queryset.order_by("submitted")
     
     # filter out tutorials for now
-    queryset = queryset.exclude(session_type=Proposal.SESSION_TYPE_TUTORIAL)
+    queryset = queryset.exclude(kind__name__iexact="tutorial")
     
     admin = request.user.groups.filter(name="reviewers-admins").exists()
     
@@ -112,7 +112,7 @@ def review_tutorial_list(request, username=None):
     queryset = queryset.order_by("submitted")
     
     # this time, it's ONLY the tutorials
-    queryset = queryset.filter(session_type=Proposal.SESSION_TYPE_TUTORIAL)
+    queryset = queryset.filter(kind__name__iexact="tutorial")
     
     admin = request.user.groups.filter(name="reviewers-admins").exists()
     
@@ -169,12 +169,12 @@ def review_detail(request, pk):
     admin = request.user.groups.filter(name="reviewers-admins").exists()
     speakers = [s.user for s in proposal.speakers()]
     
-    if proposal.session_type == Proposal.SESSION_TYPE_TUTORIAL:
+    if proposal.kind.name.lower() == "tutorial":
         if not request.user.groups.filter(name="reviewers-tutorials").exists():
             return access_not_permitted(request)
-    else:
-        if not request.user.groups.filter(name="reviewers").exists():
-            return access_not_permitted(request)
+        else:
+            if not request.user.groups.filter(name="reviewers").exists():
+                return access_not_permitted(request)
     
     if not admin and request.user in speakers:
         return access_not_permitted(request)
@@ -187,7 +187,7 @@ def review_detail(request, pk):
     if request.method == "POST":
         if request.user in speakers:
             return access_not_permitted(request)
-        if proposal.invited:
+        if hasattr(proposal, "invited") and proposal.invited:
             return access_not_permitted(request)
         
         if "vote_submit" in request.POST:
