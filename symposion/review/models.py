@@ -10,9 +10,8 @@ from django.contrib.auth.models import User
 
 from biblion import creole_parser
 
-from proposals.models import Proposal
-
-from schedule.models import Presentation
+from symposion.proposals.models import Proposal
+from symposion.schedule.models import Presentation
 
 
 class ProposalScoreExpression(object):

@@ -3,8 +3,8 @@ from django.test import TestCase
 
 from django.contrib.auth.models import User, Group
 
-from proposals.models import Proposal
-from review.models import Review, ReviewAssignment
+from symposion.proposals.models import Proposal
+from symposion.review.models import Review, ReviewAssignment
 
 
 class login(object):

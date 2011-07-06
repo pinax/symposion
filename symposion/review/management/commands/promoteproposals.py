@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand
 from django.db import connections
 
-from review.models import ProposalResult, promote_proposal
+from symposion.review.models import ProposalResult, promote_proposal
 
 
 class Command(BaseCommand):

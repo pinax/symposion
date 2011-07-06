@@ -1,6 +1,6 @@
 from django import forms
 
-from review.models import Review, Comment, ProposalMessage
+from symposion.review.models import Review, Comment, ProposalMessage
 
 
 class ReviewForm(forms.ModelForm):

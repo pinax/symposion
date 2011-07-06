@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from schedule.models import SessionRole, Presentation, Slot, Session, Track
+from symposion.schedule.models import SessionRole, Presentation, Slot, Session, Track
 
 
 admin.site.register(Session)
