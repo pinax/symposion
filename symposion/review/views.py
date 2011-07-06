@@ -300,7 +300,8 @@ def review_stats(request, key=None):
     if key:
         ctx.update({
             "key": key,
-            "proposals": group_proposals(proposals_generator(request, proposals[key], check_speaker=not admin))
+            "proposals": group_proposals(proposals_generator(request, proposals[key], check_speaker=not admin)),
+            "proposal_count": proposals[key].count(),
         })
     else:
         ctx["proposals"] = proposals
