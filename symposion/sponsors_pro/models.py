@@ -28,7 +28,7 @@ class Sponsor(models.Model):
     applicant = models.OneToOneField(
         User, related_name="sponsorship", verbose_name=_("applicant"), null=True
     )
-    name = models.CharField(_("name"), max_length=100)
+    name = models.CharField(_("sponsor name"), max_length=100)
     external_url = models.URLField(_("external URL"))
     annotation = models.TextField(_("annotation"), blank=True)
     contact_name = models.CharField(_("contact name"), max_length=100)

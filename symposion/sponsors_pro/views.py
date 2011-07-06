@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.template import RequestContext
 
+from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 
@@ -71,7 +72,9 @@ def sponsor_detail(request, pk):
         if form.is_valid() and formset.is_valid():
             form.save()
             formset.save()
-            # @@@ user message here?
+            
+            messages.success(request, "Your sponsorship application has been submitted!")
+            
             return redirect(request.path)
     else:
         form = SponsorDetailsForm(instance=sponsor)
