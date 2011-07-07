@@ -30,7 +30,7 @@ def proposal_submit(request):
             speaker_profile = request.user.speaker_profile
         except ObjectDoesNotExist:
             return redirect("speaker_dashboard")
-    if settings.ACCEPTING_PROPOSALS:
+    if not settings.ACCEPTING_PROPOSALS:
         return redirect("speaker_dashboard")
     if request.method == "POST":
         form = ProposalSubmitForm(request.POST)
