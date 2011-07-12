@@ -1,12 +1,18 @@
 from django.conf import settings
 
-import redis
-
-
-db = redis.Redis(**settings.REDIS_PARAMS)
 try:
-    db.ping()
-except redis.ConnectionError:
+    import redis
+except ImportError:
+    redis = None
+
+
+if redis:
+    db = redis.Redis(**settings.REDIS_PARAMS)
+    try:
+        db.ping()
+    except redis.ConnectionError:
+        db = None
+else:
     db = None
 
 

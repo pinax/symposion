@@ -433,7 +433,8 @@ def schedule_user_slot_manage(request, presentation_id):
             UserBookmark.objects.filter(user=request.user, presentation=presentation_id).delete()
         else:
             return HttpResponse(status=400)
-        db.delete(cache_key_user(request.user))
+        if db:
+            db.delete(cache_key_user(request.user))
         return HttpResponse(status=202)
     else:
         return HttpResponseNotAllowed(["POST"])
