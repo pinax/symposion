@@ -217,7 +217,8 @@ def schedule_conference_edit(request):
             Timetable(Slot.objects.filter(start__week_day=3), user=request.user),
             Timetable(Slot.objects.filter(start__week_day=4), user=request.user),
             Timetable(Slot.objects.filter(start__week_day=5), user=request.user),
-        ]
+        ],
+        "timezone": settings.SCHEDULE_TIMEZONE,
     }
     ctx = RequestContext(request, ctx)
     return render_to_response("schedule/conference_edit.html", ctx)
@@ -237,6 +238,7 @@ def schedule_conference(request):
             Timetable(Slot.objects.filter(start__week_day=4), user=request.user),
             Timetable(Slot.objects.filter(start__week_day=5), user=request.user),
         ],
+        "timezone": settings.SCHEDULE_TIMEZONE,
         "csrf_token": csrf(request),
     }
     ctx = RequestContext(request, ctx)
