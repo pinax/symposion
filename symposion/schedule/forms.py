@@ -1,7 +1,7 @@
 from django import forms
 from django.db.models import Q
 
-from schedule.models import Plenary, Recess, Presentation
+from symposion.schedule.models import Plenary, Recess, Presentation
 
 
 class PlenaryForm(forms.ModelForm):

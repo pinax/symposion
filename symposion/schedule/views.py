@@ -15,9 +15,9 @@ from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
-from schedule.cache import db, cache_key_user
-from schedule.forms import PlenaryForm, RecessForm, PresentationForm
-from schedule.models import Slot, Presentation, Track, Session, SessionRole, UserBookmark
+from symposion.schedule.cache import db, cache_key_user
+from symposion.schedule.forms import PlenaryForm, RecessForm, PresentationForm
+from symposion.schedule.models import Slot, Presentation, Track, Session, SessionRole, UserBookmark
 
 
 wed_morn_start = datetime.datetime(2011, 3, 9, 9, 0)  # 9AM Eastern

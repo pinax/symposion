@@ -2,7 +2,7 @@ from datetime import datetime
 
 from django.core.management.base import BaseCommand
 
-from schedule.models import Track, Session, Slot
+from symposion.schedule.models import Track, Session, Slot
 
 
 friday_plenaries = [

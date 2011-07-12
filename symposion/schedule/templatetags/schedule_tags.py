@@ -2,7 +2,7 @@ from __future__ import with_statement
 
 from django import template
 
-from schedule.cache import db, cache_key, cache_key_user
+from symposion.schedule.cache import db, cache_key, cache_key_user
 
 
 register = template.Library()
