@@ -213,9 +213,11 @@ def schedule_conference_edit(request):
     if not request.user.is_staff:
         return redirect("schedule_conference")
     ctx = {
-        "friday": Timetable(Slot.objects.filter(start__week_day=6), user=request.user),
-        "saturday": Timetable(Slot.objects.filter(start__week_day=7), user=request.user),
-        "sunday": Timetable(Slot.objects.filter(start__week_day=1), user=request.user),
+        "timetables": [
+            Timetable(Slot.objects.filter(start__week_day=6), user=request.user),
+            Timetable(Slot.objects.filter(start__week_day=7), user=request.user),
+            Timetable(Slot.objects.filter(start__week_day=1), user=request.user),
+        ]
     }
     ctx = RequestContext(request, ctx)
     return render_to_response("schedule/conference_edit.html", ctx)
