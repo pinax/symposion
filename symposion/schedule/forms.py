@@ -19,8 +19,8 @@ class RecessForm(forms.ModelForm):
 def presentation_queryset(include=None):
     qs = Presentation.objects.all()
     qs = qs.filter(
-        Q(presentation_type=Presentation.PRESENTATION_TYPE_TALK) |
-        Q(presentation_type=Presentation.PRESENTATION_TYPE_PANEL)
+        Q(kind__name__iexact="talk") |
+        Q(kind__name__iexact="panel")
     )
     if include:
         qs = qs.filter(Q(slot=None) | Q(pk=include.pk))
