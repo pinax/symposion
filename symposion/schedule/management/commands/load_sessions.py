@@ -5,403 +5,194 @@ from django.core.management.base import BaseCommand
 from symposion.schedule.models import Track, Session, Slot
 
 
-friday_plenaries = [
+djangocon2011_plenaries = [
+    # Tuesday
     [
         {
-            "start": datetime(2011, 3, 11, 7, 0),
-            "end": datetime(2011, 3, 11, 8, 0),
+            "start": datetime(2011, 9, 6, 9, 0),
+            "end": datetime(2011, 9, 6, 9, 15),
         },
         {
-            "start": datetime(2011, 3, 11, 8, 0),
-            "end": datetime(2011, 3, 11, 9, 0),
+            "start": datetime(2011, 9, 6, 9, 15),
+            "end": datetime(2011, 9, 6, 10, 0),
         },
     ],
     [
         {
-            "start": datetime(2011, 3, 11, 9, 0),
-            "end": datetime(2011, 3, 11, 9, 10),
-        },
-        {
-            "start": datetime(2011, 3, 11, 9, 10),
-            "end": datetime(2011, 3, 11, 9, 40),
-        },
-        {
-            "start": datetime(2011, 3, 11, 9, 40),
-            "end": datetime(2011, 3, 11, 10, 5),
+            "start": datetime(2011, 9, 6, 12, 0),
+            "end": datetime(2011, 9, 6, 13, 30),
         },
     ],
     [
         {
-            "start": datetime(2011, 3, 11, 10, 5),
-            "end": datetime(2011, 3, 11, 10, 25),
+            "start": datetime(2011, 9, 6, 15, 0),
+            "end": datetime(2011, 9, 6, 15, 30),
+        },
+        {
+            "start": datetime(2011, 9, 6, 15, 30),
+            "end": datetime(2011, 9, 6, 16, 10),
+        },
+        {
+            "start": datetime(2011, 9, 6, 16, 20),
+            "end": datetime(2011, 9, 6, 17, 0),
+        },
+        {
+            "start": datetime(2011, 9, 6, 17, 10),
+            "end": datetime(2011, 9, 6, 17, 50),
+        },
+        {
+            "start": datetime(2011, 9, 6, 18, 0),
+            "end": datetime(2011, 9, 6, 18, 30),
+        },
+    ],
+    # Wednesday
+    [
+        {
+            "start": datetime(2011, 9, 7, 9, 0),
+            "end": datetime(2011, 9, 7, 10, 0),
+        },
+        {
+            "start": datetime(2011, 9, 7, 10, 30),
+            "end": datetime(2011, 9, 7, 11, 10),
         },
     ],
     [
         {
-            "start": datetime(2011, 3, 11, 17, 30),
-            "end": datetime(2011, 3, 11, 18, 0),
+            "start": datetime(2011, 9, 7, 12, 0),
+            "end": datetime(2011, 9, 7, 13, 30),
+        },
+    ],
+    [
+        {
+            "start": datetime(2011, 9, 7, 15, 0),
+            "end": datetime(2011, 9, 7, 15, 30),
+        },
+    ],
+    [
+        {
+            "start": datetime(2011, 9, 7, 17, 10),
+            "end": datetime(2011, 9, 7, 18, 0),
+        },
+    ],
+    # Thrusday
+    [
+        {
+            "start": datetime(2011, 9, 8, 9, 0),
+            "end": datetime(2011, 9, 8, 10, 0),
+        },
+        {
+            "start": datetime(2011, 9, 8, 10, 30),
+            "end": datetime(2011, 9, 8, 11, 10),
+        },
+    ],
+    [
+        {
+            "start": datetime(2011, 9, 8, 12, 0),
+            "end": datetime(2011, 9, 8, 13, 30),
+        },
+    ],
+    [
+        {
+            "start": datetime(2011, 9, 8, 15, 0),
+            "end": datetime(2011, 9, 8, 15, 30),
+        },
+    ],
+    [
+        {
+            "start": datetime(2011, 9, 8, 17, 10),
+            "end": datetime(2011, 9, 8, 17, 50),
+        },
+        {
+            "start": datetime(2011, 9, 8, 18, 0),
+            "end": datetime(2011, 9, 8, 18, 30),
         },
     ],
 ]
 
+djangocon2011_tuesday_slots = [
+    [
+        {
+            "start": datetime(2011, 9, 6, 10, 30),
+            "end": datetime(2011, 9, 6, 11, 10),
+        },
+        {
+            "start": datetime(2011, 9, 6, 11, 20),
+            "end": datetime(2011, 9, 6, 12, 0),
+        },
+    ],
+    [
+        {
+            "start": datetime(2011, 9, 6, 13, 30),
+            "end": datetime(2011, 9, 6, 14, 10),
+        },
+        {
+            "start": datetime(2011, 9, 6, 14, 20),
+            "end": datetime(2011, 9, 6, 15, 0),
+        },
+    ],
+]
 
-friday_slots_type_1 = [
+djangocon2011_wednesday_slots = [
     [
         {
-            "start": datetime(2011, 3, 11, 10, 25),
-            "end": datetime(2011, 3, 11, 11, 5),
-        },
-        {
-            "start": datetime(2011, 3, 11, 11, 5),
-            "end": datetime(2011, 3, 11, 11, 45),
-        },
-        {
-            "start": datetime(2011, 3, 11, 11, 45),
-            "end": datetime(2011, 3, 11, 12, 30),
+            "start": datetime(2011, 9, 7, 11, 20),
+            "end": datetime(2011, 9, 7, 12, 0),
         },
     ],
     [
         {
-            "title": "Lunch",
-            "start": datetime(2011, 3, 11, 12, 30),
-            "end": datetime(2011, 3, 11, 13, 35),
+            "start": datetime(2011, 9, 7, 13, 30),
+            "end": datetime(2011, 9, 7, 14, 10),
+        },
+        {
+            "start": datetime(2011, 9, 7, 14, 20),
+            "end": datetime(2011, 9, 7, 15, 0),
         },
     ],
     [
         {
-            "start": datetime(2011, 3, 11, 13, 35),
-            "end": datetime(2011, 3, 11, 14, 15),
+            "start": datetime(2011, 9, 7, 15, 30),
+            "end": datetime(2011, 9, 7, 16, 10),
         },
         {
-            "start": datetime(2011, 3, 11, 14, 15),
-            "end": datetime(2011, 3, 11, 14, 55),
-        },
-        {
-            "start": datetime(2011, 3, 11, 14, 55),
-            "end": datetime(2011, 3, 11, 15, 40),
-        },
-    ],
-    [
-        {
-            "title": "Afternoon Break with Snacks in Expo Hall",
-            "start": datetime(2011, 3, 11, 15, 40),
-            "end": datetime(2011, 3, 11, 16, 15),
-        },
-    ],
-    [
-        {
-            "start": datetime(2011, 3, 11, 16, 15),
-            "end": datetime(2011, 3, 11, 16, 55),
-        },
-        {
-            "start": datetime(2011, 3, 11, 16, 55),
-            "end": datetime(2011, 3, 11, 17, 30),
+            "start": datetime(2011, 9, 7, 16, 20),
+            "end": datetime(2011, 9, 7, 17, 0),
         },
     ]
 ]
 
-friday_slots_type_2 = [
+djangocon2011_thursday_slots = [
     [
         {
-            "start": datetime(2011, 3, 11, 10, 25),
-            "end": datetime(2011, 3, 11, 11, 5),
-        },
-        {
-            "start": datetime(2011, 3, 11, 11, 5),
-            "end": datetime(2011, 3, 11, 11, 45),
-        },
-        {
-            "start": datetime(2011, 3, 11, 11, 45),
-            "end": datetime(2011, 3, 11, 12, 15),
+            "start": datetime(2011, 9, 8, 11, 20),
+            "end": datetime(2011, 9, 8, 12, 0),
         },
     ],
     [
         {
-            "title": "Lunch",
-            "start": datetime(2011, 3, 11, 12, 15),
-            "end": datetime(2011, 3, 11, 13, 20),
+            "start": datetime(2011, 9, 8, 13, 30),
+            "end": datetime(2011, 9, 8, 14, 10),
+        },
+        {
+            "start": datetime(2011, 9, 8, 14, 20),
+            "end": datetime(2011, 9, 8, 15, 0),
         },
     ],
     [
         {
-            "start": datetime(2011, 3, 11, 13, 20),
-            "end": datetime(2011, 3, 11, 14, 15),
+            "start": datetime(2011, 9, 8, 15, 30),
+            "end": datetime(2011, 9, 8, 16, 10),
         },
         {
-            "start": datetime(2011, 3, 11, 14, 15),
-            "end": datetime(2011, 3, 11, 14, 55),
-        },
-        {
-            "start": datetime(2011, 3, 11, 14, 55),
-            "end": datetime(2011, 3, 11, 15, 25),
-        },
-    ],
-    [
-        {
-            "title": "Afternoon Break with Snacks in Expo Hall",
-            "start": datetime(2011, 3, 11, 15, 25),
-            "end": datetime(2011, 3, 11, 16, 0),
-        },
-    ],
-    [
-        {
-            "start": datetime(2011, 3, 11, 16, 0),
-            "end": datetime(2011, 3, 11, 16, 55),
-        },
-        {
-            "start": datetime(2011, 3, 11, 16, 55),
-            "end": datetime(2011, 3, 11, 17, 30),
+            "start": datetime(2011, 9, 8, 16, 20),
+            "end": datetime(2011, 9, 8, 17, 0),
         },
     ]
 ]
-
-
-saturday_plenaries = [
-    [    
-        {
-            "start": datetime(2011, 3, 12, 7, 0),
-            "end": datetime(2011, 3, 12, 8, 0),
-        },
-        {
-            "start": datetime(2011, 3, 12, 8, 0),
-            "end": datetime(2011, 3, 12, 8, 30),
-        },
-    ],
-    [
-        {
-            "start": datetime(2011, 3, 12, 8, 30),
-            "end": datetime(2011, 3, 12, 9, 0),
-        },
-        {
-            "start": datetime(2011, 3, 12, 9, 0),
-            "end": datetime(2011, 3, 12, 9, 5),
-        },
-        {
-            "start": datetime(2011, 3, 12, 9, 5),
-            "end": datetime(2011, 3, 12, 9, 20),
-        },
-        {
-            "start": datetime(2011, 3, 12, 9, 20),
-            "end": datetime(2011, 3, 12, 9, 35),
-        },
-        {
-            "start": datetime(2011, 3, 12, 9, 35),
-            "end": datetime(2011, 3, 12, 10, 5),
-        },
-    ],
-    [
-        {
-            "start": datetime(2011, 3, 12, 10, 5),
-            "end": datetime(2011, 3, 12, 10, 25),
-        },
-    ],
-    [
-        {
-            "start": datetime(2011, 3, 12, 17, 30),
-            "end": datetime(2011, 3, 12, 18, 0),
-        },
-    ],
-]
-
-
-saturday_slots_type_1 = [
-    [
-        {
-            "start": datetime(2011, 3, 12, 10, 25),
-            "end": datetime(2011, 3, 12, 11, 5),
-        },
-        {
-            "start": datetime(2011, 3, 12, 11, 5),
-            "end": datetime(2011, 3, 12, 11, 45),
-        },
-        {
-            "start": datetime(2011, 3, 12, 11, 45),
-            "end": datetime(2011, 3, 12, 12, 30),
-        },
-    ],
-    [
-        {
-            "title": "Lunch",
-            "start": datetime(2011, 3, 12, 12, 30),
-            "end": datetime(2011, 3, 12, 13, 35),
-        },
-    ],
-    [
-        {
-            "start": datetime(2011, 3, 12, 13, 35),
-            "end": datetime(2011, 3, 12, 14, 15),
-        },
-        {
-            "start": datetime(2011, 3, 12, 14, 15),
-            "end": datetime(2011, 3, 12, 14, 55),
-        },
-        {
-            "start": datetime(2011, 3, 12, 14, 55),
-            "end": datetime(2011, 3, 12, 15, 40),
-        },
-    ],
-    [
-        {
-            "title": "Afternoon Break with Snacks in Expo Hall",
-            "start": datetime(2011, 3, 12, 15, 40),
-            "end": datetime(2011, 3, 12, 16, 15),
-        },
-    ],
-    [
-        {
-            "start": datetime(2011, 3, 12, 16, 15),
-            "end": datetime(2011, 3, 12, 16, 55),
-        },
-        {
-            "start": datetime(2011, 3, 12, 16, 55),
-            "end": datetime(2011, 3, 12, 17, 30),
-        },
-    ]
-]
-
-saturday_slots_type_2 = [
-    [
-        {
-            "start": datetime(2011, 3, 12, 10, 25),
-            "end": datetime(2011, 3, 12, 11, 5),
-        },
-        {
-            "start": datetime(2011, 3, 12, 11, 5),
-            "end": datetime(2011, 3, 12, 11, 45),
-        },
-        {
-            "start": datetime(2011, 3, 12, 11, 45),
-            "end": datetime(2011, 3, 12, 12, 15),
-        },
-    ],
-    [
-        {
-            "title": "Lunch",
-            "start": datetime(2011, 3, 12, 12, 15),
-            "end": datetime(2011, 3, 12, 13, 20),
-        },
-    ],
-    [
-        {
-            "start": datetime(2011, 3, 12, 13, 20),
-            "end": datetime(2011, 3, 12, 14, 15),
-        },
-        {
-            "start": datetime(2011, 3, 12, 14, 15),
-            "end": datetime(2011, 3, 12, 14, 55),
-        },
-        {
-            "start": datetime(2011, 3, 12, 14, 55),
-            "end": datetime(2011, 3, 12, 15, 25),
-        },
-    ],
-    [
-        {
-            "title": "Afternoon Break with Snacks in Expo Hall",
-            "start": datetime(2011, 3, 12, 15, 25),
-            "end": datetime(2011, 3, 12, 16, 0),
-        },
-    ],
-    [
-        {
-            "start": datetime(2011, 3, 12, 16, 0),
-            "end": datetime(2011, 3, 12, 16, 55),
-        },
-        {
-            "start": datetime(2011, 3, 12, 16, 55),
-            "end": datetime(2011, 3, 12, 17, 30),
-        },
-    ]
-]
-
-
-sunday_plenaries = [
-    [    
-        {
-            "start": datetime(2011, 3, 13, 7, 0),
-            "end": datetime(2011, 3, 13, 8, 30),
-        },
-    ],
-    [
-        {
-            "start": datetime(2011, 3, 13, 8, 30),
-            "end": datetime(2011, 3, 13, 9, 0),
-        },
-        {
-            "start": datetime(2011, 3, 13, 9, 0),
-            "end": datetime(2011, 3, 13, 9, 5),
-        },
-        {
-            "start": datetime(2011, 3, 13, 9, 5),
-            "end": datetime(2011, 3, 13, 9, 20),
-        },
-        {
-            "start": datetime(2011, 3, 13, 9, 20),
-            "end": datetime(2011, 3, 13, 9, 35),
-        },
-        {
-            "start": datetime(2011, 3, 13, 9, 35),
-            "end": datetime(2011, 3, 13, 10, 5),
-        },
-    ],
-    [
-        {
-            "title": "Break with Snacks in Poster Area",
-            "start": datetime(2011, 3, 13, 10, 5),
-            "end": datetime(2011, 3, 13, 10, 25),
-        },
-    ],
-    [
-        {
-            "start": datetime(2011, 3, 13, 10, 25),
-            "end": datetime(2011, 3, 13, 11, 55),
-        },
-    ],
-    [
-        {
-            "title": "Lunch",
-            "start": datetime(2011, 3, 13, 12, 25),
-            "end": datetime(2011, 3, 13, 13, 15),
-        },
-    ],
-    [
-        {
-            "start": datetime(2011, 3, 13, 14, 35),
-            "end": datetime(2011, 3, 13, 15, 35),
-        },
-        {
-            "start": datetime(2011, 3, 13, 15, 35),
-            "end": datetime(2011, 3, 13, 15, 55),
-        },
-    ],
-]
-
-sunday_type_1 = [
-    [
-        {
-            "start": datetime(2011, 3, 13, 11, 55),
-            "end": datetime(2011, 3, 13, 12, 25),
-        },
-    ],
-    [
-        {
-            "start": datetime(2011, 3, 13, 13, 15),
-            "end": datetime(2011, 3, 13, 13, 55),
-        },
-        {
-            "start": datetime(2011, 3, 13, 13, 55),
-            "end": datetime(2011, 3, 13, 14, 35),
-        },
-    ],
-]
-
 
 tracks = [
-    {"Centennial I": [friday_slots_type_1, saturday_slots_type_1, sunday_type_1]},
-    {"Centennial II": [friday_slots_type_2, saturday_slots_type_2, sunday_type_1]},
-    {"Centennial III": [friday_slots_type_1, saturday_slots_type_1, sunday_type_1]},
-    {"Centennial IV": [friday_slots_type_2, saturday_slots_type_2, sunday_type_1]},
-    {"Regency V": [friday_slots_type_1, saturday_slots_type_1, sunday_type_1]}
+    {"Track 1": [djangocon2011_tuesday_slots, djangocon2011_wednesday_slots, djangocon2011_thursday_slots]},
+    {"Track 2": [djangocon2011_tuesday_slots, djangocon2011_wednesday_slots, djangocon2011_thursday_slots]},
 ]
 
 
@@ -426,7 +217,7 @@ class Command(BaseCommand):
                             )
                             print "\t\tCreated slot: %s" % slot
         print "Plenaries"
-        for data in [friday_plenaries, saturday_plenaries, sunday_plenaries]:
+        for data in [djangocon2011_plenaries]:
             for session_data in data:
                 for slot_data in session_data:
                     slot = Slot.objects.create(
