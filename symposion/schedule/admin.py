@@ -21,7 +21,7 @@ admin.site.register(Presentation,
     list_display = [
         "title",
         "slot",
-        "presentation_type",
+        "kind",
         "audience_level",
         "cancelled"
     ],

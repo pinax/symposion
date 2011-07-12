@@ -139,7 +139,7 @@ class Presentation(models.Model):
         max_length = 400, # @@@ need to enforce 400 in UI
         help_text = "Brief one paragraph blurb (will be public if accepted). Must be 400 characters or less"
     )
-    presentation_type = models.IntegerField(choices=PRESENTATION_TYPES)
+    kind = models.ForeignKey("proposals.ProposalKind")
     abstract = models.TextField(
         help_text = "More detailed description (will be public if accepted). You can use <a href='http://wikicreole.org/' target='_blank'>creole</a> markup. <a id='preview' href='#'>Preview</a>",
     )

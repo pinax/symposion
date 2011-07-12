@@ -297,13 +297,11 @@ def promote_proposal(proposal):
         defaults=dict(
             title=proposal.title,
             description=proposal.description,
-            presentation_type=proposal.session_type,
+            kind=proposal.kind,
             abstract=proposal.abstract,
             audience_level=proposal.audience_level,
             submitted=proposal.submitted,
             speaker=proposal.speaker,
-            extreme_pycon=proposal.extreme_pycon,
-            invited=proposal.invited,
         )
     )
     
