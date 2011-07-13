@@ -185,6 +185,9 @@ def speaker_profile(request, pk, template_name="speakers/speaker_profile.html", 
     else:
         sessions = []
     
+    if not sessions:
+        raise Http404()
+    
     return render_to_response(template_name, dict({
         "speaker": speaker,
         "sessions": sessions,
