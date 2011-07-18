@@ -1,3 +1,5 @@
+SPONSOR_COORDINATORS = "sponsor-coordinators"
+
 AUTH_GROUPS = [
-    "sponsor-coordinators"
+    SPONSOR_COORDINATORS
 ]
