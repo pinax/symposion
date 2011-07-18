@@ -24,8 +24,10 @@ class SponsorsNode(template.Node):
     
     def render(self, context):
         queryset = Sponsor.objects.filter(
-            active = True
-            ).order_by("level", "added")
+            active = True,
+            sponsor_benefits__benefit__type="weblogo",
+            sponsor_benefits__upload__isnull=False
+            ).distinct().order_by("level", "added")
         context[self.context_var] = queryset
         return u""
 
