@@ -8,6 +8,9 @@ from django.utils.translation import ugettext_lazy as _
 
 from django.contrib.auth.models import User
 
+from symposion.sponsors_pro import SPONSOR_COORDINATORS
+from symposion.utils.mail import send_email
+
 
 class SponsorLevel(models.Model):
     
@@ -95,6 +98,13 @@ class Sponsor(models.Model):
         # Any remaining sponsor benefits that don't normally belong to
         # this level are set to inactive
         self.sponsor_benefits.exclude(pk__in=allowed_benefits).update(active=False, max_words=None, other_limits="")
+    
+    def send_coordinator_emails(self):
+        for user in User.objects.filter(groups__name=SPONSOR_COORDINATORS):
+            send_email(
+                [user.email], "sponsor_signup",
+                context = {"sponsor": self}
+            )
 
 
 def _store_initial_level(sender, instance, **kwargs):
@@ -107,6 +117,12 @@ def _check_level_change(sender, instance, created, **kwargs):
     if instance and (created or instance.level_id != instance._initial_level_id):
         instance.reset_benefits()
 post_save.connect(_check_level_change, sender=Sponsor)
+
+
+def _send_sponsor_notification_emails(sender, instance, created, **kwargs):
+    if instance and created:
+        instance.send_coordinator_emails()
+post_save.connect(_send_sponsor_notification_emails, sender=Sponsor)
 
 
 class Benefit(models.Model):
