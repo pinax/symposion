@@ -31,7 +31,6 @@ def require_no_sponsorship(only_active=False):
     return inner
 
 
-@require_no_sponsorship(only_active=True)
 def sponsor_index(request):
     return render_to_response("sponsors/index.html", {
     }, context_instance=RequestContext(request))
