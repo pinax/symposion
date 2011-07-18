@@ -1,6 +1,6 @@
 from django import template
 
-from sponsors_pro.models import Sponsor
+from symposion.sponsors_pro.models import Sponsor
 
 
 register = template.Library()
