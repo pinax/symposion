@@ -13,7 +13,7 @@ class SponsorApplicationForm(forms.ModelForm):
     
     class Meta:
         model = Sponsor
-        fields = ["name", "contact_name", "contact_email"]
+        fields = ["name", "contact_name", "contact_email", "level"]
     
     def save(self, commit=True):
         obj = super(SponsorApplicationForm, self).save(commit=False)
