@@ -60,6 +60,16 @@ class Sponsor(models.Model):
                     self._website_logo_url = benefits[0].upload.url
         return self._website_logo_url
     
+    @property
+    def website_logo(self):
+        if not hasattr(self, '_website_logo'):
+            self._website_logo = None
+            benefits = self.sponsor_benefits.filter(benefit__type="weblogo", upload__isnull=False)
+            if benefits.count():
+                if benefits[0].upload:
+                    self._website_logo = benefits[0].upload
+        return self._website_logo
+    
     def reset_benefits(self):
         """
         Reset all benefits for this sponsor to the defaults for their
