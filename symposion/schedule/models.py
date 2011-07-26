@@ -8,6 +8,8 @@ from django.contrib.contenttypes.models import ContentType
 
 from biblion import creole_parser
 
+from symposion.conference.models import PresentationKind
+
 
 class Track(models.Model):
     
@@ -141,7 +143,7 @@ class Presentation(models.Model):
         max_length = 400, # @@@ need to enforce 400 in UI
         help_text = "Brief one paragraph blurb (will be public if accepted). Must be 400 characters or less"
     )
-    kind = models.ForeignKey("proposals.ProposalKind")
+    kind = models.ForeignKey(PresentationKind)
     abstract = models.TextField(
         help_text = "More detailed description (will be public if accepted). You can use <a href='http://wikicreole.org/' target='_blank'>creole</a> markup. <a id='preview' href='#'>Preview</a>",
     )
