@@ -2,7 +2,7 @@ import datetime
 
 from django.db import models
 
-from biblion import creole_parser
+from markitup.fields import MarkupField
 
 from symposion.conference.models import PresentationKind
 
@@ -25,10 +25,7 @@ class Proposal(models.Model):
         help_text = "Brief one paragraph blurb (will be public if accepted). Must be 400 characters or less"
     )
     kind = models.ForeignKey(PresentationKind)
-    abstract = models.TextField(
-        help_text = "More detailed description (will be public if accepted). You can use <a href='http://wikicreole.org/' target='_blank'>creole</a> markup. <a id='preview' href='#'>Preview</a>",
-    )
-    abstract_html = models.TextField(editable=False)
+    abstract = MarkupField(help_text = "More detailed description (will be public if accepted).")
     audience_level = models.IntegerField(choices=AUDIENCE_LEVELS)
     additional_notes = models.TextField(
         blank=True,
@@ -41,10 +38,6 @@ class Proposal(models.Model):
     speaker = models.ForeignKey("speakers.Speaker", related_name="proposals")
     additional_speakers = models.ManyToManyField("speakers.Speaker", blank=True)
     cancelled = models.BooleanField(default=False)
-    
-    def save(self, *args, **kwargs):
-        self.abstract_html = creole_parser.parse(self.abstract)
-        super(Proposal, self).save(*args, **kwargs)
     
     def can_edit(self):
         return self.kind in PresentationKind.available()

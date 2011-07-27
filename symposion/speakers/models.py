@@ -5,17 +5,14 @@ from django.core.urlresolvers import reverse
 
 from django.contrib.auth.models import User
 
-from biblion import creole_parser
+from markitup.fields import MarkupField
 
 
 class Speaker(models.Model):
     
     user = models.OneToOneField(User, null=True, related_name="speaker_profile")
     name = models.CharField(max_length=100)
-    biography = models.TextField(
-        help_text = "You can use <a href='http://wikicreole.org/' target='_blank'>creole</a> markup. <a id='preview' href='#'>Preview</a>",
-    )
-    biography_html = models.TextField(editable=False)
+    biography = MarkupField()
     photo = models.ImageField(upload_to="speaker_photos", blank=True)
     twitter_username = models.CharField(max_length=15, blank=True)
     annotation = models.TextField() # staff only
@@ -34,10 +31,6 @@ class Speaker(models.Model):
     
     def get_absolute_url(self):
         return reverse("speaker_edit")
-    
-    def save(self, *args, **kwargs):
-        self.biography_html = creole_parser.parse(self.biography)
-        super(Speaker, self).save(*args, **kwargs)
     
     @property
     def email(self):
