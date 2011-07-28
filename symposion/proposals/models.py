@@ -27,7 +27,7 @@ class Proposal(models.Model):
     kind = models.ForeignKey(PresentationKind)
     abstract = MarkupField(help_text = "More detailed description (will be public if accepted).")
     audience_level = models.IntegerField(choices=AUDIENCE_LEVELS)
-    additional_notes = models.TextField(
+    additional_notes = MarkupField(
         blank=True,
         help_text = "Anything else you'd like the program committee to know when making their selection: your past speaking experience, open source community experience, etc."
     )

@@ -6,6 +6,8 @@ from pinax.apps.account.forms import SignupForm as PinaxSignupForm
 
 from emailconfirmation.models import EmailAddress
 
+from markitup.widgets import MarkItUpWidget
+
 from symposion.speakers.models import Speaker
 
 
@@ -14,6 +16,9 @@ class SpeakerForm(forms.ModelForm):
     class Meta:
         model = Speaker
         exclude = ["user", "annotation", "invite_email", "invite_token"]
+        widgets = {
+            "biography": MarkItUpWidget(),
+        }
     
     def clean_twitter_username(self):
         value = self.cleaned_data["twitter_username"]

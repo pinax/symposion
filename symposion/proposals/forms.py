@@ -1,6 +1,8 @@
 from django import forms
 from django.db.models import Q
 
+from markitup.widgets import MarkItUpWidget
+
 from symposion.conference.models import PresentationKind
 from symposion.proposals.models import Proposal
 
@@ -14,6 +16,10 @@ class ProposalForm(forms.ModelForm):
             "additional_speakers",
             "cancelled",
         ]
+        widgets = {
+            "abstract": MarkItUpWidget(),
+            "additional_notes": MarkItUpWidget(),
+        }
     
     def __init__(self, *args, **kwargs):
         super(ProposalForm, self).__init__(*args, **kwargs)
