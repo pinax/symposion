@@ -4,7 +4,7 @@ from django.db import models
 class SponsorManager(models.Manager):
 
     def active(self):
-        return self.get_query_set().filter(active=True)
+        return self.get_query_set().filter(active=True).order_by("level")
     
     def with_weblogo(self):
         queryset = self.raw("""
