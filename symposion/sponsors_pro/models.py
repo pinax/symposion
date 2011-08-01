@@ -9,6 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 
 from symposion.sponsors_pro import SPONSOR_COORDINATORS
+from symposion.sponsors_pro.managers import SponsorManager
 from symposion.utils.mail import send_email
 
 
@@ -39,6 +40,8 @@ class Sponsor(models.Model):
     level = models.ForeignKey(SponsorLevel, verbose_name=_("level"), null=True)
     added = models.DateTimeField(_("added"), default=datetime.datetime.now)
     active = models.NullBooleanField(_("active"))
+
+    objects = SponsorManager()
     
     def __unicode__(self):
         return self.name
