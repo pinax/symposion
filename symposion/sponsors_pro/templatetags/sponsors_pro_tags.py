@@ -19,40 +19,25 @@ class SponsorsNode(template.Node):
                 "'as'" % bits[0])
         return cls(bits[2])
     
-    def __init__(self, context_var):
+    def __init__(self, context_var, web_only=False):
+        self.web_only = web_only
         self.context_var = context_var
     
     def render(self, context):
-        queryset = Sponsor.objects.raw("""
-        SELECT DISTINCT
-            "sponsors_pro_sponsor"."id",
-            "sponsors_pro_sponsor"."applicant_id",
-            "sponsors_pro_sponsor"."name",
-            "sponsors_pro_sponsor"."external_url",
-            "sponsors_pro_sponsor"."annotation",
-            "sponsors_pro_sponsor"."contact_name",
-            "sponsors_pro_sponsor"."contact_email",
-            "sponsors_pro_sponsor"."level_id",
-            "sponsors_pro_sponsor"."added",
-            "sponsors_pro_sponsor"."active",
-            "sponsors_pro_sponsorlevel"."order"
-        FROM
-            "sponsors_pro_sponsor"
-            INNER JOIN
-                "sponsors_pro_sponsorbenefit" ON ("sponsors_pro_sponsor"."id" = "sponsors_pro_sponsorbenefit"."sponsor_id")
-            INNER JOIN
-                "sponsors_pro_benefit" ON ("sponsors_pro_sponsorbenefit"."benefit_id" = "sponsors_pro_benefit"."id")
-            LEFT OUTER JOIN
-                "sponsors_pro_sponsorlevel" ON ("sponsors_pro_sponsor"."level_id" = "sponsors_pro_sponsorlevel"."id")
-        WHERE (
-            "sponsors_pro_sponsor"."active" = 't' AND
-            "sponsors_pro_benefit"."type" = 'weblogo' AND
-            "sponsors_pro_sponsorbenefit"."upload" != ''
-        )
-        ORDER BY "sponsors_pro_sponsorlevel"."order" ASC, "sponsors_pro_sponsor"."added" ASC
-        """)
+        if self.web_only:
+            queryset = Sponsor.objects.with_weblogo()
+        else:
+            queryset = Sponsor.objects.active()
         context[self.context_var] = queryset
         return u""
+
+
+@register.tag
+def web_sponsors(parser, token):
+    """
+    {% web_sponsors as sponsors %}
+    """
+    return SponsorsNode.handle_token(parser, token, web_only=True)
 
 
 @register.tag
