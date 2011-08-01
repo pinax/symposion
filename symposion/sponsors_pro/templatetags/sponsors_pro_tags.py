@@ -9,7 +9,7 @@ register = template.Library()
 class SponsorsNode(template.Node):
     
     @classmethod
-    def handle_token(cls, parser, token):
+    def handle_token(cls, parser, token, web_only=True):
         bits = token.split_contents()
         if len(bits) != 3:
             raise template.TemplateSyntaxError("%r takes exactly two arguments "
@@ -17,9 +17,9 @@ class SponsorsNode(template.Node):
         if bits[1] != "as":
             raise template.TemplateSyntaxError("First argument to %r must be "
                 "'as'" % bits[0])
-        return cls(bits[2])
+        return cls(bits[2], web_only)
     
-    def __init__(self, context_var, web_only=False):
+    def __init__(self, context_var, web_only):
         self.web_only = web_only
         self.context_var = context_var
     
