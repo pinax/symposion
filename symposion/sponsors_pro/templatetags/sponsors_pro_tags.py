@@ -20,7 +20,6 @@ class SponsorsNode(template.Node):
                 "'as'" % bits[0])
         if len(bits) == 4:
             section = bits[1]
-            print section
         return cls(bits[-1], section)
     
     def __init__(self, context_var, section):
