@@ -31,8 +31,8 @@ def require_no_sponsorship(only_active=False):
     return inner
 
 
-def sponsor_index(request):
-    return render_to_response("sponsors/index.html", {
+def sponsor_info(request):
+    return render_to_response("sponsors/info.html", {
     }, context_instance=RequestContext(request))
 
 
@@ -43,7 +43,7 @@ def sponsor_apply(request):
         form = SponsorApplicationForm(request.POST, user=request.user)
         if form.is_valid():
             form.save()
-            return redirect("sponsor_index")
+            return redirect("sponsor_info")
     else:
         form = SponsorApplicationForm(user=request.user)
     return render_to_response("sponsors/apply.html", {
@@ -56,7 +56,7 @@ def sponsor_detail(request, pk):
     sponsor = get_object_or_404(Sponsor, pk=pk)
     
     if not sponsor.active or sponsor.applicant != request.user:
-        return redirect("sponsor_index")
+        return redirect("sponsor_info")
     
     formset_kwargs = {
         "instance": sponsor,

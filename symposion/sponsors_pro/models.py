@@ -49,7 +49,7 @@ class Sponsor(models.Model):
     def get_absolute_url(self):
         if self.active:
             return reverse("sponsor_detail", kwargs={"pk": self.pk})
-        return reverse("sponsor_index")
+        return reverse("sponsor_info")
     
     @property
     def website_logo_url(self):
