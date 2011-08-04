@@ -10,14 +10,17 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseNotAllowed, Http404
 from django.shortcuts import render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
+from django.utils import simplejson as json
 
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.contrib.sites.models import Site
 
 from symposion.schedule.cache import db, cache_key_user
 from symposion.schedule.forms import PlenaryForm, RecessForm, PresentationForm
-from symposion.schedule.models import Slot, Presentation, Track, Session, SessionRole, UserBookmark
+from symposion.schedule.models import (Slot, Presentation, Track, Session, SessionRole,
+    UserBookmark, Plenary)
 
 
 wed_morn_start = datetime.datetime(2011, 3, 9, 9, 0)  # 9AM Eastern
@@ -33,6 +36,8 @@ WEDNESDAY_MORNING = (wed_morn_start, wed_morn_end)
 WEDNESDAY_AFTERNOON = (wed_after_start, wed_after_end)
 THURSDAY_MORNING = (thu_morn_start, thu_morn_end)
 THURSDAY_AFTERNOON = (thu_after_start, thu_after_end)
+
+CONFERENCE_TAGS = getattr(settings, "CONFERENCE_TAGS", [])
 
 
 def hash_for_user(user):
@@ -507,3 +512,93 @@ def schedule_user_bookmarks(request, user_id, user_hash):
     response = HttpResponse(cal.as_string(), content_type="text/calendar")
     response["Content-Disposition"] = "filename=pycon2011-%s-bookmarks.ics" % user.username.encode("utf-8")
     return response
+
+def json_serializer(obj):
+    if isinstance(obj, datetime.datetime):
+        return list(obj.timetuple())
+    raise TypeError
+
+def schedule_json(request):
+    slots = Slot.objects.all().order_by("start")
+
+    data = []
+    for slot in slots:
+        try:
+            tags = []
+            tags.append(slot.presentation.presentation_type.slug)
+            tags.append(Presentation.AUDIENCE_LEVELS[slot.presentation.audience_level - 1][1].lower())
+            tags.extend(CONFERENCE_TAGS)
+            data.append({
+                "room": slot.track.name,
+                "start": slot.start,
+                "duration": (slot.end - slot.start).seconds // 60,
+                "end": slot.end,
+                "title": slot.presentation.title,
+                "name": slot.presentation.title,
+                "presenters": ", ".join(map(
+                    lambda s: s.name,
+                    slot.presentation.speakers()
+                )),
+                "description": slot.presentation.description,
+                "abstract": slot.presentation.abstract,
+                "id": slot.pk,
+                "url": "http://%s%s" % (Site.objects.get_current().domain, slot.presentation.get_absolute_url()),
+                "tags": ", ".join(tags),
+                "last_updated": slot.presentation.last_updated,
+
+                # Add some fields for Carl
+                "license": "",
+                "conf_url": "",
+                "conf_key": "",
+                "released": True,
+                "start_iso": slot.start.isoformat(),
+                "end_iso": slot.end.isoformat(),
+                "authors": ", ".join(map(
+                    lambda s: s.name,
+                    slot.presentation.speakers()
+                )),
+                "last_updated_iso": slot.presentation.last_updated.isoformat(),
+                "contact": "", # not sure if this is ok to be shared.
+            })
+        except Presentation.DoesNotExist:
+            try:
+                data.append({
+                    "room": "Plenary",
+                    "start": slot.start,
+                    "duration": (slot.end - slot.start).seconds // 60,
+                    "end": slot.end,
+                    "title": slot.plenary.title,
+                    "name": slot.plenary.title,
+                    "presenters": ", ".join(map(
+                        lambda s: s.name if s else "",
+                        slot.plenary.speakers()
+                    )),
+                    "description": slot.plenary.description,
+                    "abstract": None,
+                    "id": slot.pk,
+                    "url": None,
+                    "tags": "plenary",
+                    "last_updated": slot.plenary.last_updated,
+
+                    # Add some fields for Carl
+                    "license": "",
+                    "conf_url": "",
+                    "conf_key": "",
+                    "start_iso": slot.start.isoformat(),
+                    "end_iso": slot.end.isoformat(),
+                    "released": True,
+                    "authors": ", ".join(map(
+                        lambda s: s.name if s else "",
+                        slot.plenary.speakers()
+                    )),
+                    "last_updated_iso": slot.plenary.last_updated,
+                    "contact": "", # not sure if this is ok to be shared.
+
+                })
+            except Plenary.DoesNotExist:
+                pass
+
+    return HttpResponse(
+        json.dumps(data, default=json_serializer),
+        content_type="application/json"
+    )
