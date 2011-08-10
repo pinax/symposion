@@ -10,6 +10,11 @@ from markitup.fields import MarkupField
 
 class Speaker(models.Model):
     
+    SESSION_COUNT_CHOICES = [
+        (1, "One"),
+        (2, "Two")
+    ]
+    
     user = models.OneToOneField(User, null=True, related_name="speaker_profile")
     name = models.CharField(max_length=100)
     biography = MarkupField()
@@ -21,6 +26,11 @@ class Speaker(models.Model):
     created = models.DateTimeField(
         default = datetime.datetime.now,
         editable = False
+    )
+    sessions_preference = models.IntegerField(
+        choices=SESSION_COUNT_CHOICES,
+        null=True,
+        blank=True
     )
     
     def __unicode__(self):
