@@ -11,10 +11,15 @@ class ProposalForm(forms.ModelForm):
     
     class Meta:
         model = Proposal
-        exclude = [
-            "speaker",
-            "additional_speakers",
-            "cancelled",
+        fields = [
+            "title",
+            "kind",
+            "category",
+            "audience_level",
+            "extreme",
+            "duration",
+            "description",
+            "abstract",
         ]
         widgets = {
             "abstract": MarkItUpWidget(),
