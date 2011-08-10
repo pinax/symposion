@@ -18,6 +18,12 @@ class Proposal(models.Model):
         (AUDIENCE_LEVEL_INTERMEDIATE, "Intermediate"),
         (AUDIENCE_LEVEL_EXPERIENCED, "Experienced"),
     ]
+
+    DURATION_CHOICES = [
+        (0, "I don't care"),
+        (1, "I prefer a 30 minute slot"),
+        (2, "I prefer a 45 minute slot"),
+    ]
     
     title = models.CharField(max_length=100)
     description = models.TextField(
@@ -31,6 +37,8 @@ class Proposal(models.Model):
         blank=True,
         help_text = "Anything else you'd like the program committee to know when making their selection: your past speaking experience, open source community experience, etc."
     )
+    extreme = models.BooleanField(default=False)
+    duration = models.IntegerField(choices=DURATION_CHOICES)
     submitted = models.DateTimeField(
         default = datetime.datetime.now,
         editable = False,
