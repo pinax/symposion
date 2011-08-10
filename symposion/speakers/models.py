@@ -19,7 +19,11 @@ class Speaker(models.Model):
     name = models.CharField(max_length=100)
     biography = MarkupField()
     photo = models.ImageField(upload_to="speaker_photos", blank=True)
-    twitter_username = models.CharField(max_length=15, blank=True)
+    twitter_username = models.CharField(
+        max_length = 15,
+        blank = True,
+        help_text = "Your Twitter account, with or without the @"
+    )
     annotation = models.TextField() # staff only
     invite_email = models.CharField(max_length=200, unique=True, null=True, db_index=True)
     invite_token = models.CharField(max_length=40, db_index=True)
