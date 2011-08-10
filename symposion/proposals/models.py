@@ -4,7 +4,7 @@ from django.db import models
 
 from markitup.fields import MarkupField
 
-from symposion.conference.models import PresentationKind
+from symposion.conference.models import PresentationKind, PresentationCategory
 
 
 class Proposal(models.Model):
@@ -31,6 +31,7 @@ class Proposal(models.Model):
         help_text = "Brief one paragraph blurb (will be public if accepted). Must be 400 characters or less"
     )
     kind = models.ForeignKey(PresentationKind)
+    category = models.ForeignKey(PresentationCategory)
     abstract = MarkupField(help_text = "More detailed description (will be public if accepted).")
     audience_level = models.IntegerField(choices=AUDIENCE_LEVELS)
     additional_notes = MarkupField(
