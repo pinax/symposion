@@ -145,7 +145,7 @@ def proposal_edit(request, pk):
         if form.is_valid():
             form.save()
             messages.success(request, "Proposal updated.")
-            return redirect("proposal_edit", proposal.pk)
+            return redirect("proposal_detail", proposal.pk)
     else:
         form = ProposalEditForm(instance=proposal)
     ctx = {
