@@ -20,7 +20,7 @@ class Proposal(models.Model):
     ]
 
     DURATION_CHOICES = [
-        (0, "I don't care"),
+        (0, "No preference"),
         (1, "I prefer a 30 minute slot"),
         (2, "I prefer a 45 minute slot"),
     ]
@@ -28,17 +28,22 @@ class Proposal(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField(
         max_length = 400, # @@@ need to enforce 400 in UI
-        help_text = "Brief one paragraph blurb (will be public if accepted). Must be 400 characters or less"
+        help_text = "If your talk is accepted this will be made public and printed in the program. Should be one paragraph, maximum 400 characters."
     )
     kind = models.ForeignKey(PresentationKind)
-    abstract = MarkupField(help_text = "More detailed description (will be public if accepted).")
     categories = models.ManyToManyField(PresentationCategory)
+    abstract = MarkupField(
+        help_text = "Detailed description and outline. Will be made public if your talk is accepted."
+    )
     audience_level = models.IntegerField(choices=AUDIENCE_LEVELS)
     additional_notes = MarkupField(
         blank=True,
         help_text = "Anything else you'd like the program committee to know when making their selection: your past speaking experience, open source community experience, etc."
     )
-    extreme = models.BooleanField(default=False)
+    extreme = models.BooleanField(
+        default=False,
+        help_text = "'Extreme' talks are advanced talks with little or no introductory material. See http://us.pycon.org/2012/speaker/extreme/ for details."
+    )
     duration = models.IntegerField(choices=DURATION_CHOICES)
     submitted = models.DateTimeField(
         default = datetime.datetime.now,
