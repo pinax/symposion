@@ -52,6 +52,9 @@ class Proposal(models.Model):
     speaker = models.ForeignKey("speakers.Speaker", related_name="proposals")
     additional_speakers = models.ManyToManyField("speakers.Speaker", blank=True)
     cancelled = models.BooleanField(default=False)
+
+    # Have to get around the horrible default help text like this
+    categories.help_text = "Choose one or more categories that would be covered by your proposal."
     
     def can_edit(self):
         return self.kind in PresentationKind.available()
