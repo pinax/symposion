@@ -31,8 +31,8 @@ class Proposal(models.Model):
         help_text = "Brief one paragraph blurb (will be public if accepted). Must be 400 characters or less"
     )
     kind = models.ForeignKey(PresentationKind)
-    category = models.ForeignKey(PresentationCategory)
     abstract = MarkupField(help_text = "More detailed description (will be public if accepted).")
+    categories = models.ManyToManyField(PresentationCategory)
     audience_level = models.IntegerField(choices=AUDIENCE_LEVELS)
     additional_notes = MarkupField(
         blank=True,
