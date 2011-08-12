@@ -20,6 +20,7 @@ class ProposalForm(forms.ModelForm):
             "duration",
             "description",
             "abstract",
+            "additional_notes",
         ]
         widgets = {
             "abstract": MarkItUpWidget(),
