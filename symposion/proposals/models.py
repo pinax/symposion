@@ -42,7 +42,7 @@ class Proposal(models.Model):
     )
     extreme = models.BooleanField(
         default=False,
-        help_text = "'Extreme' talks are advanced talks with little or no introductory material. See http://us.pycon.org/2012/speaker/extreme/ for details."
+        help_text = "'Extreme' talks are advanced talks with little or no introductory material. See <a href='http://us.pycon.org/2012/speaker/extreme/' target='_blank'>http://us.pycon.org/2012/speaker/extreme/</a> for details."
     )
     duration = models.IntegerField(choices=DURATION_CHOICES)
     submitted = models.DateTimeField(
