@@ -31,7 +31,7 @@ class Proposal(models.Model):
         help_text = "If your talk is accepted this will be made public and printed in the program. Should be one paragraph, maximum 400 characters."
     )
     kind = models.ForeignKey(PresentationKind)
-    categories = models.ManyToManyField(PresentationCategory)
+    category = models.ForeignKey(PresentationCategory)
     abstract = MarkupField(
         help_text = "Detailed description and outline. Will be made public if your talk is accepted."
     )
@@ -52,9 +52,6 @@ class Proposal(models.Model):
     speaker = models.ForeignKey("speakers.Speaker", related_name="proposals")
     additional_speakers = models.ManyToManyField("speakers.Speaker", blank=True)
     cancelled = models.BooleanField(default=False)
-
-    # Have to get around the horrible default help text like this
-    categories.help_text = "Choose one or more categories that would be covered by your proposal."
     
     def can_edit(self):
         return self.kind in PresentationKind.available()

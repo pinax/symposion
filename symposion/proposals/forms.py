@@ -14,7 +14,7 @@ class ProposalForm(forms.ModelForm):
         fields = [
             "title",
             "kind",
-            "categories",
+            "category",
             "audience_level",
             "extreme",
             "duration",
