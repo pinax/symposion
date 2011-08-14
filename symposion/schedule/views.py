@@ -107,6 +107,19 @@ def schedule_list_posters(request):
     }), context_instance=RequestContext(request))
 
 
+def tutorial_detail(request, pk):
+
+    tutorial = get_object_or_404(
+        Presentation,
+        id = pk,
+        kind__name__iexact = "tutorial"
+    )
+
+    return render_to_response("schedule/tutorial_detail.html", dict({
+        "tutorial": tutorial,
+    }), context_instance=RequestContext(request))
+
+
 def schedule_tutorials(request):
     
     tutorials = {
