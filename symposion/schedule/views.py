@@ -86,7 +86,7 @@ def schedule_list_talks(request):
 def schedule_list_tutorials(request):
     
     tutorials = Presentation.objects.filter(
-        presentation_type=Presentation.PRESENTATION_TYPE_TUTORIAL
+        kind__name__iexact = "tutorial",
     )
     tutorials = tutorials.order_by("pk")
     
