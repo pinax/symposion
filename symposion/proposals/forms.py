@@ -3,7 +3,7 @@ from django.db.models import Q
 
 from markitup.widgets import MarkItUpWidget
 
-from symposion.conference.models import PresentationKind
+from symposion.conference.models import PresentationKind, PresentationCategory
 from symposion.proposals.models import Proposal
 
 
@@ -31,6 +31,9 @@ class ProposalForm(forms.ModelForm):
         super(ProposalForm, self).__init__(*args, **kwargs)
         self.fields["kind"] = forms.ModelChoiceField(
             queryset=PresentationKind.available()
+        )
+        self.fields["category"] = forms.ModelChoiceField(
+            queryset = PresentationCategory.objects.order_by("name")
         )
     
     def clean_description(self):
