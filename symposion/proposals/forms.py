@@ -30,7 +30,9 @@ class ProposalForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(ProposalForm, self).__init__(*args, **kwargs)
         self.fields["kind"] = forms.ModelChoiceField(
-            queryset=PresentationKind.available()
+            queryset = PresentationKind.available(),
+            widget = forms.RadioSelect(),
+            empty_label = None
         )
         self.fields["category"] = forms.ModelChoiceField(
             queryset = PresentationCategory.objects.order_by("name")
