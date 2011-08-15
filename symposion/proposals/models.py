@@ -33,12 +33,12 @@ class Proposal(models.Model):
     kind = models.ForeignKey(PresentationKind)
     category = models.ForeignKey(PresentationCategory)
     abstract = MarkupField(
-        help_text = "Detailed description and outline. Will be made public if your talk is accepted."
+        help_text = "Detailed description and outline. Will be made public if your talk is accepted. Edit using <a href='http://warpedvisions.org/projects/markdown-cheat-sheet/' target='_blank'>Markdown</a>."
     )
     audience_level = models.IntegerField(choices=AUDIENCE_LEVELS)
     additional_notes = MarkupField(
         blank=True,
-        help_text = "Anything else you'd like the program committee to know when making their selection: your past speaking experience, open source community experience, etc."
+        help_text = "Anything else you'd like the program committee to know when making their selection: your past speaking experience, open source community experience, etc. Edit using <a href='http://warpedvisions.org/projects/markdown-cheat-sheet/' target='_blank'>Markdown</a>."
     )
     extreme = models.BooleanField(
         default=False,
