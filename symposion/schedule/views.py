@@ -91,7 +91,7 @@ def schedule_list_talks(request):
 def schedule_list_tutorials(request):
     
     tutorials = Presentation.objects.filter(
-        presentation_type=Presentation.PRESENTATION_TYPE_TUTORIAL
+        kind__name__iexact = "tutorial",
     )
     tutorials = tutorials.order_by("pk")
     
@@ -109,6 +109,19 @@ def schedule_list_posters(request):
     
     return render_to_response("schedule/list_posters.html", dict({
         "posters": posters,
+    }), context_instance=RequestContext(request))
+
+
+def tutorial_detail(request, pk):
+
+    tutorial = get_object_or_404(
+        Presentation,
+        id = pk,
+        kind__name__iexact = "tutorial"
+    )
+
+    return render_to_response("schedule/tutorial_detail.html", dict({
+        "tutorial": tutorial,
     }), context_instance=RequestContext(request))
 
 
