@@ -1,4 +1,5 @@
 import datetime
+from itertools import chain
 
 from django.db import models
 from django.core.urlresolvers import reverse
@@ -38,6 +39,15 @@ class Speaker(models.Model):
     def save(self, *args, **kwargs):
         self.biography_html = creole_parser.parse(self.biography)
         super(Speaker, self).save(*args, **kwargs)
+    
+    @property
+    def presentations(self):
+        # schedule may not be installed so we need to check for sessions
+        if hasattr(self, "sessions"):
+            sessions = self.sessions.exclude(slot=None)
+            additional_sessions = self.presentation_set.exclude(slot=None)
+            return list(chain(sessions, additional_sessions))
+        return None
     
     @property
     def email(self):
