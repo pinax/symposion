@@ -180,6 +180,14 @@ class Plenary(models.Model):
     additional_speakers = models.ManyToManyField("speakers.Speaker", blank=True)
     description = models.TextField(max_length=400, blank=True)
 
+    def speakers(self):
+        yield self.speaker
+        for speaker in self.additional_speakers.all():
+            yield speaker
+    
+    def __unicode__(self):
+        return u"%s" % self.title
+
 
 class Recess(models.Model):
     """
