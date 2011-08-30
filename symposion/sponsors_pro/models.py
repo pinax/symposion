@@ -71,7 +71,16 @@ class Sponsor(models.Model):
             if benefits.count():
                 self._listing_text = benefits[0].text
         return self._listing_text
-
+    
+    @property
+    def joblisting_text(self):
+        if not hasattr(self, '_joblisting_text'):
+            self._joblisting_text = None
+            benefits = self.sponsor_benefits.filter(benefit__id=21)
+            if benefits.count():
+                self._joblisting_text = benefits[0].text
+        return self._joblisting_text
+    
     @property
     def website_logo(self):
         if not hasattr(self, '_website_logo'):
