@@ -538,11 +538,12 @@ def schedule_json(request):
     for slot in slots:
         try:
             tags = []
-            tags.append(slot.presentation.presentation_type.slug)
+            if slot.presentation.kind:
+                tags.append(slot.presentation.kind.name)
             tags.append(Presentation.AUDIENCE_LEVELS[slot.presentation.audience_level - 1][1].lower())
             tags.extend(CONFERENCE_TAGS)
             data.append({
-                "room": slot.track.name,
+                "room": getattr(slot.track, "name", None),
                 "start": slot.start,
                 "duration": (slot.end - slot.start).seconds // 60,
                 "end": slot.end,

@@ -158,6 +158,7 @@ class Presentation(models.Model):
     
     extreme_pycon = models.BooleanField(u"EXTREME PyCon!", default=False)
     invited = models.BooleanField(default=False)
+    last_updated = models.DateTimeField(auto_now=True)
     
     def save(self, *args, **kwargs):
         self.abstract_html = creole_parser.parse(self.abstract)
@@ -170,6 +171,10 @@ class Presentation(models.Model):
     
     def __unicode__(self):
         return u"%s" % self.title
+    
+    @models.permalink
+    def get_absolute_url(self):
+        return ("symposion.schedule.views.schedule_presentation", [str(self.pk),])
 
 
 class Plenary(models.Model):
@@ -179,6 +184,7 @@ class Plenary(models.Model):
     speaker = models.ForeignKey("speakers.Speaker", null=True, blank=True, related_name="+")
     additional_speakers = models.ManyToManyField("speakers.Speaker", blank=True)
     description = models.TextField(max_length=400, blank=True)
+    last_updated = models.DateTimeField(auto_now=True)
 
     def speakers(self):
         yield self.speaker
