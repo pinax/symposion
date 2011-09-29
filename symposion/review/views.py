@@ -243,7 +243,10 @@ def review_detail(request, pk):
         initial = {}
         if latest_vote:
             initial["vote"] = latest_vote.vote
-        review_form = ReviewForm(initial=initial)
+        if request.user in speakers:
+            review_form = None
+        else:
+            review_form = ReviewForm(initial=initial)
         message_form = SpeakerCommentForm()
     
     proposal.comment_count = proposal.result.comment_count
