@@ -8,7 +8,7 @@ from django.db.models.signals import post_save
 
 from django.contrib.auth.models import User
 
-from biblion import creole_parser
+from markitup.fields import MarkupField
 
 from symposion.proposals.models import Proposal
 from symposion.schedule.models import Presentation
@@ -88,15 +88,8 @@ class ProposalMessage(models.Model):
     proposal = models.ForeignKey("proposals.Proposal", related_name="messages")
     user = models.ForeignKey(User)
     
-    message = models.TextField(
-        help_text = "You can use <a href='http://wikicreole.org/' target='_blank'>creole</a> markup. <a id='preview' href='#'>Preview</a>",
-    )
-    message_html = models.TextField(editable=False)
+    message = MarkupField()
     submitted_at = models.DateTimeField(default=datetime.now, editable=False)
-    
-    def save(self, **kwargs):
-        self.message_html = creole_parser.parse(self.message)
-        super(ProposalMessage, self).save(**kwargs)
 
 
 class Review(models.Model):
@@ -108,10 +101,7 @@ class Review(models.Model):
     # No way to encode "-0" vs. "+0" into an IntegerField, and I don't feel
     # like some complicated encoding system.
     vote = models.CharField(max_length=2, blank=True, choices=VOTES.CHOICES)
-    comment = models.TextField(
-        help_text = "You can use <a href='http://wikicreole.org/' target='_blank'>creole</a> markup. <a id='preview' href='#'>Preview</a>",
-    )
-    comment_html = models.TextField(editable=False)
+    comment = MarkupField()
     submitted_at = models.DateTimeField(default=datetime.now, editable=False)
     
     def save(self, **kwargs):
@@ -129,7 +119,6 @@ class Review(models.Model):
                 self.proposal.result.update_vote(self.vote, previous=vote.vote)
             else:
                 self.proposal.result.update_vote(self.vote)
-        self.comment_html = creole_parser.parse(self.comment)
         super(Review, self).save(**kwargs)
     
     def delete(self):
@@ -272,7 +261,7 @@ class ProposalResult(models.Model):
 class Comment(models.Model):
     proposal = models.ForeignKey("proposals.Proposal", related_name="comments")
     commenter = models.ForeignKey(User)
-    text = models.TextField()
+    text = MarkupField()
     
     # Or perhaps more accurately, can the user see this comment.
     public = models.BooleanField(choices=[
