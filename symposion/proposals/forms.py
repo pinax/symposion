@@ -29,11 +29,6 @@ class ProposalForm(forms.ModelForm):
     
     def __init__(self, *args, **kwargs):
         super(ProposalForm, self).__init__(*args, **kwargs)
-        self.fields["kind"] = forms.ModelChoiceField(
-            queryset = PresentationKind.available(),
-            widget = forms.RadioSelect(),
-            empty_label = None
-        )
         self.fields["category"] = forms.ModelChoiceField(
             queryset = PresentationCategory.objects.order_by("name")
         )
@@ -48,11 +43,30 @@ class ProposalForm(forms.ModelForm):
 
 
 class ProposalSubmitForm(ProposalForm):
-    pass
+
+    def __init__(self, *args, **kwargs):
+        super(ProposalSubmitForm, self).__init__(*args, **kwargs)
+        self.fields["kind"] = forms.ModelChoiceField(
+            queryset = PresentationKind.available(),
+            widget = forms.RadioSelect(),
+            empty_label = None
+        )
 
 
 class ProposalEditForm(ProposalForm):
-    pass
+    
+    class Meta:
+        model = Proposal
+        fields = [
+            "title",
+            "category",
+            "audience_level",
+            "extreme",
+            "duration",
+            "description",
+            "abstract",
+            "additional_notes",
+        ]
 
 
 class AddSpeakerForm(forms.Form):
