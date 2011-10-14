@@ -54,7 +54,7 @@ class Proposal(models.Model):
     cancelled = models.BooleanField(default=False)
     
     def can_edit(self):
-        return self.kind in PresentationKind.available()
+        return True
     
     @property
     def number(self):
