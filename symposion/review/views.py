@@ -79,9 +79,11 @@ def review_list(request, username=None):
     admin = request.user.groups.filter(name="reviewers-admins").exists()
     
     proposals = group_proposals(proposals_generator(request, queryset, username=username, check_speaker=not admin))
-    
+    rated_proposals = queryset.filter(review__user=request.user)
+
     ctx = {
         "proposals": proposals,
+        "rated_proposals": rated_proposals,
         "username": username,
     }
     ctx = RequestContext(request, ctx)
