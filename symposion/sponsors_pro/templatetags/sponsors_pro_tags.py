@@ -35,7 +35,7 @@ class SponsorsNode(template.Node):
         if self.section == "footer":
             queryset = queryset.filter(level__in=[4, 10])
         if self.section == "jobs":
-            queryset = queryset.filter(level__in=[1, 2, 3, 4])
+            queryset = queryset.filter(level__in=[1, 2, 3, 4, 7])
         context[self.context_var] = queryset
         return u""
 
