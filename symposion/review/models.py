@@ -91,6 +91,9 @@ class ProposalMessage(models.Model):
     message = MarkupField()
     submitted_at = models.DateTimeField(default=datetime.now, editable=False)
 
+    class Meta:
+        ordering = ["submitted_at"]
+
 
 class Review(models.Model):
     VOTES = VOTES
