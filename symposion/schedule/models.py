@@ -6,9 +6,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.contrib.contenttypes.models import ContentType
 
-from biblion import creole_parser
+from markitup.fields import MarkupField
 
-from symposion.conference.models import PresentationKind
+from symposion.conference.models import PresentationKind, PresentationCategory
 
 
 class Track(models.Model):
@@ -135,6 +135,12 @@ class Presentation(models.Model):
         (AUDIENCE_LEVEL_INTERMEDIATE, "Intermediate"),
         (AUDIENCE_LEVEL_EXPERIENCED, "Experienced"),
     ]
+
+    DURATION_CHOICES = [
+        (0, "No preference"),
+        (1, "I prefer a 30 minute slot"),
+        (2, "I prefer a 45 minute slot"),
+    ]
     
     slot = models.OneToOneField(Slot, null=True, blank=True, related_name="presentation")
     
@@ -144,11 +150,12 @@ class Presentation(models.Model):
         help_text = "Brief one paragraph blurb (will be public if accepted). Must be 400 characters or less"
     )
     kind = models.ForeignKey(PresentationKind)
-    abstract = models.TextField(
-        help_text = "More detailed description (will be public if accepted). You can use <a href='http://wikicreole.org/' target='_blank'>creole</a> markup. <a id='preview' href='#'>Preview</a>",
+    category = models.ForeignKey(PresentationCategory)
+    abstract = MarkupField(
+        help_text = "More detailed description (will be public if accepted).",
     )
-    abstract_html = models.TextField(editable=False)
     audience_level = models.IntegerField(choices=AUDIENCE_LEVELS)
+    duration = models.IntegerField(choices=DURATION_CHOICES)
     
     submitted = models.DateTimeField(
         default = datetime.datetime.now,
@@ -160,10 +167,6 @@ class Presentation(models.Model):
     
     extreme_pycon = models.BooleanField(u"EXTREME PyCon!", default=False)
     invited = models.BooleanField(default=False)
-    
-    def save(self, *args, **kwargs):
-        self.abstract_html = creole_parser.parse(self.abstract)
-        super(Presentation, self).save(*args, **kwargs)
     
     def speakers(self):
         yield self.speaker

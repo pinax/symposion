@@ -290,6 +290,8 @@ def promote_proposal(proposal):
             title=proposal.title,
             description=proposal.description,
             kind=proposal.kind,
+            category=proposal.category,
+            duration=proposal.duration,
             abstract=proposal.abstract,
             audience_level=proposal.audience_level,
             submitted=proposal.submitted,
