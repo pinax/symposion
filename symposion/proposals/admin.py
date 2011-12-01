@@ -1,13 +1,26 @@
 from django.contrib import admin
 
+from symposion.proposals.actions import export_as_csv_action
 from symposion.proposals.models import Proposal
 
 
 admin.site.register(Proposal,
     list_display = [
         "title",
+        "speaker",
+        "speaker_email",
         "kind",
         "audience_level",
         "cancelled",
-    ]
+    ],
+    list_filter = [
+        "kind__name",
+        "result__accepted",
+    ],
+    actions = [export_as_csv_action("CSV Export", fields=[
+        "title",
+        "speaker",
+        "speaker_email",
+        "kind",
+    ])]
 )
