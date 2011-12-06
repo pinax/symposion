@@ -92,7 +92,7 @@ class Sponsor(models.Model):
                 if benefits[0].upload:
                     self.sponsor_logo = benefits[0]
                     self.save()
-        return self._website_logo.upload
+        return self.sponsor_logo.upload
     
     def reset_benefits(self):
         """
