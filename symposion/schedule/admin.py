@@ -19,11 +19,16 @@ admin.site.register(Slot,
 
 admin.site.register(Presentation,
     list_display = [
+        "pk",
         "title",
         "slot",
         "kind",
         "audience_level",
         "cancelled"
+    ],
+    list_filter = [
+        "kind",
+        "cancelled",
     ],
     raw_id_fields = ["speaker"]
 )

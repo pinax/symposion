@@ -16,9 +16,11 @@ class PresentationCategory(models.Model):
 class PresentationKind(models.Model):
     
     name = models.CharField(max_length=100)
+    slug = models.SlugField()
     start = models.DateTimeField(null=True, blank=True)
     end = models.DateTimeField(null=True, blank=True)
     closed = models.NullBooleanField()
+    published = models.NullBooleanField()
     
     @classmethod
     def available(cls):
