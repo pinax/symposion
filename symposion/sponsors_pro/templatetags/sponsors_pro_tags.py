@@ -28,6 +28,7 @@ class SponsorsNode(template.Node):
     
     def render(self, context):
         queryset = Sponsor.objects.active()
+        queryset = queryset.select_related("level", "sponsor_logo")
         if self.section == "header":
             queryset = queryset.filter(level__in=[1])
         if self.section == "scroll":

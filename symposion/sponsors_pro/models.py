@@ -40,6 +40,9 @@ class Sponsor(models.Model):
     level = models.ForeignKey(SponsorLevel, verbose_name=_("level"), null=True)
     added = models.DateTimeField(_("added"), default=datetime.datetime.now)
     active = models.NullBooleanField(_("active"))
+    
+    # Denormalization  # @@@ This'll break if we can ever have more than one logo
+    sponsor_logo = models.ForeignKey("SponsorBenefit", related_name="+", null=True, blank=True, editable=False)
 
     objects = SponsorManager()
     
@@ -83,13 +86,13 @@ class Sponsor(models.Model):
     
     @property
     def website_logo(self):
-        if not hasattr(self, '_website_logo'):
-            self._website_logo = None
-            benefits = self.sponsor_benefits.filter(benefit__type="weblogo", upload__isnull=False)
+        if self.sponsor_logo is None:
+            benefits = self.sponsor_benefits.filter(benefit__type="weblogo", upload__isnull=False)[:1]
             if benefits.count():
                 if benefits[0].upload:
-                    self._website_logo = benefits[0].upload
-        return self._website_logo
+                    self.sponsor_logo = benefits[0]
+                    self.save()
+        return self._website_logo.upload
     
     def reset_benefits(self):
         """
@@ -240,3 +243,12 @@ class SponsorBenefit(models.Model):
         elif self.benefit.type == "text":
             return ["text"]
         return []
+
+
+def _denorm_weblogo(sender, instance, created, **kwargs):
+    if instance:
+        if instance.benefit.type == "weblogo" and instance.upload:
+            sponsor = instance.sponsor
+            sponsor.sponsor_logo = instance
+            sponsor.save()
+post_save.connect(_send_sponsor_notification_emails, sender=SponsorBenefit)
