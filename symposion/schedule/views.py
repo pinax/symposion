@@ -17,6 +17,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib.sites.models import Site
 
+from symposion.conference.models import PresentationKind
+
 from symposion.schedule.cache import db, cache_key_user
 from symposion.schedule.forms import PlenaryForm, RecessForm, PresentationForm
 from symposion.schedule.models import (Slot, Presentation, Track, Session, SessionRole,
@@ -62,7 +64,7 @@ def schedule_presentation(request, presentation_id, template_name="schedule/pres
     if extra_context is None:
         extra_context = {}
     
-    presentation = get_object_or_404(Presentation, id=presentation_id)
+    presentation = get_object_or_404(Presentation, id=presentation_id, kind__published=True)
     
     if request.user.is_authenticated():
         bookmarks = UserBookmark.objects.filter(
@@ -76,52 +78,14 @@ def schedule_presentation(request, presentation_id, template_name="schedule/pres
     }, **extra_context), context_instance=RequestContext(request))
 
 
-def schedule_list_talks(request):
-    
-    talks = Presentation.objects.filter(
-        presentation_type__in=[Presentation.PRESENTATION_TYPE_PANEL, Presentation.PRESENTATION_TYPE_TALK]
-    )
-    talks = talks.order_by("pk")
-    
-    return render_to_response("schedule/list_talks.html", dict({
+def schedule_presentation_list(request, kind_slug):
+
+    kind = get_object_or_404(PresentationKind, slug=kind_slug, published=True)
+    talks = Presentation.objects.filter(kind=kind).order_by("pk")
+
+    return render_to_response("schedule/list_presentations.html", dict({
         "talks": talks,
-    }), context_instance=RequestContext(request))
-
-
-def schedule_list_tutorials(request):
-    
-    tutorials = Presentation.objects.filter(
-        kind__name__iexact = "tutorial",
-    )
-    tutorials = tutorials.order_by("pk")
-    
-    return render_to_response("schedule/list_tutorials.html", dict({
-        "tutorials": tutorials,
-    }), context_instance=RequestContext(request))
-
-
-def schedule_list_posters(request):
-    
-    posters = Presentation.objects.filter(
-        presentation_type=Presentation.PRESENTATION_TYPE_POSTER
-    )
-    posters = posters.order_by("pk")
-    
-    return render_to_response("schedule/list_posters.html", dict({
-        "posters": posters,
-    }), context_instance=RequestContext(request))
-
-
-def tutorial_detail(request, pk):
-
-    tutorial = get_object_or_404(
-        Presentation,
-        id = pk,
-        kind__name__iexact = "tutorial"
-    )
-
-    return render_to_response("schedule/tutorial_detail.html", dict({
-        "tutorial": tutorial,
+        "kind": kind,
     }), context_instance=RequestContext(request))
 
 
