@@ -109,7 +109,7 @@ class Slot(models.Model):
         self.save()
     
     def __unicode__(self):
-        return u"%s: %s — %s" % (self.start.strftime("%a"), self.start.strftime("%X"), self.end.strftime("%X"))
+        return u"%s (%s: %s — %s)" % (self.title, self.start.strftime("%a"), self.start.strftime("%X"), self.end.strftime("%X"))
 
 
 class Presentation(models.Model):
