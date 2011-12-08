@@ -25,14 +25,14 @@ from symposion.schedule.models import (Slot, Presentation, Track, Session, Sessi
     UserBookmark, Plenary)
 
 
-wed_morn_start = datetime.datetime(2011, 3, 9, 9, 0)  # 9AM Eastern
-wed_morn_end = datetime.datetime(2011, 3, 9, 12, 20)  # 12:20PM Eastern
-wed_after_start = datetime.datetime(2011, 3, 9, 13, 20)  # 1:20PM Eastern
-wed_after_end = datetime.datetime(2011, 3, 9, 16, 40)  # 4:40PM Eastern
-thu_morn_start = datetime.datetime(2011, 3, 10, 9, 0)  # 9AM Eastern
-thu_morn_end = datetime.datetime(2011, 3, 10, 12, 20)  # 12:20PM Eastern
-thu_after_start = datetime.datetime(2011, 3, 10, 13, 20)  # 1:20PM Eastern
-thu_after_end = datetime.datetime(2011, 3, 10, 16, 40)  # 4:40PM Eastern
+wed_morn_start = datetime.datetime(2012, 3, 7, 9, 0)  # 9AM Eastern
+wed_morn_end = datetime.datetime(2012, 3, 7, 12, 20)  # 12:20PM Eastern
+wed_after_start = datetime.datetime(2012, 3, 7, 13, 20)  # 1:20PM Eastern
+wed_after_end = datetime.datetime(2012, 3, 7, 16, 40)  # 4:40PM Eastern
+thu_morn_start = datetime.datetime(2012, 3, 8, 9, 0)  # 9AM Eastern
+thu_morn_end = datetime.datetime(2012, 3, 8, 12, 20)  # 12:20PM Eastern
+thu_after_start = datetime.datetime(2012, 3, 8, 13, 20)  # 1:20PM Eastern
+thu_after_end = datetime.datetime(2012, 3, 8, 16, 40)  # 4:40PM Eastern
 
 WEDNESDAY_MORNING = (wed_morn_start, wed_morn_end)
 WEDNESDAY_AFTERNOON = (wed_after_start, wed_after_end)
