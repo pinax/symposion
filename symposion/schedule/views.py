@@ -25,14 +25,15 @@ from symposion.schedule.models import (Slot, Presentation, Track, Session, Sessi
     UserBookmark, Plenary)
 
 
-wed_morn_start = datetime.datetime(2012, 3, 7, 9, 0)  # 9AM Eastern
-wed_morn_end = datetime.datetime(2012, 3, 7, 12, 20)  # 12:20PM Eastern
-wed_after_start = datetime.datetime(2012, 3, 7, 13, 20)  # 1:20PM Eastern
-wed_after_end = datetime.datetime(2012, 3, 7, 16, 40)  # 4:40PM Eastern
-thu_morn_start = datetime.datetime(2012, 3, 8, 9, 0)  # 9AM Eastern
-thu_morn_end = datetime.datetime(2012, 3, 8, 12, 20)  # 12:20PM Eastern
-thu_after_start = datetime.datetime(2012, 3, 8, 13, 20)  # 1:20PM Eastern
-thu_after_end = datetime.datetime(2012, 3, 8, 16, 40)  # 4:40PM Eastern
+# @@@ this needs some rethinking (PyCon 2012 specific and hacky as heck)
+wed_morn_start = datetime.datetime(2012, 3, 7, 12, 0)  # 9AM Pacific
+wed_morn_end = datetime.datetime(2012, 3, 7, 15, 20)  # 12:20PM Pacific
+wed_after_start = datetime.datetime(2012, 3, 7, 16, 20)  # 1:20PM Pacific
+wed_after_end = datetime.datetime(2012, 3, 7, 19, 40)  # 4:40PM Pacific
+thu_morn_start = datetime.datetime(2012, 3, 8, 12, 0)  # 9AM Pacific
+thu_morn_end = datetime.datetime(2012, 3, 8, 15, 20)  # 12:20PM Pacific
+thu_after_start = datetime.datetime(2012, 3, 8, 16, 20)  # 1:20PM Pacific
+thu_after_end = datetime.datetime(2012, 3, 8, 19, 40)  # 4:40PM Pacific
 
 WEDNESDAY_MORNING = (wed_morn_start, wed_morn_end)
 WEDNESDAY_AFTERNOON = (wed_after_start, wed_after_end)
