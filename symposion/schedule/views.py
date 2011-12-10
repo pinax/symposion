@@ -124,6 +124,7 @@ def schedule_tutorials(request):
     
     ctx = {
         "tutorials": tutorials,
+        "timezone": settings.SCHEDULE_TIMEZONE,
     }
     ctx = RequestContext(request, ctx)
     return render_to_response("schedule/tutorials.html", ctx)
