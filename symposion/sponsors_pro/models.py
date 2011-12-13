@@ -251,4 +251,4 @@ def _denorm_weblogo(sender, instance, created, **kwargs):
             sponsor = instance.sponsor
             sponsor.sponsor_logo = instance
             sponsor.save()
-post_save.connect(_send_sponsor_notification_emails, sender=SponsorBenefit)
+post_save.connect(_denorm_weblogo, sender=SponsorBenefit)
