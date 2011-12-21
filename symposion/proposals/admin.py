@@ -19,6 +19,7 @@ admin.site.register(Proposal,
         "result__accepted",
     ],
     actions = [export_as_csv_action("CSV Export", fields=[
+        "id",
         "title",
         "speaker",
         "speaker_email",
