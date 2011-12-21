@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 
 from symposion.proposals.models import Proposal
 from symposion.review.forms import ReviewForm, ReviewCommentForm, SpeakerCommentForm
+from symposion.review.forms import BulkPresentationForm
 from symposion.review.models import ReviewAssignment, Review, LatestVote, VOTES
 from symposion.utils.mail import send_email
 
@@ -340,3 +341,24 @@ def review_assignment_opt_out(request, pk):
         review_assignment.save()
         ReviewAssignment.create_assignments(review_assignment.proposal, origin=ReviewAssignment.AUTO_ASSIGNED_LATER)
     return redirect("review_assignments")
+
+
+@login_required
+def review_bulk_accept(request):
+    if not request.user.groups.filter(name="reviewers-admins").exists():
+        return access_not_permitted(request)
+    if request.method == "POST":
+        form = BulkPresentationForm(request.POST)
+        if form.is_valid():
+            talk_ids = form.cleaned_data["talk_ids"].split(",")
+            talks = Proposal.objects.filter(id__in=talk_ids).select_related("result")
+            for talk in talks:
+                talk.result.accepted = True
+                talk.result.save()
+            return redirect("review_list")
+    else:
+        form = BulkPresentationForm()
+    
+    return render_to_response("review/review_bulk_accept.html", {
+        "form": form,
+    }, context_instance=RequestContext(request))

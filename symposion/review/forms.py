@@ -31,3 +31,10 @@ class SpeakerCommentForm(forms.ModelForm):
         model = ProposalMessage
         fields = ["message"]
         widgets = { "message": MarkItUpWidget() }
+
+
+class BulkPresentationForm(forms.Form):
+    talk_ids = forms.CharField(
+        max_length=500,
+        help_text="Provide a comma seperated list of talk ids to accept."
+    )
