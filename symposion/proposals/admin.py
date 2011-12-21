@@ -6,6 +6,7 @@ from symposion.proposals.models import Proposal
 
 admin.site.register(Proposal,
     list_display = [
+        "id",
         "title",
         "speaker",
         "speaker_email",
