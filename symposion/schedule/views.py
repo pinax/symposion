@@ -82,7 +82,7 @@ def schedule_presentation(request, presentation_id, template_name="schedule/pres
 def schedule_presentation_list(request, kind_slug):
 
     kind = get_object_or_404(PresentationKind, slug=kind_slug, published=True)
-    talks = Presentation.objects.filter(kind=kind).order_by("pk")
+    talks = Presentation.objects.filter(kind=kind, cancelled=False).order_by("pk")
 
     return render_to_response("schedule/list_presentations.html", dict({
         "talks": talks,
