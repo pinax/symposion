@@ -1,8 +1,8 @@
-================
-symposion README
-================
+=========
+symposion
+=========
 
-symposion is a collection of Pinax apps designed to help manage conferences.
+Pinax symposion is a Django project for conference websites.
 The code was originally developed for DjangoCon 2010 and PyCon 2011.
 
 Roadmap
