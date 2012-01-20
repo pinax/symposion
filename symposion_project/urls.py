@@ -7,8 +7,6 @@ admin.autodiscover()
 
 from pinax.apps.account.openid_consumer import PinaxConsumer
 
-from symposion_project.views import creole_preview
-
 
 handler500 = "pinax.views.server_error"
 
@@ -27,7 +25,6 @@ urlpatterns = patterns("",
     url(r"^proposal/", include("symposion.proposals.urls")),
     url(r"^review/", include("symposion.review.urls")),
     url(r"^schedule/", include("symposion.schedule.urls")),
-    url(r"^creole_preview/$", creole_preview, name="creole_preview"),
 )
 
 

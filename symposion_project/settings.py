@@ -159,10 +159,10 @@ INSTALLED_APPS = [
     "biblion",
     "boxes",
     "sorl.thumbnail",
+    "metron",
     
     # Pinax
     "pinax.apps.account",
-    "pinax.apps.analytics",
     "pinax.apps.signup_codes",
     
     # symposion
@@ -203,6 +203,8 @@ EMAIL_DEBUG = DEBUG
 DEBUG_TOOLBAR_CONFIG = {
     "INTERCEPT_REDIRECTS": False,
 }
+
+MARKITUP_FILTER = ("markdown.markdown", {"safe_mode": True})
 
 THUMBNAIL_EXTENSION = "PNG"
 
