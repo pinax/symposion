@@ -20,4 +20,4 @@ pytz==2011n
 django-openid==0.2.3.dev1
 python-openid==2.2.5
 
--e git+git://github.com/pinax/pinax-theme-bootstrap.git#egg=pinax_theme_bootstrap
+-e git+git://github.com/pinax/pinax-theme-bootstrap.git@2.0-less#egg=pinax-theme-bootstrap
