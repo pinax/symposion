@@ -1,0 +1,26 @@
+{% extends "speakers/base.html" %}
+
+{% load boxes_tags %}
+
+{% block body %}
+    <header>
+        <h1>Speakers</h1>
+    </header>
+    
+    {% if accepting_proposals %}
+        <p>{% box "talk-proposals" %}</p>
+        
+        <p>To submit a talk:</p>
+        
+        <ol class="steps">
+            <li class="done">sign up and log in</li>
+            <li class="next"><a href="{% url speaker_create %}">create a speaker profile</a></li>
+            <li>submit one or more talk proposals</li>
+        </ol>
+        
+        <p>You will be able to come back and revise your submission until the deadline.
+            Remember that speakers must register and pay to attend the conference.</p>
+    {% else %}
+        <p>Talk submissions are now closed.</p>
+    {% endif %}
+{% endblock %}

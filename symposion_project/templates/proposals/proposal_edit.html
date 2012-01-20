@@ -1,0 +1,29 @@
+{% extends "proposals/base.html" %}
+
+{% load bootstrap_tags %}
+
+{% block body %}
+    <header>
+        <h1>Edit: {{ proposal.title }}</h1>
+    </header>
+    
+    <p><a href="{% url proposal_speaker_manage proposal.pk %}">Manage speakers</a></p>
+    
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset>
+            {{ form|as_bootstrap }}
+        </fieldset>
+        <div class="actions">
+            <button type="submit" value="save" class="btn primary">Save</button>
+        </div>
+    </form>
+{% endblock %}
+
+{% block extra_body %}
+    <script type="text/javascript">
+        $(function() {
+            $("#id_title").focus();
+        });
+    </script>
+{% endblock %}

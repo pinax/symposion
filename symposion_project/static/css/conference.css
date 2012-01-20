@@ -1,0 +1,15 @@
+ol.steps {
+    font-size: 14pt;
+    color: rgb(35, 79, 50);
+}
+ol.steps li {
+    line-height: 1.25em;
+}
+ol.steps li.next {
+    font-weight: bold;
+    color: rgb(18, 40, 25);
+}
+ol.steps li.done {
+    text-shadow: none;
+    text-decoration: line-through;
+}

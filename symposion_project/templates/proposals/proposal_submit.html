@@ -1,0 +1,67 @@
+{% extends "proposals/base.html" %}
+
+{% load bootstrap_tags %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/facebox.css" />
+    <style>
+        .uniForm select,
+        .uniForm textarea
+        {
+            width: 99%;
+        }
+        .uniForm input[type=text]
+        {
+            width: 95%;
+        }
+        .uniForm .formHint {
+            width: 99%;
+            line-height: 12pt;
+            margin-top: 8px;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    <header>
+        <h1>Submit A Proposal</h1>
+    </header>
+    
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset>
+            {{ form|as_bootstrap }}
+        </fieldset>
+        <div class="action">
+            <button type="submit" name="finish" class="btn primary" value="submit and finish">Submit and finish</button> or
+            <button type="submit" name="add-speakers" class="btn">Submit and add additional speakers</button>
+        </div>
+    </form>
+{% endblock %}
+
+{% block extra_body %}
+    <script type="text/javascript">
+    $(function() {
+        $("#id_title").focus();
+    });
+    </script>
+    <script src="{{ STATIC_URL }}js/facebox.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        jQuery(document).ready(function($) {
+            $.facebox.settings.loadingImage = '{{ STATIC_URL }}img/facebox/loading.gif';
+            $.facebox.settings.closeImage = '{{ STATIC_URL }}img/facebox/closelabel.png';
+            $('#preview').click(function() {
+                var raw = $("#id_abstract").val();
+                $.facebox.loading();
+                $.post(
+                    '{% url creole_preview %}',
+                    {raw: raw},
+                    function(data) {
+                        $.facebox(data)
+                    }
+                );
+                return false;
+            });
+        });
+    </script>
+{% endblock %}

@@ -1,0 +1,23 @@
+# base.txt is a pip requirements file which describes the necessary
+# distributions required to run this project. If you need something that is
+# project specific not listed here use project.txt. You can, of course, update
+# versions of distributions here if needed.
+
+--extra-index-url=http://dist.pinaxproject.com/dev/
+--extra-index-url=http://dist.pinaxproject.com/fresh-start/
+
+Django==1.3.1
+Pinax
+
+django-debug-toolbar==0.8.4
+django-staticfiles==1.1.2
+django_compressor==1.1.1
+
+django-mailer==0.2a1.dev3
+django-email-confirmation==0.2.dev6
+django-timezones==0.2.dev2
+pytz==2011n
+django-openid==0.2.3.dev1
+python-openid==2.2.5
+
+-e git+git://github.com/pinax/pinax-theme-bootstrap.git#egg=pinax_theme_bootstrap

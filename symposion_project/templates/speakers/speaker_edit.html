@@ -1,0 +1,17 @@
+{% extends "speakers/base.html" %}
+
+{% load bootstrap_tags %}
+
+{% block body %}
+    <h1>Edit Speaker Profile</h1>
+    
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset>
+            {{ form|as_bootstrap }}
+        </fieldset>
+        <div class="actions">
+            <button type="submit" value="submit" class="btn primary">Submit</button>
+        </div>
+    </form>
+{% endblock %}

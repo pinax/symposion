@@ -1,0 +1,59 @@
+{% extends "speakers/base.html" %}
+
+{% load bootstrap_tags %}
+
+{% block body %}
+    <header>
+        <h1>Speakers</h1>
+    </header>
+    {% if not request.user.is_authenticated %}
+        {% if login_form %}
+            
+            <h2>Log In To Your Existing Account</h2>
+            
+            <form method="POST" action="" enctype="multipart/form-data" class="uniForm">
+                {% csrf_token %}
+                <fieldset>
+                    {{ login_form|as_bootstrap }}
+                </fieldset>
+                <div class="actions">
+                    <button type="submit" name="login" class="btn primary" value="log in">Log In</button>
+                </div>
+            </form>
+            
+            <p><b>- or -</b></p>
+        {% endif %}
+        
+        <h2>Create An Account and Speaker Profile</h2>
+        
+        <p>You've been attached as an additional speaker to a talk proposal for DjangoCon US 2011. Create yourself an account and speaker profile by filling out the form below. You will be able to see the proposal(s) you've been invited to once signed up.</p>
+        
+        <form method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset>
+                {{ signup_form|as_bootstrap }}
+            </fieldset>
+            <fieldset>
+                {{ speaker_form|as_bootstrap }}
+            </fieldset>
+            <div class="actions">
+                <button type="submit" name="signup" class="btn primary" value="submit">Submit</button>
+            </div>
+        </form>
+    {% else %}
+        
+        <h2>Create Your Speaker Profile</h2>
+        
+        <p>You were attached as an additional speaker to a talk proposal for DjangoCon US 2011, but have not created a speaker profile. Create your speaker profile below.</p>
+        
+        <form method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset>
+                {{ speaker_form|as_bootstrap }}
+            </fieldset>
+            <div class="actions">
+                <input type="submit" name="signup" class="btn primary" value="create" />
+            </div>
+        </form>
+    {% endif %}
+{% endblock %}

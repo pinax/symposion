@@ -1,0 +1,78 @@
+{% extends "proposals/base.html" %}
+
+{% load bootstrap_tags %}
+
+{% block body %}
+    <header>
+        <h1>{{ proposal.title }}</h1>
+    </header>
+    <p>
+        {% if not proposal.cancelled %}
+            {% if request.user == proposal.speaker.user %}
+                <a href="{% url proposal_edit proposal.pk %}">Edit</a>
+                | <a href="{% url proposal_cancel proposal.pk %}">Cancel</a>
+            {% else %}
+                <a href="{% url proposal_leave proposal.pk %}">Leave</a>
+            {% endif %}
+        {% else %}
+            Cancelled
+        {% endif %}
+    </p>
+    
+    <div>
+        {{ proposal.description }}
+    </div>
+    
+    <p><b>Kind</b>: {{ proposal.kind.name }}</p>
+    
+    <div>
+        {{ proposal.abstract_html|safe }}
+    </div>
+    
+    <p><b>Audience level</b>: {{ proposal.get_audience_level_display }}</p>
+    
+    <p><b>Submitting speaker</b>: {{ proposal.speaker }}</p>
+    
+    {% if proposal.additional_speakers.all %}
+        <p><b>Additional speakers</b>:</p>
+        <ul>
+        {% for speaker in proposal.additional_speakers.all %}
+            {% if speaker.user %}
+                <li><b>{{ speaker.name }}</b> &mdash; {{ speaker.email }}</li>
+            {% else %}
+                <li>{{ speaker.email }} &mdash; pending invitation</li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+    {% endif %}
+    
+    {% if request.user == proposal.speaker.user %}
+        <p><b>Additional Notes:</b></p>
+    
+        <p>{{ proposal.additional_notes }}</p>
+    {% endif %}
+    
+    <h2>Conversation with Reviewers</h2>
+    
+    {% for message in proposal.messages.all %}
+        <div class="review-box">
+            <div class="comment">{{ message.message_html|safe }}</div>
+            <div class="dateline"><b>{{ message.user }}</b> {{ message.submitted_at|timesince }} ago</div>
+        </div>
+        <div class="clear"></div>
+    {% endfor %}
+    
+    <h3>Leave a Message</h3>
+    
+    <p>You can leave a message for the proposer here.</p>
+    
+    <form action="" method="POST" accept-charset="utf-8">
+        {% csrf_token %}
+        <fieldset>
+            {{ message_form|as_bootstrap }}
+        </fieldset>
+        <div class="actions">
+            <button type="submit" name="message_submit" class="btn primary">Submit</button>
+        </div>
+    </form>
+{% endblock %}

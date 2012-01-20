@@ -1,0 +1,28 @@
+{% extends "speakers/base.html" %}
+
+{% load boxes_tags %}
+
+{% block body %}
+    <header>
+        <h1>Speakers</h1>
+    </header>
+    
+    {% if accepting_proposals %}
+        <p>{% box "talk-proposals" %}</p>
+        
+        <p>To submit a talk:</p>
+        
+        <ol class="steps">
+            <li class="next"><a href="{% url acct_signup %}?next={{ request.path }}">sign up</a> and <a href="{% url acct_login %}?next={{ request.path }}">log in</a></li>
+            <li>create a speaker profile</li>
+            <li>submit one or more talk proposals</li>
+        </ol>
+    {% else %}
+        <p>Talk submissions are now closed</p>
+        
+        <p>
+            If you submitted a talk, you can get to the speaker dashboard by 
+            <a href="{% url acct_login %}?next={{ request.path }}">logging in</a>.
+        </p>
+    {% endif %}
+{% endblock %}

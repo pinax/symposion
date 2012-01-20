@@ -1,0 +1,24 @@
+# project.txt is a pip requirements file which describes the distributions
+# required by your project to run.
+
+--requirement=base.txt
+
+# Put project-specific requirements here.
+# See http://pip-installer.org/requirement-format.html for more information.
+
+# required for deployment to Gondor (commented out; @@@ could move to own
+# requirements file):
+# gondor==1.0
+# nashvegas==0.6.3
+# psycopg2==2.4.2
+
+# required to run:
+PIL==1.1.7
+sorl-thumbnail==3.2.5
+biblion==0.1.dev11
+creole==1.2
+Pygments==1.4
+icalendar==1.2
+django-boxes==1.0b1.dev1005
+
+-e git+git://github.com/pinax/symposion.git@release/djangocon-2011#egg=symposion

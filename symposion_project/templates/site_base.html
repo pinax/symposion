@@ -1,0 +1,26 @@
+{% extends "theme_base.html" %}
+
+{% load analytics_tags %}
+{% load i18n %}
+
+{% block extra_head_base %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/conference.css" />
+    {% block extra_head %}{% endblock %}
+{% endblock %}
+
+{% block nav %}
+    <ul>
+        <li><a href="{% url speaker_dashboard %}">Speaker</a></li>
+    </ul>
+{% endblock %}
+
+{% block footer %}
+<div class="legal">
+    {% include "_footer.html" %}
+</div>
+{% endblock %}
+
+{% block extra_body_base %}
+    {% analytics %}
+    {% block extra_body %}{% endblock %}
+{% endblock %}

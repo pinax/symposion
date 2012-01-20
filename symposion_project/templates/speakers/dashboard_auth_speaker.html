@@ -1,0 +1,61 @@
+{% extends "speakers/base.html" %}
+
+{% load boxes_tags %}
+
+{% block subnav %}
+    <ul>
+        <li><a href="{% url speaker_edit %}">Edit your speaker profile</a></li>
+    </ul>
+{% endblock %}
+
+{% block body %}
+    <header>
+        <h1>Speakers</h1>
+    </header>
+    
+    {% if accepting_proposals %}
+        <p>{% box "talk-proposals" %}</p>
+        
+        <p>To submit a talk:</p>
+        
+        <ol class="steps">
+            <li class="done">sign up and log in</li>
+            <li class="done">create a speaker profile</li>
+            <li class="next"><a href="{% url proposal_submit %}">{{ proposal_text }}</a></li>
+        </ol>
+        
+        <p>You will be able to come back and revise your submission until the deadline.
+            Remember that speakers must register and pay to attend the conference.</p>
+    {% else %}
+        <p>Talk submissions are now closed.</p>
+    {% endif %}
+    
+    <h2>Proposals</h2>
+    
+    {% if proposals %}
+        <table class="proposals">
+            <tr>
+                <th>Title</th>
+                <th>Kind</th>
+                <th>Audience level</th>
+                <th>Status</th>
+                <th>Messages</th>
+                <th>Actions</th>
+            </tr>
+            {% for proposal in proposals %}
+            <tr>
+                <td><a href="{% url proposal_detail proposal.pk %}">{{ proposal.title }}</a></td>
+                <td>{{ proposal.kind.name }}</td>
+                <td>{{ proposal.get_audience_level_display }}</td>
+                <td>{% if proposal.cancelled %}Cancelled{% else %}{% if request.user == proposal.speaker.user %}{% if proposal.result.accepted %}Accepted{% else %}Submitted{% endif %}{% else %}Associated{% endif %}{% endif %}</td>
+                <td>{{ proposal.messages.all.count }}</td>
+                {# <td>{% if not proposal.cancelled %}{% if request.user == proposal.speaker.user %}<a href="{% url proposal_edit proposal.pk %}">Edit</a>{% endif %}{% if request.user == proposal.speaker.user %} | <a href="{% url proposal_cancel proposal.pk %}">Cancel</a>{% else %}<a href="{% url proposal_leave proposal.pk %}">Leave</a>{% endif %}{% endif %}</td> #}
+                <td>{% if not proposal.cancelled %}{% if request.user == proposal.speaker.user and proposal.can_edit %}<a href="{% url proposal_edit proposal.pk %}">Edit</a>{% endif %}{% endif %}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No proposals. You can <a href="{% url proposal_submit %}">submit one</a> now!</p>
+    {% endif %}
+    
+{% endblock %}

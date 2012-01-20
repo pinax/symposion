@@ -1,0 +1,36 @@
+{% extends "speakers/base.html" %}
+
+{% load timezone_filters %}
+{% load thumbnail %}
+
+{% block body_class %}speaker_profile{% endblock %}
+
+{% block body %}
+    <header>
+        <h1>Speaker Profile</h1>
+        <p>Get to know your speakers!</p>
+    </header>
+
+    {% if speaker.photo %}
+        <div class="speakerphoto">
+            <img class="framed" src="{% thumbnail speaker.photo 140x140 crop %}" alt="{{ speaker.name }}" />
+        </div>
+        <h1 class="speakername">{{ speaker.name }}</h1>
+    {% else %}
+        <h1 class="speakername prefix">{{ speaker.name }}</h1>
+
+    {% endif %}
+    
+    <h2>Bio</h2>
+    <section class="bio creole">{{ speaker.biography_html|safe }}</section>
+        
+    {% if sessions %}
+        <h2>Sessions</h2>
+        <dl class="sessions">
+            {% for session in sessions %}
+                <dt>{{ session.slot.start|localtime:timezone|date:"F jS" }} {{ session.slot.start|localtime:timezone|date:"P" }} &ndash; {{ session.slot.end|localtime:timezone|date:"P" }}</dt>
+                <dd><a href="{% url schedule_presentation session.id %}">{{ session.title }}</a></dd>
+            {% endfor %}
+        </dl>
+    {% endif %}
+{% endblock %}

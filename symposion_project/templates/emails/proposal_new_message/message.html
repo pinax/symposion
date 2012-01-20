@@ -1,0 +1,10 @@
+<p>
+    <b>{{ message.user }}</b> has added a message on <b>{{ proposal.title }}</b>.
+</p>
+<blockquote>
+    {{ message.message_html|safe }}
+</blockquote>
+<p>
+    {% if reviewer %}{% url review_detail proposal.pk as detail_url %}{% else %}{% url proposal_detail proposal.pk %}{% endif %}
+    Respond online at <a href="http://{{ current_site }}{{ detail_url }}">http://{{ current_site }}{{ detail_url }}</a>
+</p>
