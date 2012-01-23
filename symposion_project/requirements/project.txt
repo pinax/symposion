@@ -20,5 +20,6 @@ creole==1.2
 Pygments==1.4
 icalendar==1.2
 django-boxes==1.0b1.dev1005
-metron==0.2.dev3
+metron==0.1
 markdown==2.1.0
+django-markitup==1.0.0
