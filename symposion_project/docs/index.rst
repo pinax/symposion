@@ -1,10 +1,14 @@
-.. Pinax Symposion documentation master file, created by
-   sphinx-quickstart on Sun Feb  5 17:31:13 2012.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
+Pinax Symposion
+===============
 
-Welcome to Pinax Symposion's documentation!
-===========================================
+Pinax Symposion is an open-source Django project for conference websites.
+
+It came out of development done by Eldarion for DjangoCon US and US PyCon
+but has been independently used for a number of other conferences.
+
+We are in the process of cleaning things up and making them more generic.
+
+The project homepage is http://pinax.github.com/symposion/
 
 Contents:
 
