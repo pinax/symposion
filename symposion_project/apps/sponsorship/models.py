@@ -14,6 +14,9 @@ class SponsorLevel(models.Model):
     
     def __unicode__(self):
         return self.name
+    
+    def sponsors(self):
+        return self.sponsor_set.filter(active=True).order_by("added")
 
 
 class Sponsor(models.Model):

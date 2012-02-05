@@ -1,6 +1,6 @@
 from django import template
 
-from sponsorship.models import Sponsor
+from sponsorship.models import Sponsor, SponsorLevel
 
 
 register = template.Library()
@@ -11,33 +11,62 @@ class SponsorsNode(template.Node):
     @classmethod
     def handle_token(cls, parser, token):
         bits = token.split_contents()
-        if len(bits) != 4:
-            raise template.TemplateSyntaxError("%r takes exactly three arguments "
-                "(second argument must be 'as')" % bits[0])
-        if bits[2] != "as":
-            raise template.TemplateSyntaxError("Second argument to %r must be "
-                "'as'" % bits[0])
-        return cls(bits[1], bits[3])
+        if len(bits) == 3 and bits[1] == "as":
+            return cls(bits[2])
+        elif len(bits) == 4 and bits[2] == "as":
+            return cls(bits[3], bits[1])
+        else:
+            raise template.TemplateSyntaxError("%r takes 'as var' or 'level as var'" % bits[0])
     
-    def __init__(self, level, context_var):
-        self.level = template.Variable(level)
+    def __init__(self, context_var, level=None):
+        if level:
+            self.level = template.Variable(level)
+        else:
+            self.level = None
         self.context_var = context_var
     
     def render(self, context):
-        level = self.level.resolve(context)
-        queryset = Sponsor.objects.filter(
-            level__name__iexact = level,
-            active = True
-            ).order_by(
-                "added"
-            )
+        if self.level:
+            level = self.level.resolve(context)
+            queryset = Sponsor.objects.filter(level__name__iexact = level, active = True).order_by("added")
+        else:
+            queryset = Sponsor.objects.filter(active = True).order_by("level__order", "added")
         context[self.context_var] = queryset
+        return u""
+
+
+class SponsorLevelNode(template.Node):
+    
+    @classmethod
+    def handle_token(cls, parser, token):
+        bits = token.split_contents()
+        if len(bits) == 3 and bits[1] == "as":
+            return cls(bits[2])
+        else:
+            raise template.TemplateSyntaxError("%r takes 'as var'" % bits[0])
+    
+    def __init__(self, context_var):
+        self.context_var = context_var
+    
+    def render(self, context):
+        context[self.context_var] = SponsorLevel.objects.all()
         return u""
 
 
 @register.tag
 def sponsors(parser, token):
     """
-    {% sponsors "gold" as sponsors %}
+    {% sponsors as all_sponsors %}
+    or
+    {% sponsors "gold" as gold_sponsors %}
     """
     return SponsorsNode.handle_token(parser, token)
+
+
+@register.tag
+def sponsor_levels(parser, token):
+    """
+    {% sponsor_levels as levels %}
+    """
+    return SponsorLevelNode.handle_token(parser, token)
+    

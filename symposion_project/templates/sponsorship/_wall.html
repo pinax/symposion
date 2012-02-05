@@ -1,0 +1,7 @@
+{% load sponsorship_tags %}
+{% sponsors as sponsors %}
+<div class="sponsor-wall">
+{% for sponsor in sponsors %}
+    {% include "sponsorship/_sponsor_link.html" with sponsor=sponsor %}
+{% endfor %}
+</div>
