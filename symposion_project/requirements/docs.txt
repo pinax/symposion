@@ -1,0 +1,3 @@
+# requirements needed to build the docs
+
+Sphinx==1.1.2
