@@ -108,6 +108,8 @@ MIDDLEWARE_CLASSES = [
     "django_openid.consumer.SessionConsumer",
     "django.contrib.messages.middleware.MessageMiddleware",
     "pinax.apps.account.middleware.LocaleMiddleware",
+    "django.middleware.transaction.TransactionMiddleware",
+    "reversion.middleware.RevisionMiddleware",
     "pinax.middleware.security.HideSensistiveFieldsMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
@@ -163,6 +165,7 @@ INSTALLED_APPS = [
     "taggit",
     "cms",
     "mptt",
+    "reversion",
     
     # Pinax
     "pinax.apps.account",

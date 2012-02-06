@@ -10,6 +10,8 @@ from taggit.managers import TaggableManager
 from mptt.models import MPTTModel, TreeForeignKey
 from mptt.utils import drilldown_tree_for_node
 
+import reversion
+
 
 class ContentBase(models.Model):
     
@@ -59,6 +61,8 @@ class Page(MPTTModel, ContentBase):
 
     class MPTTMeta:
         order_insertion_by = ["ordering", "title"]
+
+reversion.register(Page)
 
 
 class MenuItem(MPTTModel):
