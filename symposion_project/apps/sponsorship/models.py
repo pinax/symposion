@@ -2,18 +2,21 @@ import datetime
 
 from django.db import models
 
+from conference.models import Conference
+
 
 class SponsorLevel(models.Model):
     
+    conference = models.ForeignKey(Conference)
     name = models.CharField(max_length=100)
     order = models.IntegerField(default=0)
     description = models.TextField(blank=True)
     
     class Meta:
-        ordering = ["order"]
+        ordering = ["conference", "order"]
     
     def __unicode__(self):
-        return self.name
+        return u"%s %s" % (self.conference, self.name)
     
     def sponsors(self):
         return self.sponsor_set.filter(active=True).order_by("added")

@@ -1,5 +1,6 @@
 from django import template
 
+from conference.models import current_conference
 from sponsorship.models import Sponsor, SponsorLevel
 
 
@@ -26,11 +27,12 @@ class SponsorsNode(template.Node):
         self.context_var = context_var
     
     def render(self, context):
+        conference = current_conference()
         if self.level:
             level = self.level.resolve(context)
-            queryset = Sponsor.objects.filter(level__name__iexact = level, active = True).order_by("added")
+            queryset = Sponsor.objects.filter(level__conference = conference, level__name__iexact = level, active = True).order_by("added")
         else:
-            queryset = Sponsor.objects.filter(active = True).order_by("level__order", "added")
+            queryset = Sponsor.objects.filter(level__conference = conference, active = True).order_by("level__order", "added")
         context[self.context_var] = queryset
         return u""
 
@@ -49,7 +51,8 @@ class SponsorLevelNode(template.Node):
         self.context_var = context_var
     
     def render(self, context):
-        context[self.context_var] = SponsorLevel.objects.all()
+        conference = current_conference()
+        context[self.context_var] = SponsorLevel.objects.filter(conference=conference)
         return u""
 
 
