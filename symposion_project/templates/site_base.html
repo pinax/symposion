@@ -2,9 +2,32 @@
 
 {% load metron_tags %}
 {% load i18n %}
+{% load mptt_tags %}
 
 {% block extra_head_base %}
     {% block extra_head %}{% endblock %}
+{% endblock %}
+
+{% block nav %}
+    <ul class="nav">
+        {% recursetree menuitems %}
+            {% if not node.is_leaf_node %}
+                <li id="tab_{{ node.slug }}" class="dropdown">
+                    <a href="#"
+                          class="dropdown-toggle"
+                          data-toggle="dropdown">
+                          {{ node.name }}
+                          <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        {{ children }}
+                    </ul>
+                </li>
+            {% else %}
+                <li id="tab_{{ node.slug }}"><a href="{{ node.url }}">{{ node.name }}</a></li>
+            {% endif %}
+        {% endrecursetree %}
+    </ul>
 {% endblock %}
 
 {% block footer %}
