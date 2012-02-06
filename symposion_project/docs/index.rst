@@ -15,6 +15,7 @@ Apps:
 .. toctree::
    :maxdepth: 2
    
+   conference
    sponsorship
 
 
