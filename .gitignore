@@ -1,1 +1,3 @@
 _build
+*.pyc
+dev.db
