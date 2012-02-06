@@ -207,6 +207,7 @@ DEBUG_TOOLBAR_CONFIG = {
 }
 
 MARKITUP_FILTER = ("markdown.markdown", {"safe_mode": True})
+CONFERENCE_ID = 1
 
 # local_settings.py can be used to override environment-specific settings
 # like database and email that differ between development and production.
