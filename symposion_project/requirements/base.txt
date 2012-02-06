@@ -23,3 +23,7 @@ python-openid==2.2.5
 metron==0.1
 
 pinax-theme-bootstrap==0.1.5
+django-taggit==0.9.3
+django-reversion==1.5.1
+django-markitup==1.0.0
+markdown==2.1.1

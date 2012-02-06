@@ -157,6 +157,10 @@ INSTALLED_APPS = [
     "timezones",
     "emailconfirmation",
     "metron",
+    "markitup",
+    "taggit",
+    "cms",
+    "mptt",
     
     # Pinax
     "pinax.apps.account",
@@ -195,6 +199,8 @@ EMAIL_DEBUG = DEBUG
 DEBUG_TOOLBAR_CONFIG = {
     "INTERCEPT_REDIRECTS": False,
 }
+
+MARKITUP_FILTER = ("markdown.markdown", {"safe_mode": True})
 
 # local_settings.py can be used to override environment-specific settings
 # like database and email that differ between development and production.
