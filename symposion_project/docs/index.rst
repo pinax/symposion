@@ -16,6 +16,7 @@ Apps:
    :maxdepth: 2
    
    conference
+   sponsorship
 
 
 Indices and tables

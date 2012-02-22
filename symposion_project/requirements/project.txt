@@ -5,3 +5,6 @@
 
 # Put project-specific requirements here.
 # See http://pip-installer.org/requirement-format.html for more information.
+
+PIL==1.1.7
+easy-thumbnails==1.0-alpha-21
