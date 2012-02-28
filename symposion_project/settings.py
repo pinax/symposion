@@ -165,6 +165,8 @@ INSTALLED_APPS = [
     # project
     "about",
     "conference",
+    "speakers",
+    "proposals",
 ]
 
 FIXTURE_DIRS = [
