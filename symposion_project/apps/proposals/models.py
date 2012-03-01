@@ -2,6 +2,7 @@ import datetime
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django import forms
 
 
 class Proposal(models.Model):
@@ -10,7 +11,7 @@ class Proposal(models.Model):
     and during the review process. It has one mandatory speaker and possible
     additional speakers as well as a certain kind (tutorial, session, ...),
     audience level and proposed duration.
-    
+
     TODO: Add tags to proposal which will then be copied over to the actual
           session.
     """
@@ -26,7 +27,7 @@ class Proposal(models.Model):
         verbose_name=_("additional speakers"))
     submission_date = models.DateTimeField(_("submission date"), editable=False,
         default=datetime.datetime.utcnow)
-    modified_date = models.DateTimeField(_("modification date"), blank=True, 
+    modified_date = models.DateTimeField(_("modification date"), blank=True,
         null=True)
     kind = models.ForeignKey("conference.SessionKind",
         verbose_name=_("kind"))
@@ -38,3 +39,11 @@ class Proposal(models.Model):
     class Meta(object):
         verbose_name = _("proposal")
         verbose_name_plural = _("proposals")
+
+    def clean(self):
+        super(Proposal, self).clean()
+        try:
+            if self.conference is not None and self.duration.conference != self.conference:
+                raise forms.ValidationError(_("The duration has to be associated with the same conference as the proposal"))
+        except:
+            pass

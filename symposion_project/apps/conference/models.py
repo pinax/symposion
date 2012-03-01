@@ -92,6 +92,13 @@ class AudienceLevel(models.Model):
     slug = models.SlugField(_("slug"))
     level = models.IntegerField(_("level"), blank=True, null=True)
 
+    class Meta(object):
+        verbose_name = _("audience level")
+        verbose_name_plural = _("audience levels")
+
+    def __unicode__(self):
+        return self.name
+
 
 class SessionDuration(models.Model):
     """
@@ -104,6 +111,13 @@ class SessionDuration(models.Model):
     label = models.CharField(_("label"), max_length=100)
     slug = models.SlugField(_("slug"))
     minutes = models.IntegerField(_("minutes"))
+
+    class Meta(object):
+        verbose_name = _("session duration")
+        verbose_name_plural = _("session durations")
+
+    def __unicode__(self):
+        return u"%s (%d min.)" % (self.label, self.minutes)
 
 
 class SessionKind(models.Model):
@@ -118,6 +132,9 @@ class SessionKind(models.Model):
         verbose_name = _("session kind")
         verbose_name_plural = _("session kinds")
 
+    def __unicode__(self):
+        return u"%s (%s)" % (self.name, self.conference)
+
     def clean(self):
         """
         A SessionKind can either have neither start nor end date or both.
@@ -131,9 +148,8 @@ class SessionKind(models.Model):
 
     def accepts_proposals(self):
         now = datetime.datetime.utcnow()
-        if self.conference.start_date is not None and \
-            self.conference.end_date is not None:
-            if not (self.conference.start_date <= now <= self.conference.end_date):
+        if self.conference.start_date is not None:
+            if self.conference.start_date < now.date():
                 return False
         if self.closed is None:
             return self.start_date <= now <= self.end_date
