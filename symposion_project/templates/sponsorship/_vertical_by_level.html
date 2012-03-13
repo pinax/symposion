@@ -1,0 +1,13 @@
+{% load sponsorship_tags %}
+{% sponsor_levels as levels %}
+<div class="sponsor-list">
+{% for level in levels %}
+    <h3>{{ level.name }}</h3>
+    
+    {% for sponsor in level.sponsors %}
+        <div>
+            {% include "sponsorship/_sponsor_link.html" with sponsor=sponsor %}
+        </div>
+    {% endfor %}
+{% endfor %}
+</div>

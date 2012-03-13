@@ -157,6 +157,7 @@ INSTALLED_APPS = [
     "timezones",
     "emailconfirmation",
     "metron",
+    "easy_thumbnails",
     
     # Pinax
     "pinax.apps.account",
@@ -164,6 +165,7 @@ INSTALLED_APPS = [
     
     # project
     "about",
+    "sponsorship",
     "conference",
 ]
 
