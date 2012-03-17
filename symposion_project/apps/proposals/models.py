@@ -2,6 +2,7 @@ import datetime
 
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.core.urlresolvers import reverse
 from django import forms
 
 
@@ -47,3 +48,6 @@ class Proposal(models.Model):
                 raise forms.ValidationError(_("The duration has to be associated with the same conference as the proposal"))
         except:
             pass
+
+    def get_absolute_url(self):
+        return reverse("view_proposal", kwargs=dict(pk=self.pk))

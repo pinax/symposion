@@ -1,0 +1,32 @@
+{% extends "site_base.html" %}
+{% load i18n %}
+{% block body %}
+<article class="proposal">
+<h1>{% trans "Proposal:" %} {{ proposal.title }}</h1>
+
+<div class="meta">
+{% blocktrans with speaker_url=proposal.speaker.get_absolute_url speaker=proposal.speaker submission_date=proposal.submission_date|date:"DATE_FORMAT" %}
+<a class="speaker user" href="{{ speaker_url }}">{{ speaker }}</a> submitted this proposal at <span class="submission-date">{{ submission_date }}</span>.
+{% endblocktrans %}
+</div>
+
+<div class="actions">
+    {% if proposal.kind.accepts_proposals %}
+        {% if user == proposal.speaker.user or user in proposal.additional_speakers %}
+        <a href="{% url edit_proposal pk=proposal.pk %}">{% trans "Edit" %}</a>
+        {% endif %}
+        {% if user == proposal.speaker.user or user.is_staff %}
+        <a href="{% url cancel_proposal pk=proposal.pk %}">{% trans "Delete" %}</a>
+        {% endif %}
+    {% endif %}
+</div>
+
+<div class="description">
+    {{ speaker.description }}
+</div>
+
+<div class="abstract">
+    {{ speaker.abstract }}
+</div>
+</article>
+{% endblock %}
