@@ -1,0 +1,48 @@
+{% extends "site_base.html" %}
+{% load i18n %}
+{% block body %}
+<h1>{% trans "Your proposals" %}</h1>
+{% if proposals %}
+    <section>
+        <h1>{% trans "... as primary speaker" %}</h1>
+        <table class="table table-striped">
+            <thead></thead>
+            <tbody>
+                {% for proposal in proposals %}
+                    <tr>
+                        <td><a href="{{ proposal.get_absolute_url }}">{{ proposal.title }}</a></td>
+                        <td>
+                            <a class="btn icon-edit" href="{% url edit_proposal proposal.pk %}?next={% url my_proposals %}">{% trans "Edit" %}</a>
+                            <a class="btn icon-remove" href="{% url cancel_proposal proposal.pk %}?next={% url my_proposals %}">{% trans "Cancel" %}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+{% else %}
+    <p class="empty">{% trans "You haven't created any proposals yet." %}</p>
+{% endif %}
+
+{% if proposal_participations %}
+    <section>
+        <h1>{% trans "Participations" %}</h1>
+        <table class="table table-striped">
+            <thead></thead>
+            <tbody>
+                {% for proposal in proposal_participations %}
+                    <tr>
+                        <td><a href="{{ proposal.get_absolute_url }}">{{ proposal.title }}</a></td>
+                        <td>
+                            <a class="btn icon-remove" href="{% url leave_proposal proposal.pk %}?next={% url my_proposals %}">{% trans "Leave" %}</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+{% endif %}
+
+<a class="btn" href="{% url submit_proposal %}">{% trans "Submit a session proposal " %}</a>
+
+{% endblock %}
