@@ -143,7 +143,7 @@ class SessionKind(models.Model):
         if self.closed is None:
             if self.start_date is None or self.end_date is None:
                 raise forms.ValidationError(_("You have to specify a start and end date if you leave the 'closed' status undetermined"))
-            if self.start_date <= self.end_date:
+            if self.start_date >= self.end_date:
                 raise forms.ValidationError(_("The end date has to be after the start date"))
 
     def accepts_proposals(self):

@@ -103,3 +103,23 @@ class SessionKindTests(TestCase):
             closed=True)
         kind.save()
         self.assertFalse(kind.accepts_proposals())
+
+    def test_sessionkind_valid_start(self):
+        """
+        If there are start and end defined, end have to be after start.
+        """
+        kind = models.SessionKind(
+            name="Kind",
+            slug="kind",
+            conference=self.future_conference,
+            start_date=self.now - timedelta(2),
+            end_date=self.now + timedelta(2),
+            closed=None)
+        kind.full_clean()
+        kind.start_date = self.now + timedelta(2)
+        kind.end_date = self.now
+        try:
+            kind.full_clean()
+            self.fail()
+        except Exception, _:
+            pass
