@@ -16,6 +16,7 @@ installed:
  * virtualenv 1.4.7+
  * C compiler (for PIL)
 
+
 Setting up environment
 ----------------------
 
@@ -25,9 +26,14 @@ Create a virtual environment where your dependencies will live::
     $ source myconference/bin/activate
     (myconference)$
 
+
+Now clone the git repo
+
+    (myconference)$ git clone git://github.com/pinax/symposion.git myproject
+
 Make the project directory your working directory::
 
-    $ cd symposion_project
+    (myconference)$ cd myproject/symposion_project
 
 Install conference project dependencies::
 
