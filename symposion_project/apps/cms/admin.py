@@ -2,7 +2,7 @@ from django.contrib import admin
 
 from mptt.admin import MPTTModelAdmin
 
-from cms.models import MenuItem, Page
+from cms.models import Page
 
 
 class PageAdmin(MPTTModelAdmin):
