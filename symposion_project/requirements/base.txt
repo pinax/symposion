@@ -22,6 +22,7 @@ django-openid==0.3a1
 python-openid==2.2.5
 metron==0.1
 
+django-mptt==0.5.2
 django-taggit==0.9.3
 django-reversion==1.5.1
 django-markitup==1.0.0
