@@ -166,6 +166,7 @@ INSTALLED_APPS = [
     "mptt",
     "reversion",
     "easy_thumbnails",
+    "sitetree",
     
     # Pinax
     "pinax.apps.account",
