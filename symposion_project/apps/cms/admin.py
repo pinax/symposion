@@ -10,10 +10,3 @@ class PageAdmin(MPTTModelAdmin):
     list_display = ("title", "published", "status")
 
 admin.site.register(Page, PageAdmin)
-
-
-class MenuItemAdmin(MPTTModelAdmin):
-    prepopulated_fields = {"slug": ("name",)}
-    list_display = ("name", "login_required", "published",)
-
-admin.site.register(MenuItem, MenuItemAdmin)
