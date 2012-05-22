@@ -22,7 +22,7 @@ urlpatterns = patterns("",
     url(r"^account/", include("pinax.apps.account.urls")),
     url(r"^openid/", include(PinaxConsumer().urls)),
     url(r"^markitup/", include("markitup.urls")),
-    url(r"^pages/(?P<slug>%s)/$" % WIKI_SLUG, "cms.views.page", name="cms_page"),
+    url(r"^(?P<slug>%s)/$" % WIKI_SLUG, "cms.views.page", name="cms_page"),
 )
 
 
