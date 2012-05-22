@@ -2,9 +2,14 @@
 
 {% load metron_tags %}
 {% load i18n %}
+{% load sitetree %}
 
 {% block extra_head_base %}
     {% block extra_head %}{% endblock %}
+{% endblock %}
+
+{% block nav %}
+    {% sitetree_menu from "root" include "trunk" %}
 {% endblock %}
 
 {% block footer %}
@@ -13,7 +18,7 @@
 </div>
 {% endblock %}
 
-{% block extra_body_base %}
+{% block extra_script %}
     {% analytics %}
     {% block extra_body %}{% endblock %}
 {% endblock %}

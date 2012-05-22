@@ -108,6 +108,8 @@ MIDDLEWARE_CLASSES = [
     "django_openid.consumer.SessionConsumer",
     "django.contrib.messages.middleware.MessageMiddleware",
     "pinax.apps.account.middleware.LocaleMiddleware",
+    "django.middleware.transaction.TransactionMiddleware",
+    "reversion.middleware.RevisionMiddleware",
     "pinax.middleware.security.HideSensistiveFieldsMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
@@ -158,7 +160,13 @@ INSTALLED_APPS = [
     "timezones",
     "emailconfirmation",
     "metron",
+    "markitup",
+    "taggit",
+    "cms",
+    "mptt",
+    "reversion",
     "easy_thumbnails",
+    "sitetree",
     
     # Pinax
     "pinax.apps.account",
@@ -200,6 +208,7 @@ DEBUG_TOOLBAR_CONFIG = {
     "INTERCEPT_REDIRECTS": False,
 }
 
+MARKITUP_FILTER = ("markdown.markdown", {"safe_mode": True})
 CONFERENCE_ID = 1
 
 # local_settings.py can be used to override environment-specific settings
