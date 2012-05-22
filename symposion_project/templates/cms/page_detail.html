@@ -1,4 +1,17 @@
-{% extends "site_base.html" %}
+{% extends "subnav_base.html" %}
+
+{% block subnav %}
+    <ul class="nav nav-list">
+        <li class="nav-header">{{ page.parent }}</li>
+        {% for sibling in siblings %}
+            {% if sibling == page %}
+                <li>{{ sibling }}</li>
+            {% else %}
+                <li><a href="{% url cms_page sibling.path %}">{{ sibling }}</a>
+            {% endif %}
+        {% endfor %}
+    </ul>
+{% endblock %}
 
 {% block body %}
     <h1>{{ page.title }}</h1>
