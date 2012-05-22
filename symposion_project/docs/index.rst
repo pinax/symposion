@@ -10,11 +10,13 @@ We are in the process of cleaning things up and making them more generic.
 
 The project homepage is http://pinax.github.com/symposion/
 
-Contents:
+Apps:
 
 .. toctree::
    :maxdepth: 2
-
+   
+   conference
+   sponsorship
 
 
 Indices and tables

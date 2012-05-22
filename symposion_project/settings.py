@@ -151,6 +151,7 @@ INSTALLED_APPS = [
     
     # theme
     "pinax_theme_bootstrap",
+    "django_forms_bootstrap",
     
     # external
     "staticfiles",
@@ -166,6 +167,7 @@ INSTALLED_APPS = [
     "cms",
     "mptt",
     "reversion",
+    "easy_thumbnails",
     
     # Pinax
     "pinax.apps.account",
@@ -173,6 +175,7 @@ INSTALLED_APPS = [
     
     # project
     "about",
+    "sponsorship",
     "conference",
 ]
 
