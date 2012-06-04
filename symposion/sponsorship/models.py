@@ -3,7 +3,7 @@ import datetime
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from conference.models import Conference
+from symposion.conference.models import Conference
 
 
 class SponsorLevel(models.Model):

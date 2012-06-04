@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from sponsorship.models import SponsorLevel, Sponsor
+from symposion.sponsorship.models import SponsorLevel, Sponsor
 
 
 admin.site.register(SponsorLevel)
