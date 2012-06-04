@@ -1,0 +1,8 @@
+{% extends "site_base.html" %}
+{% load i18n %}
+{% block body %}
+<p class="question">{% blocktrans %}Do you really want to cancel this proposal?{% endblocktrans %}</p>
+<form method="POST"><button type="submit">{% trans "Yes" %}</button>
+    {% csrf_token %}
+    <a href="{{ next }}">Cancel</a></form>
+{% endblock %}

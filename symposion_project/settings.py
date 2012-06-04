@@ -168,6 +168,8 @@ INSTALLED_APPS = [
     "about",
     "sponsorship",
     "conference",
+    "speakers",
+    "proposals",
 ]
 
 FIXTURE_DIRS = [

@@ -1,0 +1,10 @@
+{% extends "site_base.html" %}
+{% load i18n %}
+{% block body %}
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">{% trans "Create" %}</button>
+    <a href="{{ next }}">{% trans "Cancel" %}</a>
+</form>
+{% endblock %}
