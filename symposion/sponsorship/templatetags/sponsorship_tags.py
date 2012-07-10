@@ -1,7 +1,7 @@
 from django import template
 
-from conference.models import current_conference
-from sponsorship.models import Sponsor, SponsorLevel
+from symposion.conference.models import current_conference
+from symposion.sponsorship.models import Sponsor, SponsorLevel
 
 
 register = template.Library()

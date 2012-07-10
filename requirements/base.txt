@@ -7,20 +7,21 @@
 --extra-index-url=http://dist.pinaxproject.com/alpha/
 --extra-index-url=http://dist.pinaxproject.com/fresh-start/
 
-Django==1.3.1
-Pinax
-
+Django==1.4
+pinax-theme-bootstrap==2.0.3
+django-forms-bootstrap==2.0.3.post1
+metron==0.1 # 0.2.dev3
+pinax-utils==1.0b1.dev3
 django-debug-toolbar==0.9.1
-django-staticfiles==1.1.2
-django_compressor==1.0.1
-
 django-mailer==0.2a1
-django-email-confirmation==0.2
 django-timezones==0.2
 pytz==2011n
 django-openid==0.3a1
 python-openid==2.2.5
-metron==0.1
+django_compressor==1.2a1
+
+-e git+git://github.com/pinax/pinax-theme-bootstrap-account.git@70c0be0279d61bd2d0f949698f94b8f938918277#egg=pinax-theme-bootstrap-account
+-e git+git://github.com/pinax/django-user-accounts.git@3676d2c7ea0e9a5c3f8510ac8e6f8d58175e6b5f#egg=django-user-accounts
 
 django-mptt==0.5.2
 django-taggit==0.9.3
@@ -28,6 +29,3 @@ django-reversion==1.5.1
 django-markitup==1.0.0
 markdown==2.1.1
 django-sitetree==0.6
-
-pinax-theme-bootstrap==2.0.3
-django-forms-bootstrap==2.0.3.post1
