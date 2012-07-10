@@ -25,7 +25,7 @@ django_compressor==1.2a1
 
 django-mptt==0.5.2
 django-taggit==0.9.3
-django-reversion==1.5.1
+django-reversion==1.6.1
 django-markitup==1.0.0
 markdown==2.1.1
 django-sitetree==0.6

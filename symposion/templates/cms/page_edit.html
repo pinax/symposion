@@ -1,0 +1,22 @@
+{% extends "site_base.html" %}
+
+{% load sitetree %}
+{% load i18n %}
+{% load bootstrap_tags %}
+
+{% block body_class %}cms-page{% endblock %}
+
+{% block head_title %}Create Page{% endblock %}
+
+{% block page_title %}{% trans "Edit page at:" %} {{ path }}{% endblock %}
+{% block breadcrumbs %}{% sitetree_breadcrumbs from "main" %}{% endblock %}
+
+{% block body %}
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{ form|as_bootstrap }}
+        <div class="form-actions">
+            <input class="btn btn-primary" type="submit" value="Save" />
+        </div>
+    </form>
+{% endblock %}

@@ -1,19 +1,22 @@
-{% extends "subnav_base.html" %}
+{% extends "site_base.html" %}
 
-{% block subnav %}
-    <ul class="nav nav-list">
-        <li class="nav-header">{{ page.parent }}</li>
-        {% for sibling in siblings %}
-            {% if sibling == page %}
-                <li>{{ sibling }}</li>
-            {% else %}
-                <li><a href="{% url cms_page sibling.path %}">{{ sibling }}</a>
-            {% endif %}
-        {% endfor %}
-    </ul>
+{% load sitetree %}
+{% load i18n %}
+
+{% block body_class %}cms-page{% endblock %}
+
+{% block head_title %}{{ page.title }}{% endblock %}
+
+{% block page_title %}
+    {{ page.title }}
+    {% if editable %}
+        <div class="pull-right">
+            <a href="{% url cms_page_edit page.path %}" class="btn"><i class="icon-pencil icon-large"></i></a>
+        </div>
+    {% endif %}
 {% endblock %}
+{% block breadcrumbs %}{% sitetree_breadcrumbs from "main" %}{% endblock %}
 
 {% block body %}
-    <h1>{{ page.title }}</h1>
     {{ page.body }}
 {% endblock %}

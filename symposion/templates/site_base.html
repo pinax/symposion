@@ -3,20 +3,43 @@
 {% load metron_tags %}
 {% load i18n %}
 {% load sitetree %}
+{% load markitup_tags %}
+{% load static %}
 
 {% block extra_head_base %}
+    <link href="{{ STATIC_URL }}img/favicon.ico" rel="shortcut icon" />
+    <script src="{% block jquery_src %}{% static "pinax/js/jquery.js" %}{% endblock %}"></script>
+    {% markitup_media "no-jquery" %}
     {% block extra_head %}{% endblock %}
 {% endblock %}
 
 {% block nav %}
-    {% sitetree_menu from "root" include "trunk" %}
+    {% sitetree_menu from "main" include "trunk" %}
+{% endblock %}
+
+{% block body_base %}
+    <div class="container">
+        {% include "_messages.html" %}
+        
+        {% block breadcrumbs %}
+            {% sitetree_breadcrumbs from "main" %}
+        {% endblock %}
+        
+        {% block page_title %}
+        {% endblock %}
+        
+        {% block body %}
+        {% endblock %}
+    </div>
 {% endblock %}
 
 {% block footer %}
     {% include "_footer.html" %}
 {% endblock %}
 
-{% block extra_script %}
+{% block script_base %}
     {% analytics %}
-    {% block extra_body %}{% endblock %}
+    <script src="{% static "bootstrap/js/bootstrap.js" %}"></script>
+    <script src="{% static "pinax/js/theme.js" %}"></script>
+    {% block extra_script %}{% endblock %}
 {% endblock %}

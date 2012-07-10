@@ -20,8 +20,10 @@ urlpatterns = patterns("",
     url(r"^account/", include("account.urls")),
     # url(r"^openid/", include(PinaxConsumer().urls)),
     
-    url(r"^(?P<slug>%s)/$" % WIKI_SLUG, "cms.views.page", name="cms_page"),
+    url(r"^boxes/", include("symposion.boxes.urls")),
     url(r"^markitup/", include("markitup.urls")),
+    
+    url(r"^", include("symposion.cms.urls")),
 )
 
 
