@@ -9,6 +9,7 @@ admin.autodiscover()
 
 # from pinax.apps.account.openid_consumer import PinaxConsumer
 
+WIKI_SLUG = r"(([\w-]{2,})(/[\w-]{2,})*)"
 
 urlpatterns = patterns("",
     url(r"^$", direct_to_template, {
@@ -18,6 +19,11 @@ urlpatterns = patterns("",
     url(r"^about/", include("symposion.about.urls")),
     url(r"^account/", include("account.urls")),
     # url(r"^openid/", include(PinaxConsumer().urls)),
+    
+    url(r"^boxes/", include("symposion.boxes.urls")),
+    url(r"^markitup/", include("markitup.urls")),
+    
+    url(r"^", include("symposion.cms.urls")),
 )
 
 

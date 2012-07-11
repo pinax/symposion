@@ -106,6 +106,8 @@ MIDDLEWARE_CLASSES = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django_openid.consumer.SessionConsumer",
     "django.contrib.messages.middleware.MessageMiddleware",
+    "django.middleware.transaction.TransactionMiddleware",
+    "reversion.middleware.RevisionMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
@@ -151,7 +153,12 @@ INSTALLED_APPS = [
     "django_openid",
     "timezones",
     "metron",
+    "markitup",
+    "taggit",
+    "mptt",
+    "reversion",
     "easy_thumbnails",
+    "sitetree",
     
     # Pinax
     "account",
@@ -160,6 +167,8 @@ INSTALLED_APPS = [
     "symposion.about",
     "symposion.sponsorship",
     "symposion.conference",
+    "symposion.cms",
+    "symposion.boxes",
 ]
 
 FIXTURE_DIRS = [
@@ -192,7 +201,13 @@ DEBUG_TOOLBAR_CONFIG = {
     "INTERCEPT_REDIRECTS": False,
 }
 
+MARKITUP_FILTER = ("markdown.markdown", {"safe_mode": True})
+MARKITUP_SET = "markitup/sets/markdown"
+MARKITUP_SKIN = "markitup/skins/simple"
+
 CONFERENCE_ID = 1
+
+SYMPOSION_PAGE_REGEX = r"(([\w-]{1,})(/[\w-]{1,})*)/"
 
 # local_settings.py can be used to override environment-specific settings
 # like database and email that differ between development and production.
