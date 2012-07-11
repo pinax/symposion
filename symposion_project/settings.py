@@ -111,7 +111,7 @@ MIDDLEWARE_CLASSES = [
     "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
 
-ROOT_URLCONF = "symposion.urls"
+ROOT_URLCONF = "symposion_project.urls"
 
 TEMPLATE_DIRS = [
     os.path.join(PROJECT_ROOT, "templates"),
@@ -159,12 +159,9 @@ INSTALLED_APPS = [
     "reversion",
     "easy_thumbnails",
     "sitetree",
-    
-    # Pinax
     "account",
     
-    # project
-    "symposion.about",
+    # symposion
     "symposion.sponsorship",
     "symposion.conference",
     "symposion.cms",

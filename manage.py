@@ -2,7 +2,7 @@
 import os, sys
 
 if __name__ == "__main__":
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "symposion.settings")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "symposion_project.settings")
     
     from django.core.management import execute_from_command_line
     

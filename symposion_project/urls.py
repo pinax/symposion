@@ -16,7 +16,6 @@ urlpatterns = patterns("",
         "template": "homepage.html",
     }, name="home"),
     url(r"^admin/", include(admin.site.urls)),
-    url(r"^about/", include("symposion.about.urls")),
     url(r"^account/", include("account.urls")),
     # url(r"^openid/", include(PinaxConsumer().urls)),
     
