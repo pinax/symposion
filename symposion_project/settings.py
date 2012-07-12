@@ -166,6 +166,8 @@ INSTALLED_APPS = [
     "symposion.conference",
     "symposion.cms",
     "symposion.boxes",
+    "symposion.proposals",
+    "symposion.speakers",
 ]
 
 FIXTURE_DIRS = [
