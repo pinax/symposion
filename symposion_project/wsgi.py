@@ -1,11 +1,6 @@
-from django.core.handlers.wsgi import WSGIHandler
+import os
 
-import pinax.env
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "symposion_project.settings")
 
-
-# setup the environment for Django and Pinax
-pinax.env.setup_environ(__file__)
-
-
-# set application for WSGI processing
-application = WSGIHandler()
+from django.core.wsgi import get_wsgi_application
+application = get_wsgi_application()
