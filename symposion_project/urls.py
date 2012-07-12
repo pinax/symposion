@@ -7,6 +7,8 @@ from django.views.generic.simple import direct_to_template
 from django.contrib import admin
 admin.autodiscover()
 
+import symposion.views
+
 # from pinax.apps.account.openid_consumer import PinaxConsumer
 
 WIKI_SLUG = r"(([\w-]{2,})(/[\w-]{2,})*)"
@@ -18,6 +20,7 @@ urlpatterns = patterns("",
     url(r"^admin/", include(admin.site.urls)),
     url(r"^account/", include("account.urls")),
     
+    url(r"^dashboard/", symposion.views.dashboard, name="dashboard"),
     url(r"^speaker/", include("symposion.speakers.urls")),
     url(r"^proposals/", include("symposion.proposals.urls")),
     url(r"^boxes/", include("symposion.boxes.urls")),
