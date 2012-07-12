@@ -1,0 +1,76 @@
+{% extends "site_base.html" %}
+
+{% block head_title %}{{ proposal.title }}{% endblock %}
+
+{% block body %}
+    <h1>{{ proposal.title }}</h1>
+    
+    <p>
+        {% if not proposal.cancelled %}
+            {% if request.user == proposal.speaker.user %}
+                <a href="{% url proposal_edit proposal.pk %}">Edit</a>
+                | <a href="{% url proposal_cancel proposal.pk %}">Cancel Talk</a>
+            {% else %}
+                <a href="{% url proposal_leave proposal.pk %}">Leave</a>
+            {% endif %}
+        {% else %}
+            Cancelled
+        {% endif %}
+    </p>
+    
+    <div>
+        {{ proposal.description }}
+    </div>
+    
+    <p><b>Type</b>: {{ proposal.kind.name }}</p>
+    
+    <div>
+        {{ proposal.abstract|safe }}
+    </div>
+    
+    <p><b>Audience level</b>: {{ proposal.get_audience_level_display }}</p>
+    
+    <p><b>Submitting speaker</b>: {{ proposal.speaker }}</p>
+    
+    {% if proposal.additional_speakers.all %}
+        <p><b>Additional speakers</b>:</p>
+        <ul>
+        {% for speaker in proposal.additional_speakers.all %}
+            {% if speaker.user %}
+                <li><b>{{ speaker.name }}</b> &mdash; {{ speaker.email }}</li>
+            {% else %}
+                <li>{{ speaker.email }} &mdash; pending invitation</li>
+            {% endif %}
+        {% endfor %}
+        </ul>
+    {% endif %}
+    
+    {% if request.user == proposal.speaker.user %}
+        <p><b>Additional Notes:</b></p>
+    
+        <p>{{ proposal.additional_notes }}</p>
+    {% endif %}
+    
+    {% if request.user == proposal.speaker.user %}
+        <h2>Supporting Documents</h2>
+        
+        {% if proposal.supporting_documents.exists %}
+            <table class="table table-striped">
+                {% for document in proposal.supporting_documents.all %}
+                    <tr>
+                        <td><a href="{{ document.download_url }}">{{ document.description }}</a></td>
+                        <td>
+                        <form style="margin: 0;" method="post" action="{% url proposal_document_delete document.pk %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-mini">delete</button>
+                        </form>
+                    </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            <p>No supporting documents attached to this proposal.</p>
+        {% endif %}
+        <a class="btn btn-small" href="{% url proposal_document_create proposal.pk %}"><i class="icon-plus"></i> add document</a>
+    {% endif %}
+{% endblock %}

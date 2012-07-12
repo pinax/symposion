@@ -1,0 +1,17 @@
+{% extends "auth_base.html" %}
+
+{% load bootstrap_tags %}
+
+{% block page_title %}Upload Document to '{{ proposal.title }}'{% endblock %}
+
+{% block body %}
+    <form method="POST" action="" enctype="multipart/form-data" class="form-horizontal">
+        {% csrf_token %}
+        <fieldset>
+            {{ form|as_bootstrap }}
+        </fieldset>
+        <div class="form-actions">
+            <input class="btn btn-primary" type="submit" value="Upload" />
+        </div>
+    </form>
+{% endblock %}
