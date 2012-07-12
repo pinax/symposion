@@ -18,6 +18,7 @@ Apps:
    conference
    sponsorship
    speakers
+   proposals
 
 
 Indices and tables
