@@ -1,0 +1,165 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load proposal_tags %}
+
+{% block head_title %}Dashboard{% endblock %}
+
+{% block body_class %}auth{% endblock %}
+
+{% block body_outer %}
+    <div class="row">
+        <div class="span12">
+            <div class="page-head">
+                <h1>{% trans "Dashboard" %}</h1>
+                <p>
+                    This is your dashboard where you can manage all aspects of your
+                    involvement in the conference, from talk proposals to sponsorship.
+                </p>
+                {% block breadcrumbs %}{% endblock %}
+            </div>
+
+            <div class="box">
+                <div class="box-head">
+                    <h2>Speaking</h2>
+                </div>
+                <div class="box-content">
+                    {% if user.speaker_profile %}
+                        <div class="actions">
+                            <a href="{% url speaker_edit %}" class="action">
+                                <i class="widget-icon icon-pencil"></i>
+                                <span class="widget-label">Edit your speaker profile</span>
+                            </a>
+
+                            <a href="{% url proposal_submit %}" class="action">
+                                <i class="widget-icon  icon-bullhorn"></i>
+                                <span class="widget-label">Submit a new proposal</span>
+                            </a>
+                        </div>
+
+                        <section class="subsection">
+                            <h4>Your Proposals</h4>
+                            {% if user.speaker_profile.proposals.exists %}
+                                <table class="table">
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Session type</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                    {% for proposal in user.speaker_profile.proposals.all %}
+                                        {% include "proposals/_proposal_row.html" %}
+                                    {% endfor %}
+                                </table>
+                            {% else %}
+                                <p>No proposals submitted yet.</p>
+                            {% endif %}
+                        </section>
+                        
+                        {% associated_proposals as associated_proposals %}
+                        {% if associated_proposals %}
+                            <section class="subsection">
+                                <h4>Proposals you have joined as an additional speaker</h4>
+                                <table class="table">
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Session type</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                    {% for proposal in associated_proposals %}
+                                        {% include "proposals/_proposal_row.html" %}
+                                    {% endfor %}
+                                </table>
+                            </section>
+                        {% endif %}
+                        
+                        {% pending_proposals as pending_proposals %}
+                        {% if pending_proposals %}
+                            <section class="subsection">
+                                <h4>Proposals you have been invited to join</h4>
+                                <table class="table">
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Session type</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                    {% for proposal in pending_proposals %}
+                                        {% include "proposals/_pending_proposal_row.html" %}
+                                    {% endfor %}
+                                </table>
+                            </section>
+                        {% endif %}
+                    
+                    {% else %}
+                        <p>To submit a proposal, first create a speaker profile.</p>
+                        <div class="actions">
+                            <a href="{% url speaker_create %}" class="action">
+                                <i class="widget-icon icon-user"></i>
+                                <span class="widget-label">Create a speaker profile</span>
+                            </a>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+
+
+            <div class="box">
+                <div class="box-head">
+                    <h2>Sponsorship</h2>
+                </div>
+                <div class="box-content">
+                    <div class="actions">
+                        <a href="{% url cms_page "sponsors/prospectus/" %}" class="action">
+                            <i class="widget-icon icon-info-sign"></i>
+                            <span class="widget-label">Learn about sponsorship</span>
+                        </a>
+                        {% if not user.sponsorships.exists %}
+                            <a href="{% url sponsor_apply %}" class="action">
+                                <i class="widget-icon icon-money"></i>
+                                <span class="widget-label">Apply to be a sponsor</span>
+                            </a>
+                        {% endif %}
+                    </div>
+
+                    {% if user.sponsorships.exists %}
+                        <section class="subsection">
+                            <h4>Your Sponsorship</h4>
+                            <ul>
+                                {% for sponsorship in user.sponsorships.all %}
+                                    <li>
+                                        {% if sponsorship.active %}
+                                            <a href="{% url sponsor_detail sponsorship.pk %}"><b>{{ sponsorship.name }}</b></a>
+                                            ({{ sponsorship.level }})
+                                        {% else %}
+                                            <b>{{ sponsorship.name }}</b>
+                                            ({{ sponsorship.level }})
+                                            <span class="label label-warning">awaiting approval</span>
+                                        {% endif %}
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </section>
+                    {% endif %}
+                </div>
+            </div>
+
+            {% if user.is_staff %}
+                <div class="box">
+                    <div class="box-head">
+                        <h2>Staff</h2>
+                    </div>
+                    <div class="box-content">
+                        <div class="actions">
+                            <a href="{% url admin:index %}" class="action">
+                                <i class="widget-icon icon-key"></i>
+                                <span class="widget-label">Go to Django admin</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
