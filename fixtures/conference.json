@@ -1,0 +1,67 @@
+[
+    {
+        "pk": 1, 
+        "model": "conference.conference", 
+        "fields": {
+            "timezone": "US/Pacific", 
+            "start_date": "2013-03-13", 
+            "end_date": "2013-03-21", 
+            "title": "PyCon 2013"
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "conference.section", 
+        "fields": {
+            "conference": 1, 
+            "start_date": "2013-03-13", 
+            "name": "Tutorials", 
+            "end_date": "2013-03-14", 
+            "slug": "tutorials"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "conference.section", 
+        "fields": {
+            "conference": 1, 
+            "start_date": "2013-03-15", 
+            "name": "Talks", 
+            "end_date": "2013-03-18", 
+            "slug": "talks"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "conference.section", 
+        "fields": {
+            "conference": 1, 
+            "start_date": null, 
+            "name": "Posters", 
+            "end_date": null, 
+            "slug": "posters"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "conference.section", 
+        "fields": {
+            "conference": 1, 
+            "start_date": "2013-03-19", 
+            "name": "Sprints", 
+            "end_date": "2013-03-21", 
+            "slug": "sprints"
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "conference.section", 
+        "fields": {
+            "conference": 1, 
+            "start_date": null, 
+            "name": "Open Spaces", 
+            "end_date": null, 
+            "slug": "open-spaces"
+        }
+    }
+]
