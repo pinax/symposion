@@ -17,8 +17,9 @@ urlpatterns = patterns("",
     }, name="home"),
     url(r"^admin/", include(admin.site.urls)),
     url(r"^account/", include("account.urls")),
-    # url(r"^openid/", include(PinaxConsumer().urls)),
     
+    url(r"^speaker/", include("symposion.speakers.urls")),
+    url(r"^proposals/", include("symposion.proposals.urls")),
     url(r"^boxes/", include("symposion.boxes.urls")),
     url(r"^markitup/", include("markitup.urls")),
     
