@@ -764,6 +764,7 @@ div.subnav .nav>.open>.dropdown-toggle:hover .caret{border-top-color:#4183c4;}
 .label-info{background-color:#4183C4;}
 .hero-unit{-webkit-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);-moz-box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);box-shadow:inset 0 1px 1px rgba(0, 0, 0, 0.05);border:1px solid rgba(0, 0, 0, 0.05);}
 body{padding-top:24px;}
+label:not(.checkbox):not(.radio){font-weight:bold;}
 header{position:relative;margin-bottom:24px;}header h1{margin-bottom:9px;font-size:48px;letter-spacing:-1px;line-height:1;-webkit-margin-before:0;-webkit-margin-after:0;}
 header p{font-size:30px;line-height:36px;}
 header a,header a:hover,header a:visited{color:#333333;text-decoration:none;}
