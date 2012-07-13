@@ -768,3 +768,8 @@ label:not(.checkbox):not(.radio){font-weight:bold;}
 header{position:relative;margin-bottom:24px;}header h1{margin-bottom:9px;font-size:48px;letter-spacing:-1px;line-height:1;-webkit-margin-before:0;-webkit-margin-after:0;}
 header p{font-size:30px;line-height:36px;}
 header a,header a:hover,header a:visited{color:#333333;text-decoration:none;}
+div.box-content .markItUpEditor{font-family:Menlo,Monaco,Consolas,"Courier New",monospace;padding:5px;width:600px;height:320px;clear:both;display:block;overflow:auto;}
+.modal div.markItUp{width:500px;}
+.modal textarea.markItUpEditor{width:500px;height:250px;}
+.content-box.editable{border:1px dashed #bbb;padding:5px;min-height:30px;}
+.edit-toggle{position:relative;float:left;left:-20px;}
