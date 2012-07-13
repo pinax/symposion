@@ -6,6 +6,13 @@ label:not(.checkbox):not(.radio) {
     font-weight: bold;
 }
 
+.navbar .nav li.dropdown .dropdown-toggle .caret,
+.navbar .nav li.dropdown.open .caret {
+  border-top-color: @grayDarker;
+  border-bottom-color: @grayDarker;
+}
+
+
 header {
     position: relative;
     margin-bottom: 24px;
@@ -62,3 +69,12 @@ div.box-content .markItUpEditor {
     float: left;
     left: -20px;
 }
+
+.widget {
+    position: relative;
+    clear: both;
+    width: auto;
+    margin-bottom: 2em;
+    overflow: hidden;
+}
+
