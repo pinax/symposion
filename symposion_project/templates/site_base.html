@@ -18,8 +18,43 @@
     {% block extra_head %}{% endblock %}
 {% endblock %}
 
-{% block nav %}
-    {% sitetree_menu from "main" include "trunk" %}
+{% block topbar_base %}
+    <div class="container">
+        <header>
+            <div class="pull-right">
+                {% if request.user.is_authenticated %}
+                    <form style="margin: 0;" action="{% url account_logout %}" method="post">
+                        <div class="btn-group">
+                            <a class="btn" href="{% url dashboard %}">Dashboard</a>
+                            <a class="btn" href="{% url account_settings %}">Settings</a>
+                            {% csrf_token %}<button type="submit" class="btn">Log out</button>
+                        </div>
+                    </form>
+                {% else %}
+                    <a href="{% url account_login %}">Log in</a> / <a href="{% url account_signup %}">Sign up</a>
+                {% endif %}
+            </div>
+            
+            <h1><a href="{% url home %}">MoonCon <span style="font-weight: 200;">2019</span></a></h1>
+            <h2><a href="{% url home %}"><span style="font-weight: 200;">Sea of Tranquility, July 16th&ndash;24th</span></a></h2>
+        </header>
+        <div class="navbar">
+            <div class="navbar-inner">
+                {% block topbar %}
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <div class="nav-collapse">
+                        {% block nav %}
+                            {% sitetree_menu from "main" include "trunk" %}
+                        {% endblock %}
+                    </div>
+                {% endblock %}
+            </div>
+        </div>
+    </div>
 {% endblock %}
 
 {% block body_base %}
