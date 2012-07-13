@@ -9,4 +9,4 @@ LESS_COMPRESSOR ?= `which lessc`
 
 build:
 	mkdir -p css
-	lessc --compress ${BOOTSTRAP_LESS} > css/${CSS_OUTPUT_FILENAME}
+	lessc --yui-compress ${BOOTSTRAP_LESS} > css/${CSS_OUTPUT_FILENAME}
