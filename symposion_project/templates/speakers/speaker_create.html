@@ -9,7 +9,7 @@
 {% block body %}
     {% box "speaker-profile" %}
 
-    <form method="POST" action="" enctype="multipart/form-data" class="form-horizontal">
+    <form method="POST" action="" enctype="multipart/form-data">
         {% csrf_token %}
         <legend>{% trans "Create Speaker Profile" %}</legend>
         <fieldset>
