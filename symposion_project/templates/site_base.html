@@ -30,11 +30,20 @@
             {% sitetree_breadcrumbs from "main" %}
         {% endblock %}
         
-        {% block page_title %}
-        {% endblock %}
-        
-        {% block body %}
-        {% endblock %}
+        <div class="row">
+            <div class="span9">
+                {% block body %}
+                {% endblock %}
+            </div>
+            <div class="span3">
+                <h4>Sponsors</h4>
+                <img src="http://placekitten.com/g/200/100"></img><br /><br />
+                <img src="http://placekitten.com/g/200/101"></img><br /><br />
+                <img src="http://placekitten.com/g/200/98"></img><br /><br />
+                <img src="http://placekitten.com/g/200/99"></img><br /><br />
+                <img src="http://placekitten.com/g/200/102"></img><br /><br />
+            </div>
+        </div>
     </div>
 {% endblock %}
 
