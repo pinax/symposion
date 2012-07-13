@@ -1,0 +1,35 @@
+[
+    {
+        "pk": 1, 
+        "model": "sponsorship.sponsorlevel", 
+        "fields": {
+            "conference": 1,
+            "description": "", 
+            "cost": 10000, 
+            "name": "Gold", 
+            "order": 0
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "sponsorship.sponsorlevel", 
+        "fields": {
+            "conference": 1,
+            "description": "", 
+            "cost": 5000, 
+            "name": "Silver", 
+            "order": 1
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "sponsorship.sponsorlevel", 
+        "fields": {
+            "conference": 1,
+            "description": "", 
+            "cost": 2000, 
+            "name": "Bronze", 
+            "order": 2
+        }
+    }
+]
