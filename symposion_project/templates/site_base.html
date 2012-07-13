@@ -6,6 +6,8 @@
 {% load markitup_tags %}
 {% load static %}
 
+{% block viewport %}{% endblock %}
+
 {% block style_base %}
     <link href="{% static "symposion/css/symposion.css" %}" rel="stylesheet">
     {% block extra_style %}{% endblock %}
