@@ -3,8 +3,8 @@
         "pk": 1, 
         "model": "sites.site", 
         "fields": {
-            "domain": "example.com", 
-            "name": "example.com"
+            "domain": "localhost",
+            "name": "SymposionCon"
         }
     }
 ]
