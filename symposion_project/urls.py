@@ -18,6 +18,9 @@ urlpatterns = patterns("",
         "template": "homepage.html",
     }, name="home"),
     url(r"^admin/", include(admin.site.urls)),
+    
+    url(r"^account/signup/$", symposion.views.SignupView.as_view(), name="account_signup"),
+    url(r"^account/login/$", symposion.views.LoginView.as_view(), name="account_login"),
     url(r"^account/", include("account.urls")),
     
     url(r"^dashboard/", symposion.views.dashboard, name="dashboard"),
