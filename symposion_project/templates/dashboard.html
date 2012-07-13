@@ -10,15 +10,13 @@
 {% block body %}
     <h2>{% trans "Dashboard" %}</h2>
     
-    <section id="dashboard_speakers">
+    <section id="dashboard_speakers" class="dashboard-section well">
         <h3>{% trans "Speaking" %}</h3>
         {% if not user.speaker_profile %}
-            <div class="alert alert-info">
                 <p>To submit a proposal, you must first create a speaker profile.</p>
                 <a href="{% url speaker_create %}" class="btn">
                     Create a speaker profile
                 </a>
-            </div>
 
         {% else %}
             <a href="{% url speaker_edit %}" class="btn">
@@ -80,7 +78,7 @@
         {% endif %}
     </section>
     
-    <section id="dashboard_sponsorship">
+    <section id="dashboard_sponsorship" class="dashboard-section well">
         <h3>{% trans "Sponsorship" %}</h3>
         {% if not user.sponsorships.exists %}
             <a href="{# {% url sponsor_apply %} #}" class="btn">
