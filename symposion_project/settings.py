@@ -194,9 +194,9 @@ ACCOUNT_LOGIN_REDIRECT_URL = "dashboard"
 ACCOUNT_LOGOUT_REDIRECT_URL = "home"
 ACCOUNT_USER_DISPLAY = lambda user: user.email
 
-# AUTHENTICATION_BACKENDS = [
-#     "pinax.apps.account.auth_backends.AuthenticationBackend",
-# ]
+AUTHENTICATION_BACKENDS = [
+    "account.auth_backends.EmailAuthenticationBackend",
+]
 
 LOGIN_URL = "/account/login/" # @@@ any way this can be a url name?
 
