@@ -26,7 +26,9 @@
                     <form style="margin: 0;" action="{% url account_logout %}" method="post">
                         <div class="btn-group">
                             <a class="btn" href="{% url dashboard %}">Dashboard</a>
-                            <a class="btn" href="{% url admin:index %}">Admin</a>
+                            {% if request.user.is_staff %}
+                                <a class="btn" href="{% url admin:index %}">Admin</a>
+                            {% endif %}
                             <a class="btn" href="{% url account_settings %}">Settings</a>
                             {% csrf_token %}<button type="submit" class="btn">Log out</button>
                         </div>
