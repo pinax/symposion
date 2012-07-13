@@ -6,6 +6,11 @@
 {% load markitup_tags %}
 {% load static %}
 
+{% block style_base %}
+    <link href="{% static "symposion/css/symposion.css" %}" rel="stylesheet">
+    {% block extra_style %}{% endblock %}
+{% endblock %}
+
 {% block extra_head_base %}
     <link href="{{ STATIC_URL }}img/favicon.ico" rel="shortcut icon" />
     <script src="{% block jquery_src %}{% static "pinax/js/jquery.js" %}{% endblock %}"></script>
