@@ -1,5 +1,0 @@
-SPONSOR_COORDINATORS = "sponsor-coordinators"
-
-AUTH_GROUPS = [
-    SPONSOR_COORDINATORS
-]
