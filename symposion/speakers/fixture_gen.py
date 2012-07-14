@@ -15,14 +15,12 @@ def speakers():
         user=guido,
         name="Guido van Rossum",
         biography="I wrote Python, and named it after Monty Python",
-        twitter_username="gvanrossum",
     )
     Speaker.objects.create(
         user=matz,
         name="Yukihiro Matsumoto",
         biography="I wrote Ruby, and named it after the rare gem Ruby, a pun "
             "on Perl/pearl.",
-        twitter_username="yukihiro_matz"
     )
     Speaker.objects.create(
         user=larry,

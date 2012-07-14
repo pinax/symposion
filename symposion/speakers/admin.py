@@ -4,6 +4,6 @@ from symposion.speakers.models import Speaker
 
 
 admin.site.register(Speaker,
-    list_display = ["name", "email", "twitter_username", "sessions_preference", "created"],
+    list_display = ["name", "email", "created"],
     search_fields = ["name"],
 )

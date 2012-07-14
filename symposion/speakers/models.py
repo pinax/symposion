@@ -19,23 +19,12 @@ class Speaker(models.Model):
     name = models.CharField(max_length=100, help_text="As you would like it to appear in the conference program.")
     biography = MarkupField(blank=True, help_text="A little bit about you. Edit using <a href='http://warpedvisions.org/projects/markdown-cheat-sheet/' target='_blank'>Markdown</a>.")
     photo = models.ImageField(upload_to="speaker_photos", blank=True)
-    twitter_username = models.CharField(
-        max_length = 15,
-        blank = True,
-        help_text = "Your Twitter account"
-    )
     annotation = models.TextField()  # staff only
     invite_email = models.CharField(max_length=200, unique=True, null=True, db_index=True)
     invite_token = models.CharField(max_length=40, db_index=True)
     created = models.DateTimeField(
         default = datetime.datetime.now,
         editable = False
-    )
-    sessions_preference = models.IntegerField(
-        choices=SESSION_COUNT_CHOICES,
-        null=True,
-        blank=True,
-        help_text="If you've submitted multiple proposals, please let us know if you only want to give one or if you'd like to give two talks. You may submit more than two proposals."
     )
     
     def __unicode__(self):
