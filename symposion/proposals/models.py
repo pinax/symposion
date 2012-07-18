@@ -8,6 +8,8 @@ from django.db.models import Q
 
 from django.contrib.auth.models import User
 
+import reversion
+
 from markitup.fields import MarkupField
 
 from model_utils.managers import InheritanceManager
@@ -103,6 +105,9 @@ class ProposalBase(models.Model):
         yield self.speaker
         for speaker in self.additional_speakers.exclude(additionalspeaker__status=AdditionalSpeaker.SPEAKING_STATUS_DECLINED):
             yield speaker
+
+
+reversion.register(ProposalBase)
 
 
 class AdditionalSpeaker(models.Model):

@@ -4,6 +4,8 @@ from django.db import models
 
 from django.contrib.auth.models import User
 
+import reversion
+
 from markitup.fields import MarkupField
 
 
@@ -20,3 +22,6 @@ class Box(models.Model):
     
     class Meta:
         verbose_name_plural = "boxes"
+
+
+reversion.register(Box)
