@@ -302,7 +302,7 @@ def document_create(request, proposal_pk):
 @login_required
 def document_download(request, pk, *args):
     document = get_object_or_404(SupportingDocument, pk=pk)
-    if settings.USE_X_ACCEL_REDIRECT:
+    if getattr(settings, "USE_X_ACCEL_REDIRECT", False):
         response = HttpResponse()
         response["X-Accel-Redirect"] = document.file.url
         # delete content-type to allow Gondor to determine the filetype and
