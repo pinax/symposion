@@ -61,7 +61,27 @@ class Sponsor(models.Model):
         if self.active:
             return reverse("sponsor_detail", kwargs={"pk": self.pk})
         return reverse("sponsor_list")
-
+    
+    @property
+    def website_logo(self):
+        if self.sponsor_logo is None:
+            benefits = self.sponsor_benefits.filter(benefit__type="weblogo", upload__isnull=False)[:1]
+            if benefits.count():
+                if benefits[0].upload:
+                    self.sponsor_logo = benefits[0]
+                    self.save()
+        return self.sponsor_logo.upload
+    
+    @property
+    def listing_text(self):
+        if not hasattr(self, "_listing_text"):
+            self._listing_text = None
+            # @@@ better than hard-coding a pk but still not good
+            benefits = self.sponsor_benefits.filter(benefit__name="Sponsor Description")
+            if benefits.count():
+                self._listing_text = benefits[0].text
+        return self._listing_text
+    
     def reset_benefits(self):
         """
         Reset all benefits for this sponsor to the defaults for their
