@@ -71,6 +71,6 @@
         {% else %}
             <p>No supporting documents attached to this proposal.</p>
         {% endif %}
-        <a class="btn btn-small" href="{% url proposal_document_create proposal.pk %}"><i class="icon-plus"></i> add document</a>
+        <a class="btn btn-small{% if proposal.cancelled %} btn-disabled{% endif %}" href="{% url proposal_document_create proposal.pk %}"><i class="icon-plus"></i> add document</a>
     {% endif %}
 {% endblock %}
