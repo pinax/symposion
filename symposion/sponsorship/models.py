@@ -3,6 +3,7 @@ import datetime
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.db import models
+from django.db.models.signals import post_init, post_save
 from django.utils.translation import ugettext_lazy as _
 
 from django.contrib.auth.models import User
@@ -123,6 +124,18 @@ class Sponsor(models.Model):
 
     def send_coordinator_emails(self):
         pass  # @@@ should this just be done centrally?
+
+
+def _store_initial_level(sender, instance, **kwargs):
+    if instance:
+        instance._initial_level_id = instance.level_id
+post_init.connect(_store_initial_level, sender=Sponsor)
+
+
+def _check_level_change(sender, instance, created, **kwargs):
+    if instance and (created or instance.level_id != instance._initial_level_id):
+        instance.reset_benefits()
+post_save.connect(_check_level_change, sender=Sponsor)
 
 
 BENEFIT_TYPE_CHOICES = [
