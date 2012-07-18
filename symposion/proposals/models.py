@@ -5,6 +5,7 @@ import uuid
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Q
+from django.utils.translation import ugettext_lazy as _
 
 from django.contrib.auth.models import User
 
@@ -57,7 +58,7 @@ class ProposalKind(models.Model):
     
     section = models.ForeignKey(Section, related_name="proposal_kinds")
     
-    name = models.CharField("name", max_length=100)
+    name = models.CharField(_("Name"), max_length=100)
     slug = models.SlugField()
     
     def __unicode__(self):
@@ -72,15 +73,17 @@ class ProposalBase(models.Model):
     
     title = models.CharField(max_length=100)
     description = models.TextField(
+        _("Brief Outline"),
         max_length=400,  # @@@ need to enforce 400 in UI
         help_text="If your talk is accepted this will be made public and printed in the program. Should be one paragraph, maximum 400 characters."
     )
     abstract = MarkupField(
-        help_text="Detailed description and outline. Will be made public if your talk is accepted. Edit using <a href='http://warpedvisions.org/projects/markdown-cheat-sheet/' target='_blank'>Markdown</a>."
+        _("Detailed Abstract"),
+        help_text=_("Detailed description and outline. Will be made public if your talk is accepted. Edit using <a href='http://daringfireball.net/projects/markdown/basics' target='_blank'>Markdown</a>.")
     )
     additional_notes = MarkupField(
         blank=True,
-        help_text="Anything else you'd like the program committee to know when making their selection: your past speaking experience, open source community experience, etc. Edit using <a href='http://warpedvisions.org/projects/markdown-cheat-sheet/' target='_blank'>Markdown</a>."
+        help_text=_("Anything else you'd like the program committee to know when making their selection: your past speaking experience, open source community experience, etc. Edit using <a href='http://daringfireball.net/projects/markdown/basics' target='_blank'>Markdown</a>.")
     )
     submitted = models.DateTimeField(
         default=datetime.datetime.now,
@@ -117,9 +120,9 @@ class AdditionalSpeaker(models.Model):
     SPEAKING_STATUS_DECLINED = 3
     
     SPEAKING_STATUS = [
-        (SPEAKING_STATUS_PENDING, "Pending"),
-        (SPEAKING_STATUS_ACCEPTED, "Accepted"),
-        (SPEAKING_STATUS_DECLINED, "Declined"),
+        (SPEAKING_STATUS_PENDING, _("Pending")),
+        (SPEAKING_STATUS_ACCEPTED, _("Accepted")),
+        (SPEAKING_STATUS_DECLINED, _("Declined")),
     ]
     
     speaker = models.ForeignKey("speakers.Speaker")
