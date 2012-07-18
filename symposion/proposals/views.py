@@ -282,6 +282,9 @@ def document_create(request, proposal_pk):
     proposal = get_object_or_404(queryset, pk=proposal_pk)
     proposal = ProposalBase.objects.get_subclass(pk=proposal.pk)
     
+    if proposal.cancelled:
+        return HttpResponseForbidden()
+    
     if request.method == "POST":
         form = SupportingDocumentCreateForm(request.POST, request.FILES)
         if form.is_valid():
