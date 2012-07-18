@@ -42,6 +42,7 @@ class SponsorAdmin(admin.ModelAdmin):
         })
     ]
     inlines = [SponsorBenefitInline]
+    list_display = ["name", "external_url", "level", "active"]
     
     def get_form(self, *args, **kwargs):
         # @@@ kinda ugly but using choices= on NullBooleanField is broken
@@ -56,6 +57,7 @@ class SponsorAdmin(admin.ModelAdmin):
 
 class BenefitAdmin(admin.ModelAdmin):
     
+    list_display = ["name", "type", "description"]
     inlines = [BenefitLevelInline]
 
 
