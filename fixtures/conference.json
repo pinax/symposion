@@ -26,9 +26,9 @@
         "fields": {
             "conference": 1, 
             "start_date": "2040-01-02", 
-            "name": "Talks", 
+            "name": "General Sessions", 
             "end_date": "2040-01-04", 
-            "slug": "talks"
+            "slug": "general-sessions"
         }
     }
 ]
