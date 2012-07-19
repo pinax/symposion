@@ -113,6 +113,7 @@
                 form.submit();
                 return false;
             });
+            $(".required-field").prepend("<span style='color:red;'>* </div>");
         });
     </script>
     {% block extra_script %}{% endblock %}
