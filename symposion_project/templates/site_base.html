@@ -22,7 +22,7 @@
 
 {% block topbar_base %}
     <div class="container">
-        <header>
+        <header id="masthead">
             <div class="pull-right">
                 {% if request.user.is_authenticated %}
                     <form style="margin: 0;" action="{% url account_logout %}" method="post">
