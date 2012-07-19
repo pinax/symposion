@@ -24,20 +24,32 @@
     <div class="container">
         <header id="masthead">
             <div class="pull-right">
-                {% if request.user.is_authenticated %}
-                    <form style="margin: 0;" action="{% url account_logout %}" method="post">
-                        <div class="btn-group">
-                            <a class="btn" href="{% url dashboard %}">Dashboard</a>
-                            {% if request.user.is_staff %}
-                                <a class="btn" href="{% url admin:index %}">Admin</a>
-                            {% endif %}
-                            <a class="btn" href="{% url account_settings %}">Settings</a>
-                            {% csrf_token %}<button type="submit" class="btn">Log out</button>
-                        </div>
-                    </form>
-                {% else %}
-                    <a href="{% url account_login %}">Log in</a> / <a href="{% url account_signup %}">Sign up</a>
-                {% endif %}
+                <ul class="nav nav-pills">
+                    {% if not request.user.is_authenticated %}
+                        <li>
+                            <a href="{% url account_login %}">Log in</a>
+                        </li>
+                        <li>
+                            <a href="{% url account_signup %}">Sign up</a>
+                        </li>
+                    {% else %}
+                        <li>
+                            <a href="{% url dashboard %}">Dashboard</a>
+                        </li>
+                        <li>
+                            <a href="{% url account_settings %}">Settings</a>
+                        </li>
+                        {% if request.user.is_staff %}
+                            <li>
+                                <a href="{% url admin:index %}">Admin</a>
+                            </li>
+                        {% endif %}
+                        <li>
+                            <a id="logout_link" href="{% url account_logout %}" data-form-submit="#account_logout_form">Log out</a>
+                        </li>
+                        <form id="account_logout_form" class="hide" action="{% url account_logout %}" method="post">{% csrf_token %}</form>
+                    {% endif %}
+                </ul>
             </div>
             
             <h1><a href="{% url home %}">{{ SITE_NAME }}</a></h1>
@@ -94,5 +106,14 @@
     {% analytics %}
     <script src="{% static "bootstrap/js/bootstrap.js" %}"></script>
     <script src="{% static "pinax/js/theme.js" %}"></script>
+    <script type="text/javascript">
+        $(function() {
+            $("#logout_link").on("click", function(e) {
+                var form = $($(this).data("form-submit"));
+                form.submit();
+                return false;
+            });
+        });
+    </script>
     {% block extra_script %}{% endblock %}
 {% endblock %}
