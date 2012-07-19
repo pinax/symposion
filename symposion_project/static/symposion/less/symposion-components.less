@@ -160,6 +160,54 @@ div.box-content .markItUpEditor {
     }
 }
 
+// Titled Form
+.titled-form {
+    position: relative;
+    clear: both;
+    width: auto;
+    margin-bottom: 2em;
+    overflow: hidden;
+    
+    .titled-form-header {
+        position: relative;
+        height: 40px;
+        line-height: 40px;
+        #gradient > .vertical(@navbarBackgroundHighlight, @navbarBackground);
+        border: 1px solid #D5D5D5;
+        .border-radius(4px 4px 0 0);
+        -webkit-background-clip: padding-box;
+        
+        h3 {
+            position: relative;
+            top: 2px;
+            left: 10px;
+            display: inline-block;
+            margin-right: 3em;
+            font-size: 14px;
+            font-weight: 600;
+            color: @grayDark;
+            line-height: 18px;
+            text-shadow: 1px 1px 2px rgba(255,255,255,.5);
+        }
+    }
+
+    .titled-form-content {
+        border: 1px solid #D5D5D5;
+        .box-shadow(0 1px 1px rgba(0, 0, 0, 0.1));
+        background-color: #fff;
+        border-top: none;
+        padding-top: 20px;
+    }
+
+    .form-actions {
+        margin-top: 0px;
+        .border-radius(0 0 4px 4px);
+        .box-shadow(0 1px 1px rgba(0, 0, 0, 0.1));
+        border: 1px solid #D5D5D5;
+        border-top: none;
+    }
+}
+
 // Footer
 .footer {
   margin-top: 45px;
