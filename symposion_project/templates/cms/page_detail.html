@@ -7,16 +7,17 @@
 
 {% block head_title %}{{ page.title }}{% endblock %}
 
-{% block page_title %}
-    {{ page.title }}
-    {% if editable %}
-        <div class="pull-right">
-            <a href="{% url cms_page_edit page.path %}" class="btn"><i class="icon-pencil icon-large"></i></a>
-        </div>
-    {% endif %}
-{% endblock %}
 {% block breadcrumbs %}{% sitetree_breadcrumbs from "main" %}{% endblock %}
 
 {% block body %}
-    {{ page.body }}
+    {% if editable %}
+        <div class="pull-right">
+            <a href="{% url cms_page_edit page.path %}" class="btn"><i class="icon-pencil icon-large"></i> Edit this page</a>
+        </div>
+    {% endif %}
+    <h2>{{ page.title }}</h2>
+    
+    <div class="page-content">
+        {{ page.body }}
+    </div>
 {% endblock %}
