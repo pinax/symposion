@@ -30,3 +30,5 @@ django-reversion==1.6.1
 django-markitup==1.0.0
 markdown==2.1.1
 django-sitetree==0.8
+PIL==1.1.7
+easy-thumbnails==1.0.3
