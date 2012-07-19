@@ -22,7 +22,7 @@ django_compressor==1.2a1
 django-model-utils==1.1.0
 
 -e git+git://github.com/pinax/pinax-theme-bootstrap-account.git@8fc34ba4309fc1edd12e5836cc1398c3f9597e6d#egg=pinax-theme-bootstrap-account
--e git+git://github.com/pinax/django-user-accounts.git@fd08c676ae71d0b9d7353ddee123deb751d6ee15#egg=django-user-accounts
+-e git+git://github.com/pinax/django-user-accounts.git@ee694e74d3341893655fc8903962b5c5b43da9b8#egg=django-user-accounts
 
 django-mptt==0.5.2
 django-taggit==0.9.3
