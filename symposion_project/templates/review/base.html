@@ -1,0 +1,42 @@
+{% extends "site_base.html" %}
+
+{% block body_class %}full review{% endblock %}
+
+{% block extra_head %}
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/dataTables.css" />
+	<link rel="stylesheet" href="{{ STATIC_URL }}css/TableTools.css" />
+{% endblock %}
+
+{% block body %}
+    <div class="span-5">
+        <h1 class="section-title">Review</h1>
+        {% block extra_sidebar %}{% endblock %}
+        <ul class="side-nav">
+            <li><a href="{% url review_list %}">all reviews</a></li>
+            <li><a href="{% url review_list_user user.username %}">your reviews</a></li>
+            <li><a href="{% url review_stats %}">stats</a></li>
+        {% if is_reviewer_tutorials %}
+            <li><a href="{% url review_tutorial_list %}">all tutorial reviews</a></li>
+            <li><a href="{% url review_tutorial_list_user user.username %}">your tutorial reviews</a></li>
+        {% endif %}
+        {% if is_reviewer_admin %}
+            <li><a href="{% url review_admin %}">admin</a></li>
+        {% endif %}
+        </ul>
+    </div>
+
+    <div class="span-19 last">
+        {% block primary %}{% endblock %}
+    </div>
+{% endblock %}
+
+{% block extra_body %}
+    <script type="text/javascript" language="javascript" src="{{ STATIC_URL }}js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $("table.review").dataTable({
+                "bStateSave": true
+            });
+        });
+    </script>
+{% endblock %}

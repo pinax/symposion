@@ -1,0 +1,137 @@
+{% comment %}
+<div>
+    <b>View</b>:
+        <a href="#type-talk">Talks</a> |
+        <a href="#type-panel">Panels</a> |
+        <a href="#type-tutorial">Tutorials</a>
+        <a href="#type-poster">Posters</a>
+</div>
+{% endcomment %}
+<div class="badges legend mod">
+    <div class="badge extreme">E</div><div class="label"> = EXTREME PyCon</div>
+</div>
+
+<hr />
+
+<h3>Proposal Types: 
+{% for type, props in proposals.iteritems %}
+    <a href="#type-{{ type|slugify|lower }}">{{ type }}{{ props|length|pluralize }} ({{ props|length }})</a>{% if not forloop.last %}, {% endif %}
+{% endfor %}
+</h3>
+
+{% for type, props in proposals.iteritems %}
+    {% for proposal in props %}
+        {% if forloop.first %}
+            {% if proposal.kind.name %}
+                <h2 id="type-{{ proposal.kind.name|slugify|lower }}">
+                    {{ proposal.kind.name }}{{ props|length|pluralize }}
+                </h2>
+            {% endif %}
+            <table class="review review-list">
+                <thead>
+                    <tr>
+                        <th class="pr-number">
+                            #
+                        </th>
+                        <th>
+                            Title
+                        </th>
+                        <th>
+                            Category
+                        </th>
+                        <th class="comments">
+                            <span>Comments</span>
+                        </td>
+                        <th>
+                            +1
+                        </th>
+                        <th>
+                            +0
+                        </th>
+                        <th>
+                            &minus;0
+                        </th>
+                        <th>
+                            &minus;1
+                        </th>
+                        <th>
+                            Rated
+                        </th>
+                        <th>
+                            Result
+                        </th>
+                    </tr>
+                <thead>
+                <tbody>
+        {% endif %}
+        <tr class="{{ proposal.latest_vote }} {% if forloop.first %}first{% endif %}">
+            <td class="pr-number">
+                {{ proposal.number }}
+            </td>
+            <td class="pr-details">
+                <div class="title">
+                    <a href="{% url review_detail proposal.pk %}">{{ proposal.title }}</a>
+                </div>
+                <div class="metadata">
+                    <span class="level {{ proposal.get_audience_level_display|lower }}">
+                        {{ proposal.get_audience_level_display }}
+                    </span>
+                    {{ proposal.kind.name }}
+                    <span class="author">by
+                    <b>{{ proposal.speaker }}</b></span>
+                    {% if proposal.additional_speakers.all %}
+                        with
+                        {{ proposal.additional_speakers.all|join:", " }}
+                    {% endif %}
+                    <div class="badges">
+                        {% if proposal.extreme %}
+                            <div class="badge extreme">E</div>
+                        {% endif %}
+                        {% if proposal.invited %}
+                            <div class="badge invited">I</div>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="description" style="display:none">
+                    <div>
+                        {{ proposal.description }}
+                    </div>
+                    <div>
+                        {{ proposal.abstract|safe }}
+                    </div>
+                </div>
+            </td>
+            <td>
+                {{ proposal.category.name }}
+            </td>
+            <td class="count">
+                {{ proposal.comment_count }}
+            </td>
+            <td class="count plus-one">
+                {{ proposal.plus_one }}
+            </td>
+            <td class="count plus-zero">
+                {{ proposal.plus_zero }}
+            </td>
+            <td class="count minus-zero">
+                {{ proposal.minus_zero }}
+            </td>
+            <td class="count minus-one">
+                {{ proposal.minus_one }}
+            </td>
+            <td class="count">
+                {% if proposal in rated_proposals %}Yes{% else %}No{% endif %}
+            </td>
+            <td class="result {{ proposal.result.get_accepted_display }}">
+                {{ proposal.result.get_accepted_display }}
+            </td>
+        </tr>
+        {% if forloop.last %}
+        </tbody>
+            </table>
+            <hr />
+        {% endif %}
+    {% endfor %}
+{% empty %}
+    <p>No matching proposals.</p>
+{% endfor %}
