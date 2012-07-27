@@ -121,4 +121,56 @@
             </p>
         </div>
     </div>
+    
+    <div class="dashboard-panel">
+        <div class="dashboard-panel-header">
+            <i class="icon-briefcase"></i>
+            <h3>{% trans "Reviews" %}</h3>
+            <div class="pull-right header-actions">
+                {# if reviewer admin #}
+                <a href="{% url sponsor_apply %}" class="btn">
+                    <i class="icon-cog"></i> Manage
+                </a>
+            </div>
+        </div>
+        
+        <div class="dashboard-panel-content">
+            <h4>My Reviews</h4>
+            <table class="table">
+                <thead>
+                    <td>Proposal Title</td>
+                    <td>Score</td>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Title One</td>
+                        <td>+4</td>
+                    </tr>
+                    <tr>
+                        <td>Title Two</td>
+                        <td>-2</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h4>My Assignments</h4>
+            <table class="table">
+                <thead>
+                    <td>Proposal Title</td>
+                    <td>Score</td>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Title Three</td>
+                        <td>-1</td>
+                    </tr>
+                    <tr>
+                        <td>Title Four</td>
+                        <td>+2</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
 {% endblock %}
