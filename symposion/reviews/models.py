@@ -284,27 +284,26 @@ post_save.connect(create_proposal_result, sender=Proposal)
 
 
 def promote_proposal(proposal):
-    presentation, created = Presentation.objects.get_or_create(
-        pk=proposal.pk,
-        defaults=dict(
-            title=proposal.title,
-            description=proposal.description,
-            kind=proposal.kind,
-            category=proposal.category,
-            duration=proposal.duration,
-            abstract=proposal.abstract,
-            audience_level=proposal.audience_level,
-            submitted=proposal.submitted,
-            speaker=proposal.speaker,
-        )
-    )
-    
-    if created:
-        for speaker in proposal.additional_speakers.all():
-            presentation.additional_speakers.add(speaker)
-            presentation.save()
-    
-    return presentation
+    raise NotImplementedError()
+    # presentation, created = Presentation.objects.get_or_create(
+    #     pk=proposal.pk,
+    #     defaults=dict(
+    #         title=proposal.title,
+    #         description=proposal.description,
+    #         kind=proposal.kind,
+    #         category=proposal.category,
+    #         duration=proposal.duration,
+    #         abstract=proposal.abstract,
+    #         audience_level=proposal.audience_level,
+    #         submitted=proposal.submitted,
+    #         speaker=proposal.speaker,
+    #     )
+    # )
+    # if created:
+    #     for speaker in proposal.additional_speakers.all():
+    #         presentation.additional_speakers.add(speaker)
+    #         presentation.save()
+    # return presentation
 
 
 def accepted_proposal(sender, instance=None, **kwargs):
