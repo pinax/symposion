@@ -1,4 +1,4 @@
-{% extends "review/base.html" %}
+{% extends "reviews/base.html" %}
 
 {% block primary %}
     <h1>Proposal Review Stats</h1>
@@ -23,7 +23,7 @@
                 <div class="stat-def">proposals with both a +1 and &minus;1</div>
             {% endif %}
 
-            {% include "review/_review_table.html" %}
+            {% include "reviews/_review_table.html" %}
 
         </div>
     {% else %}
