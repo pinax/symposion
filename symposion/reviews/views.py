@@ -6,7 +6,7 @@ from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
-from symposion.proposals.models import Proposal
+from symposion.proposals.models import ProposalBase
 from symposion.reviews.forms import ReviewForm, ReviewCommentForm, SpeakerCommentForm
 from symposion.reviews.forms import BulkPresentationForm
 from symposion.reviews.models import ReviewAssignment, Review, LatestVote, VOTES
@@ -68,7 +68,7 @@ def review_list(request, username=None):
         if not request.user.groups.filter(name="reviewers").exists():
             return access_not_permitted(request)
     
-    queryset = Proposal.objects.select_related("speaker__user", "result")
+    queryset = ProposalBase.objects.select_related("speaker__user", "result")
     if username:
         reviewed = LatestVote.objects.filter(user__username=username).values_list("proposal", flat=True)
         queryset = queryset.filter(pk__in=reviewed)
@@ -108,7 +108,7 @@ def review_tutorial_list(request, username=None):
         if not request.user.groups.filter(name="reviewers-tutorials").exists():
             return access_not_permitted(request)
     
-    queryset = Proposal.objects.select_related("speaker__user", "result")
+    queryset = ProposalBase.objects.select_related("speaker__user", "result")
     if username:
         reviewed = LatestVote.objects.filter(user__username=username).values_list("proposal", flat=True)
         queryset = queryset.filter(pk__in=reviewed)
@@ -166,7 +166,7 @@ def review_admin(request):
 
 @login_required
 def review_detail(request, pk):
-    proposals = Proposal.objects.select_related("result")
+    proposals = ProposalBase.objects.select_related("result")
     proposal = get_object_or_404(proposals, pk=pk)
     
     admin = request.user.groups.filter(name="reviewers-admins").exists()
@@ -288,7 +288,7 @@ def review_stats(request, key=None):
     if not request.user.groups.filter(name="reviewers").exists():
         return access_not_permitted(request)
     
-    queryset = Proposal.objects.select_related("speaker__user", "result")
+    queryset = ProposalBase.objects.select_related("speaker__user", "result")
     
     proposals = {
         # proposals with at least one +1 and no -1s, sorted by the 'score'
@@ -351,7 +351,7 @@ def review_bulk_accept(request):
         form = BulkPresentationForm(request.POST)
         if form.is_valid():
             talk_ids = form.cleaned_data["talk_ids"].split(",")
-            talks = Proposal.objects.filter(id__in=talk_ids).select_related("result")
+            talks = ProposalBase.objects.filter(id__in=talk_ids).select_related("result")
             for talk in talks:
                 talk.result.accepted = True
                 talk.result.save()
