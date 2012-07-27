@@ -1,5 +1,5 @@
 from django.db.models import Q, Count
-from django.shortcuts import render_to_response, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.template import RequestContext
 from django.views.decorators.http import require_POST
 
@@ -14,8 +14,7 @@ from symposion.utils.mail import send_email
 
 
 def access_not_permitted(request):
-    ctx = RequestContext(request)
-    return render_to_response("review/access_not_permitted.html", ctx)
+    return render(request, "review/access_not_permitted.html")
 
 
 def proposals_generator(request, queryset, username=None, check_speaker=True):
@@ -87,8 +86,7 @@ def review_list(request, username=None):
         "rated_proposals": rated_proposals,
         "username": username,
     }
-    ctx = RequestContext(request, ctx)
-    return render_to_response("review/review_list.html", ctx)
+    return render(request, "review/review_list.html", ctx)
 
 
 @login_required
@@ -125,8 +123,7 @@ def review_tutorial_list(request, username=None):
         "proposals": proposals,
         "username": username,
     }
-    ctx = RequestContext(request, ctx)
-    return render_to_response("review/review_list.html", ctx)
+    return render(request, "review/review_list.html", ctx)
 
 
 @login_required
@@ -160,8 +157,7 @@ def review_admin(request):
     ctx = {
         "reviewers": reviewers(),
     }
-    ctx = RequestContext(request, ctx)
-    return render_to_response("review/review_admin.html", ctx)
+    return render(request, "review/review_admin.html", ctx)
 
 
 @login_required
@@ -261,13 +257,13 @@ def review_detail(request, pk):
     
     reviews = Review.objects.filter(proposal=proposal).order_by("-submitted_at")
     
-    return render_to_response("review/review_detail.html", {
+    return render(request, "review/review_detail.html", {
         "proposal": proposal,
         "latest_vote": latest_vote,
         "reviews": reviews,
         "review_form": review_form,
         "message_form": message_form
-    }, context_instance=RequestContext(request))
+    })
 
 
 @login_required
@@ -312,8 +308,7 @@ def review_stats(request, key=None):
     else:
         ctx["proposals"] = proposals
     
-    ctx = RequestContext(request, ctx)
-    return render_to_response("review/review_stats.html", ctx)
+    return render(request, "review/review_stats.html", ctx)
 
 
 @login_required
@@ -324,9 +319,9 @@ def review_assignments(request):
         user=request.user,
         opted_out=False
     )
-    return render_to_response("review/review_assignment.html", {
+    return render(request, "review/review_assignment.html", {
         "assignments": assignments,
-    }, context_instance=RequestContext(request))
+    })
 
 
 @login_required
@@ -359,6 +354,6 @@ def review_bulk_accept(request):
     else:
         form = BulkPresentationForm()
     
-    return render_to_response("review/review_bulk_accept.html", {
+    return render(request, "review/review_bulk_accept.html", {
         "form": form,
-    }, context_instance=RequestContext(request))
+    })
