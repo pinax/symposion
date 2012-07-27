@@ -2,7 +2,7 @@ from django import forms
 
 from markitup.widgets import MarkItUpWidget
 
-from symposion.review.models import Review, Comment, ProposalMessage, VOTES
+from symposion.reviews.models import Review, Comment, ProposalMessage, VOTES
 
 
 class ReviewForm(forms.ModelForm):

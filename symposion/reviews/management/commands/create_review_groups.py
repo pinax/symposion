@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand
 
 from django.contrib.auth.models import Group
 
-from symposion.review import AUTH_GROUPS
+from symposion.reviews import AUTH_GROUPS
 
 
 class Command(BaseCommand):

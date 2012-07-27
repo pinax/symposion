@@ -7,9 +7,9 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 
 from symposion.proposals.models import Proposal
-from symposion.review.forms import ReviewForm, ReviewCommentForm, SpeakerCommentForm
-from symposion.review.forms import BulkPresentationForm
-from symposion.review.models import ReviewAssignment, Review, LatestVote, VOTES
+from symposion.reviews.forms import ReviewForm, ReviewCommentForm, SpeakerCommentForm
+from symposion.reviews.forms import BulkPresentationForm
+from symposion.reviews.models import ReviewAssignment, Review, LatestVote, VOTES
 from symposion.utils.mail import send_email
 
 

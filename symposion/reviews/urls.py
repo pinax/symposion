@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import patterns, url, include
 
 
-urlpatterns = patterns("symposion.review.views",
+urlpatterns = patterns("symposion.reviews.views",
     url(r"^list/$", "review_list", name="review_list"),
     url(r"^list/(?P<username>[\w\-]+)/$", "review_list", name="review_list_user"),
     url(r"^tutorial/list/$", "review_tutorial_list", name="review_tutorial_list"),

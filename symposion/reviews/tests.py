@@ -4,7 +4,7 @@ from django.test import TestCase
 from django.contrib.auth.models import User, Group
 
 from symposion.proposals.models import Proposal
-from symposion.review.models import Review, ReviewAssignment
+from symposion.reviews.models import Review, ReviewAssignment
 
 
 class login(object):
