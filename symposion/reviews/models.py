@@ -50,7 +50,7 @@ class ReviewAssignment(models.Model):
         (AUTO_ASSIGNED_LATER, "auto-assigned, later"),
     ]
     
-    proposal = models.ForeignKey("proposals.Proposal")
+    proposal = models.ForeignKey("proposals.ProposalBase")
     user = models.ForeignKey(User)
     
     origin = models.IntegerField(choices=ORIGIN_CHOICES)
@@ -85,7 +85,7 @@ class ReviewAssignment(models.Model):
 
 
 class ProposalMessage(models.Model):
-    proposal = models.ForeignKey("proposals.Proposal", related_name="messages")
+    proposal = models.ForeignKey("proposals.ProposalBase", related_name="messages")
     user = models.ForeignKey(User)
     
     message = MarkupField()
@@ -98,7 +98,7 @@ class ProposalMessage(models.Model):
 class Review(models.Model):
     VOTES = VOTES
     
-    proposal = models.ForeignKey("proposals.Proposal", related_name="reviews")
+    proposal = models.ForeignKey("proposals.ProposalBase", related_name="reviews")
     user = models.ForeignKey(User)
     
     # No way to encode "-0" vs. "+0" into an IntegerField, and I don't feel
@@ -171,7 +171,7 @@ class Review(models.Model):
 class LatestVote(models.Model):
     VOTES = VOTES
     
-    proposal = models.ForeignKey("proposals.Proposal", related_name="votes")
+    proposal = models.ForeignKey("proposals.ProposalBase", related_name="votes")
     user = models.ForeignKey(User)
     
     # No way to encode "-0" vs. "+0" into an IntegerField, and I don't feel
@@ -192,7 +192,7 @@ class LatestVote(models.Model):
 
 
 class ProposalResult(models.Model):
-    proposal = models.OneToOneField("proposals.Proposal", related_name="result")
+    proposal = models.OneToOneField("proposals.ProposalBase", related_name="result")
     score = models.DecimalField(max_digits=5, decimal_places=2, default=Decimal("0.00"))
     comment_count = models.PositiveIntegerField(default=1)
     vote_count = models.PositiveIntegerField(default=1)
@@ -262,7 +262,7 @@ class ProposalResult(models.Model):
 
 
 class Comment(models.Model):
-    proposal = models.ForeignKey("proposals.Proposal", related_name="comments")
+    proposal = models.ForeignKey("proposals.ProposalBase", related_name="comments")
     commenter = models.ForeignKey(User)
     text = MarkupField()
     
@@ -280,7 +280,7 @@ def create_proposal_result(sender, instance=None, **kwargs):
     ProposalResult.objects.get_or_create(proposal=instance)
 
 
-post_save.connect(create_proposal_result, sender=Proposal)
+post_save.connect(create_proposal_result, sender=ProposalBase)
 
 
 def promote_proposal(proposal):
