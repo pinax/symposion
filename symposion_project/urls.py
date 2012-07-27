@@ -28,6 +28,7 @@ urlpatterns = patterns("",
     url(r"^speaker/", include("symposion.speakers.urls")),
     url(r"^proposals/", include("symposion.proposals.urls")),
     url(r"^sponsors/", include("symposion.sponsorship.urls")),
+    url(r"^reviews/", include("symposion.reviews.urls")),
     url(r"^boxes/", include("symposion.boxes.urls")),
     url(r"^", include("symposion.cms.urls")),
 )
