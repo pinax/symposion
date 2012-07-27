@@ -1,6 +1,4 @@
-from django.db.models import Q, Count
 from django.shortcuts import render, redirect, get_object_or_404
-from django.template import RequestContext
 from django.views.decorators.http import require_POST
 
 from django.contrib.auth.decorators import login_required
@@ -14,7 +12,7 @@ from symposion.utils.mail import send_email
 
 
 def access_not_permitted(request):
-    return render(request, "review/access_not_permitted.html")
+    return render(request, "reviews/access_not_permitted.html")
 
 
 def proposals_generator(request, queryset, username=None, check_speaker=True):
@@ -86,7 +84,7 @@ def review_list(request, username=None):
         "rated_proposals": rated_proposals,
         "username": username,
     }
-    return render(request, "review/review_list.html", ctx)
+    return render(request, "reviews/review_list.html", ctx)
 
 
 @login_required
@@ -123,7 +121,7 @@ def review_tutorial_list(request, username=None):
         "proposals": proposals,
         "username": username,
     }
-    return render(request, "review/review_list.html", ctx)
+    return render(request, "reviews/review_list.html", ctx)
 
 
 @login_required
@@ -157,7 +155,7 @@ def review_admin(request):
     ctx = {
         "reviewers": reviewers(),
     }
-    return render(request, "review/review_admin.html", ctx)
+    return render(request, "reviews/review_admin.html", ctx)
 
 
 @login_required
@@ -257,7 +255,7 @@ def review_detail(request, pk):
     
     reviews = Review.objects.filter(proposal=proposal).order_by("-submitted_at")
     
-    return render(request, "review/review_detail.html", {
+    return render(request, "reviews/review_detail.html", {
         "proposal": proposal,
         "latest_vote": latest_vote,
         "reviews": reviews,
@@ -308,7 +306,7 @@ def review_stats(request, key=None):
     else:
         ctx["proposals"] = proposals
     
-    return render(request, "review/review_stats.html", ctx)
+    return render(request, "reviews/review_stats.html", ctx)
 
 
 @login_required
@@ -319,7 +317,7 @@ def review_assignments(request):
         user=request.user,
         opted_out=False
     )
-    return render(request, "review/review_assignment.html", {
+    return render(request, "reviews/review_assignment.html", {
         "assignments": assignments,
     })
 
@@ -354,6 +352,6 @@ def review_bulk_accept(request):
     else:
         form = BulkPresentationForm()
     
-    return render(request, "review/review_bulk_accept.html", {
+    return render(request, "reviews/review_bulk_accept.html", {
         "form": form,
     })
