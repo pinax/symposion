@@ -135,7 +135,7 @@
                     {% for membership in user.memberships.all %}
                         <li>
                             {% if membership.state == "manager" %}
-                                <a href="#">{{ membership.team.name }}</a>
+                                <a href="{% url team_detail membership.team.slug %}">{{ membership.team.name }}</a>
                             {% else %}
                                 {{ membership.team.name }}
                             {% endif %}

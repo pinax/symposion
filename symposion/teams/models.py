@@ -26,6 +26,12 @@ class Team(models.Model):
     def __unicode__(self):
         return self.name
 
+    def get_state_for_user(self, user):
+        try:
+            return self.memberships.get(user=user).state
+        except Membership.DoesNotExist:
+            return None
+
 
 MEMBERSHIP_STATE_CHOICES = [
     ("applied", "applied"),
