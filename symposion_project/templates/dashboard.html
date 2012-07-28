@@ -121,4 +121,29 @@
             </p>
         </div>
     </div>
+
+    <div class="dashboard-panel">
+        <div class="dashboard-panel-header">
+            <i class="icon-group"></i>
+            <h3>{% trans "Teams" %}</h3>
+        </div>
+        
+        <div class="dashboard-panel-content">
+            {% if user.memberships.exists %}
+                <h4>Your Teams</h4>
+                <ul>
+                    {% for membership in user.memberships.all %}
+                        <li>
+                            {% if membership.state == "manager" %}
+                                <a href="#">{{ membership.team.name }}</a>
+                            {% else %}
+                                {{ membership.team.name }}
+                            {% endif %}
+                            <span class="badge">{{ membership.get_state_display }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}
