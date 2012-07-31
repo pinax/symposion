@@ -194,6 +194,10 @@ ACCOUNT_LOGOUT_REDIRECT_URL = "home"
 ACCOUNT_USER_DISPLAY = lambda user: user.email
 
 AUTHENTICATION_BACKENDS = [
+    # Permissions Backends
+    "symposion.teams.backends.TeamPermissionsBackend",
+    
+    # Auth backends
     "account.auth_backends.EmailAuthenticationBackend",
 ]
 
