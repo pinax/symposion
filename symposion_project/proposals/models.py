@@ -38,18 +38,21 @@ class Proposal(ProposalBase):
     
     class Meta:
         abstract = True
+        permissions = [
+            ("can_review", "Can review")
+        ]
 
 
 class TalkProposal(Proposal):
-    class Meta:
+    class Meta(Proposal.Meta):
         verbose_name = "talk proposal"
 
 
 class TutorialProposal(Proposal):
-    class Meta:
+    class Meta(Proposal.Meta):
         verbose_name = "tutorial proposal"
 
 
 class PosterProposal(Proposal):
-    class Meta:
+    class Meta(Proposal.Meta):
         verbose_name = "poster proposal"
