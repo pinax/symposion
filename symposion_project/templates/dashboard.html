@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load proposal_tags %}
+{% load review_tags %}
 
 {% block head_title %}Dashboard{% endblock %}
 
@@ -134,25 +135,27 @@
             </div>
         </div>
         
+        {% user_reviews as user_reviews %}
         <div class="dashboard-panel-content">
             <h4>My Reviews</h4>
             <table class="table">
                 <thead>
+                    <td>Speaker Name</td>
                     <td>Proposal Title</td>
-                    <td>Score</td>
+                    <td>Your Review</td>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Title One</td>
-                        <td>+4</td>
-                    </tr>
-                    <tr>
-                        <td>Title Two</td>
-                        <td>-2</td>
-                    </tr>
+                    {% for review in user_reviews %}
+                        <tr>
+                            <td>{{ review.proposal.speaker }}</td>
+                            <td>{{ review.proposal.title }}</td>
+                            <td>{{ review.proposal.vote }}</td>
+                        </tr>
+                    {% endfor %}
                 </tbody>
             </table>
             
+            {% comment %}
             <h4>My Assignments</h4>
             <table class="table">
                 <thead>
@@ -170,6 +173,7 @@
                     </tr>
                 </tbody>
             </table>
+            {% endcomment %}
             
         </div>
     </div>
