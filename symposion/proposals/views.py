@@ -243,7 +243,7 @@ def proposal_leave(request, pk):
         proposal.additional_speakers.remove(speaker)
         # @@@ fire off email to submitter and other speakers
         messages.success(request, "You are no longer speaking on %s" % proposal.title)
-        return redirect("speaker_dashboard")
+        return redirect("dashboard")
     ctx = {
         "proposal": proposal,
     }
