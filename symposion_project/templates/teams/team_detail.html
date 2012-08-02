@@ -61,6 +61,10 @@
                 {% for membership in team.applicants %}
                     <tr>
                         <td>{{ membership.user.email }}</td>
+                        <td>
+                            <form style="margin: 0; float: left;" method="post" action="{% url team_accept membership.pk %}">{% csrf_token %}<button type="submit" class="btn btn-mini">accept</button></form>
+                            <form style="margin: 0; float: left;" method="post" action="{% url team_reject membership.pk %}">{% csrf_token %}<button type="submit" class="btn btn-mini">reject</button></form>
+                        </td>
                     </tr>
                 {% endfor %}
             </table>
