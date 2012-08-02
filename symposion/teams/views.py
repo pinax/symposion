@@ -48,7 +48,7 @@ def can_apply(team, user):
 def team_detail(request, slug):
     team = get_object_or_404(Team, slug=slug)
     state = team.get_state_for_user(request.user)
-    if team.access == "invitation" and state is None and request.user.is_staff:
+    if team.access == "invitation" and state is None and not request.user.is_staff:
         raise Http404()
     
     return render(request, "teams/team_detail.html", {
@@ -64,7 +64,7 @@ def team_detail(request, slug):
 def team_join(request, slug):
     team = get_object_or_404(Team, slug=slug)
     state = team.get_state_for_user(request.user)
-    if team.access == "invitation" and state is None and request.user.is_staff:
+    if team.access == "invitation" and state is None and not request.user.is_staff:
         raise Http404()
     
     if can_join(team, request.user) and request.method == "POST":
@@ -81,7 +81,7 @@ def team_join(request, slug):
 def team_leave(request, slug):
     team = get_object_or_404(Team, slug=slug)
     state = team.get_state_for_user(request.user)
-    if team.access == "invitation" and state is None and request.user.is_staff:
+    if team.access == "invitation" and state is None and not request.user.is_staff:
         raise Http404()
     
     if can_leave(team, request.user) and request.method == "POST":
@@ -97,7 +97,7 @@ def team_leave(request, slug):
 def team_apply(request, slug):
     team = get_object_or_404(Team, slug=slug)
     state = team.get_state_for_user(request.user)
-    if team.access == "invitation" and state is None and request.user.is_staff:
+    if team.access == "invitation" and state is None and not request.user.is_staff:
         raise Http404()
     
     if can_apply(team, request.user) and request.method == "POST":
