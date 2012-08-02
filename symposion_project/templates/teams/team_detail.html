@@ -34,7 +34,7 @@
             <table class="table table-striped">
                 {% for membership in team.managers %}
                     <tr>
-                        <td>{{ membership.user.email }}</td>
+                        <td>{{ membership.user.email }}{% if user == membership.user %} <span class="label label-info">you</span>{% endif %}</td>
                         <td>
                             <form style="margin: 0;" method="post" action="{% url team_demote membership.pk %}">{% csrf_token %}<button type="submit" class="btn btn-mini">demote</button></form>
                         </td>
@@ -47,7 +47,7 @@
             <table class="table table-striped">
                 {% for membership in team.members %}
                     <tr>
-                        <td>{{ membership.user.email }}</td>
+                        <td>{{ membership.user.email }}{% if user == membership.user %} <span class="label label-info">you</span>{% endif %}</td>
                         <td>
                             <form style="margin: 0;" method="post" action="{% url team_promote membership.pk %}">{% csrf_token %}<button type="submit" class="btn btn-mini">promote</button></form>
                         </td>
