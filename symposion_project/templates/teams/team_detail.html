@@ -5,4 +5,18 @@
 {% block body %}
     <h1>{{ team.name }}</h1>
     
+    {% if can_join %}
+        <form method="post" action="{% url team_join team.slug %}">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-primary" value="join">
+        </form>
+    {% endif %}
+    
+    {% if can_leave %}
+        <form method="post" action="{% url team_leave team.slug %}">
+            {% csrf_token %}
+            <input type="submit" class="btn" value="leave">
+        </form>
+    {% endif %}
+    
 {% endblock %}
