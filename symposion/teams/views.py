@@ -108,3 +108,29 @@ def team_apply(request, slug):
         return redirect("team_detail", slug=slug)
     else:
         return redirect("team_detail", slug=slug)
+
+
+@login_required
+def team_promote(request, pk):
+    if request.method == "POST":
+        membership = get_object_or_404(Membership, pk=pk)
+        state = membership.team.get_state_for_user(request.user)
+        if request.user.is_staff or state == "manager":
+            if membership.state == "member":
+                membership.state = "manager"
+                membership.save()
+                # contrib.message
+    return redirect("team_detail", slug=membership.team.slug)
+
+
+@login_required
+def team_demote(request, pk):
+    if request.method == "POST":
+        membership = get_object_or_404(Membership, pk=pk)
+        state = membership.team.get_state_for_user(request.user)
+        if request.user.is_staff or state == "manager":
+            if membership.state == "manager":
+                membership.state = "member"
+                membership.save()
+                # contrib.message
+    return redirect("team_detail", slug=membership.team.slug)
