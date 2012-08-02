@@ -148,11 +148,12 @@
             {% available_teams as available_teams %}
             {% if available_teams %}
                 <h4>Available Teams</h4>
-                <ul>
+                <dl>
                     {% for team in available_teams %}
-                        <li>{{ team }} <span class="label">{{ team.get_access_display }}</span></li>
+                        <dt><a href="{% url team_detail team.slug %}">{{ team }}</a> <span class="label">{{ team.get_access_display }}</span></dt>
+                        {% if team.description %}<dd>{{ team.description }}</dd>{% endif %}
                     {% endfor %}
-                </ul>
+                </dl>
             {% endif %}
         </div>
     </div>
