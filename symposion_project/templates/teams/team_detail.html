@@ -28,4 +28,27 @@
         </form>
     {% endif %}
     
+    {% if user.is_staff or state == "manager" %}
+        {% if team.members %}
+            <h2>Team Members</h2>
+            <table class="table table-striped">
+                {% for membership in team.members %}
+                    <tr>
+                        <td>{{ membership.user.email }}</td>
+                        <td>{{ membership.state }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+        {% if team.applicants and team.access == "application" %}
+            <h2>Applicants</h2>
+            <table class="table table-striped">
+                {% for membership in team.applicants %}
+                    <tr>
+                        <td>{{ membership.user.email }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+    {% endif %}
 {% endblock %}

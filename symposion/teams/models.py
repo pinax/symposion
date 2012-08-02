@@ -31,6 +31,18 @@ class Team(models.Model):
             return self.memberships.get(user=user).state
         except Membership.DoesNotExist:
             return None
+    
+    def applicants(self):
+        return self.memberships.filter(state="applied")
+    
+    def invitees(self):
+        return self.memberships.filter(state="invited")
+    
+    def members(self):
+        return self.memberships.filter(state="member")
+    
+    def managers(self):
+        return self.memberships.filter(state="manager")
 
 
 MEMBERSHIP_STATE_CHOICES = [
