@@ -27,6 +27,8 @@ class AvailableTeamsNode(template.Node):
                 teams.append(team)
             elif team.access == "open" and state is None:
                 teams.append(team)
+            elif request.user.is_staff and state is None:
+                teams.append(team)
         context[self.context_var] = teams
         return u""
 
