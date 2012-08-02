@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load proposal_tags %}
+{% load teams_tags %}
 
 {% block head_title %}Dashboard{% endblock %}
 
@@ -144,6 +145,10 @@
                     {% endfor %}
                 </ul>
             {% endif %}
+            {% available_teams as available_teams %}
+            {% for team in available_team %}
+                {{ team }}
+            {% endfor %}
         </div>
     </div>
 {% endblock %}

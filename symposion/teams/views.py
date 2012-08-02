@@ -11,6 +11,7 @@ def team_detail(request, slug):
     team = get_object_or_404(Team, slug=slug)
     if team.get_state_for_user(request.user) != "manager":
         raise Http404()
-
+    
     return render(request, "teams/team_detail.html", {
+        "team": team,
     })
