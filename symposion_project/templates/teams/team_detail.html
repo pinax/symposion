@@ -3,7 +3,9 @@
 {% block head_title %}{{ team.name }}{% endblock %}
 
 {% block body %}
-    <h1>{{ team.name }}</h1>
+    <h1>{{ team.name }}{% if state %} <span class="label">{{ state }}</span>{% endif %}</h1>
+    
+    {% if team.description %}<p>{{ team.description }}</p>{% endif %}
     
     {% if can_join %}
         <form method="post" action="{% url team_join team.slug %}">
@@ -20,7 +22,7 @@
     {% endif %}
     
     {% if can_apply %}
-        <form method="post" action="{% url team_apply team.slug %}">
+        <form method="post" action="{% url team_apply team.slug %}"> 
             {% csrf_token %}
             <input type="submit" class="btn btn-primary" value="apply">
         </form>
