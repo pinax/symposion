@@ -146,9 +146,14 @@
                 </ul>
             {% endif %}
             {% available_teams as available_teams %}
-            {% for team in available_team %}
-                {{ team }}
-            {% endfor %}
+            {% if available_teams %}
+                <h4>Available Teams</h4>
+                <ul>
+                    {% for team in available_teams %}
+                        <li>{{ team }} <span class="label">{{ team.get_access_display }}</span></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
         </div>
     </div>
 {% endblock %}

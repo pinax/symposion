@@ -22,7 +22,6 @@ class AvailableTeamsNode(template.Node):
         request = context["request"]
         teams = []
         for team in Team.objects.all():
-            print team
             state = team.get_state_for_user(request.user)
             if team.access == "open":
                 if state in [None, "invited"]:
