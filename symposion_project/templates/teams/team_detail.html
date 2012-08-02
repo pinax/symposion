@@ -19,4 +19,11 @@
         </form>
     {% endif %}
     
+    {% if can_apply %}
+        <form method="post" action="{% url team_apply team.slug %}">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-primary" value="apply">
+        </form>
+    {% endif %}
+    
 {% endblock %}

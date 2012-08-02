@@ -29,6 +29,14 @@ def can_leave(team, user):
         return False
 
 
+def can_apply(team, user):
+    state = team.get_state_for_user(user)
+    if team.access == "application" and state is None:
+        return True
+    else:
+        return False
+
+
 ## views
 
 
@@ -44,6 +52,7 @@ def team_detail(request, slug):
         "state": state,
         "can_join": can_join(team, request.user),
         "can_leave": can_leave(team, request.user),
+        "can_apply": can_apply(team, request.user),
     })
 
 
@@ -76,5 +85,22 @@ def team_leave(request, slug):
         membership.delete()
         # contrib.message
         return redirect("dashboard")
+    else:
+        return redirect("team_detail", slug=slug)
+
+
+@login_required
+def team_apply(request, slug):
+    team = get_object_or_404(Team, slug=slug)
+    state = team.get_state_for_user(request.user)
+    if team.access == "invitation" and state is None:
+        raise Http404()
+    
+    if can_apply(team, request.user) and request.method == "POST":
+        membership, created = Membership.objects.get_or_create(team=team, user=request.user)
+        membership.state = "applied"
+        membership.save()
+        # contrib.message
+        return redirect("team_detail", slug=slug)
     else:
         return redirect("team_detail", slug=slug)
