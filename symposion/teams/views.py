@@ -2,6 +2,7 @@ from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 
 from symposion.teams.forms import TeamInvitationForm
 from symposion.teams.models import Team, Membership
@@ -64,7 +65,7 @@ def team_detail(request, slug):
             form = TeamInvitationForm(request.POST, team=team)
             if form.is_valid():
                 form.invite()
-                # contrib.message
+                messages.success(request, "Invitation created.")
                 return redirect("team_detail", slug=slug)
         else:
             form = TeamInvitationForm(team=team)
@@ -92,7 +93,7 @@ def team_join(request, slug):
         membership, created = Membership.objects.get_or_create(team=team, user=request.user)
         membership.state = "member"
         membership.save()
-        # contrib.message
+        messages.success(request, "Joined team.")
         return redirect("team_detail", slug=slug)
     else:
         return redirect("team_detail", slug=slug)
@@ -108,7 +109,7 @@ def team_leave(request, slug):
     if can_leave(team, request.user) and request.method == "POST":
         membership = Membership.objects.get(team=team, user=request.user)
         membership.delete()
-        # contrib.message
+        messages.success(request, "Left team.")
         return redirect("dashboard")
     else:
         return redirect("team_detail", slug=slug)
@@ -125,7 +126,7 @@ def team_apply(request, slug):
         membership, created = Membership.objects.get_or_create(team=team, user=request.user)
         membership.state = "applied"
         membership.save()
-        # contrib.message
+        messages.success(request, "Applied to join team.")
         return redirect("team_detail", slug=slug)
     else:
         return redirect("team_detail", slug=slug)
@@ -140,7 +141,7 @@ def team_promote(request, pk):
             if membership.state == "member":
                 membership.state = "manager"
                 membership.save()
-                # contrib.message
+                messages.success(request, "Promoted to manager.")
     return redirect("team_detail", slug=membership.team.slug)
 
 
@@ -153,7 +154,7 @@ def team_demote(request, pk):
             if membership.state == "manager":
                 membership.state = "member"
                 membership.save()
-                # contrib.message
+                messages.success(request, "Demoted from manager.")
     return redirect("team_detail", slug=membership.team.slug)
 
 
@@ -166,7 +167,7 @@ def team_accept(request, pk):
             if membership.state == "applied":
                 membership.state = "member"
                 membership.save()
-                # contrib.message
+                messages.success(request, "Accepted application.")
     return redirect("team_detail", slug=membership.team.slug)
 
 
@@ -179,5 +180,5 @@ def team_reject(request, pk):
             if membership.state == "applied":
                 membership.state = "rejected"
                 membership.save()
-                # contrib.message
+                messages.success(request, "Rejected application.")
     return redirect("team_detail", slug=membership.team.slug)
