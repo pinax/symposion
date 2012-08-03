@@ -34,6 +34,8 @@
             
             {% if team.description %}<p>{{ team.description }}</p>{% endif %}
             
+            {% if state == "invited" %}<p>You have been invited to join this team. Click <b>join</b> to the right to accept.</p>{% endif %}
+            
             {% if user.is_staff or state == "manager" %}
                 {% if team.managers %}
                     <h2>Managers</h2>
