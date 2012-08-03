@@ -13,10 +13,9 @@ from symposion.teams.models import Team, Membership
 
 def can_join(team, user):
     state = team.get_state_for_user(user)
-
     if team.access == "open" and state is None:
         return True
-    elif team.access == "invitation" and state is "invited":
+    elif state == "invited":
         return True
     elif user.is_staff and state is None:
         return True
