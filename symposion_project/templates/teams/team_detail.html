@@ -1,5 +1,7 @@
 {% extends "site_base.html" %}
 
+{% load bootstrap_tags %}
+
 {% block head_title %}{{ team.name }}{% endblock %}
 
 {% block body %}
@@ -68,6 +70,26 @@
                     </tr>
                 {% endfor %}
             </table>
+        {% endif %}
+        {% if team.invitees %}
+            <h2>Invitees</h2>
+            <table class="table table-striped">
+                {% for membership in team.invitees %}
+                    <tr>
+                        <td>{{ membership.user.email }}</td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+        {% if invite_form %}
+            <form method="POST" action="" class="form-horizontal">
+                {% csrf_token %}
+                <legend>Invite User to Team</legend>
+                {{ invite_form|as_bootstrap }}
+                <div class="form-actions">
+                    <input class="btn btn-primary" type="submit" value="Invite" />
+                </div>
+            </form>
         {% endif %}
     {% endif %}
 {% endblock %}

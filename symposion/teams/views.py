@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 
 from django.contrib.auth.decorators import login_required
 
+from symposion.teams.forms import TeamInvitationForm
 from symposion.teams.models import Team, Membership
 
 
@@ -41,6 +42,14 @@ def can_apply(team, user):
         return False
 
 
+def can_invite(team, user):
+    state = team.get_state_for_user(user)
+    if team.access == "invitation":
+        if state == "manager" or user.is_staff:
+            return True
+    return False
+
+
 ## views
 
 
@@ -51,9 +60,22 @@ def team_detail(request, slug):
     if team.access == "invitation" and state is None and not request.user.is_staff:
         raise Http404()
     
+    if can_invite(team, request.user):
+        if request.method == "POST":
+            form = TeamInvitationForm(request.POST, team=team)
+            if form.is_valid():
+                form.invite()
+                # contrib.message
+                return redirect("team_detail", slug=slug)
+        else:
+            form = TeamInvitationForm(team=team)
+    else:
+        form = None
+    
     return render(request, "teams/team_detail.html", {
         "team": team,
         "state": state,
+        "invite_form": form,
         "can_join": can_join(team, request.user),
         "can_leave": can_leave(team, request.user),
         "can_apply": can_apply(team, request.user),
