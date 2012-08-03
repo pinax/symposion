@@ -23,9 +23,7 @@ class AvailableTeamsNode(template.Node):
         teams = []
         for team in Team.objects.all():
             state = team.get_state_for_user(request.user)
-            if state == "invited":
-                teams.append(team)
-            elif team.access == "open" and state is None:
+            if team.access == "open" and state is None:
                 teams.append(team)
             elif request.user.is_staff and state is None:
                 teams.append(team)
