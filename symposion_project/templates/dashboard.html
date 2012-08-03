@@ -132,30 +132,42 @@
         <div class="dashboard-panel-content">
             {% if user.memberships.exists %}
                 <h4>Your Teams</h4>
-                <dl>
+                <table class="table table-striped">
                     {% for membership in user.memberships.all %}
-                        <dt>
-                            <a href="{% url team_detail membership.team.slug %}">{{ membership.team.name }}</a>
-                            <span class="label">{{ membership.get_state_display }}</span>
-                            {% if membership.state == "manager" or user.is_staff %}
-                                {% if membership.team.applicants %}{{ membership.team.applicants.count }} applicant{{ membership.team.applicants.count|pluralize }}{% endif %}
-                            {% endif %}
-                        </dt>
+                        <tr>
+                            <td>
+                                <a href="{% url team_detail membership.team.slug %}">{{ membership.team.name }}</a>
+                                {% if membership.team.description %}<br>{{ membership.team.description }}{% endif %}
+                            </td>
+                            <td>
+                                <span class="label">{{ membership.get_state_display }}</span>
+                            </td>
+                            <td>
+                                {% if membership.state == "manager" or user.is_staff %}
+                                    {% if membership.team.applicants %}{{ membership.team.applicants.count }} applicant{{ membership.team.applicants.count|pluralize }}{% endif %}
+                                {% endif %}
+                            </td>
+                        </tr>
                     {% endfor %}
-                </dl>
+                </table>
             {% endif %}
             {% available_teams as available_teams %}
             {% if available_teams %}
                 <h4>Available Teams</h4>
-                <dl>
+                <table class="table table-striped">
                     {% for team in available_teams %}
-                        <dt>
-                            <a href="{% url team_detail team.slug %}">{{ team }}</a>
-                            <span class="label">{{ team.get_access_display }}</span>
-                        </dt>
-                        {% if team.description %}<dd>{{ team.description }}</dd>{% endif %}
+                        <tr>
+                            <td>
+                                <a href="{% url team_detail team.slug %}">{{ team }}</a>
+                                {% if team.description %}<br>{{ team.description }}{% endif %}
+                            </td>
+                            <td>
+                                <span class="label">{{ team.get_access_display }}</span>
+                            </td>
+                        </tr>
+
                     {% endfor %}
-                </dl>
+                </table>
             {% endif %}
         </div>
     </div>
