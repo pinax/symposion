@@ -140,7 +140,7 @@
                                 {% if membership.team.description %}<br>{{ membership.team.description }}{% endif %}
                             </td>
                             <td>
-                                <span class="label">{{ membership.get_state_display }}</span>
+                                <span class="label{% if membership.state == 'invited' %} label-info{% endif %}">{{ membership.get_state_display }}</span>
                             </td>
                             <td>
                                 {% if membership.state == "manager" or user.is_staff %}
