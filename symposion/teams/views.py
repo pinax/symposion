@@ -36,8 +36,6 @@ def can_apply(team, user):
     state = team.get_state_for_user(user)
     if team.access == "application" and state is None:
         return True
-    elif user.is_staff and state is None:
-        return True
     else:
         return False
 
