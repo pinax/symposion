@@ -6,5 +6,12 @@
             "domain": "localhost",
             "name": "SymposionCon"
         }
+    },
+    {
+        "pk": 1,
+        "model": "conference.conference",
+        "fields": {
+            "title": "SymposionCon"
+        }
     }
 ]
