@@ -1,58 +1,69 @@
 {% extends "site_base.html" %}
 
+{% load i18n %}
+
 {% block head_title %}{{ proposal.title }}{% endblock %}
 
 {% block body %}
-    <h1>{{ proposal.title }}</h1>
-    
-    <p>
+    <div class="pull-right">
         {% if not proposal.cancelled %}
             {% if request.user == proposal.speaker.user %}
-                <a href="{% url proposal_edit proposal.pk %}">Edit</a>
-                | <a href="{% url proposal_cancel proposal.pk %}">Cancel Talk</a>
+                <a href="{% url proposal_edit proposal.pk %}" class="btn">
+                    {% trans "Edit this proposal" %}
+                </a>
+                <a href="{% url proposal_cancel proposal.pk %}" class="btn">
+                    {% trans "Cancel this proposal" %}
+                </a>
             {% else %}
-                <a href="{% url proposal_leave proposal.pk %}">Leave</a>
+                <a href="{% url proposal_leave proposal.pk %}" class="btn">
+                    {% trans "Remove me from this proposal" %}
+                </a>
             {% endif %}
         {% else %}
             Cancelled
         {% endif %}
-    </p>
-    
-    <div>
-        {{ proposal.description }}
     </div>
+    <h2>{{ proposal.title }}</h2>
     
-    <p><b>Type</b>: {{ proposal.kind.name }}</p>
-    
-    <div>
-        {{ proposal.abstract|safe }}
-    </div>
-    
-    <p><b>Audience level</b>: {{ proposal.get_audience_level_display }}</p>
-    
-    <p><b>Submitting speaker</b>: {{ proposal.speaker }}</p>
-    
-    {% if proposal.additional_speakers.all %}
-        <p><b>Additional speakers</b>:</p>
-        <ul>
-        {% for speaker in proposal.additional_speakers.all %}
-            {% if speaker.user %}
-                <li><b>{{ speaker.name }}</b> &mdash; {{ speaker.email }}</li>
-            {% else %}
-                <li>{{ speaker.email }} &mdash; pending invitation</li>
-            {% endif %}
-        {% endfor %}
-        </ul>
-    {% endif %}
+    <dl>
+        <dt>{% trans "Submitted by" %}</dt>
+        <dd>{{ proposal.speaker }}</dd>
+        
+        {% if proposal.additional_speakers.all %}
+            <dt>{% trans "Additional Speakers" %}</dt>
+            <dd>
+                {% for speaker in proposal.additional_speakers.all %}
+                    <li>
+                        {% if speaker.user %}
+                            <strong>{{ speaker.name }}</strong> &gt;{{ speaker.email }}&lt;
+                        {% else %}
+                            {{ speaker.email }} ({% trans "Invitation Sent" %})
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </dd>
+        {% endif %}
+        
+        <dt>{% trans "Description" %}</dt>
+        <dd>{{ proposal.description }}</dd>
+        
+        <dt>{% trans "Type" %}</dt>
+        <dd>{{ proposal.kind.name }}</dd>
+        
+        <dt>{% trans "Audience Level" %}</dt>
+        <dd>{{ proposal.get_audience_level_display }}</dd>
+        
+        <dt>{% trans "Abstract" %}</dt>
+        <dd>{{ proposal.abstract|safe }}</dd>
+        
+        {% if request.user == proposal.speaker.user %}
+            <dt>{% trans "Private Notes" %}</dt>
+            <dd>{{ proposal.additional_notes }}</dd>
+        {% endif %}
+    </dl>
     
     {% if request.user == proposal.speaker.user %}
-        <p><b>Additional Notes:</b></p>
-    
-        <p>{{ proposal.additional_notes }}</p>
-    {% endif %}
-    
-    {% if request.user == proposal.speaker.user %}
-        <h2>Supporting Documents</h2>
+        <h3>Supporting Documents</h3>
         
         {% if proposal.supporting_documents.exists %}
             <table class="table table-striped">
@@ -71,6 +82,6 @@
         {% else %}
             <p>No supporting documents attached to this proposal.</p>
         {% endif %}
-        <a class="btn btn-small{% if proposal.cancelled %} btn-disabled{% endif %}" href="{% url proposal_document_create proposal.pk %}"><i class="icon-plus"></i> add document</a>
+        <a class="btn btn-small{% if proposal.cancelled %} btn-disabled{% endif %}" href="{% url proposal_document_create proposal.pk %}"><i class="icon-upload"></i> Add Document</a>
     {% endif %}
 {% endblock %}
