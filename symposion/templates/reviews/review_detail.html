@@ -109,23 +109,7 @@
                 {% markitup_media "no-jquery" %}
             </div>
             <div class="tab-pane" id="proposal-feedback">
-                <form action="" method="POST"accept-charset="utf-8">
-                    <legend>{% trans "Send a message" %}</legend>
-                    <p>
-                        {% blocktrans %}
-                            If you'd like to communicate with the submitter, use the following form and he or she will be
-                            notified and given the opportunity to respond.
-                        {% endblocktrans %}
-                    </p>
-                    {% csrf_token %}
-                    {{ message_form|as_bootstrap }}
-                    <div class="form-actions">
-                        <input type="submit" class="btn btn-primary" name="message_submit" value="Send Message" />
-                    </div>
-                </form>
                 {% if review_messages %}
-                    <hr />
-                    
                     <h3>{% trans "Conversation with the submitter" %}</h3>
                     {% for message in review_messages %}
                         <div class="comment-box">
@@ -140,7 +124,23 @@
                             </div>
                         </div>
                     {% endfor %}
+                    <hr />
                 {% endif %}
+                
+                <form action="" method="POST"accept-charset="utf-8">
+                    <legend>{% trans "Send a message" %}</legend>
+                    <p>
+                        {% blocktrans %}
+                            If you'd like to communicate with the submitter, use the following form and he or she will be
+                            notified and given the opportunity to respond.
+                        {% endblocktrans %}
+                    </p>
+                    {% csrf_token %}
+                    {{ message_form|as_bootstrap }}
+                    <div class="form-actions">
+                        <input type="submit" class="btn btn-primary" name="message_submit" value="Send Message" />
+                    </div>
+                </form>
             </div>
         </div>
     </div>
