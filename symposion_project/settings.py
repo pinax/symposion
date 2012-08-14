@@ -161,6 +161,7 @@ INSTALLED_APPS = [
     "account",
     
     # symposion
+    "symposion",
     "symposion.sponsorship",
     "symposion.conference",
     "symposion.cms",
