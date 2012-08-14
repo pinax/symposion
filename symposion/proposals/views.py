@@ -59,6 +59,9 @@ def proposal_submit_kind(request, kind_slug):
         except ObjectDoesNotExist:
             return redirect("dashboard")
     
+    if not kind.section.proposalsection.is_available():
+        return redirect("proposal_submit")
+    
     form_class = get_form(settings.PROPOSAL_FORMS[kind_slug])
     
     if request.method == "POST":

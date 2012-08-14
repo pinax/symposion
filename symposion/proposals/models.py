@@ -44,6 +44,16 @@ class ProposalSection(models.Model):
             Q(closed=False) | Q(closed=None),
         )
     
+    def is_available(self):
+        if self.closed:
+            return False
+        now = datetime.datetime.now()
+        if self.start and self.start > now:
+            return False
+        if self.end and self.end < now:
+            return False
+        return True
+    
     def __unicode__(self):
         return self.section.name
 
