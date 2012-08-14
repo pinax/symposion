@@ -1,0 +1,8 @@
+<p>{{ proposal.speaker.name }} attached you as an additional speaker to a
+    talk proposal for {{ current_site.name }} entitled "{{ proposal.title }}".</p>
+
+<p>Go to</p>
+
+<p><a href="http://{{ current_site }}{% url speaker_create_token token %}">http://{{ current_site }}{% url speaker_create_token token %}</a></p>
+
+<p>to confirm and fill out your speaker profile.</p>

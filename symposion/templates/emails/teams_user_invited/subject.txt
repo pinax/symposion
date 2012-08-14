@@ -1,0 +1,1 @@
+{% load i18n %}{% blocktrans %}You have been invited to join "{{ team }}"{% endblocktrans %}

@@ -1,0 +1,23 @@
+{% extends "speakers/base.html" %}
+
+{% load bootstrap_tags %}
+{% load i18n %}
+{% load boxes_tags %}
+
+{% block page_title %}{% trans "Edit Speaker Profile" %}{% endblock %}
+
+{% block body %}
+    {% box "speaker-profile" %}
+
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <legend>{% trans "Edit Speaker Profile" %}</legend>
+        <fieldset>
+            {{ form|as_bootstrap }}
+        </fieldset>
+        <div class="form-actions">
+            <input class="btn btn-primary" type="submit" value="Save" />
+            <a class="btn" href="{% url dashboard %}">Cancel</a>
+        </div>
+    </form>
+{% endblock %}

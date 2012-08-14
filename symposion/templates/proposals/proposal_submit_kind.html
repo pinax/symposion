@@ -1,0 +1,27 @@
+{% extends "proposals/base.html" %}
+
+{% load bootstrap_tags %}
+{% load boxes_tags %}
+{% load markitup_tags %}
+{% load i18n %}
+
+{% block page_title %}Submit a Proposal for a {{ kind.name }}{% endblock %}
+
+{% block body %}
+    {% box "example_proposal" %}
+
+    <form method="POST" action="" enctype="multipart/form-data" class="form-horizontal">
+        {% csrf_token %}
+        <fieldset>
+            {{ form|as_bootstrap }}
+        </fieldset>
+        <div class="form-actions">
+            <p>
+                You will be able to edit your proposal after it has been submitted. The program committee may ask questions, provide feedback, and even suggest changes to your proposal as part of the review processes.
+            </p>
+            <input class="btn btn-primary" type="submit" name="finish" value="Save" />
+            <!-- <span style="float: right; padding: 4px 6px">or</span> -->
+            <input class="btn" type="submit" name="add-speakers" value="Save and Add Additional Speakers" />
+        </div>
+    </form>
+{% endblock %}

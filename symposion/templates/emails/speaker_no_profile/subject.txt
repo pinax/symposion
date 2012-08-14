@@ -1,0 +1,1 @@
+{{ proposal.speaker.name }} has invited you to join as a speaker on {{ proposal.title }}

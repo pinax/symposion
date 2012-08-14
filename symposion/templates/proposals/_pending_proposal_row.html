@@ -1,0 +1,38 @@
+<tr>
+    <td>
+        <a href="{% url proposal_detail proposal.pk %}">{{ proposal.title }}</a>
+    </td>
+    
+    <td>{{ proposal.kind.name }}</td>
+    
+    <td>
+        {% if proposal.cancelled %}
+            <span class="label label-important">Cancelled</span>
+        {% else %}
+            {% if request.user == proposal.speaker.user %}
+                {% if proposal.result.accepted %}
+                    <span class="label label-success">Accepted</span>
+                {% else %}
+                    <span class="label">Submitted</span>
+                {% endif %}
+            {% else %}
+                <span class="label">Invited</span>
+            {% endif %}
+        {% endif %}
+    </td>
+        
+    <td>
+        {% if not proposal.cancelled %}
+            <div class="btn-group">
+                <a class="btn btn-mini dropdown-toggle" data-toggle="dropdown" href="#">
+                Choose Response
+                <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="{% url proposal_pending_join proposal.id %}">Accept invitation</a></li>
+                    <li><a href="{% url proposal_pending_decline proposal.id %}">Decline invitation</a></li>
+                </ul>
+            </div>
+        {% endif %}
+    </td>
+</tr>

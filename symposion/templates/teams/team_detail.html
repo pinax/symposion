@@ -1,0 +1,103 @@
+{% extends "site_base.html" %}
+
+{% load bootstrap_tags %}
+
+{% block head_title %}{{ team.name }}{% endblock %}
+
+{% block body_outer %}
+    <div class="row">
+        <div class="span12">
+            <div class="pull-right">
+            {% if can_join %}
+                <form method="post" action="{% url team_join team.slug %}">
+                    {% csrf_token %}
+                    <input type="submit" class="btn btn-primary" value="join">
+                </form>
+            {% endif %}
+            
+            {% if can_leave %}
+                <form method="post" action="{% url team_leave team.slug %}">
+                    {% csrf_token %}
+                    <input type="submit" class="btn" value="leave">
+                </form>
+            {% endif %}
+            
+            {% if can_apply %}
+                <form method="post" action="{% url team_apply team.slug %}"> 
+                    {% csrf_token %}
+                    <input type="submit" class="btn btn-primary" value="apply">
+                </form>
+            {% endif %}
+            </div>
+            
+            <h1>{{ team.name }}{% if state %} <span class="label">{{ state }}</span>{% endif %}</h1>
+            
+            {% if team.description %}<p>{{ team.description }}</p>{% endif %}
+            
+            {% if state == "invited" %}<p>You have been invited to join this team. Click <b>join</b> to the right to accept.</p>{% endif %}
+            
+            {% if user.is_staff or state == "manager" %}
+                {% if team.managers %}
+                    <h2>Managers</h2>
+                    <table class="table table-striped">
+                        {% for membership in team.managers %}
+                            <tr>
+                                <td>{{ membership.user.email }}{% if user == membership.user %} <span class="label label-info">you</span>{% endif %}</td>
+                                <td>
+                                    <form style="margin: 0;" method="post" action="{% url team_demote membership.pk %}">{% csrf_token %}<button type="submit" class="btn btn-mini">demote</button></form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% endif %}
+                {% if team.members %}
+                    <h2>Team Members</h2>
+                    <table class="table table-striped">
+                        {% for membership in team.members %}
+                            <tr>
+                                <td>{{ membership.user.email }}{% if user == membership.user %} <span class="label label-info">you</span>{% endif %}</td>
+                                <td>
+                                    <form style="margin: 0;" method="post" action="{% url team_promote membership.pk %}">{% csrf_token %}<button type="submit" class="btn btn-mini">promote</button></form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% endif %}
+                {% if team.applicants and team.access == "application" %}
+                    <h2>Applicants</h2>
+                    <table class="table table-striped">
+                        {% for membership in team.applicants %}
+                            <tr>
+                                <td>{{ membership.user.email }}</td>
+                                <td>
+                                    <form style="margin: 0; float: left;" method="post" action="{% url team_accept membership.pk %}">{% csrf_token %}<button type="submit" class="btn btn-mini">accept</button></form>
+                                    <form style="margin: 0; float: left;" method="post" action="{% url team_reject membership.pk %}">{% csrf_token %}<button type="submit" class="btn btn-mini">reject</button></form>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% endif %}
+                {% if team.invitees %}
+                    <h2>Invitees</h2>
+                    <table class="table table-striped">
+                        {% for membership in team.invitees %}
+                            <tr>
+                                <td>{{ membership.user.email }}</td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                {% endif %}
+                {% if invite_form %}
+                    <form method="POST" action="" class="form-horizontal">
+                        {% csrf_token %}
+                        <legend>Invite User to Team</legend>
+                        {{ invite_form|as_bootstrap }}
+                        <div class="form-actions">
+                            <input class="btn btn-primary" type="submit" value="Invite" />
+                        </div>
+                    </form>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

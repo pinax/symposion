@@ -1,0 +1,35 @@
+{% load i18n %}
+
+<table class="table table-striped table-bordered table-reviews">
+    <thead>
+        <th>#</th>
+        <th>{% trans "Speaker / Title" %}</th>
+        <th>{% trans "Category" %}</th>
+        <th><i class="icon-comment-alt"></i></th>
+        <th>{% trans "+1" %}</th>
+        <th>{% trans "+0" %}</th>
+        <th>{% trans "-0" %}</th>
+        <th>{% trans "-1" %}</th>
+    </thead>
+    
+    <tbody>
+        {% for proposal in proposals %}
+            <tr>
+                <td>{{ proposal.number }}</td>
+                <td>
+                    <a href="{% url review_detail proposal.pk %}">
+                        <small><strong>{{ proposal.speaker }}</strong></small>
+                        <br />
+                        {{ proposal.title }}
+                    </a>
+                </td>
+                <td>{{ proposal.track }}</td>
+                <td>{{ proposal.comment_count }}</td>
+                <td>{{ proposal.plus_one }}</td>
+                <td>{{ proposal.plus_zero }}</td>
+                <td>{{ proposal.minus_zero }}</td>
+                <td>{{ proposal.minus_one }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

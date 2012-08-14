@@ -1,0 +1,56 @@
+{% extends "reviews/base.html" %}
+
+{% block body %}
+    <h1>Reviewers</h1>
+    
+    <table class="table table-striped">
+        <tr>
+            <th>
+                Reviewer
+            </th>
+            <th>
+                Proposals<br/>Reviewed
+            </td>
+            <th>
+                Comments
+            </th>
+            <th>
+                +1
+            </th>
+            <th>
+                +0
+            </th>
+            <th>
+                &minus;0
+            </th>
+            <th>
+                &minus;1
+            </th>
+        </tr>
+        {% for reviewer in reviewers %}
+        <tr>
+            <td>
+                <a href="{% url review_list_user section_slug reviewer.pk %}">{{ reviewer.get_full_name }}</a>
+            </td>
+            <td>
+                {{ reviewer.total_votes }}
+            </td>
+            <td>
+                {{ reviewer.comment_count }}
+            </td>
+            <td>
+                {{ reviewer.plus_one }}
+            </td>
+            <td>
+                {{ reviewer.plus_zero }}
+            </td>
+            <td>
+                {{ reviewer.minus_zero }}
+            </td>
+            <td>
+                {{ reviewer.minus_one }}
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

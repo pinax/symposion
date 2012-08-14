@@ -1,0 +1,1 @@
+{% load i18n account_tags %}{% user_display user as username %}{% blocktrans %}{{ username}} has applied to to join "{{ team }}"{% endblocktrans %}

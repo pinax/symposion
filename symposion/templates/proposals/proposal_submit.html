@@ -1,0 +1,22 @@
+{% extends "proposals/base.html" %}
+
+{% load boxes_tags %}
+{% load i18n %}
+
+{% block page_title %}{% trans "Submit A Proposal" %}{% endblock %}
+
+{% block body %}
+    {% box "proposal_submit" %}
+    
+    {% if kinds %}
+        <p>Select what kind of proposal you'd like to submit:</p>
+    
+        <ul>
+            {% for kind in kinds %}
+                <li><a href="{% url proposal_submit_kind kind.slug %}">{{ kind }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Proposals are not currently open for submission.</p>
+    {% endif %}
+{% endblock %}

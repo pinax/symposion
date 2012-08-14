@@ -1,0 +1,32 @@
+{% load markitup_tags %}
+{% load i18n %}
+
+{% if form %}
+    <div id="edit_{{ label }}" class="modal fade hide">
+        <form id="edit_form_{{ label }}" accept-charset="UTF-8" class="modal-form" method="POST" action="{{ form_action }}?next={{ request.path }}">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h3>{% trans "Editing content:" %} {{ label }}</h3>
+            </div>
+            <div class="modal-body">
+                {% csrf_token %}
+                {{ form.content }}
+
+                {% markitup_editor form.content.auto_id %}
+                
+            </div>
+            <div class="modal-footer">
+                 <div class="pull-left">Content is processed using <a href="http://daringfireball.net/projects/markdown/syntax" target="_blank">Markdown</a></div>
+                <a href="#" class="btn" data-dismiss="modal">Close</a>
+                <button type="submit" class="btn btn-primary">Save changes</a>
+            </div>
+        </form>
+    </div>
+{% endif %}
+
+<div id="content_{{ label }}" class="content-box {% if form %}editable{% endif %}">
+    {% if form %}
+        <a href="#edit_{{ label }}" data-toggle="modal" class="btn edit-toggle"><i class="icon-pencil"></i> Edit this content</a>
+    {% endif %}
+    {{ box.content|safe }}
+</div>

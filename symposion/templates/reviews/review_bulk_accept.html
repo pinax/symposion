@@ -1,0 +1,17 @@
+{% extends "reviews/base.html" %}
+
+{% load uni_form_tags %}
+
+{% block body %}
+
+    <h1>Bulk Accept</h1>
+    <form action="" method="POST" class="uniForm" accept-charset="utf-8">
+        {% csrf_token %}
+        <fieldset>
+            {{ form|as_uni_form }}
+            <div class="form_block">
+                <input type="submit" name="submit" value="submit" />
+            </div>
+        </fieldset>
+    </form>
+{% endblock %}

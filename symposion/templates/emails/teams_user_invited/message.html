@@ -1,0 +1,12 @@
+{% load i18n account_tags %}
+
+{% blocktrans with team_name=team team_url=team.get_absolute_url site_name=current_site.name site_url=current_site %}
+    <p>
+        You have been invited to join <b>{{ team_name }}</b> on {{ site_name }}.
+    </p>
+
+    <p>
+        To accept this invitation, visit the following url:
+        <a href="http://{{ site_url }}{{ team_url }}">http://{{ site_url }}{{ team_url }}</a>
+    </p>
+{% endblocktrans %}
