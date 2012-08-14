@@ -13,7 +13,7 @@
             {% for speaker in proposal.additional_speakers.all %}
                 <li>
                     {% if speaker.user %}
-                        <strong>{{ speaker.name }}</strong> &gt;{{ speaker.email }}&lt;
+                        <strong>{{ speaker.name }}</strong> &lt;{{ speaker.email }}&gt;
                     {% else %}
                         {{ speaker.email }} ({% trans "Invitation Sent" %})
                     {% endif %}
