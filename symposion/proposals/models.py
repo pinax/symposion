@@ -33,7 +33,7 @@ class ProposalSection(models.Model):
     start = models.DateTimeField(null=True, blank=True)
     end = models.DateTimeField(null=True, blank=True)
     closed = models.NullBooleanField()
-    published = models.NullBooleanField()  # @@@ what is this used for?
+    published = models.NullBooleanField()
     
     @classmethod
     def available(cls):
