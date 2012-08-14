@@ -14,6 +14,9 @@ import symposion.forms
 class SignupView(account.views.SignupView):
     
     form_class = symposion.forms.SignupForm
+    form_kwargs = {
+        "prefix": "signup",
+    }
     
     def create_user(self, form, commit=True):
         user_kwargs = {
@@ -40,6 +43,9 @@ class SignupView(account.views.SignupView):
 class LoginView(account.views.LoginView):
 
     form_class = account.forms.LoginEmailForm
+    form_kwargs = {
+        "prefix": "login",
+    }
 
 
 @login_required
