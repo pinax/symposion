@@ -4,6 +4,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 
+from symposion.utils.mail import send_email
+
 from symposion.teams.forms import TeamInvitationForm
 from symposion.teams.models import Team, Membership
 
@@ -63,6 +65,7 @@ def team_detail(request, slug):
             form = TeamInvitationForm(request.POST, team=team)
             if form.is_valid():
                 form.invite()
+                send_email([form.user.email], "teams_user_invited", context={"team": team})
                 messages.success(request, "Invitation created.")
                 return redirect("team_detail", slug=slug)
         else:
@@ -124,6 +127,11 @@ def team_apply(request, slug):
         membership, created = Membership.objects.get_or_create(team=team, user=request.user)
         membership.state = "applied"
         membership.save()
+        managers = [m.user.email for m in team.managers()]
+        send_email(managers, "teams_user_applied", context={
+            "team": team,
+            "user": request.user
+        })
         messages.success(request, "Applied to join team.")
         return redirect("team_detail", slug=slug)
     else:
