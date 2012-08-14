@@ -71,6 +71,7 @@ def review_section(request, section_slug, assigned=False):
     
     ctx = {
         "proposals": proposals,
+        "section": section,
     }
     
     return render(request, "reviews/review_list.html", ctx)
