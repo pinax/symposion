@@ -1,2 +1,2 @@
 include README LICENSE
-recursive-include symposion/templates *.html
+recursive-include symposion/templates *.html *.txt
