@@ -34,4 +34,24 @@
     <dt>{% trans "Audience Level" %}</dt>
     <dd>{{ proposal.get_audience_level_display }}&nbsp;</dd>
     
+    <dt>{% trans "Documents" %}</dt>
+    <dd>
+        {% if proposal.supporting_documents.exists %}
+            <table class="table table-striped">
+                {% for document in proposal.supporting_documents.all %}
+                    <tr>
+                        <td><a href="{{ document.download_url }}">{{ document.description }}</a></td>
+                        <td>
+                        <form style="margin: 0;" method="post" action="{% url proposal_document_delete document.pk %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-mini">delete</button>
+                        </form>
+                    </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            No supporting documents attached to this proposal.
+        {% endif %}
+    </dd>
 </dl>
