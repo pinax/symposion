@@ -65,7 +65,7 @@
                     </a>
                     <div class="nav-collapse">
                         {% block nav %}
-                            {% sitetree_menu from "main" include "trunk" %}
+                            {% sitetree_menu from "main" include "trunk" template "sitetree/menu_bootstrap.html" %}
                         {% endblock %}
                     </div>
                 {% endblock %}
