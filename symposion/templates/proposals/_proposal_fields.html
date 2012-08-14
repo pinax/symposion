@@ -34,8 +34,4 @@
     <dt>{% trans "Audience Level" %}</dt>
     <dd>{{ proposal.get_audience_level_display }}&nbsp;</dd>
     
-    {% if request.user == proposal.speaker.user %}
-        <dt>{% trans "Private Notes" %}</dt>
-        <dd>{{ proposal.additional_notes }}&nbsp;</dd>
-    {% endif %}
 </dl>
