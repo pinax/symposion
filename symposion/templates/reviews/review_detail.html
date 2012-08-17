@@ -94,12 +94,8 @@
                                 <span>{{ review.vote }}</span>
                             </div>
                             <div class="review-content">
-                                <b>
-                                    {% if review.user.speaker_profile %}
-                                        {{ review.user.speaker_profile }}
-                                    {% else %}
-                                        {% user_display review.user %}
-                                    {% endif %}</b> {{ review.submitted_at|timesince }} ago <br />
+                                <b>{% user_display review.user %}</b>
+                                {{ review.submitted_at|timesince }} ago <br />
                                 {{ review.comment|safe }}
                             </div>
                         </div>
@@ -114,12 +110,8 @@
                     {% for message in review_messages %}
                         <div class="comment-box">
                             <div class="commment-content">
-                                <b>
-                                    {% if message.user.speaker_profile %}
-                                        {{ message.user.speaker_profile }}
-                                    {% else %}
-                                        {% user_display message.user %}
-                                    {% endif %}</b> {{ message.submitted_at|timesince }} ago <br />
+                                <b>{% user_display message.user %}</b>
+                                {{ message.submitted_at|timesince }} ago <br />
                                 {{ message.message|safe }}
                             </div>
                         </div>
