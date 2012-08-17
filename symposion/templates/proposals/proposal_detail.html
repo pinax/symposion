@@ -75,7 +75,7 @@
             {% for message in proposal.messages.all %}
                 <div class="review-box">
                     <div class="comment">{{ message.message|safe }}</div>
-                    <div class="dateline"><b>{% user_display user %}</b> {{ message.submitted_at|timesince }} ago</div>
+                    <div class="dateline"><b>{% user_display message.user %}</b> {{ message.submitted_at|timesince }} ago</div>
                 </div>
                 <div class="clear"></div>
             {% endfor %}
