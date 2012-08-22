@@ -7,6 +7,9 @@
     <dt>{% trans "Track" %}</dt>
     <dd>{{ proposal.track }}&nbsp;</dd>
     
+    <dt>{% trans "Audience Level" %}</dt>
+    <dd>{{ proposal.get_audience_level_display }}&nbsp;</dd>
+    
     {% if proposal.additional_speakers.all %}
         <dt>{% trans "Addl Speakers" %}</dt>
         <dd>
@@ -30,9 +33,6 @@
     
     <dt>{% trans "Notes" %}</dt>
     <dd>{{ proposal.additional_notes|safe }}&nbsp;</dd>
-    
-    <dt>{% trans "Audience Level" %}</dt>
-    <dd>{{ proposal.get_audience_level_display }}&nbsp;</dd>
     
     <dt>{% trans "Documents" %}</dt>
     <dd>
