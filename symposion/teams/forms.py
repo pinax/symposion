@@ -1,5 +1,8 @@
 from django import forms
 
+from django.utils.html import escape
+from django.utils.safestring import mark_safe
+
 from django.contrib.auth.models import User
 
 from symposion.teams.models import Membership
@@ -7,7 +10,7 @@ from symposion.teams.models import Membership
 
 class TeamInvitationForm(forms.Form):
     
-    email = forms.EmailField(help_text="email address must be that of a user on the site")
+    email = forms.EmailField(help_text="email address must be that of an account on this conference site")
     
     def __init__(self, *args, **kwargs):
         self.team = kwargs.pop("team")
@@ -25,7 +28,7 @@ class TeamInvitationForm(forms.Form):
         except User.DoesNotExist:
             # eventually we can invite them but for now assume they are
             # already on the site
-            raise forms.ValidationError("no known user with email address %s" % email)
+            raise forms.ValidationError(mark_safe("no account with email address <b>%s</b> found on this conference site" % escape(email)))
         
         state = self.team.get_state_for_user(user)
         
