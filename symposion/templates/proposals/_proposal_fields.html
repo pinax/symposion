@@ -11,7 +11,7 @@
     <dd>{{ proposal.get_audience_level_display }}&nbsp;</dd>
     
     {% if proposal.additional_speakers.all %}
-        <dt>{% trans "Addl Speakers" %}</dt>
+        <dt>{% trans "Additional Speakers" %}</dt>
         <dd>
             {% for speaker in proposal.additional_speakers.all %}
                 <li>
