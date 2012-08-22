@@ -34,6 +34,9 @@
     <dt>{% trans "Notes" %}</dt>
     <dd>{{ proposal.additional_notes|safe }}&nbsp;</dd>
     
+    <dt>{% trans "Speaker Bio" %}</dt>
+    <dd>{{ proposal.speaker.biography|safe }}&nbsp;</dd>
+    
     <dt>{% trans "Documents" %}</dt>
     <dd>
         {% if proposal.supporting_documents.exists %}
