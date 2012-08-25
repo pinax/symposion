@@ -275,6 +275,9 @@ def review_delete(request, pk):
 @login_required
 def review_status(request, section_slug=None, key=None):
     
+    if not request.user.has_perm("reviews.can_review_%s" % section_slug):
+        return access_not_permitted(request)
+    
     VOTE_THRESHOLD = settings.SYMPOSION_VOTE_THRESHOLD
     
     ctx = {
