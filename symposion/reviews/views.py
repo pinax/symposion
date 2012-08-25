@@ -308,7 +308,6 @@ def review_status(request, section_slug=None, key=None):
         ctx.update({
             "key": key,
             "proposals": proposals_generator(request, proposals[key], check_speaker=not admin),
-            "proposal_count": proposals[key].count(),
         })
     else:
         ctx["proposals"] = proposals
