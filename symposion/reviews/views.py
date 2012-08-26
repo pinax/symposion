@@ -305,6 +305,8 @@ def review_status(request, section_slug=None, key=None):
     admin = request.user.has_perm("reviews.can_manage_%s" % section_slug)
     
     for status in proposals:
+        if key and key != status:
+            continue
         proposals[status] = list(proposals_generator(request, proposals[status], check_speaker=not admin))
     
     if key:
