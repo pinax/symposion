@@ -187,6 +187,16 @@ def proposal_edit(request, pk):
         form = form_class(request.POST, instance=proposal)
         if form.is_valid():
             form.save()
+            if hasattr(proposal, "reviews"):
+                for review in proposal.reviews.distinct("user"):
+                    ctx = {
+                        "user": request.user,
+                        "proposal": proposal,
+                    }
+                    send_email(
+                        [review.user.email], "proposal_updated",
+                        context=ctx
+                    )
             messages.success(request, "Proposal updated.")
             return redirect("proposal_detail", proposal.pk)
     else:

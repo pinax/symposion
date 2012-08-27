@@ -1,0 +1,1 @@
+{% load account_tags %}"{{ proposal.title }}" has been updated by {% user_display user %}
