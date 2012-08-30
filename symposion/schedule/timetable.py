@@ -12,7 +12,7 @@ class TimeTable(object):
         return Slot.objects.filter(day=self.day)
     
     def rooms(self):
-        return Room.objects.filter(day=self.day.schedule).order_by("order")
+        return Room.objects.filter(schedule=self.day.schedule).order_by("order")
     
     def __iter__(self):
         times = sorted(set(itertools.chain(*self.slots_qs().values_list("start", "end"))))
