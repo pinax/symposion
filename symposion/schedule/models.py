@@ -1,6 +1,7 @@
 from django.db import models
 
 from symposion.conference.models import Section
+from symposion.schedule.utils import InlineSet
 
 
 class Schedule(models.Model):
@@ -10,50 +11,41 @@ class Schedule(models.Model):
 
 class Day(models.Model):
     
+    schedule = models.ForeignKey(Schedule)
     date = models.DateField()
-
-
-class Track(models.Model):
     
+    class Meta:
+        unique_together = [("schedule", "date")]
+
+
+class Room(models.Model):
+    
+    schedule = models.ForeignKey(Schedule)
     name = models.CharField(max_length=65)
-    room = models.CharField(max_length=100)
+    order = models.PositiveIntegerField()
+
+
+class SlotKind(models.Model):
+    """
+    A slot kind represents what kind a slot is. For example, a slot can be a
+    break, lunch, or X-minute talk.
+    """
+    
+    schedule = models.ForeignKey(Schedule)
+    label = models.CharField(max_length=50)
 
 
 class Slot(models.Model):
     
     day = models.ForeignKey(Day)
-    track_set = models.TextField(db_column="tracks")
+    room_set = models.TextField(db_column="rooms")
+    kind = models.ForeignKey(SlotKind)
     start = models.TimeField()
     end = models.TimeField()
     
     @property
-    def tracks(self):
-        attr = "_tracks"
+    def rooms(self):
+        attr = "_rooms"
         if not hasattr(self, attr):
-            slot = self
-            class TrackSet(object):
-                
-                def __init__(self, data, delimiter):
-                    self.data = set(data.split(delimiter))
-                
-                def __iter__(self):
-                    return Track.objects.filter(pk__in=self.data)
-                
-                def add(self, track, commit=True):
-                    """
-                    Add given track to the set, but check if it can exist
-                    before adding it.
-                    """
-                    self.data.add(track.pk)
-                    self._update_model(commit=commit)
-                
-                def remove(self, track, commit=True):
-                    self.data.remove(track.pk)
-                    self._update_model(commit=commit)
-                
-                def _update_model(self, commit=True):
-                    slot.track_set += self.delimiter.join(self.data)
-                    if commit:
-                        slot.save(force_update=True)
-            setattr(self, attr, TrackSet(self.track_set, delimiter=" "))
+            setattr(self, attr, InlineSet(obj=self, field="room_set", delimiter=" "))
         return getattr(self, attr)
