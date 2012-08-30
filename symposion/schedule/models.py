@@ -49,7 +49,7 @@ class Slot(models.Model):
         attr = "_rooms"
         if not hasattr(self, attr):
             class RoomInlineSet(InlineSet):
-                def consective_count(self):
+                def consecutive_count(self):
                     return len(self)
             value = RoomInlineSet(obj=self, field="room_set", delimiter=" ")
             setattr(self, attr, value)
