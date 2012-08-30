@@ -23,8 +23,8 @@ class TimeTable(object):
             for slot in slots:
                 if slot.start == time:
                     slot.rowspan = TimeTable.rowspan(times, slot.start, slot.end)
+                    slot.colspan = slot.rooms.consecutive_count()
                     row["slots"].append(slot)
-            row["colspan"] = self.rooms.consecutive_count()
             if row["slots"] or next_time is None:
                 yield row
     
