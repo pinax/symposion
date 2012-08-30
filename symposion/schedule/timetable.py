@@ -3,7 +3,7 @@ import itertools
 from symposion.schedule.models import Room, Slot
 
 
-class Timetable(object):
+class TimeTable(object):
     
     def __init__(self, day):
         self.day = day
@@ -22,7 +22,7 @@ class Timetable(object):
             row = {"time": time, "slots": []}
             for slot in slots:
                 if slot.start == time:
-                    slot.rowspan = Timetable.rowspan(times, slot.start, slot.end)
+                    slot.rowspan = TimeTable.rowspan(times, slot.start, slot.end)
                     row["slots"].append(slot)
             row["colspan"] = self.rooms.consecutive_count()
             if row["slots"] or next_time is None:
