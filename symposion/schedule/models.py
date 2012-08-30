@@ -48,5 +48,9 @@ class Slot(models.Model):
     def rooms(self):
         attr = "_rooms"
         if not hasattr(self, attr):
-            setattr(self, attr, InlineSet(obj=self, field="room_set", delimiter=" "))
+            class RoomInlineSet(InlineSet):
+                def consective_count(self):
+                    return len(self)
+            value = RoomInlineSet(obj=self, field="room_set", delimiter=" ")
+            setattr(self, attr, value)
         return getattr(self, attr)
