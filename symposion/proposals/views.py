@@ -188,13 +188,18 @@ def proposal_edit(request, pk):
         if form.is_valid():
             form.save()
             if hasattr(proposal, "reviews"):
-                for review in proposal.reviews.distinct("user"):
+                users = User.objects.filter(
+                    Q(review__proposal=proposal) |
+                    Q(proposalmessage__proposal=proposal)
+                )
+                users = users.exclude(id=request.user.id).distinct()
+                for user in users:
                     ctx = {
                         "user": request.user,
                         "proposal": proposal,
                     }
                     send_email(
-                        [review.user.email], "proposal_updated",
+                        [user.email], "proposal_updated",
                         context=ctx
                     )
             messages.success(request, "Proposal updated.")
