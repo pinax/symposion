@@ -1,7 +1,6 @@
 from django.db import models
 
 from symposion.conference.models import Section
-from symposion.schedule.utils import InlineSet
 
 
 class Schedule(models.Model):
@@ -39,18 +38,18 @@ class SlotKind(models.Model):
 class Slot(models.Model):
     
     day = models.ForeignKey(Day)
-    room_set = models.TextField(db_column="rooms")
     kind = models.ForeignKey(SlotKind)
     start = models.TimeField()
     end = models.TimeField()
+
+
+class SlotRoom(models.Model):
+    """
+    Links a slot with a room.
+    """
     
-    @property
-    def rooms(self):
-        attr = "_rooms"
-        if not hasattr(self, attr):
-            class RoomInlineSet(InlineSet):
-                def consecutive_count(self):
-                    return len(self)
-            value = RoomInlineSet(obj=self, field="room_set", delimiter=" ")
-            setattr(self, attr, value)
-        return getattr(self, attr)
+    slot = models.ForeignKey(Slot)
+    room = models.ForeignKey(Room)
+    
+    class Meta:
+        unique_together = [("slot", "room")]
