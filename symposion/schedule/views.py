@@ -5,7 +5,7 @@ from symposion.schedule.models import Schedule
 
 def schedule_detail(request, slug=None):
     qs = Schedule.objects.all()
-    if pk is None:
+    if slug is None:
         schedule = next(iter(qs), None)
         if schedule is None:
             raise Http404()
@@ -19,7 +19,7 @@ def schedule_detail(request, slug=None):
 
 def schedule_edit(request, slug=None):
     qs = Schedule.objects.all()
-    if pk is None:
+    if slug is None:
         schedule = next(iter(qs), None)
         if schedule is None:
             raise Http404()
