@@ -88,13 +88,16 @@
     </style>
 {% endblock %}
 
-{% block body %}
-    <h1>Schedule Edit</h1>
-    
-    {% for timetable in days %}
-        <h2>{{ timetable.day.date }}</h2>
+{% block body_outer %}
+    <div class="row">
+        <div class="span12">
+            <h1>Schedule Edit</h1>
             
-        {% include "schedule/_grid.html" %}
-    {% endfor %}
-    
+            {% for timetable in days %}
+                <h2>{{ timetable.day.date }}</h2>
+                    
+                {% include "schedule/_grid.html" %}
+            {% endfor %}
+        </div>
+    </div>
 {% endblock %}
