@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table table-bordered table-condensed">
     <tr>
         <th>&nbsp;</th>
         {% for room in timetable.rooms %}
@@ -9,8 +9,8 @@
         <tr>
             <td class="time">{{ row.time|date:"h:iA" }}</td>
             {% for slot in row.slots %}
-                <td colspan="{{ slot.colspan }}" rowspan="{{ slow.rowspan }}">
-                        <span class="controls"><b>add</b>: <a href="{# url schedule_slot_add slot.pk "plenary" #}" rel="facebox">plenary</a> | <a href="{# url schedule_slot_add slot.pk "break" #}" rel="facebox">break</a> | <a href="{# url schedule_slot_add slot.pk "presentation" #}" rel="facebox">presentation</a></span>
+                <td class="slot" colspan="{{ slot.colspan }}" rowspan="{{ slow.rowspan }}">
+                    <span class="schedule-controls"><b>add</b>: <a href="{# url schedule_slot_add slot.pk "plenary" #}" rel="facebox">plenary</a> | <a href="{# url schedule_slot_add slot.pk "break" #}" rel="facebox">break</a> | <a href="{# url schedule_slot_add slot.pk "presentation" #}" rel="facebox">presentation</a></span>
                 </td>
                 {% comment %}
                 <td colspan="{{ slot.colspan }}" rowspan="{{ slot.rowspan }}" class="slot {{ slot.kind.name }} rowspan-{{ slot.rowspan }} colspan-{{ slot.colspan }}">
