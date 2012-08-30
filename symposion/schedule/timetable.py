@@ -1,5 +1,7 @@
 import itertools
 
+from symposion.schedule.models import Room, Slot
+
 
 class Timetable(object):
     
