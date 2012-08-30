@@ -1,0 +1,100 @@
+{% extends "site_base.html" %}
+
+{% block head_title %}Conference Schedule Edit{% endblock %}
+
+{% block body_class %}full{% endblock %}
+
+{% block right %}
+{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/facebox.css" />
+    <style>
+    /*
+        body {
+            font-family: "Helvetica Neue", Arial, "Helvetica";
+        }
+        #wrapper {
+            width: 960px;
+        }
+        table {
+            border-collapse: collapse;
+            font-weight: normal;
+            line-height: 1.1em;
+        }
+        td {
+            padding: 4px 8px;
+            border: 1px solid #666;
+            vertical-align: top;
+        }
+        td.slot {
+            text-align: center;
+            background: #FFF;
+            font-size: 10pt;
+            width: 180px;
+        }
+        td.slot.recess,
+        td.slot.recess.colspan-1.rowspan-1,
+        td.slot.recess.colspan-1.rowspan-2 {
+            background: #ECFFFF;
+        }
+        td.slot.plenary {
+            background: #DCDCFF;
+        }
+        td.slot div.title {
+            font-weight: bold;
+        }
+        td.slot div.speaker {
+            font-style: italic;
+            font-size: 8pt;
+        }
+        th {
+            font-size: 12pt;
+            background: #FFF;
+            padding: 2px 4px;
+            border: none;
+            border-right: 1px solid #666;
+        }
+        td.time {
+            width: 50px;
+            font-size: 9pt;
+            border: none;
+            border-top: 1px solid #666;
+        }
+        td.colspan-1.rowspan-1 {
+            background: #FFFCC9;
+        }
+        td.colspan-1.rowspan-2 {
+            background: #FDA;
+        }
+        td.slot:hover .controls {
+            display: block;
+        }
+        .controls {
+            display: none;
+            font-size: 8pt;
+        }
+        .controls a {
+            text-decoration: none;
+            color: #000;
+        }
+        .controls a:hover {
+            color: #999;
+        }
+        #facebox h3 {
+            margin-top: 0;
+        }
+    */
+    </style>
+{% endblock %}
+
+{% block body %}
+    <h1>Schedule Edit</h1>
+    
+    {% for timetable in days %}
+        <h2>{{ timetable.day.date }}</h2>
+            
+        {% include "schedule/_grid.html" %}
+    {% endfor %}
+    
+{% endblock %}
