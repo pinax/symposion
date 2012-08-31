@@ -44,7 +44,7 @@ def schedule_slot_edit(request, slot_pk):
     form = SlotEditForm(request.POST)
     
     if form.is_valid():
-        presentation = form.presentation
+        presentation = form.cleaned_data["presentation"]
         presentation.slot = slot
         presentation.save()
     return redirect("schedule_edit")
