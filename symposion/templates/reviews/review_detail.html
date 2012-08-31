@@ -16,7 +16,6 @@
 {% endblock %}
 
 {% block body %}
-    {% comment %}
     <div class="pull-right">
         <form class="result-form form-inline" method="POST" action="">
             {% csrf_token %}
@@ -34,7 +33,6 @@
             {% endif %}
         </form>
     </div>
-    {% endcomment %}
     
     <h3>#{{ proposal.number }}: {{ proposal.title }} ({{ proposal.speaker }}, Track: {{ proposal.track }})</h3>
     
