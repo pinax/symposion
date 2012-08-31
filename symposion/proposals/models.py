@@ -107,6 +107,10 @@ class ProposalBase(models.Model):
         return True
     
     @property
+    def section(self):
+        return self.kind.section
+    
+    @property
     def speaker_email(self):
         return self.speaker.email
 
