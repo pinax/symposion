@@ -300,9 +300,17 @@ def promote_proposal(proposal):
     return presentation
 
 
+def unpromote_proposal(proposal):
+    
+    if hasattr(proposal, "presentation") and proposal.presentation:
+        proposal.presentation.delete()
+
+
 def accepted_proposal(sender, instance=None, **kwargs):
     if instance is None:
         return
     if instance.accepted == True:
         promote_proposal(instance.proposal)
+    else:
+        unpromote_proposal(instance.proposal)
 post_save.connect(accepted_proposal, sender=ProposalResult)
