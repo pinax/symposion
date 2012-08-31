@@ -11,7 +11,7 @@ from django.contrib.auth.models import User
 from markitup.fields import MarkupField
 
 from symposion.proposals.models import ProposalBase
-# from symposion.schedule.models import Presentation
+from symposion.schedule.models import Presentation
 
 
 class ProposalScoreExpression(object):
@@ -279,26 +279,25 @@ class Comment(models.Model):
 
 
 def promote_proposal(proposal):
-    raise NotImplementedError()
-    # presentation, created = Presentation.objects.get_or_create(
-    #     pk=proposal.pk,
-    #     defaults=dict(
-    #         title=proposal.title,
-    #         description=proposal.description,
-    #         kind=proposal.kind,
-    #         category=proposal.category,
-    #         duration=proposal.duration,
-    #         abstract=proposal.abstract,
-    #         audience_level=proposal.audience_level,
-    #         submitted=proposal.submitted,
-    #         speaker=proposal.speaker,
-    #     )
-    # )
-    # if created:
-    #     for speaker in proposal.additional_speakers.all():
-    #         presentation.additional_speakers.add(speaker)
-    #         presentation.save()
-    # return presentation
+    
+    if hasattr(proposal, "presentation") and proposal.presentation:
+        # already promoted
+        presentation = proposal.presentation
+    else:
+        presentation = Presentation(
+            title = proposal.title,
+            description = proposal.description,
+            abstract = proposal.abstract,
+            speaker = proposal.speaker,
+            section = proposal.section,
+            _proposal = proposal,
+        )
+        presentation.save()
+        for speaker in proposal.additional_speakers.all():
+            presentation.additional_speakers.add(speaker)
+            presentation.save()
+    
+    return presentation
 
 
 def accepted_proposal(sender, instance=None, **kwargs):
