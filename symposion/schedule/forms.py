@@ -1,6 +1,6 @@
 from django import forms
 
-from symposion.schedule.models import Slot, Presentation
+from symposion.schedule.models import Presentation
 
 
 class SlotEditForm(forms.Form):
