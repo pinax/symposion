@@ -2,6 +2,8 @@ from django.db import models
 
 from symposion.conference.models import Section
 
+from markitup.fields import MarkupField
+
 
 class Schedule(models.Model):
     
@@ -53,3 +55,25 @@ class SlotRoom(models.Model):
     
     class Meta:
         unique_together = [("slot", "room")]
+
+
+class Presentation(models.Model):
+    
+    slot = models.OneToOneField(Slot, null=True, blank=True, related_name="presentation")
+    
+    title = models.CharField(max_length=100)
+    description = models.MarkupField()
+    abstract = models.MarkupField()
+    
+    speaker = models.ForeignKey("speakers.Speaker", related_name="presentations")
+    additional_speakers = models.ManyToManyField("speakers.Speaker", blank=True)
+    
+    cancelled = models.BooleanField(default=False)
+    
+    def speakers(self):
+        yield self.speaker
+        for speaker in self.additional_speakers.all():
+            yield speaker
+    
+    def __unicode__(self):
+        return self.title
