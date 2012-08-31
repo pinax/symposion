@@ -1,8 +1,9 @@
 from django.db import models
 
-from symposion.conference.models import Section
-
 from markitup.fields import MarkupField
+
+from symposion.proposals.models import ProposalBase
+from symposion.conference.models import Section
 
 
 class Schedule(models.Model):
@@ -60,15 +61,20 @@ class SlotRoom(models.Model):
 class Presentation(models.Model):
     
     slot = models.OneToOneField(Slot, null=True, blank=True, related_name="presentation")
-    
     title = models.CharField(max_length=100)
     description = models.MarkupField()
     abstract = models.MarkupField()
-    
     speaker = models.ForeignKey("speakers.Speaker", related_name="presentations")
     additional_speakers = models.ManyToManyField("speakers.Speaker", blank=True)
-    
     cancelled = models.BooleanField(default=False)
+    _proposal = models.ForeignKey(ProposalBase, related_name="presentation")
+    
+    @property
+    def proposal(self):
+        if self._proposal:
+            proposal = ProposalBase.objects.get_subclass(pk=self._proposal.pk)
+            return proposal
+        return None
     
     def speakers(self):
         yield self.speaker
