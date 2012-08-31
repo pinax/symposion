@@ -12,7 +12,7 @@ class SlotEditForm(forms.Form):
     slot_pk = forms.CharField(
         max_length=10,
         widget=forms.HiddenInput,
-        required=True,
+        required=False,
     )
     
     def clean_slot_pk(self):
