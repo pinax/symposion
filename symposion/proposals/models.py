@@ -113,7 +113,7 @@ class ProposalBase(models.Model):
     @property
     def speaker_email(self):
         return self.speaker.email
-
+    
     @property
     def number(self):
         return str(self.pk).zfill(3)
