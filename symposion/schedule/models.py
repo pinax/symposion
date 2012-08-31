@@ -71,6 +71,10 @@ class Presentation(models.Model):
     section = models.ForeignKey(Section, related_name="presentations")
     
     @property
+    def number(self):
+        return self.proposal.number
+    
+    @property
     def proposal(self):
         if self._proposal:
             proposal = ProposalBase.objects.get_subclass(pk=self._proposal.pk)
@@ -83,4 +87,4 @@ class Presentation(models.Model):
             yield speaker
     
     def __unicode__(self):
-        return "#%s %s (%s)" % (self.id, self.title, self.speaker)
+        return "#%s %s (%s)" % (self.number, self.title, self.speaker)
