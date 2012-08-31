@@ -18,7 +18,7 @@
                             <div class="speaker">{{ slot.presentation.speaker }}</div>
 
                             <span class="schedule-controls">
-                                <a class="btn btn-mini" onClick="modalEdit({% url schedule_slot_edit slot.pk %})" href="#">Edit</a>
+                                <a class="btn btn-mini edit-slot" data-action="{% url schedule_slot_edit slot.pk %}" href="#">Edit</a>
                             </span>
                         {% endif %}
                     {% else %}
