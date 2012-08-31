@@ -83,4 +83,4 @@ class Presentation(models.Model):
             yield speaker
     
     def __unicode__(self):
-        return self.title
+        return "#%s %s (%s)" % (self.id, self.title, self.speaker)
