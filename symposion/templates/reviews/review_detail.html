@@ -16,23 +16,36 @@
 {% endblock %}
 
 {% block body %}
-    <div class="pull-right">
-        <form class="result-form form-inline" method="POST" action="">
-            {% csrf_token %}
-            {% if proposal.result.get_accepted_display == "accepted" %}
-                <input type="submit" name="result_submit" value="reject" class="btn btn-danger" />
-                <input type="submit" name="result_submit" value="undecide" class="btn" />
-            {% else %}
-                {% if proposal.result.get_accepted_display == "rejected" %}
-                    <input type="submit" name="result_submit" value="accept" class="btn btn-success" />
-                    <input type="submit" name="result_submit" value="undecide" class="btn" />
-                {% else %}
-                    <input type="submit" name="result_submit" value="accept" class="btn btn-success" />
-                    <input type="submit" name="result_submit" value="reject" class="btn btn-danger" />
-                {% endif %}
-            {% endif %}
-        </form>
-    </div>
+    {% if request.user.is_staff %}
+        <div class="pull-right">
+            <form class="result-form form-inline" method="POST" action="">
+                {% csrf_token %}
+                <div class="btn-group">
+                    {% if proposal.result.get_accepted_display == "accepted" %}
+                        <a class="btn dropdown-toggle btn-success" data-toggle="dropdown" href="#">Accepted <span class="caret"></span></a>
+                        <ul class="dropdown-menu pull-right">
+                            <li><input type="submit" name="result_submit" value="reject" class="btn btn-danger" /></li>
+                            <li><input type="submit" name="result_submit" value="undecide" class="btn" /></li>
+                        </ul>
+                    {% else %}
+                        {% if proposal.result.get_accepted_display == "rejected" %}
+                            <a class="btn dropdown-toggle btn-danger" data-toggle="dropdown" href="#">Rejected <span class="caret"></span></a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><input type="submit" name="result_submit" value="accept" class="btn btn-success" /></li>
+                                <li><input type="submit" name="result_submit" value="undecide" class="btn" /></li>
+                            </ul>
+                        {% else %}
+                            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Undecided <span class="caret"></span></a>
+                            <ul class="dropdown-menu pull-right">
+                                <li><input type="submit" name="result_submit" value="accept" class="btn btn-success" /></li>
+                                <li><input type="submit" name="result_submit" value="reject" class="btn btn-danger" /></li>
+                            </ul>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+    {% endif %}
     
     <h3>#{{ proposal.number }}: {{ proposal.title }} ({{ proposal.speaker }}, Track: {{ proposal.track }})</h3>
     
