@@ -11,7 +11,16 @@
             {% for slot in row.slots %}
                 <td class="slot slot-{{ slot.kind.label }}" colspan="{{ slot.colspan }}" rowspan="{{ slow.rowspan }}">
                     {% if slot.kind.label == "talk" %}
-                        <span class="schedule-controls"><b>add</b>: <a href="{# url schedule_slot_add slot.pk "talk" #}" rel="facebox">talk</a></span>
+                        {% if not slot.presentation %}
+                            <a class="btn btn-mini edit-slot" data-action="{% url schedule_slot_edit slot.pk %}" href="#">+</a>
+                        {% else %}
+                            <div class="title">{{ slot.presentation.title }}</div>
+                            <div class="speaker">{{ slot.presentation.speaker }}</div>
+
+                            <span class="schedule-controls">
+                                <a class="btn btn-mini" onClick="modalEdit({% url schedule_slot_edit slot.pk %})" href="#">Edit</a>
+                            </span>
+                        {% endif %}
                     {% else %}
                         {{ slot.kind.label }}
                     {% endif %}

@@ -1,5 +1,8 @@
 {% extends "site_base.html" %}
 
+{% load i18n %}
+{% load bootstrap_tags %}
+
 {% block head_title %}Conference Schedule Edit{% endblock %}
 
 {% block body_class %}full{% endblock %}
@@ -77,5 +80,32 @@
                 {% include "schedule/_grid.html" %}
             {% endfor %}
         </div>
+        
+        <div class="modal fade hide" id="slotEditModal">
+            <form id="slotEditForm" class="modal-form" method="POST">
+                <div class="modal-header">
+                    <a class="close" data-dismiss="modal">&times;</a>
+                    <h3>{% trans "Edit Slot" %}</h3>
+                </div>
+                <div class="modal-body">
+                    {% csrf_token %}
+                    {{ form|as_bootstrap }}
+                </div>
+                <div class="modal-footer">
+                    <button type="submit">Save</button>
+                </div>
+            </form>
+        </div>
     </div>
+{% endblock %}
+
+{% block extra_script %}
+    <script type="text/javascript">
+        $(function() {
+            $("a.edit-slot").click(function() {
+                $("#slotEditForm").get(0).setAttribute("action", $(this).data("action"));
+                $("#slotEditModal").modal("show");
+            });
+        });
+    </script>
 {% endblock %}
