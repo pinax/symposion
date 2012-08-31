@@ -47,4 +47,4 @@ def schedule_slot_edit(request, slot_pk):
         presentation = form.cleaned_data["presentation"]
         presentation.slot = slot
         presentation.save()
-    return redirect("schedule_edit")
+    return redirect("schedule_edit_singleton")
