@@ -68,6 +68,7 @@ class Presentation(models.Model):
     additional_speakers = models.ManyToManyField("speakers.Speaker", blank=True)
     cancelled = models.BooleanField(default=False)
     _proposal = models.OneToOneField(ProposalBase, related_name="presentation")
+    section = models.ForeignKey(Section, related_name="presentations")
     
     @property
     def proposal(self):
