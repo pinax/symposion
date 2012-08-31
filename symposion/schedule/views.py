@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
 
 from symposion.schedule.forms import SlotEditForm
-from symposion.schedule.models import Schedule, Day, Slot
+from symposion.schedule.models import Schedule, Day, Slot, Presentation
 from symposion.schedule.timetable import TimeTable
 
 
@@ -22,6 +22,14 @@ def schedule_detail(request, slug=None):
         "schedule": schedule,
     }
     return render(request, "schedule/schedule_detail.html", ctx)
+
+
+def schedule_list(request):
+    presentations = Presentation.objects.order_by("id")
+    ctx = {
+        "presentations": presentations,
+    }
+    return render(request, "schedule/schedule_list.html", ctx)
 
 
 @login_required
