@@ -6,4 +6,5 @@ urlpatterns = patterns("symposion.schedule.views",
     url(r"^edit/$", "schedule_edit", name="schedule_edit_singleton"),
     url(r"^(\w+)/edit/$", "schedule_detail", name="schedule_detail"),
     url(r"^(\w+)/edit/$", "schedule_edit", name="schedule_edit"),
+    url(r"^edit/slot/(?P<slot_pk>\d+)/", "schedule_slot_edit", name="schedule_slot_edit"),
 )
