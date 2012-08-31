@@ -1,0 +1,19 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}Presentation Listing{% endblock %}
+
+{% block body %}
+    {% for presentation in presentations %}
+        <div class="row">
+            <div class="span8 well">
+                <h3>{{ presentation.title }}</h3>
+                <h4>{{ presentation.speaker }} in {{ presentation.proposal.track }}</h4>
+                <p>
+                    {{ presentation.description }}
+                </p>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

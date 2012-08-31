@@ -1,0 +1,94 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load bootstrap_tags %}
+
+{% block head_title %}Conference Schedule Edit{% endblock %}
+
+{% block body_class %}full{% endblock %}
+
+{% block right %}
+{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}chosen/chosen.css" />
+    <style>
+        td {
+            font-size: 9pt;
+        }
+        td.slot {
+            text-align: center;
+            vertical-align: middle;
+        }
+        td.time {
+            vertical-align: top;
+            width: 50px;
+            font-size: 8pt;
+            padding-top: 0;
+        }
+        td.slot:hover .schedule-controls {
+            display: block;
+        }
+        .schedule-controls {
+            display: none;
+            font-size: 8pt;
+        }
+        .schedule-controls a {
+            text-decoration: none;
+            color: #000;
+        }
+        .schedule-controls a:hover {
+            color: #999;
+        }
+        td.slot .title {
+            font-weight: bold;
+            line-height: 10pt;
+        }
+        #id_presentation {
+            width:400px;
+        }
+    </style>
+{% endblock %}
+
+{% block body_outer %}
+    <div class="row">
+        <div class="span12">
+            <h1>Schedule Edit</h1>
+            
+            {% for timetable in days %}
+                <h2>{{ timetable.day.date }}</h2>
+                    
+                {% include "schedule/_grid.html" %}
+            {% endfor %}
+        </div>
+        
+        <div class="modal fade hide in" id="slotEditModal">
+            <form id="slotEditForm" class="modal-form" method="POST">
+                <div class="modal-header">
+                    <a class="close" data-dismiss="modal">&times;</a>
+                    <h3>{% trans "Edit Slot" %}</h3>
+                </div>
+                <div class="modal-body" style="height:300px">
+                    {% csrf_token %}
+                    {{ form|as_bootstrap }}
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_script %}
+    <script src="{{ STATIC_URL }}chosen/chosen.jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function() {
+            $("a.edit-slot").click(function() {
+                $("#slotEditForm").get(0).setAttribute("action", $(this).data("action"));
+                $("#slotEditModal").modal("show");
+            });
+            $("#id_presentation").chosen();
+        });
+    </script>
+{% endblock %}
