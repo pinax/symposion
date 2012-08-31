@@ -9,7 +9,7 @@
         <tr>
             <td class="time">{{ row.time|date:"h:iA" }}</td>
             {% for slot in row.slots %}
-                <td class="slot" colspan="{{ slot.colspan }}" rowspan="{{ slow.rowspan }}">
+                <td class="slot slot-{{ slot.kind.label }}" colspan="{{ slot.colspan }}" rowspan="{{ slow.rowspan }}">
                     {% if slot.kind.label == "talk" %}
                         <span class="schedule-controls"><b>add</b>: <a href="{# url schedule_slot_add slot.pk "talk" #}" rel="facebox">talk</a></span>
                     {% else %}
