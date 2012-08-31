@@ -1,0 +1,13 @@
+{% extends "proposals/base.html" %}
+
+{% load uni_form_tags %}
+
+{% block body %}
+    <h3>Leaving {{ proposal.title }}</h3>
+    
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p>Are you sure you wish to leave as a speaker on <b>{{ proposal.title }}</b>?</p>
+        <input type="submit" class="btn btn-primary" value="I am sure" />
+    </form>
+{% endblock %}

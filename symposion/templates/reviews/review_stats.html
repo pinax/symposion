@@ -43,35 +43,35 @@
         <dl>
             <dt>
                 <a href="{% url review_status section_slug "positive" %}">Positive</a>
-                <span class="badge">{{ proposals.positive.count }}</span>
+                <span class="badge">{{ proposals.positive|length }}</span>
             </dt>
             <dd>
                 proposals with at least {{ vote_threshold }} vote{{ vote_threshold|pluralize }} and at least one +1 and no &minus;1s
             </dd>
             <dt>
                 <a href="{% url review_status section_slug "negative" %}">Negative</a>
-                <span class="badge">{{ proposals.negative.count }}</span>
+                <span class="badge">{{ proposals.negative|length }}</span>
             </dt>
             <dd>
                 proposals with at least {{ vote_threshold }} vote{{ vote_threshold|pluralize }} and at least one &minus;1 and no +1s
             </dd>
             <dt>
                 <a href="{% url review_status section_slug "indifferent" %}">Indifferent</a>
-                <span class="badge">{{ proposals.indifferent.count }}</span>
+                <span class="badge">{{ proposals.indifferent|length }}</span>
             </dt>
             <dd>
                 proposals with at least {{ vote_threshold }} vote{{ vote_threshold|pluralize }} and neither a +1 or a &minus;1
             </dd>
             <dt>
                 <a href="{% url review_status section_slug "controversial" %}">Controversial</a>
-                <span class="badge">{{ proposals.controversial.count }}</span>
+                <span class="badge">{{ proposals.controversial|length }}</span>
             </dt>
             <dd>
                 proposals with at least {{ vote_threshold }} vote{{ vote_threshold|pluralize }} and both a +1 and &minus;1
             </dd>
             <dt>
                 <a href="{% url review_status section_slug "too_few" %}">Too Few Reviews</a>
-                <span class="badge">{{ proposals.too_few.count }}</span>
+                <span class="badge">{{ proposals.too_few|length }}</span>
             </dt>
             <dd>
                 proposals with fewer than {{ vote_threshold }} vote{{ vote_threshold|pluralize }}

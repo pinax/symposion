@@ -275,6 +275,9 @@ def review_delete(request, pk):
 @login_required
 def review_status(request, section_slug=None, key=None):
     
+    if not request.user.has_perm("reviews.can_review_%s" % section_slug):
+        return access_not_permitted(request)
+    
     VOTE_THRESHOLD = settings.SYMPOSION_VOTE_THRESHOLD
     
     ctx = {
@@ -298,14 +301,18 @@ def review_status(request, section_slug=None, key=None):
         # proposals with fewer than VOTE_THRESHOLD reviews
         "too_few": queryset.filter(result__vote_count__lt=VOTE_THRESHOLD).order_by("result__vote_count"),
     }
-        
+    
     admin = request.user.has_perm("reviews.can_manage_%s" % section_slug)
+    
+    for status in proposals:
+        if key and key != status:
+            continue
+        proposals[status] = list(proposals_generator(request, proposals[status], check_speaker=not admin))
     
     if key:
         ctx.update({
             "key": key,
-            "proposals": proposals_generator(request, proposals[key], check_speaker=not admin),
-            "proposal_count": proposals[key].count(),
+            "proposals": proposals[key],
         })
     else:
         ctx["proposals"] = proposals
