@@ -225,8 +225,8 @@ def review_detail(request, pk):
                 elif result == "undecide":
                     proposal.result.status = "undecided"
                     proposal.result.save()
-                elif result == "reserve":
-                    proposal.result.status = "in-reserve"
+                elif result == "standby":
+                    proposal.result.status = "standby"
                     proposal.result.save()
             
             return redirect(request.path)

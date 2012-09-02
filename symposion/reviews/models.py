@@ -213,7 +213,7 @@ class ProposalResult(models.Model):
         ("accepted", "accepted"),
         ("rejected", "rejected"),
         ("undecided", "undecided"),
-        ("in-reserve", "in reserve"),
+        ("standby", "standby"),
     ], default="undecided")
     
     @classmethod

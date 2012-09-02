@@ -21,25 +21,37 @@
             <form class="result-form form-inline" method="POST" action="">
                 {% csrf_token %}
                 <div class="btn-group">
-                    {% if proposal.result.get_accepted_display == "accepted" %}
+                    {% if proposal.result.status == "accepted" %}
                         <a class="btn dropdown-toggle btn-success" data-toggle="dropdown" href="#">Accepted <span class="caret"></span></a>
                         <ul class="dropdown-menu pull-right">
                             <li><input type="submit" name="result_submit" value="reject" class="btn btn-danger" /></li>
+                            <li><input type="submit" name="result_submit" value="standby" class="btn" /></li>
                             <li><input type="submit" name="result_submit" value="undecide" class="btn" /></li>
                         </ul>
                     {% else %}
-                        {% if proposal.result.get_accepted_display == "rejected" %}
+                        {% if proposal.result.status == "rejected" %}
                             <a class="btn dropdown-toggle btn-danger" data-toggle="dropdown" href="#">Rejected <span class="caret"></span></a>
                             <ul class="dropdown-menu pull-right">
                                 <li><input type="submit" name="result_submit" value="accept" class="btn btn-success" /></li>
+                                <li><input type="submit" name="result_submit" value="standby" class="btn" /></li>
                                 <li><input type="submit" name="result_submit" value="undecide" class="btn" /></li>
                             </ul>
                         {% else %}
-                            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Undecided <span class="caret"></span></a>
-                            <ul class="dropdown-menu pull-right">
-                                <li><input type="submit" name="result_submit" value="accept" class="btn btn-success" /></li>
-                                <li><input type="submit" name="result_submit" value="reject" class="btn btn-danger" /></li>
-                            </ul>
+                            {% if proposal.result.status == "standby" %}
+                                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Standby <span class="caret"></span></a>
+                                <ul class="dropdown-menu pull-right">
+                                    <li><input type="submit" name="result_submit" value="accept" class="btn btn-success" /></li>
+                                    <li><input type="submit" name="result_submit" value="reject" class="btn btn-danger" /></li>
+                                    <li><input type="submit" name="result_submit" value="undecide" class="btn" /></li>
+                                </ul>
+                            {% else %}
+                                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Undecided <span class="caret"></span></a>
+                                <ul class="dropdown-menu pull-right">
+                                    <li><input type="submit" name="result_submit" value="accept" class="btn btn-success" /></li>
+                                    <li><input type="submit" name="result_submit" value="reject" class="btn btn-danger" /></li>
+                                    <li><input type="submit" name="result_submit" value="standby" class="btn" /></li>
+                                </ul>
+                            {% endif %}
                         {% endif %}
                     {% endif %}
                 </div>
