@@ -217,13 +217,16 @@ def review_detail(request, pk):
                 result = request.POST["result_submit"]
                 
                 if result == "accept":
-                    proposal.result.accepted = True
+                    proposal.result.status = "accepted"
                     proposal.result.save()
                 elif result == "reject":
-                    proposal.result.accepted = False
+                    proposal.result.status = "rejected"
                     proposal.result.save()
                 elif result == "undecide":
-                    proposal.result.accepted = None
+                    proposal.result.status = "undecided"
+                    proposal.result.save()
+                elif result == "reserve":
+                    proposal.result.status = "in-reserve"
                     proposal.result.save()
             
             return redirect(request.path)
@@ -357,7 +360,7 @@ def review_bulk_accept(request, section_slug):
             talk_ids = form.cleaned_data["talk_ids"].split(",")
             talks = ProposalBase.objects.filter(id__in=talk_ids).select_related("result")
             for talk in talks:
-                talk.result.accepted = True
+                talk.result.status = "accepted"
                 talk.result.save()
             return redirect("review_list")
     else:

@@ -10,7 +10,7 @@
             <span class="label label-important">Cancelled</span>
         {% else %}
             {% if request.user == proposal.speaker.user %}
-                {% if proposal.result.accepted %}
+                {% if proposal.result.status == "accepted" %}
                     <span class="label label-success">Accepted</span>
                 {% else %}
                     <span class="label">Submitted</span>

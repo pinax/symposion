@@ -209,6 +209,12 @@ class ProposalResult(models.Model):
         (False, "rejected"),
         (None, "undecided"),
     ], default=None)
+    status = models.CharField(max_length=20, choices=[
+        ("accepted", "accepted"),
+        ("rejected", "rejected"),
+        ("undecided", "undecided"),
+        ("in-reserve", "in reserve"),
+    ], default="undecided")
     
     @classmethod
     def full_calculate(cls):
@@ -309,7 +315,7 @@ def unpromote_proposal(proposal):
 def accepted_proposal(sender, instance=None, **kwargs):
     if instance is None:
         return
-    if instance.accepted == True:
+    if instance.status == "accepted":
         promote_proposal(instance.proposal)
     else:
         unpromote_proposal(instance.proposal)
