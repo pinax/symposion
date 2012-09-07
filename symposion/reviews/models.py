@@ -284,6 +284,24 @@ class Comment(models.Model):
     commented_at = models.DateTimeField(default=datetime.now)
 
 
+class NotificationTemplate(models.Model):
+    
+    label = models.CharField(max_length=100)
+    subject = models.CharField(max_length=100)
+    body = models.TextField()
+
+
+class ResultNotification(models.Model):
+    
+    proposal = models.ForeignKey("proposals.ProposalBase", related_name="notifications")
+    template = models.ForeignKey(NotificationTemplate, null=True, blank=True, on_delete=models.SET_NULL)
+    timestamp = models.DateTimeField(default=datetime.now)
+    to_address = models.EmailField()
+    from_address = models.EmailField()
+    subject = models.CharField(max_length=100)
+    body = models.TextField()
+
+
 def promote_proposal(proposal):
     
     if hasattr(proposal, "presentation") and proposal.presentation:

@@ -369,3 +369,17 @@ def review_bulk_accept(request, section_slug):
     return render(request, "reviews/review_bulk_accept.html", {
         "form": form,
     })
+
+
+@login_required
+def result_notification(request, section_slug, status):
+    if not request.user.has_perm("reviews.can_manage_%s" % section_slug):
+        return access_not_permitted(request)
+    
+    proposals = ProposalBase.objects.filter(kind__section__slug=section_slug, result__status=status).select_related("speaker__user", "result").select_subclasses()
+
+    ctx = {
+        "section_slug": section_slug,
+        "proposals": proposals,
+    }
+    return render(request, "reviews/result_notification.html", ctx)
