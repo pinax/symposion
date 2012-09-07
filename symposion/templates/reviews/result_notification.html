@@ -62,10 +62,6 @@
                 var options = $.extend({}, $.fn.actions.defaults, opts);
                 var actionCheckboxes = $(this);
                 checker = function(checked) {
-                    if (checked) {
-                    } else {
-                        reset();
-                    }
                     $(actionCheckboxes).attr("checked", checked)
                         .parent().parent().toggleClass(options.selectedClass, checked);
                 }
@@ -81,17 +77,12 @@
                         return value;
                     });
                 }
-                reset = function() {
-                    $(options.counterContainer).show();
-                }
-                // Show counter by default
-                $(options.counterContainer).show();
                 // Check state of checkboxes and reinit state if needed
                 $(this).filter(":checked").each(function(i) {
                     $(this).parent().parent().toggleClass(options.selectedClass);
                     updateCounter();
                 });
-                $(options.allToggle).show().click(function() {
+                $(options.allToggle).click(function() {
                     checker($(this).attr("checked"));
                     updateCounter();
                 });
