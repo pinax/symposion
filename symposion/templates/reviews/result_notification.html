@@ -62,13 +62,13 @@
                 var options = $.extend({}, $.fn.actions.defaults, opts);
                 var actionCheckboxes = $(this);
                 checker = function(checked) {
-                    $(actionCheckboxes).attr("checked", checked)
+                    $(actionCheckboxes).prop("checked", checked)
                         .parent().parent().toggleClass(options.selectedClass, checked);
                 }
                 updateCounter = function() {
                     var sel = $(actionCheckboxes).filter(":checked").length;
                     $(options.counterContainer).html(sel);
-                    $(options.allToggle).attr("checked", function() {
+                    $(options.allToggle).prop("checked", function() {
                         if (sel == actionCheckboxes.length) {
                             value = true;
                         } else {
@@ -83,7 +83,7 @@
                     updateCounter();
                 });
                 $(options.allToggle).click(function() {
-                    checker($(this).attr("checked"));
+                    checker($(this).prop("checked"));
                     updateCounter();
                 });
                 lastChecked = null;
@@ -92,14 +92,14 @@
                     var target = event.target ? event.target : event.srcElement;
                     if (lastChecked && $.data(lastChecked) != $.data(target) && event.shiftKey == true) {
                         var inrange = false;
-                        $(lastChecked).attr("checked", target.checked)
+                        $(lastChecked).prop("checked", target.checked)
                             .parent().parent().toggleClass(options.selectedClass, target.checked);
                         $(actionCheckboxes).each(function() {
                             if ($.data(this) == $.data(lastChecked) || $.data(this) == $.data(target)) {
                                 inrange = (inrange) ? false : true;
                             }
                             if (inrange) {
-                                $(this).attr("checked", target.checked)
+                                $(this).prop("checked", target.checked)
                                     .parent().parent().toggleClass(options.selectedClass, target.checked);
                             }
                         });
