@@ -396,6 +396,12 @@ def result_notification_prepare(request, section_slug, status):
     if request.method != "POST":
         return HttpResponseNotAllowed(["POST"])
     
+    notification_template_pk = request.POST.get("notification_template", "")
+    if notification_template_pk:
+        notification_template = NotificationTemplate.objects.get(pk=notification_template_pk)
+    else:
+        notification_template = None
+    
     proposal_pks = []
     try:
         for pk in request.POST.getlist("_selected_action"):
@@ -413,6 +419,7 @@ def result_notification_prepare(request, section_slug, status):
     ctx = {
         "section_slug": section_slug,
         "status": status,
+        "notification_template": notification_template,
         "proposals": proposals,
         "proposal_pks": " ".join([str(pk) for pk in proposal_pks]),
     }
