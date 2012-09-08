@@ -22,8 +22,8 @@
             Select one or more proposals (<span class="action-counter">0</span> currently selected)
             <br/>
             then pick an email template
-            <select>
-                <option value="0">[blank]</option>
+            <select name="notification_template">
+                <option value="">[blank]</option>
                 {% for template in notification_templates %}
                     <option value="{{ template.pk }}">{{ template.label }}</option>
                 {% endfor %}
