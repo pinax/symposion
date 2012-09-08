@@ -378,11 +378,13 @@ def result_notification(request, section_slug, status):
         return access_not_permitted(request)
     
     proposals = ProposalBase.objects.filter(kind__section__slug=section_slug, result__status=status).select_related("speaker__user", "result").select_subclasses()
+    notification_templates = NotificationTemplate.objects.all()
     
     ctx = {
         "section_slug": section_slug,
         "status": status,
         "proposals": proposals,
+        "notification_templates": notification_templates,
     }
     return render(request, "reviews/result_notification.html", ctx)
 
