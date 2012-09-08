@@ -23,7 +23,6 @@
         <div class="span6">
             <h2>Email</h2>
             
-            
             <form method="post" action="{% url result_notification_send section_slug status %}">
                 <label>Subject</label>
                 <input type="text" name="subject" class="span5" value="{{ notification_template.subject }}" />
@@ -33,7 +32,11 @@
                 <br/>
                 <input type="hidden" name="notification_template" value="{{ notification_template.pk }}" />
                 <input type="hidden" name="proposal_pks" value="{{ proposal_pks }}" />
-                <button type="submit" class="btn btn-primary">Send</button>
+                <p>
+                    If the <b>Body</b> includes the string <code>{% templatetag openvariable %} proposal {% templatetag closevariable %}</code> then it will be
+                    replaced with the title of the proposal when the email is sent.
+                </p>
+                <button type="submit" class="btn btn-primary">Send {{ proposals|length }} Email{{ proposals|length|pluralize }}</button>
             </form>
         </div>
     </form>
