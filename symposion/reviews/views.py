@@ -12,7 +12,9 @@ from symposion.utils.mail import send_email
 
 from symposion.reviews.forms import ReviewForm, SpeakerCommentForm
 from symposion.reviews.forms import BulkPresentationForm
-from symposion.reviews.models import ReviewAssignment, Review, LatestVote, ProposalResult
+from symposion.reviews.models import (
+    ReviewAssignment, Review, LatestVote, ProposalResult, NotificationTemplate
+)
 
 
 def access_not_permitted(request):
