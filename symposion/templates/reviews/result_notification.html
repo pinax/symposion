@@ -11,6 +11,13 @@
 {% endblock %}
 
 {% block body %}
+    
+    <ul class="nav nav-pills">
+        <li{% if status == 'accepted' %} class="active"{% endif %}><a href="{% url result_notification section_slug 'accepted' %}">accepted</a>
+        <li{% if status == 'rejected' %} class="active"{% endif %}><a href="{% url result_notification section_slug 'rejected' %}">rejected</a>
+        <li{% if status == 'standby' %} class="active"{% endif %}><a href="{% url result_notification section_slug 'standby' %}">standby</a>
+    </ul>
+    
     <h1>Result Notification</h1>
     
     <form method="post" action="{% url result_notification_prepare section_slug status %}">
@@ -64,6 +71,7 @@
                             {% endwith %}
                         </td>
                         <td>
+                            {% if proposal.notifications.exists %}yes{% endif %}
                         </td>
                     </tr>
                 {% endfor %}
