@@ -414,6 +414,7 @@ def result_notification_prepare(request, section_slug, status):
         "section_slug": section_slug,
         "status": status,
         "proposals": proposals,
+        "proposal_pks": " ".join(proposal_pks),
     }
     return render(request, "reviews/result_notification_prepare.html", ctx)
 
@@ -422,4 +423,22 @@ def result_notification_send(request, section_slug, status):
     if request.method != "POST":
         return HttpResponseNotAllowed(["POST"])
     
-    # @@@ discuss with jtauber about how to handle this
+    if "proposal_pks" not in request.POST:
+        return HttpResponseBadRequest()
+    
+    try:
+        proposal_pks = [int(pk) for pk in request.POST["proposal_pks"]]
+    except ValueError:
+        return HttpResponseBadRequest()
+    
+    proposals = ProposalBase.objects.filter(
+        kind__section__slug=section_slug,
+        result__status=status,
+    )
+    proposals = proposals.filter(pk__in=proposal_pks)
+    proposals = proposals.select_related("speaker__user", "result")
+    proposals = proposals.select_subclasses()
+    
+    # create ResultNotification objects and send
+    
+    return redirect("result_notification", section_slug=section_slug, status=status)
