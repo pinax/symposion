@@ -37,6 +37,7 @@
                     replaced with the title of the proposal when the email is sent.
                 </p>
                 <button type="submit" class="btn btn-primary">Send {{ proposals|length }} Email{{ proposals|length|pluralize }}</button>
+                <a class="btn" href="{% url result_notification section_slug status %}">Cancel</a>
             </form>
         </div>
     </form>

@@ -28,7 +28,7 @@
                 {% endfor %}
             </select>
             <br/>
-            <button type="submit" class="btn btn-primary">Next <i class="icon icon-chevron-right"></i></button>
+            <button id="next-button" type="submit" class="btn btn-primary" disabled>Next <i class="icon icon-chevron-right"></i></button>
         </p>
         
         <table class="table table-striped table-bordered">
@@ -93,6 +93,11 @@
                         }
                         return value;
                     });
+                    if (sel == 0) {
+                        $("#next-button").prop("disabled", true);
+                    } else {
+                        $("#next-button").prop("disabled", false);
+                    }
                 }
                 // Check state of checkboxes and reinit state if needed
                 $(this).filter(":checked").each(function(i) {
