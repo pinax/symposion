@@ -400,6 +400,9 @@ def result_notification_prepare(request, section_slug, status):
     if request.method != "POST":
         return HttpResponseNotAllowed(["POST"])
     
+    if not request.user.has_perm("reviews.can_manage_%s" % section_slug):
+        return access_not_permitted(request)
+    
     proposal_pks = []
     try:
         for pk in request.POST.getlist("_selected_action"):
@@ -430,9 +433,13 @@ def result_notification_prepare(request, section_slug, status):
     return render(request, "reviews/result_notification_prepare.html", ctx)
 
 
+@login_required
 def result_notification_send(request, section_slug, status):
     if request.method != "POST":
         return HttpResponseNotAllowed(["POST"])
+    
+    if not request.user.has_perm("reviews.can_manage_%s" % section_slug):
+        return access_not_permitted(request)
     
     if not all([k in request.POST for k in ["proposal_pks", "subject", "body"]]):
         return HttpResponseBadRequest()
