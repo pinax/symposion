@@ -13,7 +13,6 @@
 {% block body %}
     <h1>Result Notification</h1>
     
-    
     <form method="post" action="{% url result_notification_prepare section_slug status %}">
         
         {% csrf_token %}
