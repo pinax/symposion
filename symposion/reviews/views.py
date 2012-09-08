@@ -396,12 +396,6 @@ def result_notification_prepare(request, section_slug, status):
     if request.method != "POST":
         return HttpResponseNotAllowed(["POST"])
     
-    notification_template_pk = request.POST.get("notification_template", "")
-    if notification_template_pk:
-        notification_template = NotificationTemplate.objects.get(pk=notification_template_pk)
-    else:
-        notification_template = None
-    
     proposal_pks = []
     try:
         for pk in request.POST.getlist("_selected_action"):
@@ -416,12 +410,18 @@ def result_notification_prepare(request, section_slug, status):
     proposals = proposals.select_related("speaker__user", "result")
     proposals = proposals.select_subclasses()
     
+    notification_template_pk = request.POST.get("notification_template", "")
+    if notification_template_pk:
+        notification_template = NotificationTemplate.objects.get(pk=notification_template_pk)
+    else:
+        notification_template = None
+    
     ctx = {
         "section_slug": section_slug,
         "status": status,
         "notification_template": notification_template,
         "proposals": proposals,
-        "proposal_pks": " ".join([str(pk) for pk in proposal_pks]),
+        "proposal_pks": ",".join([str(pk) for pk in proposal_pks]),
     }
     return render(request, "reviews/result_notification_prepare.html", ctx)
 
@@ -434,7 +434,7 @@ def result_notification_send(request, section_slug, status):
         return HttpResponseBadRequest()
     
     try:
-        proposal_pks = [int(pk) for pk in request.POST["proposal_pks"]]
+        proposal_pks = [int(pk) for pk in request.POST["proposal_pks"].split(",")]
     except ValueError:
         return HttpResponseBadRequest()
     
@@ -445,6 +445,12 @@ def result_notification_send(request, section_slug, status):
     proposals = proposals.filter(pk__in=proposal_pks)
     proposals = proposals.select_related("speaker__user", "result")
     proposals = proposals.select_subclasses()
+    
+    notification_template_pk = request.POST.get("notification_template", "")
+    if notification_template_pk:
+        notification_template = NotificationTemplate.objects.get(pk=notification_template_pk)
+    else:
+        notification_template = None
     
     # create ResultNotification objects and send
     
