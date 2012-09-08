@@ -13,11 +13,24 @@
 {% block body %}
     <h1>Result Notification</h1>
     
-    <span class="action-counter">0</span> selected
     
     <form method="post" action="{% url result_notification_prepare section_slug status %}">
         
         {% csrf_token %}
+        
+        <p>
+            Select one or more proposals (<span class="action-counter">0</span> currently selected)
+            <br/>
+            then pick an email template
+            <select>
+                <option value="0">[blank]</option>
+                {% for template in notification_templates %}
+                    <option value="{{ template.pk }}">{{ template.label }}</option>
+                {% endfor %}
+            </select>
+            <br/>
+            <button type="submit" class="btn btn-primary">Next <i class="icon icon-chevron-right"></i></button>
+        </p>
         
         <table class="table table-striped table-bordered">
             <thead>
@@ -57,9 +70,6 @@
                 {% endfor %}
             </tbody>
         </table>
-        
-        <button type="submit" class="btn btn-primary">POST IT</button>
-        
     </form>
 {% endblock %}
 
