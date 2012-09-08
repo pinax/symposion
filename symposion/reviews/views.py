@@ -434,7 +434,7 @@ def result_notification_send(request, section_slug, status):
     if request.method != "POST":
         return HttpResponseNotAllowed(["POST"])
     
-    if not all([k in request.POST for k in ["proposal_pks", "subject", "body"]])
+    if not all([k in request.POST for k in ["proposal_pks", "subject", "body"]]):
         return HttpResponseBadRequest()
     
     try:
