@@ -1,3 +1,6 @@
+import re
+
+from django.core.mail import send_mass_mail
 from django.db.models import Q
 from django.http import HttpResponseBadRequest, HttpResponseNotAllowed
 from django.shortcuts import render, redirect, get_object_or_404
@@ -13,7 +16,8 @@ from symposion.utils.mail import send_email
 from symposion.reviews.forms import ReviewForm, SpeakerCommentForm
 from symposion.reviews.forms import BulkPresentationForm
 from symposion.reviews.models import (
-    ReviewAssignment, Review, LatestVote, ProposalResult, NotificationTemplate
+    ReviewAssignment, Review, LatestVote, ProposalResult, NotificationTemplate,
+    ResultNotification
 )
 
 
@@ -430,7 +434,7 @@ def result_notification_send(request, section_slug, status):
     if request.method != "POST":
         return HttpResponseNotAllowed(["POST"])
     
-    if "proposal_pks" not in request.POST:
+    if not all([k in request.POST for k in ["proposal_pks", "subject", "body"]])
         return HttpResponseBadRequest()
     
     try:
@@ -452,6 +456,19 @@ def result_notification_send(request, section_slug, status):
     else:
         notification_template = None
     
-    # create ResultNotification objects and send
+    emails = []
+    
+    for proposal in proposals:
+        rn = ResultNotification()
+        rn.proposal = proposal
+        rn.template = notification_template
+        rn.to_address = proposal.speaker_email
+        rn.from_address = settings.DEFAULT_FROM_EMAIL
+        rn.subject = request.POST["subject"]
+        rn.body = re.sub(r"{{\s*proposal\s*}}", proposal.title, request.POST["body"])
+        rn.save()
+        emails.append(rn.email_args)
+    
+    send_mass_mail(emails)
     
     return redirect("result_notification", section_slug=section_slug, status=status)

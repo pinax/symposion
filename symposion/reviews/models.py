@@ -300,6 +300,10 @@ class ResultNotification(models.Model):
     from_address = models.EmailField()
     subject = models.CharField(max_length=100)
     body = models.TextField()
+    
+    @property
+    def email_args(self):
+        return (self.subject, self.body, self.from_address, [self.to_address])
 
 
 def promote_proposal(proposal):
