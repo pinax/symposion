@@ -414,7 +414,7 @@ def result_notification_prepare(request, section_slug, status):
         "section_slug": section_slug,
         "status": status,
         "proposals": proposals,
-        "proposal_pks": " ".join(proposal_pks),
+        "proposal_pks": " ".join([str(pk) for pk in proposal_pks]),
     }
     return render(request, "reviews/result_notification_prepare.html", ctx)
 
