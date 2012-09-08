@@ -1,4 +1,5 @@
 from django.db.models import Q
+from django.http import HttpResponseBadRequest, HttpResponseNotAllowed
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 
@@ -377,9 +378,44 @@ def result_notification(request, section_slug, status):
         return access_not_permitted(request)
     
     proposals = ProposalBase.objects.filter(kind__section__slug=section_slug, result__status=status).select_related("speaker__user", "result").select_subclasses()
-
+    
     ctx = {
         "section_slug": section_slug,
+        "status": status,
         "proposals": proposals,
     }
     return render(request, "reviews/result_notification.html", ctx)
+
+
+@login_required
+def result_notification_prepare(request, section_slug, status):
+    if request.method != "POST":
+        return HttpResponseNotAllowed(["POST"])
+    
+    proposal_pks = []
+    try:
+        for pk in request.POST.getlist("_selected_action"):
+            proposal_pks.append(int(pk))
+    except ValueError:
+        return HttpResponseBadRequest()
+    proposals = ProposalBase.objects.filter(
+        kind__section__slug=section_slug,
+        result__status=status,
+    )
+    proposals = proposals.filter(pk__in=proposal_pks)
+    proposals = proposals.select_related("speaker__user", "result")
+    proposals = proposals.select_subclasses()
+    
+    ctx = {
+        "section_slug": section_slug,
+        "status": status,
+        "proposals": proposals,
+    }
+    return render(request, "reviews/result_notification_prepare.html", ctx)
+
+
+def result_notification_send(request, section_slug, status):
+    if request.method != "POST":
+        return HttpResponseNotAllowed(["POST"])
+    
+    # @@@ discuss with jtauber about how to handle this
