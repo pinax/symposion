@@ -24,6 +24,9 @@
             <h2>Email</h2>
             
             <form method="post" action="{% url result_notification_send section_slug status %}">
+                
+                {% csrf_token %}
+                
                 <label>Subject</label>
                 <input type="text" name="subject" class="span5" value="{{ notification_template.subject }}" />
                 <br/>
