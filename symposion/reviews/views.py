@@ -1,4 +1,8 @@
+import re
+
+from django.core.mail import send_mass_mail
 from django.db.models import Q
+from django.http import HttpResponseBadRequest, HttpResponseNotAllowed
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
 
@@ -11,7 +15,10 @@ from symposion.utils.mail import send_email
 
 from symposion.reviews.forms import ReviewForm, SpeakerCommentForm
 from symposion.reviews.forms import BulkPresentationForm
-from symposion.reviews.models import ReviewAssignment, Review, LatestVote, ProposalResult
+from symposion.reviews.models import (
+    ReviewAssignment, Review, LatestVote, ProposalResult, NotificationTemplate,
+    ResultNotification
+)
 
 
 def access_not_permitted(request):
@@ -369,3 +376,106 @@ def review_bulk_accept(request, section_slug):
     return render(request, "reviews/review_bulk_accept.html", {
         "form": form,
     })
+
+
+@login_required
+def result_notification(request, section_slug, status):
+    if not request.user.has_perm("reviews.can_manage_%s" % section_slug):
+        return access_not_permitted(request)
+    
+    proposals = ProposalBase.objects.filter(kind__section__slug=section_slug, result__status=status).select_related("speaker__user", "result").select_subclasses()
+    notification_templates = NotificationTemplate.objects.all()
+    
+    ctx = {
+        "section_slug": section_slug,
+        "status": status,
+        "proposals": proposals,
+        "notification_templates": notification_templates,
+    }
+    return render(request, "reviews/result_notification.html", ctx)
+
+
+@login_required
+def result_notification_prepare(request, section_slug, status):
+    if request.method != "POST":
+        return HttpResponseNotAllowed(["POST"])
+    
+    if not request.user.has_perm("reviews.can_manage_%s" % section_slug):
+        return access_not_permitted(request)
+    
+    proposal_pks = []
+    try:
+        for pk in request.POST.getlist("_selected_action"):
+            proposal_pks.append(int(pk))
+    except ValueError:
+        return HttpResponseBadRequest()
+    proposals = ProposalBase.objects.filter(
+        kind__section__slug=section_slug,
+        result__status=status,
+    )
+    proposals = proposals.filter(pk__in=proposal_pks)
+    proposals = proposals.select_related("speaker__user", "result")
+    proposals = proposals.select_subclasses()
+    
+    notification_template_pk = request.POST.get("notification_template", "")
+    if notification_template_pk:
+        notification_template = NotificationTemplate.objects.get(pk=notification_template_pk)
+    else:
+        notification_template = None
+    
+    ctx = {
+        "section_slug": section_slug,
+        "status": status,
+        "notification_template": notification_template,
+        "proposals": proposals,
+        "proposal_pks": ",".join([str(pk) for pk in proposal_pks]),
+    }
+    return render(request, "reviews/result_notification_prepare.html", ctx)
+
+
+@login_required
+def result_notification_send(request, section_slug, status):
+    if request.method != "POST":
+        return HttpResponseNotAllowed(["POST"])
+    
+    if not request.user.has_perm("reviews.can_manage_%s" % section_slug):
+        return access_not_permitted(request)
+    
+    if not all([k in request.POST for k in ["proposal_pks", "subject", "body"]]):
+        return HttpResponseBadRequest()
+    
+    try:
+        proposal_pks = [int(pk) for pk in request.POST["proposal_pks"].split(",")]
+    except ValueError:
+        return HttpResponseBadRequest()
+    
+    proposals = ProposalBase.objects.filter(
+        kind__section__slug=section_slug,
+        result__status=status,
+    )
+    proposals = proposals.filter(pk__in=proposal_pks)
+    proposals = proposals.select_related("speaker__user", "result")
+    proposals = proposals.select_subclasses()
+    
+    notification_template_pk = request.POST.get("notification_template", "")
+    if notification_template_pk:
+        notification_template = NotificationTemplate.objects.get(pk=notification_template_pk)
+    else:
+        notification_template = None
+    
+    emails = []
+    
+    for proposal in proposals:
+        rn = ResultNotification()
+        rn.proposal = proposal
+        rn.template = notification_template
+        rn.to_address = proposal.speaker_email
+        rn.from_address = settings.DEFAULT_FROM_EMAIL
+        rn.subject = request.POST["subject"]
+        rn.body = re.sub(r"{{\s*proposal\s*}}", proposal.title, request.POST["body"])
+        rn.save()
+        emails.append(rn.email_args)
+    
+    send_mass_mail(emails)
+    
+    return redirect("result_notification", section_slug=section_slug, status=status)

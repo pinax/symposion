@@ -1,0 +1,47 @@
+{% extends "reviews/base.html" %}
+
+{% load i18n %}
+
+{% block body %}
+    <h1>Result Notification Prepare</h1>
+    
+    <div class="row">
+        <div class="span4">
+            <h2>Proposals</h2>
+            <table class="table table-striped table-compact">
+                {% for proposal in proposals %}
+                    <tr>
+                        <td>
+                            <strong>{{ proposal.speaker }}</strong> ({{ proposal.speaker.email }})
+                            <br />
+                            {{ proposal.title }}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        </div>
+        <div class="span6">
+            <h2>Email</h2>
+            
+            <form method="post" action="{% url result_notification_send section_slug status %}">
+                
+                {% csrf_token %}
+                
+                <label>Subject</label>
+                <input type="text" name="subject" class="span5" value="{{ notification_template.subject }}" />
+                <br/>
+                <label>Body</label>
+                <textarea class="span5" rows="10" name="body">{{ notification_template.body }}</textarea>
+                <br/>
+                <input type="hidden" name="notification_template" value="{{ notification_template.pk }}" />
+                <input type="hidden" name="proposal_pks" value="{{ proposal_pks }}" />
+                <p>
+                    If the <b>Body</b> includes the string <code>{% templatetag openvariable %} proposal {% templatetag closevariable %}</code> then it will be
+                    replaced with the title of the proposal when the email is sent.
+                </p>
+                <button type="submit" class="btn btn-primary">Send {{ proposals|length }} Email{{ proposals|length|pluralize }}</button>
+                <a class="btn" href="{% url result_notification section_slug status %}">Cancel</a>
+            </form>
+        </div>
+    </form>
+{% endblock %}
