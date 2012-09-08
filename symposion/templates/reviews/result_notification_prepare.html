@@ -25,13 +25,11 @@
             
             
             <form method="post" action="{% url result_notification_send section_slug status %}">
-                Subject:
-                <input name="subject" value="{{ notification_template.subject }}" />
+                <label>Subject</label>
+                <input type="text" name="subject" class="span5" value="{{ notification_template.subject }}" />
                 <br/>
-                Body:
-                <textarea name="body">
-                    {{ notification_template.body }}
-                </textarea>
+                <label>Body</label>
+                <textarea class="span5" rows="10" name="body">{{ notification_template.body }}</textarea>
                 <br/>
                 <input type="hidden" name="notification_template" value="{{ notification_template.pk }}" />
                 <input type="hidden" name="proposal_pks" value="{{ proposal_pks }}" />
