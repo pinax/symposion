@@ -1,0 +1,7 @@
+    <b>Body</b> may include the following variables which will be substituted in the email with a value
+    specific to each proposal:
+<ul>
+    <li><code>{% templatetag openvariable %} proposal.title {% templatetag closevariable %}</code> e.g. {{ proposals.0.title }}
+    <li><code>{% templatetag openvariable %} proposal.kind {% templatetag closevariable %}</code> e.g. {{ proposals.0.kind }}
+    <li><code>{% templatetag openvariable %} proposal.speaker {% templatetag closevariable %}</code> e.g. {{ proposals.0.speaker }}
+</ul>
