@@ -287,6 +287,7 @@ class Comment(models.Model):
 class NotificationTemplate(models.Model):
     
     label = models.CharField(max_length=100)
+    from_address = models.EmailField()
     subject = models.CharField(max_length=100)
     body = models.TextField(
         help_text=(

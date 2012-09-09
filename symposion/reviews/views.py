@@ -441,7 +441,7 @@ def result_notification_send(request, section_slug, status):
     if not request.user.has_perm("reviews.can_manage_%s" % section_slug):
         return access_not_permitted(request)
     
-    if not all([k in request.POST for k in ["proposal_pks", "subject", "body"]]):
+    if not all([k in request.POST for k in ["proposal_pks", "from_address", "subject", "body"]]):
         return HttpResponseBadRequest()
     
     try:
@@ -470,7 +470,7 @@ def result_notification_send(request, section_slug, status):
         rn.proposal = proposal
         rn.template = notification_template
         rn.to_address = proposal.speaker_email
-        rn.from_address = settings.DEFAULT_FROM_EMAIL
+        rn.from_address = request.POST["from_address"]
         rn.subject = request.POST["subject"]
         rn.body = re.sub(r"{{\s*proposal\s*}}", proposal.title, request.POST["body"])
         rn.save()

@@ -27,6 +27,9 @@
                 
                 {% csrf_token %}
                 
+                <label>From Address</label>
+                <input type="text" name="from_address" class="span5" value="{{ notification_template.from_address }}" />
+                <br/>
                 <label>Subject</label>
                 <input type="text" name="subject" class="span5" value="{{ notification_template.subject }}" />
                 <br/>
