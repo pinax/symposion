@@ -122,6 +122,13 @@ class ProposalBase(models.Model):
         yield self.speaker
         for speaker in self.additional_speakers.exclude(additionalspeaker__status=AdditionalSpeaker.SPEAKING_STATUS_DECLINED):
             yield speaker
+    
+    def notification_email_context(self):
+        return {
+            "title": self.title,
+            "speaker": self.speaker.name,
+            "kind": self.kind.name,
+        }
 
 
 reversion.register(ProposalBase)

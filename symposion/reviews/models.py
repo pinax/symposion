@@ -289,13 +289,7 @@ class NotificationTemplate(models.Model):
     label = models.CharField(max_length=100)
     from_address = models.EmailField()
     subject = models.CharField(max_length=100)
-    body = models.TextField(
-        help_text=(
-            "If the <b>Body</b> includes the string <code>{{ proposal }}</code> "
-            "then it will be replaced with the title of the proposal when the "
-            "email is sent."
-        )
-    )
+    body = models.TextField()
 
 
 class ResultNotification(models.Model):

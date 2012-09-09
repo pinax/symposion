@@ -4,6 +4,7 @@ from django.core.mail import send_mass_mail
 from django.db.models import Q
 from django.http import HttpResponseBadRequest, HttpResponseNotAllowed
 from django.shortcuts import render, redirect, get_object_or_404
+from django.template import Context, Template
 from django.views.decorators.http import require_POST
 
 from django.contrib.auth.decorators import login_required
@@ -472,7 +473,11 @@ def result_notification_send(request, section_slug, status):
         rn.to_address = proposal.speaker_email
         rn.from_address = request.POST["from_address"]
         rn.subject = request.POST["subject"]
-        rn.body = re.sub(r"{{\s*proposal\s*}}", proposal.title, request.POST["body"])
+        rn.body = Template(request.POST["body"]).render(
+            Context({
+                "proposal": proposal.notification_email_context()
+            })
+        )
         rn.save()
         emails.append(rn.email_args)
     
