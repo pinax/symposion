@@ -67,7 +67,7 @@ class Presentation(models.Model):
     speaker = models.ForeignKey("speakers.Speaker", related_name="presentations")
     additional_speakers = models.ManyToManyField("speakers.Speaker", blank=True)
     cancelled = models.BooleanField(default=False)
-    _proposal = models.OneToOneField(ProposalBase, related_name="presentation")
+    proposal_base = models.OneToOneField(ProposalBase, related_name="presentation")
     section = models.ForeignKey(Section, related_name="presentations")
     
     @property
@@ -76,10 +76,9 @@ class Presentation(models.Model):
     
     @property
     def proposal(self):
-        if self._proposal:
-            proposal = ProposalBase.objects.get_subclass(pk=self._proposal.pk)
-            return proposal
-        return None
+        if self.proposal_base_id is None:
+            return None
+        return ProposalBase.objects.get_subclass(pk=self.proposal_base_id)
     
     def speakers(self):
         yield self.speaker
