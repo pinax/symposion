@@ -1,3 +1,4 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
 from django.shortcuts import render, get_object_or_404, redirect
 
@@ -65,10 +66,22 @@ def schedule_slot_edit(request, slot_pk):
         raise Http404()
     
     slot = get_object_or_404(Slot, pk=slot_pk)
-    form = SlotEditForm(request.POST)
     
-    if form.is_valid():
-        presentation = form.cleaned_data["presentation"]
-        presentation.slot = slot
-        presentation.save()
-    return redirect("schedule_edit_singleton")
+    if request.method == "POST":
+        form = SlotEditForm(request.POST)
+        if form.is_valid():
+            presentation = form.cleaned_data["presentation"]
+            slot.assign(presentation)
+        return redirect("schedule_edit_singleton")
+    else:
+        initial = {}
+        try:
+            initial["presentation"] = slot.content
+        except ObjectDoesNotExist:
+            pass
+        form = SlotEditForm(initial=initial)
+        ctx = {
+            "form": form,
+            "slot": slot,
+        }
+        return render(request, "schedule/_slot_edit.html", ctx)

@@ -1,6 +1,8 @@
+from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 
 from markitup.fields import MarkupField
+from model_utils.managers import InheritanceManager
 
 from symposion.proposals.models import ProposalBase
 from symposion.conference.models import Section
@@ -44,6 +46,28 @@ class Slot(models.Model):
     kind = models.ForeignKey(SlotKind)
     start = models.TimeField()
     end = models.TimeField()
+    
+    def assign(self, content):
+        """
+        Assign the given content to this slot and if a previous slot content
+        was given we need to unlink it to avoid integrity errors.
+        """
+        if self.content and self.content.slot_id:
+            self.content.slot = None
+            self.content.save()
+        content.slot = self
+        content.save()
+    
+    @property
+    def content(self):
+        """
+        Return the content this slot represents.
+        @@@ hard-coded for presentation for now
+        """
+        try:
+            return self.content_ptr
+        except ObjectDoesNotExist:
+            return None
 
 
 class SlotRoom(models.Model):
@@ -60,7 +84,7 @@ class SlotRoom(models.Model):
 
 class Presentation(models.Model):
     
-    slot = models.OneToOneField(Slot, null=True, blank=True, related_name="presentation")
+    slot = models.OneToOneField(Slot, null=True, blank=True, related_name="content_ptr")
     title = models.CharField(max_length=100)
     description = MarkupField()
     abstract = MarkupField()

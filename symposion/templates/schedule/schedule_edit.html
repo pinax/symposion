@@ -62,21 +62,7 @@
             {% endfor %}
         </div>
         
-        <div class="modal fade hide in" id="slotEditModal">
-            <form id="slotEditForm" class="modal-form" method="POST">
-                <div class="modal-header">
-                    <a class="close" data-dismiss="modal">&times;</a>
-                    <h3>{% trans "Edit Slot" %}</h3>
-                </div>
-                <div class="modal-body" style="height:350px">
-                    {% csrf_token %}
-                    {{ form|as_bootstrap }}
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Save</button>
-                </div>
-            </form>
-        </div>
+        <div class="modal fade hide in" id="slotEditModal"></div>
     </div>
 {% endblock %}
 
@@ -85,10 +71,11 @@
     <script type="text/javascript">
         $(function() {
             $("a.edit-slot").click(function() {
-                $("#slotEditForm").get(0).setAttribute("action", $(this).data("action"));
-                $("#slotEditModal").modal("show");
+                $("#slotEditModal").load($(this).data("action"), function() {
+                    $("#id_presentation").chosen();
+                    $("#slotEditModal").modal("show");
+                });
             });
-            $("#id_presentation").chosen();
         });
     </script>
 {% endblock %}

@@ -11,11 +11,11 @@
             {% for slot in row.slots %}
                 <td class="slot slot-{{ slot.kind.label }}" colspan="{{ slot.colspan }}" rowspan="{{ slow.rowspan }}">
                     {% if slot.kind.label == "talk" %}
-                        {% if not slot.presentation %}
+                        {% if not slot.content %}
                             <a class="btn btn-mini edit-slot" data-action="{% url schedule_slot_edit slot.pk %}" href="#">+</a>
                         {% else %}
-                            <div class="title">{{ slot.presentation.title }}</div>
-                            <div class="speaker">{{ slot.presentation.speaker }}</div>
+                            <div class="title">{{ slot.content.title }}</div>
+                            <div class="speaker">{{ slot.content.speaker }}</div>
 
                             <span class="schedule-controls">
                                 <a class="btn btn-mini edit-slot" data-action="{% url schedule_slot_edit slot.pk %}" href="#">Edit</a>
