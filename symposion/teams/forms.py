@@ -48,6 +48,5 @@ class TeamInvitationForm(forms.Form):
             Membership.objects.create(team=self.team, user=self.user, state="invited")
         elif self.state == "applied":
             # if they applied we shortcut invitation process
-            membership = Membership.objects.get(team=self.team, user=self.user)
-            membership.state = "member"
-            membership.save()
+            membership = Membership.objects.filter(team=self.team, user=self.user)
+            membership.update(state="member")
