@@ -1,4 +1,4 @@
-from django.http import Http404
+from django.http import Http404, HttpResponseNotAllowed
 from django.shortcuts import render, redirect, get_object_or_404
 
 from django.contrib.auth.decorators import login_required
@@ -140,51 +140,55 @@ def team_apply(request, slug):
 
 @login_required
 def team_promote(request, pk):
-    if request.method == "POST":
-        membership = get_object_or_404(Membership, pk=pk)
-        state = membership.team.get_state_for_user(request.user)
-        if request.user.is_staff or state == "manager":
-            if membership.state == "member":
-                membership.state = "manager"
-                membership.save()
-                messages.success(request, "Promoted to manager.")
+    if request.method != "POST":
+        return HttpResponseNotAllowed(["POST"])
+    membership = get_object_or_404(Membership, pk=pk)
+    state = membership.team.get_state_for_user(request.user)
+    if request.user.is_staff or state == "manager":
+        if membership.state == "member":
+            membership.state = "manager"
+            membership.save()
+            messages.success(request, "Promoted to manager.")
     return redirect("team_detail", slug=membership.team.slug)
 
 
 @login_required
 def team_demote(request, pk):
-    if request.method == "POST":
-        membership = get_object_or_404(Membership, pk=pk)
-        state = membership.team.get_state_for_user(request.user)
-        if request.user.is_staff or state == "manager":
-            if membership.state == "manager":
-                membership.state = "member"
-                membership.save()
-                messages.success(request, "Demoted from manager.")
+    if request.method != "POST":
+        return HttpResponseNotAllowed(["POST"])
+    membership = get_object_or_404(Membership, pk=pk)
+    state = membership.team.get_state_for_user(request.user)
+    if request.user.is_staff or state == "manager":
+        if membership.state == "manager":
+            membership.state = "member"
+            membership.save()
+            messages.success(request, "Demoted from manager.")
     return redirect("team_detail", slug=membership.team.slug)
 
 
 @login_required
 def team_accept(request, pk):
-    if request.method == "POST":
-        membership = get_object_or_404(Membership, pk=pk)
-        state = membership.team.get_state_for_user(request.user)
-        if request.user.is_staff or state == "manager":
-            if membership.state == "applied":
-                membership.state = "member"
-                membership.save()
-                messages.success(request, "Accepted application.")
+    if request.method != "POST":
+        return HttpResponseNotAllowed(["POST"])
+    membership = get_object_or_404(Membership, pk=pk)
+    state = membership.team.get_state_for_user(request.user)
+    if request.user.is_staff or state == "manager":
+        if membership.state == "applied":
+            membership.state = "member"
+            membership.save()
+            messages.success(request, "Accepted application.")
     return redirect("team_detail", slug=membership.team.slug)
 
 
 @login_required
 def team_reject(request, pk):
-    if request.method == "POST":
-        membership = get_object_or_404(Membership, pk=pk)
-        state = membership.team.get_state_for_user(request.user)
-        if request.user.is_staff or state == "manager":
-            if membership.state == "applied":
-                membership.state = "rejected"
-                membership.save()
-                messages.success(request, "Rejected application.")
+    if request.method != "POST":
+        return HttpResponseNotAllowed(["POST"])
+    membership = get_object_or_404(Membership, pk=pk)
+    state = membership.team.get_state_for_user(request.user)
+    if request.user.is_staff or state == "manager":
+        if membership.state == "applied":
+            membership.state = "rejected"
+            membership.save()
+            messages.success(request, "Rejected application.")
     return redirect("team_detail", slug=membership.team.slug)
