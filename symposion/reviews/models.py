@@ -336,7 +336,7 @@ def unpromote_proposal(proposal):
 
 
 def accepted_proposal(sender, instance=None, **kwargs):
-    if instance is None:
+    if instance is None or not hasattr(instance, "presentation"):
         return
     if instance.status == "accepted":
         promote_proposal(instance.proposal)
