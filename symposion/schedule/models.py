@@ -11,7 +11,6 @@ from symposion.conference.models import Section
 class Schedule(models.Model):
     
     section = models.OneToOneField(Section)
-    slug = models.SlugField(unique=True)
 
 
 class Day(models.Model):
