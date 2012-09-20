@@ -17,7 +17,7 @@
             
         }
         .presentation p {
-            margin: 0;
+            margin-bottom: 0.5em;
             line-height: 1.2em;
         }
     </style>
@@ -31,6 +31,14 @@
                 <h3><a href="#">{{ presentation.title }}</a></h3>
                 <h4>{{ presentation.speaker }} in {{ presentation.proposal.track }}</h4>
                 {{ presentation.description }}
+                {% if presentation.slot %}
+                    <h4>
+                        {{ presentation.slot.day.date|date:"l" }}
+                        {{ presentation.slot.start}}&ndash;{{ presentation.slot.end }}
+                        in
+                        {{ presentation.slot.rooms|join:", " }}
+                    </h4>
+                {% endif %}
             </div>
         </div>
     {% endfor %}
