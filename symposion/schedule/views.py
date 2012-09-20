@@ -50,11 +50,9 @@ def schedule_edit(request, slug=None):
     
     days_qs = Day.objects.filter(schedule=schedule)
     days = [TimeTable(day) for day in days_qs]
-    form = SlotEditForm()
     ctx = {
         "schedule": schedule,
         "days": days,
-        "form": form,
     }
     return render(request, "schedule/schedule_edit.html", ctx)
 
