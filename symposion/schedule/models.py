@@ -73,6 +73,10 @@ class Slot(models.Model):
             return self.content_ptr
         except ObjectDoesNotExist:
             return None
+    
+    @property
+    def rooms(self):
+        return Room.objects.filter(pk__in=self.slotroom_set.values("room"))
 
 
 class SlotRoom(models.Model):
