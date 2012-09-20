@@ -67,19 +67,23 @@ def schedule_slot_edit(request, slot_pk):
     
     slot = get_object_or_404(Slot, pk=slot_pk)
     
+    # slot content
+    try:
+        content = slot.content
+    except ObjectDoesNotExist:
+        content = None
+    
     if request.method == "POST":
-        form = SlotEditForm(request.POST)
+        form = SlotEditForm(request.POST, content=content)
         if form.is_valid():
             presentation = form.cleaned_data["presentation"]
-            slot.assign(presentation)
+            if presentation is None:
+                slot.unassign()
+            else:
+                slot.assign(presentation)
         return redirect("schedule_edit_singleton")
     else:
-        initial = {}
-        try:
-            initial["presentation"] = slot.content
-        except ObjectDoesNotExist:
-            pass
-        form = SlotEditForm(initial=initial)
+        form = SlotEditForm(content=content)
         ctx = {
             "form": form,
             "slot": slot,

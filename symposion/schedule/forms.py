@@ -6,17 +6,18 @@ from symposion.schedule.models import Presentation
 
 class SlotEditForm(forms.Form):
     
-    presentation = forms.ModelChoiceField(
-        queryset=Presentation.objects.all(),
-        required=True,
-    )
+    presentation = forms.ModelChoiceField(queryset=Presentation.objects.all())
     
     def __init__(self, *args, **kwargs):
-        presentation = kwargs.get("initial", {}).get("presentation")
+        content = kwargs.pop("content", None)
+        if content:
+            kwargs.setdefault("initial", {})["presentation"] = content
         super(SlotEditForm, self).__init__(*args, **kwargs)
         queryset = self.fields["presentation"].queryset
-        if presentation:
-            queryset = queryset.filter(Q(slot=None) | Q(pk=presentation.pk))
+        if content:
+            queryset = queryset.filter(Q(slot=None) | Q(pk=content.pk))
+            self.fields["presentation"].required = False
         else:
             queryset = queryset.filter(slot=None)
+            self.fields["presentation"].required = True
         self.fields["presentation"].queryset = queryset

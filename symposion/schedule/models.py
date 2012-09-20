@@ -52,11 +52,17 @@ class Slot(models.Model):
         Assign the given content to this slot and if a previous slot content
         was given we need to unlink it to avoid integrity errors.
         """
+        self.unassign()
+        content.slot = self
+        content.save()
+    
+    def unassign(self):
+        """
+        Unassign the associated content with this slot.
+        """
         if self.content and self.content.slot_id:
             self.content.slot = None
             self.content.save()
-        content.slot = self
-        content.save()
     
     @property
     def content(self):
