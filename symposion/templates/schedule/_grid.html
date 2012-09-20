@@ -14,12 +14,8 @@
                         {% if not slot.content %}
                             <a class="btn btn-mini edit-slot" data-action="{% url schedule_slot_edit slot.pk %}" href="#">+</a>
                         {% else %}
-                            <div class="title">{{ slot.content.title }}</div>
+                            <div class="title"><a class="edit-slot" data-action="{% url schedule_slot_edit slot.pk %}" href="#">{{ slot.content.title }}</a></div>
                             <div class="speaker">{{ slot.content.speaker }}</div>
-
-                            <span class="schedule-controls">
-                                <a class="btn btn-mini edit-slot" data-action="{% url schedule_slot_edit slot.pk %}" href="#">Edit</a>
-                            </span>
                         {% endif %}
                     {% else %}
                         {{ slot.kind.label }}
