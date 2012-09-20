@@ -38,6 +38,7 @@ def schedule_list(request, slug=None):
     presentations = presentations.exclude(cancelled=True).order_by("id")
     
     ctx = {
+        "schedule": schedule,
         "presentations": presentations,
     }
     return render(request, "schedule/schedule_list.html", ctx)

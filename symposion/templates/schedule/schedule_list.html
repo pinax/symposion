@@ -24,7 +24,7 @@
 {% endblock %}
 
 {% block body %}
-    <h1>Accepted Presentations</h1>
+    <h1>Accepted {{ schedule.section.name }}</h1>
     {% for presentation in presentations %}
         <div class="row">
             <div class="span8 presentation well">
