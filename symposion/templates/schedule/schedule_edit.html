@@ -13,10 +13,10 @@
 {% block extra_head %}
     <link rel="stylesheet" href="{{ STATIC_URL }}chosen/chosen.css" />
     <style>
-        td {
+        .table td {
             font-size: 9pt;
         }
-        td.slot {
+        .table th, td.slot {
             text-align: center;
             vertical-align: middle;
         }
@@ -25,20 +25,6 @@
             width: 50px;
             font-size: 8pt;
             padding-top: 0;
-        }
-        td.slot:hover .schedule-controls {
-            display: block;
-        }
-        .schedule-controls {
-            display: none;
-            font-size: 8pt;
-        }
-        .schedule-controls a {
-            text-decoration: none;
-            color: #000;
-        }
-        .schedule-controls a:hover {
-            color: #999;
         }
         td.slot .title {
             font-weight: bold;
