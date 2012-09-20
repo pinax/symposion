@@ -26,7 +26,7 @@ def schedule_detail(request, slug=None):
 
 
 def schedule_list(request):
-    presentations = Presentation.objects.order_by("id")
+    presentations = Presentation.objects.exclude(cancelled=True).order_by("id")
     ctx = {
         "presentations": presentations,
     }
