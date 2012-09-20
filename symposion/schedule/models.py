@@ -27,6 +27,9 @@ class Room(models.Model):
     schedule = models.ForeignKey(Schedule)
     name = models.CharField(max_length=65)
     order = models.PositiveIntegerField()
+    
+    def __unicode__(self):
+        return self.name
 
 
 class SlotKind(models.Model):
