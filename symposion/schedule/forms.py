@@ -13,7 +13,7 @@ class SlotEditForm(forms.Form):
         if content:
             kwargs.setdefault("initial", {})["presentation"] = content
         super(SlotEditForm, self).__init__(*args, **kwargs)
-        queryset = Presentation.objects.order_by("proposal_base__pk")
+        queryset = Presentation.objects.exclude(cancelled=True).order_by("proposal_base__pk")
         if content:
             queryset = queryset.filter(Q(slot=None) | Q(pk=content.pk))
             self.fields["presentation"].required = False
