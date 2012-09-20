@@ -4,15 +4,33 @@
 
 {% block head_title %}Presentation Listing{% endblock %}
 
+{% block extra_head %}
+    <style>
+        .presentation {
+            
+        }
+        .presentation h3 {
+            line-height: 1.1em;
+            font-weight: bold;
+        }
+        .presentation h4 {
+            
+        }
+        .presentation p {
+            margin: 0;
+            line-height: 1.2em;
+        }
+    </style>
+{% endblock %}
+
 {% block body %}
+    <h1>Accepted Presentations</h1>
     {% for presentation in presentations %}
         <div class="row">
-            <div class="span8 well">
-                <h3>{{ presentation.title }}</h3>
+            <div class="span8 presentation well">
+                <h3><a href="#">{{ presentation.title }}</a></h3>
                 <h4>{{ presentation.speaker }} in {{ presentation.proposal.track }}</h4>
-                <p>
-                    {{ presentation.description }}
-                </p>
+                {{ presentation.description }}
             </div>
         </div>
     {% endfor %}
