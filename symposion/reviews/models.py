@@ -308,7 +308,7 @@ class ResultNotification(models.Model):
 
 
 def promote_proposal(proposal):
-    
+    print "promote", proposal
     if hasattr(proposal, "presentation") and proposal.presentation:
         # already promoted
         presentation = proposal.presentation
@@ -330,13 +330,13 @@ def promote_proposal(proposal):
 
 
 def unpromote_proposal(proposal):
-    
+    print "unpromote"
     if hasattr(proposal, "presentation") and proposal.presentation:
         proposal.presentation.delete()
 
 
 def accepted_proposal(sender, instance=None, **kwargs):
-    if instance is None or not hasattr(instance, "presentation"):
+    if instance is None:
         return
     if instance.status == "accepted":
         promote_proposal(instance.proposal)
