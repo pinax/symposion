@@ -89,7 +89,7 @@ def schedule_slot_edit(request, slug, slot_pk):
                 slot.unassign()
             else:
                 slot.assign(presentation)
-        return redirect("schedule_edit_slugless")
+        return redirect("schedule_edit")
     else:
         form = SlotEditForm(content=content)
         ctx = {
