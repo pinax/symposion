@@ -55,11 +55,12 @@
     <script src="{{ STATIC_URL }}chosen/chosen.jquery.min.js" type="text/javascript"></script>
     <script type="text/javascript">
         $(function() {
-            $("a.edit-slot").click(function() {
+            $("a.edit-slot").click(function(e) {
                 $("#slotEditModal").load($(this).data("action"), function() {
                     $("#id_presentation").chosen();
                     $("#slotEditModal").modal("show");
                 });
+                e.preventDefault();
             });
         });
     </script>
