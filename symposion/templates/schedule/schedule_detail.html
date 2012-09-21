@@ -11,7 +11,6 @@
 {% endblock %}
 
 {% block extra_head %}
-    <link rel="stylesheet" href="{{ STATIC_URL }}chosen/chosen.css" />
     <style>
         .table td {
             font-size: 9pt;
@@ -30,37 +29,18 @@
             font-weight: bold;
             line-height: 10pt;
         }
-        #id_presentation {
-            width:400px;
-        }
     </style>
 {% endblock %}
 
 {% block body_outer %}
     <div class="row">
         <div class="span12">
-            <h1>Schedule Edit</h1>
+            <h1>Schedule</h1>
             
             {% for timetable in days %}
                 <h2>{{ timetable.day.date }}</h2>
-                {% include "schedule/_edit_grid.html" %}
+                {% include "schedule/_grid.html" %}
             {% endfor %}
         </div>
-        
-        <div class="modal fade hide in" id="slotEditModal"></div>
     </div>
-{% endblock %}
-
-{% block extra_script %}
-    <script src="{{ STATIC_URL }}chosen/chosen.jquery.min.js" type="text/javascript"></script>
-    <script type="text/javascript">
-        $(function() {
-            $("a.edit-slot").click(function() {
-                $("#slotEditModal").load($(this).data("action"), function() {
-                    $("#id_presentation").chosen();
-                    $("#slotEditModal").modal("show");
-                });
-            });
-        });
-    </script>
 {% endblock %}
