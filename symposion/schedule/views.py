@@ -25,8 +25,12 @@ def fetch_schedule(slug):
 def schedule_detail(request, slug=None):
     schedule = fetch_schedule(slug)
     
+    days_qs = Day.objects.filter(schedule=schedule)
+    days = [TimeTable(day) for day in days_qs]
+    
     ctx = {
         "schedule": schedule,
+        "days": days,
     }
     return render(request, "schedule/schedule_detail.html", ctx)
 
