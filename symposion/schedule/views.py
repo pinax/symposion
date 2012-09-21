@@ -13,6 +13,8 @@ def fetch_schedule(slug):
     qs = Schedule.objects.all()
     
     if slug is None:
+        if qs.count() > 1:
+            raise Http404()
         schedule = next(iter(qs), None)
         if schedule is None:
             raise Http404()
@@ -96,3 +98,13 @@ def schedule_slot_edit(request, slug, slot_pk):
             "slot": slot,
         }
         return render(request, "schedule/_slot_edit.html", ctx)
+
+
+def schedule_presentation_detail(request, pk):
+    
+    presentation = get_object_or_404(Presentation, pk=pk)
+    
+    ctx = {
+        "presentation": presentation,
+    }
+    return render(request, "schedule/presentation_detail.html", ctx)
