@@ -308,7 +308,6 @@ class ResultNotification(models.Model):
 
 
 def promote_proposal(proposal):
-    print "promote", proposal
     if hasattr(proposal, "presentation") and proposal.presentation:
         # already promoted
         presentation = proposal.presentation
@@ -319,7 +318,7 @@ def promote_proposal(proposal):
             abstract = proposal.abstract,
             speaker = proposal.speaker,
             section = proposal.section,
-            _proposal = proposal,
+            proposal_base = proposal,
         )
         presentation.save()
         for speaker in proposal.additional_speakers.all():
@@ -330,7 +329,6 @@ def promote_proposal(proposal):
 
 
 def unpromote_proposal(proposal):
-    print "unpromote"
     if hasattr(proposal, "presentation") and proposal.presentation:
         proposal.presentation.delete()
 
