@@ -1,0 +1,38 @@
+{% extends "site_base.html" %}
+
+{% block head_title %}Presentation: {{ presentation.title }}{% endblock %}
+
+{% block body %}
+    
+    <h1>{{ presentation.title }}</h1>
+
+    <h2>
+        {% for speaker in presentation.speakers %}
+            {{ speaker }}
+        {% if not forloop.last %}, {% endif %}{% endfor %}
+    </h2>
+    
+    <dl class="dl-horizontal">
+        <dt>Audience level:</dt>
+        <dd style="margin-bottom: 0;">{{ presentation.proposal.get_audience_level_display }}</dd>
+        <dt>Track:</dt>
+        <dd>{{ presentation.proposal.track }}</dd>
+    </dl>
+    
+    {% if presentation.slot %}
+        <h2>
+            {{ presentation.slot.day.date|date:"l" }}
+            {{ presentation.slot.start}}&ndash;{{ presentation.slot.end }}
+            in
+            {{ presentation.slot.rooms|join:", " }}
+        </h2>
+    {% endif %}
+
+    <h3>Description</h3>
+
+    <div class="description">{{ presentation.description }}</div>
+    
+    <h3>Abstract</h3>
+    
+    <div class="abstract">{{ presentation.abstract|safe }}</div>
+{% endblock %}

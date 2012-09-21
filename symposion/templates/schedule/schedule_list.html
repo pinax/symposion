@@ -28,7 +28,7 @@
     {% for presentation in presentations %}
         <div class="row">
             <div class="span8 presentation well">
-                <h3><a href="#">{{ presentation.title }}</a></h3>
+                <h3><a href="{% url schedule_presentation_detail presentation.pk %}">{{ presentation.title }}</a></h3>
                 <h4>{{ presentation.speaker }} in {{ presentation.proposal.track }}</h4>
                 {{ presentation.description }}
                 {% if presentation.slot %}

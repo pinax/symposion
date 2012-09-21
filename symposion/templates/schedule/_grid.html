@@ -13,7 +13,7 @@
                     {% if slot.kind.label == "talk" %}
                         {% if not slot.content %}
                         {% else %}
-                            <div class="title"><a class="edit-slot" href="#">{{ slot.content.title }}</a></div>
+                            <div class="title"><a href="{% url schedule_presentation_detail slot.content.pk %}">{{ slot.content.title }}</a></div>
                             <div class="speaker">{{ slot.content.speaker }}</div>
                         {% endif %}
                     {% else %}
