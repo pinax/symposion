@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load bootstrap_tags %}
+{% load boxes_tags %}
 
 {% block head_title %}Conference Schedule{% endblock %}
 
@@ -36,6 +37,8 @@
     <div class="row">
         <div class="span12">
             <h1>Schedule</h1>
+            
+            {% box "schedule_top" %}
             
             {% for timetable in days %}
                 <h2>{{ timetable.day.date }}</h2>
