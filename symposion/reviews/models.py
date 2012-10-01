@@ -198,8 +198,8 @@ class LatestVote(models.Model):
 class ProposalResult(models.Model):
     proposal = models.OneToOneField("proposals.ProposalBase", related_name="result")
     score = models.DecimalField(max_digits=5, decimal_places=2, default=Decimal("0.00"))
-    comment_count = models.PositiveIntegerField(default=1)
-    vote_count = models.PositiveIntegerField(default=1)
+    comment_count = models.PositiveIntegerField(default=0)
+    vote_count = models.PositiveIntegerField(default=0)
     plus_one = models.PositiveIntegerField(default=0)
     plus_zero = models.PositiveIntegerField(default=0)
     minus_zero = models.PositiveIntegerField(default=0)
