@@ -53,9 +53,11 @@ def proposals_generator(request, queryset, user_pk=None, check_speaker=True):
             lookup_params["user"] = request.user
         
         try:
-            obj.latest_vote = LatestVote.objects.get(**lookup_params).css_class()
+            obj.user_vote = LatestVote.objects.get(**lookup_params).vote
+            obj.user_vote_css = LatestVote.objects.get(**lookup_params).css_class()
         except LatestVote.DoesNotExist:
-            obj.latest_vote = "no-vote"
+            obj.user_vote = None
+            obj.user_vote_css = "no-vote"
         
         yield obj
 

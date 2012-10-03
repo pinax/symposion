@@ -97,7 +97,8 @@
     <script src="{{ STATIC_URL }}tabletools/js/TableTools.min.js" type="text/javascript"></script>
     <script src="{{ STATIC_URL }}datatables/js/dataTables.bootstrap.js" type="text/javascript"></script>
     <script type="text/javascript">
-        $(function() {            
+        $(function() {
+            $(".tip").tooltip();
             $("table.table-reviews").dataTable({
                 "sDom": "<'row'<'span3'l><'span3'T><'span4'f>r>t<'row'<'span3'i><'span5'p>>",
                 "sPaginationType": "bootstrap",
