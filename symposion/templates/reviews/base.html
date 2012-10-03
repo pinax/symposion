@@ -50,53 +50,44 @@
 
 {% block body_class %}reviews{% endblock %}
 
-{% block body_base %}
-    <div class="container">
-        
-        {% include "_messages.html" %}
-        
-        {% block breadcrumbs %}
-            {% sitetree_breadcrumbs from "main" %}
-        {% endblock %}
-        
-        <div class="row">
-            <div class="span2">
-                {% block sidebar %}
-                    <ul class="nav nav-list well">
-                        {% for section in review_sections %}
-                            <li class="nav-header">
-                                {{ section }}
-                            </li>
+{% block body_outer %}
+    <div class="row">
+        <div class="span2">
+            {% block sidebar %}
+                <ul class="nav nav-list well">
+                    {% for section in review_sections %}
+                        <li class="nav-header">
+                            {{ section }}
+                        </li>
+                        <li>
+                            <a href="{% url review_section section.section.slug %}">
+                                {% trans "All Reviews" %}
+                            </a>
+                        </li>
+                        {% comment %}
+                        <li>
+                            <a href="{% url review_section_assignments section.section.slug %}">
+                                {% trans "Your Assignments" %}
+                            </a>
+                        </li>
+                        {% endcomment %}
+                        <li>
+                            <a href="{% url review_status section.section.slug %}">
+                                {% trans "Voting Status" %}
+                            </a>
+                        </li>
+                        {% if request.user.is_staff %}
                             <li>
-                                <a href="{% url review_section section.section.slug %}">
-                                    {% trans "All Reviews" %}
-                                </a>
+                                <a href="{% url result_notification section.section.slug 'accepted' %}">Result Notification</a>
                             </li>
-                            {% comment %}
-                            <li>
-                                <a href="{% url review_section_assignments section.section.slug %}">
-                                    {% trans "Your Assignments" %}
-                                </a>
-                            </li>
-                            {% endcomment %}
-                            <li>
-                                <a href="{% url review_status section.section.slug %}">
-                                    {% trans "Voting Status" %}
-                                </a>
-                            </li>
-                            {% if request.user.is_staff %}
-                                <li>
-                                    <a href="{% url result_notification section.section.slug 'accepted' %}">Result Notification</a>
-                                </li>
-                            {% endif %}
-                        {% endfor %}
-                    </ul>
-                {% endblock %}
-            </div>
-            <div class="span10">
-                {% block body %}
-                {% endblock %}
-            </div>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            {% endblock %}
+        </div>
+        <div class="span10">
+            {% block body %}
+            {% endblock %}
         </div>
     </div>
 {% endblock %}
