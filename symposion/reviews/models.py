@@ -130,21 +130,22 @@ class Review(models.Model):
             proposal=self.proposal,
             user=self.user,
         )
-        # find previous vote before self
         try:
-            previous = user_reviews.filter(submitted_at__lt=self.submitted_at).order_by("-submitted_at")[0]
+            # find the latest review
+            latest = user_reviews.exclude(pk=self.pk).order_by("-submitted_at")[0]
         except IndexError:
-            # did not find a previous which means this must be the only one.
+            # did not find a latest which means this must be the only one.
             # treat it as a last, but delete the latest vote.
             self.proposal.result.update_vote(self.vote, removal=True)
             lv = LatestVote.objects.filter(proposal=self.proposal, user=self.user)
             lv.delete()
         else:
-            # handle that we've found a previous vote
-            # check if self is the last vote
-            if self == user_reviews.order_by("-submitted_at")[0]:
-                # self is the latest which means we need to treat as last.
-                # revert the latest vote to previous vote.
+            # handle that we've found a latest vote
+            # check if self is the lastest vote
+            if self == latest:
+                # self is the latest review; revert the latest vote to the
+                # previous vote
+                previous = user_reviews.filter(submitted_at__lt=self.submitted_at).order_by("-submitted_at")[0]
                 self.proposal.result.update_vote(self.vote, previous=previous.vote, removal=True)
                 lv = LatestVote.objects.filter(proposal=self.proposal, user=self.user)
                 lv.update(
@@ -152,8 +153,8 @@ class Review(models.Model):
                     submitted_at=previous.submitted_at,
                 )
             else:
-                # self is not the latest so we just need to decrement the
-                # comment count
+                # self is not the latest review so we just need to decrement
+                # the comment count
                 self.proposal.result.comment_count = models.F("comment_count") - 1
                 self.proposal.result.save()
         # in all cases we need to delete the review; let's do it!
