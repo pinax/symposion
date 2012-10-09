@@ -1,6 +1,7 @@
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import Http404
+from django.http import Http404, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
+from django.template import loader, Context
 
 from django.contrib.auth.decorators import login_required
 
@@ -48,6 +49,26 @@ def schedule_list(request, slug=None):
         "presentations": presentations,
     }
     return render(request, "schedule/schedule_list.html", ctx)
+
+
+def schedule_list_csv(request, slug=None):
+    schedule = fetch_schedule(slug)
+    
+    presentations = Presentation.objects.filter(section=schedule.section)
+    presentations = presentations.exclude(cancelled=True).order_by("id")
+    
+    response = HttpResponse(mimetype="text/csv")
+    if slug:
+        file_slug = slug
+    else:
+        file_slug = "presentations"
+    response["Content-Disposition"] = 'attachment; filename="%s.csv"' % file_slug
+    
+    response.write(loader.get_template("schedule/schedule_list.csv").render(Context({
+        "presentations": presentations,
+        
+    })))
+    return response
 
 
 @login_required
