@@ -1,15 +1,13 @@
-from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
-from django.db.models import Q
-from django.http import Http404, HttpResponse
+from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
-from django.template import RequestContext
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 from symposion.proposals.models import ProposalBase
-from symposion.speakers.forms import SpeakerForm #, SignupForm
+from symposion.speakers.forms import SpeakerForm
 from symposion.speakers.models import Speaker
 
 
@@ -38,10 +36,38 @@ def speaker_create(request):
             messages.success(request, "Speaker profile created.")
             return redirect("dashboard")
     else:
-        form = SpeakerForm(initial = {"name": request.user.get_full_name()})
+        form = SpeakerForm(initial={"name": request.user.get_full_name()})
     
     return render(request, "speakers/speaker_create.html", {
-        "form": form,    
+        "form": form,
+    })
+
+
+@login_required
+def speaker_create_staff(request, username):
+    user = get_object_or_404(User, username=username)
+    if not request.user.is_staff:
+        raise Http404
+    
+    try:
+        return redirect(user.speaker_profile)
+    except ObjectDoesNotExist:
+        pass
+    
+    if request.method == "POST":
+        form = SpeakerForm(request.POST, request.FILES)
+        
+        if form.is_valid():
+            speaker = form.save(commit=False)
+            speaker.user = user
+            speaker.save()
+            messages.success(request, "Speaker profile created.")
+            return redirect("user_list")
+    else:
+        form = SpeakerForm(initial={"name": user.get_full_name()})
+    
+    return render(request, "speakers/speaker_create.html", {
+        "form": form,
     })
 
 
@@ -58,9 +84,9 @@ def speaker_create_token(request, token):
             del request.session["pending-token"]
             additional_speakers = ProposalBase.additional_speakers.through
             additional_speakers._default_manager.filter(
-                speaker = speaker
+                speaker=speaker
             ).update(
-                speaker = existing_speaker
+                speaker=existing_speaker
             )
             messages.info(request, "You have been associated with all pending "
                 "talk proposals")

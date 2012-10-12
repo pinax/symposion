@@ -11,6 +11,8 @@
         <div class="span2">
             {% if speaker.photo %}
                 <img src="{% thumbnail speaker.photo '128x128' %}" alt="{{ speaker.name }}" />
+            {% else %}
+                &nbsp;
             {% endif %}
         </div>
         <div class="span6">
@@ -36,26 +38,4 @@
             {% endfor %}
         </div>
     </div>
-
 {% endblock %}
-
-
-
-
-{% comment %}
-
-{% block content %}
-    
-    {% if sessions %}
-        <h3>Presentations</h3>
-        
-        <dl class="sessions">
-            {% for session in sessions %}
-                <dt>{{ session.slot.start|localtime:timezone|date:"F jS" }} {{ session.slot.start|localtime:timezone|date:"P" }} &ndash; {{ session.slot.end|localtime:timezone|date:"P" }}</dt>
-                <dd><a href="{% url schedule_presentation session.id %}">{{ session.title }}</a></dd>
-            {% endfor %}
-        </dl>
-    {% endif %}
-{% endblock %}
-
-{% endcomment %}
