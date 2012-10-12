@@ -1,0 +1,61 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load thumbnail %}
+
+
+{% block page_title %}{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="span2">
+            {% if speaker.photo %}
+                <img src="{% thumbnail speaker.photo '128x128' %}" alt="{{ speaker.name }}" />
+            {% endif %}
+        </div>
+        <div class="span6">
+            {% if speaker.user == request.user or request.user.is_staff %}
+                <a class="btn pull-right" href="{% url speaker_edit speaker.pk %}">Edit</a>
+            {% endif %}
+            <h1>{{ speaker.name }}</h1>
+            <div class="bio">{{ speaker.biography|safe }}</div>
+            
+            <h2>Presentations</h2>
+            {% for presentation in speaker.presentations.all %}
+                <h3><a href="{% url schedule_presentation_detail presentation.pk %}">{{ presentation.title }}</a></h3>
+                {% if presentation.slot %}
+                    <p>
+                        {{ presentation.slot.day.date|date:"l" }}
+                        {{ presentation.slot.start}}&ndash;{{ presentation.slot.end }}
+                        in
+                        {{ presentation.slot.rooms|join:", " }}
+                    </p>
+                {% endif %}
+            {% empty %}
+                <p>No presentations. This page is only visible to staff until there is a presentation.<p>
+            {% endfor %}
+        </div>
+    </div>
+
+{% endblock %}
+
+
+
+
+{% comment %}
+
+{% block content %}
+    
+    {% if sessions %}
+        <h3>Presentations</h3>
+        
+        <dl class="sessions">
+            {% for session in sessions %}
+                <dt>{{ session.slot.start|localtime:timezone|date:"F jS" }} {{ session.slot.start|localtime:timezone|date:"P" }} &ndash; {{ session.slot.end|localtime:timezone|date:"P" }}</dt>
+                <dd><a href="{% url schedule_presentation session.id %}">{{ session.title }}</a></dd>
+            {% endfor %}
+        </dl>
+    {% endif %}
+{% endblock %}
+
+{% endcomment %}

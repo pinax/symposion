@@ -8,7 +8,7 @@
 
     <h2>
         {% for speaker in presentation.speakers %}
-            {{ speaker }}
+            <a href="{% url speaker_profile speaker.pk %}">{{ speaker }}</a>
         {% if not forloop.last %}, {% endif %}{% endfor %}
     </h2>
     

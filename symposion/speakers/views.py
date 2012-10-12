@@ -98,24 +98,12 @@ def speaker_edit(request, pk=None):
     })
 
 
-def speaker_profile(request, pk, template_name="speakers/speaker_profile.html", extra_context=None):
-    
-    if extra_context is None:
-        extra_context = {}
-    
+def speaker_profile(request, pk):
     speaker = get_object_or_404(Speaker, pk=pk)
     
-    # schedule may not be installed so we need to check for sessions
-    if hasattr(speaker, "sessions"):
-        sessions = speaker.sessions.exclude(slot=None).order_by("slot__start")
-    else:
-        sessions = []
-    
-    if not sessions:
+    if not speaker.presentations and not request.user.is_staff:
         raise Http404()
     
-    return render_to_response(template_name, dict({
+    return render(request, "speakers/speaker_profile.html", {
         "speaker": speaker,
-        "sessions": sessions,
-        "timezone": settings.SCHEDULE_TIMEZONE,
-    }, **extra_context), context_instance=RequestContext(request))
+    })
