@@ -1,7 +1,6 @@
-SYMPOSION
-A Django project for conference websites.
+Symposion
+a conference management solution from Eldarion
 
-A Pinax project sponsored by Eldarion and the Python Software Foundation.
+Built with the generous support of the Python Software Foundation.
 
-Commercial support and customization available from Eldarion.
-Contact info@eldarion.com for details.
+See http://eldarion.com/symposion/ for commercial support, customization and hosting
