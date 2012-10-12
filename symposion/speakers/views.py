@@ -79,7 +79,7 @@ def speaker_edit(request, pk=None):
         except Speaker.DoesNotExist:
             return redirect("speaker_create")
     else:
-        if request.user.groups.filter(name="organizer").exists(): # @@@
+        if request.user.is_staff:
             speaker = get_object_or_404(Speaker, pk=pk)
         else:
             raise Http404()
