@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.template import RequestContext
 
@@ -24,6 +25,26 @@ def sponsor_apply(request):
 
 
 @login_required
+def sponsor_add(request):
+    if not request.user.is_staff:
+        raise Http404()
+    
+    if request.method == "POST":
+        form = SponsorApplicationForm(request.POST, user=request.user)
+        if form.is_valid():
+            sponsor = form.save(commit=False)
+            sponsor.active = True
+            sponsor.save()
+            return redirect("dashboard")
+    else:
+        form = SponsorApplicationForm(user=request.user)
+    
+    return render_to_response("sponsorship/add.html", {
+        "form": form,
+    }, context_instance=RequestContext(request))
+
+
+@login_required
 def sponsor_detail(request, pk):
     sponsor = get_object_or_404(Sponsor, pk=pk)
     
@@ -44,9 +65,9 @@ def sponsor_detail(request, pk):
             form.save()
             formset.save()
             
-            messages.success(request, "Your sponsorship application has been submitted!")
+            messages.success(request, "Sponsorship details have been updated")
             
-            return redirect(request.path)
+            return redirect("dashboard")
     else:
         form = SponsorDetailsForm(instance=sponsor)
         formset = SponsorBenefitsFormSet(**formset_kwargs)

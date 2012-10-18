@@ -20,20 +20,22 @@
                     <h3>{{ level.name }}</h3>
 
                     {% for sponsor in level.sponsors %}
-                        <div class="row">
-                            <div class="span2">
-                                <h2>
-                                    <a href="{{ sponsor.external_url }}">
-                                        <img src="{% thumbnail sponsor.website_logo '150x80' %}" alt="{{ sponsor.name }}" />
-                                    </a>
-                                </h2>
+                        {% if sponsor.website_logo %}
+                            <div class="row">
+                                <div class="span2">
+                                    <h2>
+                                        <a href="{{ sponsor.external_url }}">
+                                            <img src="{% thumbnail sponsor.website_logo '150x80' %}" alt="{{ sponsor.name }}" />
+                                        </a>
+                                    </h2>
+                                </div>
+                                <div class="span10">
+                                    <h5>{{ sponsor.name }}</h5>
+                                    <p><a href="{{ sponsor.external_url }}">{{ sponsor.external_url }}</a></p>
+                                    <p>{{ sponsor.listing_text|urlize|linebreaks }}</p>
+                                </div>
                             </div>
-                            <div class="span10">
-                                <h5>{{ sponsor.name }}</h5>
-                                <p><a href="{{ sponsor.external_url }}">{{ sponsor.external_url }}</a></p>
-                                <p>{{ sponsor.listing_text|urlize|linebreaks }}</p>
-                            </div>
-                        </div>
+                        {% endif %}
                     {% endfor %}
                 {% endif %}
             {% endfor %}
