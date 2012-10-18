@@ -100,31 +100,32 @@
         </div>
         
         <div class="dashboard-panel-content">
-            <p>
-                {% if not user.sponsorships.exists %}
-                    <p>If you or your organization would be interested in sponsorship opportunities, <a href="{% url sponsor_apply %}">use our online form to apply to be a sponsor</a>.
-                {% else %}
-                    <h4>Your Sponsorship</h4>
-                    <ul>
-                        {% for sponsorship in user.sponsorships.all %}
-                            <li>
-                                {% if sponsorship.active %}
-                                    <a href="{% url sponsor_detail sponsorship.pk %}"><b>{{ sponsorship.name }}</b></a>
-                                    ({{ sponsorship.level }})
-                                {% else %}
-                                    <b>{{ sponsorship.name }}</b>
-                                    ({{ sponsorship.level }})
-                                    <span class="label label-warning">awaiting approval</span>
-                                {% endif %}
-                            </li>
-                        {% endfor %}
-                    </ul>
-                {% endif %}
-            </p>
+            {% if not user.sponsorships.exists %}
+                <p>If you or your organization would be interested in sponsorship opportunities, <a href="{% url sponsor_apply %}">use our online form to apply to be a sponsor</a>.
+            {% else %}
+                <h4>Your Sponsorship</h4>
+                <ul>
+                    {% for sponsorship in user.sponsorships.all %}
+                        <li>
+                            <a href="{% url sponsor_detail sponsorship.pk %}"><b>{{ sponsorship.name }}</b></a>
+                            ({{ sponsorship.level }})
+                            {% if not sponsorship.active %}
+                                <span class="label label-warning">awaiting approval</span>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            {% if user.is_staff %}
+                <p>
+                    As staff, you can directly <a href="{% url sponsor_add %}">add a sponsor</a> if the organization isn't
+                    applying themselves.
+                </p>
+            {% endif %}
         </div>
     </div>
         
-    {% if review_sections %}    
+    {% if review_sections %}
         <div class="dashboard-panel">
             <div class="dashboard-panel-header">
                 <i class="icon-briefcase"></i>
