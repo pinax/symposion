@@ -115,35 +115,5 @@
             "max_words": null, 
             "level": 3
         }
-    }, 
-    {
-        "pk": 12, 
-        "model": "sponsorship.benefitlevel", 
-        "fields": {
-            "other_limits": "", 
-            "benefit": 4, 
-            "max_words": null, 
-            "level": 4
-        }
-    }, 
-    {
-        "pk": 8, 
-        "model": "sponsorship.benefitlevel", 
-        "fields": {
-            "other_limits": "", 
-            "benefit": 3, 
-            "max_words": null, 
-            "level": 4
-        }
-    }, 
-    {
-        "pk": 4, 
-        "model": "sponsorship.benefitlevel", 
-        "fields": {
-            "other_limits": "", 
-            "benefit": 2, 
-            "max_words": null, 
-            "level": 4
-        }
     }
 ]
