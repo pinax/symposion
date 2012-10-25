@@ -70,7 +70,7 @@
                                 {% if user.speaker_profile %}
                                     <a href="{% url speaker_profile user.speaker_profile.pk %}">{{ user.speaker_profile }}</a>
                                 {% else %}
-                                    <a href="{% url speaker_create_staff user.username %}" class="btn btn-mini">create</a>
+                                    <a href="{% url speaker_create_staff user.pk %}" class="btn btn-mini">create</a>
                                 {% endif %}
                             </td>
                         </tr>

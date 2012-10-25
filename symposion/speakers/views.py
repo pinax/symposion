@@ -44,8 +44,8 @@ def speaker_create(request):
 
 
 @login_required
-def speaker_create_staff(request, username):
-    user = get_object_or_404(User, username=username)
+def speaker_create_staff(request, pk):
+    user = get_object_or_404(User, pk=pk)
     if not request.user.is_staff:
         raise Http404
     
