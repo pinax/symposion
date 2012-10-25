@@ -17,7 +17,11 @@
                             <div class="speaker">{{ slot.content.speaker }}</div>
                         {% endif %}
                     {% else %}
-                        {{ slot.kind.label }}
+                        {% if slot.content_override %}
+                            {{ slot.content_override|safe }}
+                        {% else %}
+                            {{ slot.kind.label }}
+                        {% endif %}
                     {% endif %}
                 </td>
             {% endfor %}
