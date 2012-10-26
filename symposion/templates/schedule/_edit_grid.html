@@ -23,6 +23,7 @@
                         {% else %}
                             {{ slot.kind.label }}
                         {% endif %}
+                        &mdash; <a class="edit-slot" data-action="{% url schedule_slot_edit schedule.section.slug slot.pk %}" href="#">edit</a>
                     {% endif %}
                 </td>
             {% endfor %}

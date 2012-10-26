@@ -96,23 +96,24 @@ def schedule_slot_edit(request, slug, slot_pk):
     
     slot = get_object_or_404(Slot, day__schedule__section__slug=slug, pk=slot_pk)
     
-    # slot content
-    try:
-        content = slot.content
-    except ObjectDoesNotExist:
-        content = None
-    
     if request.method == "POST":
-        form = SlotEditForm(request.POST, content=content)
+        form = SlotEditForm(request.POST, slot=slot)
         if form.is_valid():
-            presentation = form.cleaned_data["presentation"]
-            if presentation is None:
-                slot.unassign()
-            else:
-                slot.assign(presentation)
+            save = False
+            if "content_override" in form.cleaned_data:
+                slot.content_override = form.cleaned_data["content_override"]
+                save = True
+            if "presentation" in form.cleaned_data:
+                presentation = form.cleaned_data["presentation"]
+                if presentation is None:
+                    slot.unassign()
+                else:
+                    slot.assign(presentation)
+            if save:
+                slot.save()
         return redirect("schedule_edit")
     else:
-        form = SlotEditForm(content=content)
+        form = SlotEditForm(slot=slot)
         ctx = {
             "slug": slug,
             "form": form,

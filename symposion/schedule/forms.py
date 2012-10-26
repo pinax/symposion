@@ -6,18 +6,34 @@ from symposion.schedule.models import Presentation
 
 class SlotEditForm(forms.Form):
     
-    presentation = forms.ModelChoiceField(queryset=Presentation.objects.none())
-    
     def __init__(self, *args, **kwargs):
-        content = kwargs.pop("content", None)
-        if content:
-            kwargs.setdefault("initial", {})["presentation"] = content
+        self.slot = kwargs.pop("slot")
         super(SlotEditForm, self).__init__(*args, **kwargs)
-        queryset = Presentation.objects.exclude(cancelled=True).order_by("proposal_base__pk")
-        if content:
-            queryset = queryset.filter(Q(slot=None) | Q(pk=content.pk))
-            self.fields["presentation"].required = False
+        if self.slot.kind.label == "talk":
+            self.fields["presentation"] = self.build_presentation_field()
+        else:
+            self.fields["content_override"] = self.build_content_override_field()
+    
+    def build_presentation_field(self):
+        kwargs = {}
+        queryset = Presentation.objects.all()
+        queryset = queryset.exclude(cancelled=True)
+        queryset = queryset.order_by("proposal_base__pk")
+        if self.slot.content:
+            queryset = queryset.filter(Q(slot=None) | Q(pk=self.slot.content.pk))
+            kwargs["required"] = False
+            kwargs["initial"] = self.slot.content
         else:
             queryset = queryset.filter(slot=None)
-            self.fields["presentation"].required = True
-        self.fields["presentation"].queryset = queryset
+            kwargs["required"] = True
+        kwargs["queryset"] = queryset
+        return forms.ModelChoiceField(**kwargs)
+    
+    def build_content_override_field(self):
+        kwargs = {
+            "label": "Content",
+            "widget": forms.Textarea(attrs={"class": "span6"}),
+            "required": False,
+            "initial": self.slot.content_override,
+        }
+        return forms.CharField(**kwargs)
