@@ -1,6 +1,8 @@
 from django import forms
 from django.db.models import Q
 
+from markitup.widgets import MarkItUpWidget
+
 from symposion.schedule.models import Presentation
 
 
@@ -32,7 +34,7 @@ class SlotEditForm(forms.Form):
     def build_content_override_field(self):
         kwargs = {
             "label": "Content",
-            "widget": forms.Textarea(attrs={"class": "span6"}),
+            "widget": MarkItUpWidget(),
             "required": False,
             "initial": self.slot.content_override,
         }

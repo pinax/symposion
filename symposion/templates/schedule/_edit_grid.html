@@ -18,8 +18,8 @@
                             <div class="speaker">{{ slot.content.speaker }}</div>
                         {% endif %}
                     {% else %}
-                        {% if slot.content_override %}
-                            {{ slot.content_override|safe }}
+                        {% if slot.content_override.raw %}
+                            {{ slot.content_override.rendered|safe }}
                         {% else %}
                             {{ slot.kind.label }}
                         {% endif %}

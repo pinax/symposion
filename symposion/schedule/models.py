@@ -48,7 +48,7 @@ class Slot(models.Model):
     kind = models.ForeignKey(SlotKind)
     start = models.TimeField()
     end = models.TimeField()
-    content_override = models.TextField(blank=True)
+    content_override = MarkupField()
     
     def assign(self, content):
         """
