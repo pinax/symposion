@@ -21,7 +21,6 @@ django-timezones==0.2
 pytz==2012d
 django-model-utils==1.1.0
 
-django-mptt==0.5.2
 django-taggit==0.9.3
 django-reversion==1.6.1
 django-markitup==1.0.0
