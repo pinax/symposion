@@ -145,7 +145,6 @@ INSTALLED_APPS = [
     "metron",
     "markitup",
     "taggit",
-    "mptt",
     "reversion",
     "easy_thumbnails",
     "sitetree",
