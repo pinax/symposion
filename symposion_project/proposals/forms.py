@@ -2,16 +2,10 @@ from django import forms
 
 from markitup.widgets import MarkItUpWidget
 
-from symposion_project.proposals.models import ProposalCategory, TalkProposal, TutorialProposal, PosterProposal
+from symposion_project.proposals.models import TalkProposal, TutorialProposal, PosterProposal
 
 
 class ProposalForm(forms.ModelForm):
-    
-    def __init__(self, *args, **kwargs):
-        super(ProposalForm, self).__init__(*args, **kwargs)
-        self.fields["category"] = forms.ModelChoiceField(
-            queryset = ProposalCategory.objects.order_by("name")
-        )
     
     def clean_description(self):
         value = self.cleaned_data["description"]
@@ -28,7 +22,6 @@ class TalkProposalForm(ProposalForm):
         model = TalkProposal
         fields = [
             "title",
-            "category",
             "audience_level",
             "description",
             "abstract",
@@ -47,7 +40,6 @@ class TutorialProposalForm(ProposalForm):
         model = TutorialProposal
         fields = [
             "title",
-            "category",
             "audience_level",
             "description",
             "abstract",
@@ -67,7 +59,6 @@ class PosterProposalForm(ProposalForm):
         model = PosterProposal
         fields = [
             "title",
-            "category",
             "audience_level",
             "description",
             "abstract",
