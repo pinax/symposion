@@ -159,6 +159,8 @@ INSTALLED_APPS = [
     "symposion.proposals",
     "symposion.speakers",
     "symposion.teams",
+    "symposion.reviews",
+    "symposion.schedule",
     
     # project
     "symposion_project.proposals",
