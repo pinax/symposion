@@ -13,10 +13,6 @@ TEMPLATE_DEBUG = DEBUG
 # tells Pinax to serve media through the staticfiles app.
 SERVE_MEDIA = DEBUG
 
-# django-compressor is turned off by default due to deployment overhead for
-# most users. See <URL> for more information
-COMPRESS = False
-
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
@@ -80,16 +76,12 @@ STATICFILES_DIRS = [
 STATICFILES_FINDERS = [
     "django.contrib.staticfiles.finders.FileSystemFinder",
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
-    "compressor.finders.CompressorFinder",
 ]
 
 # URL prefix for admin media -- CSS, JavaScript and images. Make sure to use a
 # trailing slash.
 # Examples: "http://foo.com/media/", "/media/".
 ADMIN_MEDIA_PREFIX = posixpath.join(STATIC_URL, "admin/")
-
-# Subdirectory of COMPRESS_ROOT to store the cached media files in
-COMPRESS_OUTPUT_DIR = "cache"
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = "8*br)9@fs!4nzg-imfrsst&oa2udy6z-fqtdk0*e5c1=wn)(t3"
@@ -147,7 +139,6 @@ INSTALLED_APPS = [
     "django_forms_bootstrap",
     
     # external
-    "compressor",
     "debug_toolbar",
     "mailer",
     "timezones",

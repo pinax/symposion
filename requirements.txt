@@ -19,7 +19,6 @@ django-debug-toolbar==0.9.4
 django-mailer==0.2a1
 django-timezones==0.2
 pytz==2012d
-django_compressor==1.2a1
 django-model-utils==1.1.0
 
 django-mptt==0.5.2
