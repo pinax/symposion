@@ -7,10 +7,10 @@
 --extra-index-url=http://dist.pinaxproject.com/alpha/
 --extra-index-url=http://dist.pinaxproject.com/fresh-start/
 
-Django==1.4
-django-user-accounts==1.0b4
-symposion==1.0b1.dev2
-pinax-theme-bootstrap==2.0.4
+Django==1.4.2
+django-user-accounts==1.0b7
+symposion==1.0b1.dev37
+pinax-theme-bootstrap==2.2.0
 pinax-theme-bootstrap-account==1.0b2
 django-forms-bootstrap==2.0.3.post1
 metron==0.1 # 0.2.dev3
@@ -18,13 +18,13 @@ pinax-utils==1.0b1.dev3
 django-debug-toolbar==0.9.4
 django-mailer==0.2a1
 django-timezones==0.2
-pytz==2012d
+pytz==2012g
 django-model-utils==1.1.0
 
 django-taggit==0.9.3
-django-reversion==1.6.1
+django-reversion==1.6.4
 django-markitup==1.0.0
-markdown==2.1.1
-django-sitetree==0.9
+markdown==2.2.0
+django-sitetree==0.9.1
 PIL==1.1.7
-easy-thumbnails==1.0.3
+easy-thumbnails==1.1
