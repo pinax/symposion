@@ -11,12 +11,18 @@ from symposion.conference.models import Section
 class Schedule(models.Model):
     
     section = models.OneToOneField(Section)
+    
+    def __unicode__(self):
+        return "%s Schedule" % self.section
 
 
 class Day(models.Model):
     
     schedule = models.ForeignKey(Schedule)
     date = models.DateField()
+    
+    def __unicode__(self):
+        return "%s" % self.date
     
     class Meta:
         unique_together = [("schedule", "date")]
@@ -40,6 +46,9 @@ class SlotKind(models.Model):
     
     schedule = models.ForeignKey(Schedule)
     label = models.CharField(max_length=50)
+    
+    def __unicode__(self):
+        return self.label
 
 
 class Slot(models.Model):
@@ -81,6 +90,9 @@ class Slot(models.Model):
     @property
     def rooms(self):
         return Room.objects.filter(pk__in=self.slotroom_set.values("room"))
+    
+    def __unicode__(self):
+        return "%s %s (%s - %s)" % (self.day, self.kind, self.start, self.end)
 
 
 class SlotRoom(models.Model):
@@ -90,6 +102,9 @@ class SlotRoom(models.Model):
     
     slot = models.ForeignKey(Slot)
     room = models.ForeignKey(Room)
+    
+    def __unicode__(self):
+        return "%s %s" % (self.room, self.slot)
     
     class Meta:
         unique_together = [("slot", "room")]
