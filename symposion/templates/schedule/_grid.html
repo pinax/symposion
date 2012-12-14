@@ -9,7 +9,7 @@
         <tr>
             <td class="time">{{ row.time|date:"h:iA" }}</td>
             {% for slot in row.slots %}
-                <td class="slot slot-{{ slot.kind.label }}" colspan="{{ slot.colspan }}" rowspan="{{ slow.rowspan }}">
+                <td class="slot slot-{{ slot.kind.label }}" colspan="{{ slot.colspan }}" rowspan="{{ slot.rowspan }}">
                     {% if slot.kind.label == "talk" %}
                         {% if not slot.content %}
                         {% else %}
