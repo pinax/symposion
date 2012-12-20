@@ -45,6 +45,7 @@ def schedule_conference(request):
 
 
 def schedule_detail(request, slug=None):
+    
     schedule = fetch_schedule(slug)
     
     days_qs = Day.objects.filter(schedule=schedule)
@@ -147,5 +148,6 @@ def schedule_presentation_detail(request, pk):
     
     ctx = {
         "presentation": presentation,
+        "schedule": presentation.slot.day.schedule,
     }
     return render(request, "schedule/presentation_detail.html", ctx)
