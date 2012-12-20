@@ -1,6 +1,6 @@
 {% load account_tags %}
 <p>
-    <b>{% user_display user %}</b> has made changes to <b>{{ proposal.title }}</b> which you have previously reviewed.
+    <b>{% user_display user %}</b> has made changes to <b>{{ proposal.title }}</b> which you have previously reviewed or commented on.
 </p>
 <p>
     {% url review_detail proposal.pk as detail_url %}
