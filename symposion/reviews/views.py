@@ -372,7 +372,7 @@ def review_bulk_accept(request, section_slug):
             for talk in talks:
                 talk.result.status = "accepted"
                 talk.result.save()
-            return redirect("review_list")
+            return redirect("review_section", section_slug=section_slug)
     else:
         form = BulkPresentationForm()
     
