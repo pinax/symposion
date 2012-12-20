@@ -124,6 +124,14 @@
                             <div class="vote pull-left">
                                 <span>{{ review.vote }}</span>
                             </div>
+                            {% if is_manager %}
+                                <div class="pull-right">
+                                    <form class="form-inline" action="{% url review_delete review.id %}" method="POST">
+                                        {% csrf_token %}
+                                        <button class="btn btn-mini btn-danger" type="submit">Delete</button>
+                                    </form>
+                                </div>
+                            {% endif %}
                             <div class="review-content">
                                 <b>{% user_display review.user %}</b>
                                 {{ review.submitted_at|timesince }} ago <br />
