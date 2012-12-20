@@ -1,4 +1,4 @@
-#Symposion#
+# Symposion
 
 A conference management solution from Eldarion.
 
@@ -6,17 +6,8 @@ Built with the generous support of the Python Software Foundation.
 
 See http://eldarion.com/symposion/ for commercial support, customization and hosting
 
-##Instructions##
+## Quickstart
 
-	git clone https://github.com/OAhack/symposion.git
-	virtualenv env
-	source env/bin/activate
-	pip install -r requirements.txt
-	python manage.py syncdb
- 	python manage.py runserver
-
-###Load Default (Fixture) Data###
-	python manage.py loaddata
-
-The site won't work until you create an entry for 'conference' in admin panel available at /admin/ (admin login is email, password.  Not user, password). 
-
+- `pip install -r requirements.txt`
+- `python manage.py syncdb`
+- `python manage.py loaddata fixtures/*`
