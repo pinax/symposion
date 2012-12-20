@@ -130,7 +130,7 @@ def schedule_slot_edit(request, slug, slot_pk):
                     slot.assign(presentation)
             if save:
                 slot.save()
-        return redirect("schedule_edit")
+        return redirect("schedule_edit", slug)
     else:
         form = SlotEditForm(slot=slot)
         ctx = {
