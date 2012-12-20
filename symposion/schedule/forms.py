@@ -11,7 +11,7 @@ class SlotEditForm(forms.Form):
     def __init__(self, *args, **kwargs):
         self.slot = kwargs.pop("slot")
         super(SlotEditForm, self).__init__(*args, **kwargs)
-        if self.slot.kind.label == "talk":
+        if self.slot.kind.label in ["talk", "tutorial"]:
             self.fields["presentation"] = self.build_presentation_field()
         else:
             self.fields["content_override"] = self.build_content_override_field()
