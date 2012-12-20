@@ -25,6 +25,25 @@ def fetch_schedule(slug):
     return schedule
 
 
+def schedule_conference(request):
+    
+    schedules = Schedule.objects.all()
+    
+    sections = []
+    for schedule in schedules:
+        days_qs = Day.objects.filter(schedule=schedule)
+        days = [TimeTable(day) for day in days_qs]
+        sections.append({
+            "schedule": schedule,
+            "days": days,
+        })
+    
+    ctx = {
+        "sections": sections,
+    }
+    return render(request, "schedule/schedule_conference.html", ctx)
+
+
 def schedule_detail(request, slug=None):
     schedule = fetch_schedule(slug)
     

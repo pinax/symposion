@@ -1,0 +1,38 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load bootstrap_tags %}
+{% load boxes_tags %}
+{% load cache %}
+
+{% block head_title %}Conference Schedule{% endblock %}
+
+{% block body_class %}full{% endblock %}
+
+{% block right %}
+{% endblock %}
+
+{% block body_outer %}
+    <div class="row">
+        <div class="span12">
+            <div class="page-head">
+                <h1>Conference Schedule</h1>
+                {% block breadcrumbs %}{% endblock %}
+            </div>
+        </div>
+        <div class="span12">
+            {% box "schedule_top" %}
+            
+            {% for section in sections %}
+                {% cache 600 "schedule-table" section.schedule.section %}
+                    {% for timetable in section.days %}
+                        <h3>{{ timetable.day.date }}</h3>
+                        {% include "schedule/_grid.html" %}
+                    {% endfor %}
+                {% endcache %}
+            {% endfor %}
+            
+            {% box "schedule_bottom" %}
+        </div>
+    </div>
+{% endblock %}
