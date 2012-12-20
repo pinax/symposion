@@ -139,7 +139,8 @@ class Presentation(models.Model):
     def speakers(self):
         yield self.speaker
         for speaker in self.additional_speakers.all():
-            yield speaker
+            if speaker.user:
+                yield speaker
     
     def __unicode__(self):
         return "#%s %s (%s)" % (self.number, self.title, self.speaker)
