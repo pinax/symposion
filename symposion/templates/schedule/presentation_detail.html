@@ -1,38 +1,35 @@
 {% extends "site_base.html" %}
 
+{% load sitetree %}
+
 {% block head_title %}Presentation: {{ presentation.title }}{% endblock %}
 
-{% block body %}
-    
-    <h1>{{ presentation.title }}</h1>
+{% block breadcrumbs %}{% sitetree_breadcrumbs from "main" %}{% endblock %}
 
-    <h2>
+{% block body %}
+    {% if presentation.slot %}
+        <h4>
+            {{ presentation.slot.day.date|date:"l" }}
+            {{ presentation.slot.start}}&ndash;{{ presentation.slot.end }}
+        </h4>
+    {% endif %}
+    <h2>{{ presentation.title }}</h2>
+
+    <h4>
         {% for speaker in presentation.speakers %}
-            <a href="{% url speaker_profile speaker.pk %}">{{ speaker }}</a>
-        {% if not forloop.last %}, {% endif %}{% endfor %}
-    </h2>
-    
+            <a href="{% url speaker_profile speaker.pk %}">{{ speaker }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}
+    </h4>
+
     <dl class="dl-horizontal">
         <dt>Audience level:</dt>
         <dd style="margin-bottom: 0;">{{ presentation.proposal.get_audience_level_display }}</dd>
-        <dt>Track:</dt>
-        <dd>{{ presentation.proposal.track }}</dd>
     </dl>
-    
-    {% if presentation.slot %}
-        <h2>
-            {{ presentation.slot.day.date|date:"l" }}
-            {{ presentation.slot.start}}&ndash;{{ presentation.slot.end }}
-            in
-            {{ presentation.slot.rooms|join:", " }}
-        </h2>
-    {% endif %}
 
     <h3>Description</h3>
 
     <div class="description">{{ presentation.description }}</div>
-    
+
     <h3>Abstract</h3>
-    
+
     <div class="abstract">{{ presentation.abstract|safe }}</div>
 {% endblock %}

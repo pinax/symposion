@@ -126,10 +126,11 @@ def speaker_edit(request, pk=None):
 
 def speaker_profile(request, pk):
     speaker = get_object_or_404(Speaker, pk=pk)
-    
-    if not speaker.presentations and not request.user.is_staff:
+    presentations = speaker.all_presentations
+    if not presentations and not request.user.is_staff:
         raise Http404()
     
     return render(request, "speakers/speaker_profile.html", {
         "speaker": speaker,
+        "presentations": presentations,
     })

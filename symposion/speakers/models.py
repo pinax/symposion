@@ -42,3 +42,13 @@ class Speaker(models.Model):
             return self.user.email
         else:
             return self.invite_email
+    
+    @property
+    def all_presentations(self):
+        presentations = []
+        if self.presentations:
+            for p in self.presentations.all():
+                presentations.append(p)
+            for p in self.copresentations.all():
+                presentations.append(p)
+        return presentations

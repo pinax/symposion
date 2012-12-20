@@ -4,7 +4,7 @@
 {% load thumbnail %}
 
 
-{% block page_title %}{% endblock %}
+{% block head_title %}{{ speaker.name }}{% endblock %}
 
 {% block body %}
     <div class="row">
@@ -23,7 +23,7 @@
             <div class="bio">{{ speaker.biography|safe }}</div>
             
             <h2>Presentations</h2>
-            {% for presentation in speaker.presentations.all %}
+            {% for presentation in presentations %}
                 <h3><a href="{% url schedule_presentation_detail presentation.pk %}">{{ presentation.title }}</a></h3>
                 {% if presentation.slot %}
                     <p>

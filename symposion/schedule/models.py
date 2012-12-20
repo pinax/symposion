@@ -117,7 +117,7 @@ class Presentation(models.Model):
     description = MarkupField()
     abstract = MarkupField()
     speaker = models.ForeignKey("speakers.Speaker", related_name="presentations")
-    additional_speakers = models.ManyToManyField("speakers.Speaker", blank=True)
+    additional_speakers = models.ManyToManyField("speakers.Speaker", related_name="copresentations", blank=True)
     cancelled = models.BooleanField(default=False)
     proposal_base = models.OneToOneField(ProposalBase, related_name="presentation")
     section = models.ForeignKey(Section, related_name="presentations")
