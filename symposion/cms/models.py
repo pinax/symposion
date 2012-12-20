@@ -42,6 +42,10 @@ class Page(models.Model):
     def get_absolute_url(self):
         return ("cms_page", [self.path])
     
+    @property
+    def is_community(self):
+        return self.path.lower().startswith("community/")
+    
     def save(self, *args, **kwargs):
         self.updated = datetime.datetime.now()
         super(Page, self).save(*args, **kwargs)
