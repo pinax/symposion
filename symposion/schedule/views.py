@@ -145,9 +145,13 @@ def schedule_slot_edit(request, slug, slot_pk):
 def schedule_presentation_detail(request, pk):
     
     presentation = get_object_or_404(Presentation, pk=pk)
+    if presentation.slot:
+        schedule = presentation.slot.day.schedule
+    else:
+        schedule = None
     
     ctx = {
         "presentation": presentation,
-        "schedule": presentation.slot.day.schedule,
+        "schedule": schedule,
     }
     return render(request, "schedule/presentation_detail.html", ctx)
