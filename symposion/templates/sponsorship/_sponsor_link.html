@@ -2,9 +2,9 @@
 {% spaceless %}
 <a href="{{ sponsor.external_url }}">
     {% if dimensions %}
-        <img src="{% thumbnail sponsor.logo dimensions %}" alt="{{ sponsor.name }}" />
+        <img id="sponsor_{{ sponsor.pk }}" src="{% thumbnail sponsor.logo dimensions %}" alt="{{ sponsor.name }}" />
     {% else %}
-        <img src="{% thumbnail sponsor.logo '150x150' %}" alt="{{ sponsor.name }}" />
+        <img id="sponsor_{{ sponsor.pk }}" src="{% thumbnail sponsor.logo '150x150' %}" alt="{{ sponsor.name }}" />
     {% endif %}
 </a>
 {% endspaceless %}
