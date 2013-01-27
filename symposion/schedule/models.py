@@ -14,6 +14,9 @@ class Schedule(models.Model):
     
     def __unicode__(self):
         return "%s Schedule" % self.section
+    
+    class Meta:
+        ordering = ["section"]
 
 
 class Day(models.Model):
@@ -26,6 +29,7 @@ class Day(models.Model):
     
     class Meta:
         unique_together = [("schedule", "date")]
+        ordering = ["date"]
 
 
 class Room(models.Model):
