@@ -27,7 +27,7 @@ def fetch_schedule(slug):
 
 def schedule_conference(request):
     
-    schedules = Schedule.objects.all()
+    schedules = Schedule.objects.filter(published=True, hidden=False)
     
     sections = []
     for schedule in schedules:
@@ -47,6 +47,8 @@ def schedule_conference(request):
 def schedule_detail(request, slug=None):
     
     schedule = fetch_schedule(slug)
+    if not schedule.published and not request.user.is_staff:
+        raise Http404()
     
     days_qs = Day.objects.filter(schedule=schedule)
     days = [TimeTable(day) for day in days_qs]
