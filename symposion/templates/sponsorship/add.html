@@ -1,0 +1,22 @@
+{% extends "site_base.html" %}
+
+{% load bootstrap_tags %}
+{% load i18n %}
+{% load boxes_tags %}
+
+{% block head_title %}{% trans "Add a Sponsor" %}{% endblock %}
+
+{% block body_class %}sponsorships{% endblock %}
+
+{% block body %}
+    <form method="POST" action="{% url sponsor_add %}" class="form-horizontal">
+        {% csrf_token %}
+        <legend>{% trans "Add a Sponsor" %}</legend>
+        {{ form|as_bootstrap }}
+        <div class="form-actions">
+            <input class="btn btn-primary" type="submit" value="Add" />
+            <a class="btn" href="{% url dashboard %}">Cancel</a>
+        </div>
+    </form>
+
+{% endblock %}

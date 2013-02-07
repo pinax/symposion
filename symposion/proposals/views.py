@@ -10,6 +10,7 @@ from django.utils.hashcompat import sha_constructor
 from django.views import static
 
 from django.contrib import messages
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 from account.models import EmailAddress
@@ -58,6 +59,9 @@ def proposal_submit_kind(request, kind_slug):
             speaker_profile = request.user.speaker_profile
         except ObjectDoesNotExist:
             return redirect("dashboard")
+    
+    if not kind.section.proposalsection.is_available():
+        return redirect("proposal_submit")
     
     form_class = get_form(settings.PROPOSAL_FORMS[kind_slug])
     
@@ -183,6 +187,21 @@ def proposal_edit(request, pk):
         form = form_class(request.POST, instance=proposal)
         if form.is_valid():
             form.save()
+            if hasattr(proposal, "reviews"):
+                users = User.objects.filter(
+                    Q(review__proposal=proposal) |
+                    Q(proposalmessage__proposal=proposal)
+                )
+                users = users.exclude(id=request.user.id).distinct()
+                for user in users:
+                    ctx = {
+                        "user": request.user,
+                        "proposal": proposal,
+                    }
+                    send_email(
+                        [user.email], "proposal_updated",
+                        context=ctx
+                    )
             messages.success(request, "Proposal updated.")
             return redirect("proposal_detail", proposal.pk)
     else:
@@ -203,8 +222,47 @@ def proposal_detail(request, pk):
     if request.user not in [p.user for p in proposal.speakers()]:
         raise Http404()
     
+    if "symposion.reviews" in settings.INSTALLED_APPS:
+        from symposion.reviews.forms import SpeakerCommentForm
+        message_form = SpeakerCommentForm()
+        if request.method == "POST":
+            message_form = SpeakerCommentForm(request.POST)
+            if message_form.is_valid():
+                
+                message = message_form.save(commit=False)
+                message.user = request.user
+                message.proposal = proposal
+                message.save()
+                
+                ProposalMessage = SpeakerCommentForm.Meta.model
+                reviewers = User.objects.filter(
+                    id__in=ProposalMessage.objects.filter(
+                        proposal=proposal
+                    ).exclude(
+                        user=request.user
+                    ).distinct().values_list("user", flat=True)
+                )
+                
+                for reviewer in reviewers:
+                    ctx = {
+                        "proposal": proposal,
+                        "message": message,
+                        "reviewer": True,
+                    }
+                    send_email(
+                        [reviewer.email], "proposal_new_message",
+                        context=ctx
+                    )
+                
+                return redirect(request.path)
+        else:
+            message_form = SpeakerCommentForm()
+    else:
+        message_form = None
+    
     return render(request, "proposals/proposal_detail.html", {
         "proposal": proposal,
+        "message_form": message_form
     })
 
 
@@ -243,7 +301,7 @@ def proposal_leave(request, pk):
         proposal.additional_speakers.remove(speaker)
         # @@@ fire off email to submitter and other speakers
         messages.success(request, "You are no longer speaking on %s" % proposal.title)
-        return redirect("speaker_dashboard")
+        return redirect("dashboard")
     ctx = {
         "proposal": proposal,
     }

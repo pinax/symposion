@@ -1,0 +1,44 @@
+{% extends "site_base.html" %}
+
+{% load sponsorship_tags %}
+{% load thumbnail %}
+{% load i18n %}
+
+{% block head_title %}{% trans "About Our Sponsors" %}{% endblock %}
+
+{% block body_class %}sponsorships{% endblock %}
+
+{% block body_outer %}
+    <div class="row">
+        <div class="span12">
+            <h1>{% trans "About Our Sponsors" %}</h1>
+            <a href="{% url cms_page "sponsors/prospectus/" %}" class="btn">Learn how to become a sponsor <span class="arrow"></span></a>
+
+            {% sponsor_levels as levels %}
+            {% for level in levels %}
+                {% if level.sponsors %}
+                    <h3>{{ level.name }}</h3>
+
+                    {% for sponsor in level.sponsors %}
+                        {% if sponsor.website_logo %}
+                            <div class="row">
+                                <div class="span2">
+                                    <h2>
+                                        <a href="{{ sponsor.external_url }}">
+                                            <img src="{% thumbnail sponsor.website_logo '150x80' %}" alt="{{ sponsor.name }}" />
+                                        </a>
+                                    </h2>
+                                </div>
+                                <div class="span10">
+                                    <h5>{{ sponsor.name }}</h5>
+                                    <p><a href="{{ sponsor.external_url }}">{{ sponsor.external_url }}</a></p>
+                                    <p>{{ sponsor.listing_text|urlize|linebreaks }}</p>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,32 @@
+<tr>
+    <td>
+        <a href="{% url proposal_detail proposal.pk %}">{{ proposal.title }}</a>
+    </td>
+    
+    <td>{{ proposal.kind.name }}</td>
+    
+    <td>
+        {% if proposal.cancelled %}
+            <span class="label label-important">Cancelled</span>
+        {% else %}
+            {% if request.user == proposal.speaker.user %}
+                {% if proposal.result.status == "accepted" %}
+                    <span class="label label-success">Accepted</span>
+                {% else %}
+                    <span class="label">Submitted</span>
+                {% endif %}
+            {% else %}
+                <span class="label">Associated</span>
+            {% endif %}
+        {% endif %}
+    </td>
+        
+    <td>
+        {% if not proposal.cancelled %}
+            {% if request.user == proposal.speaker.user and proposal.can_edit %}
+                <a href="{% url proposal_edit proposal.pk %}" class="btn btn-mini"><i class="icon-pencil"></i> Edit</a>
+                <a href="{% url proposal_speaker_manage proposal.id %}" class="btn btn-mini"><i class="icon-user"></i> Manage Additional Speakers</a>
+            {% endif %}
+        {% endif %}
+    </td>
+</tr>

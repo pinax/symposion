@@ -1,0 +1,119 @@
+[
+    {
+        "pk": 2, 
+        "model": "sponsorship.benefit", 
+        "fields": {
+            "type": "weblogo", 
+            "name": "Web Logo", 
+            "description": "Logo to appear on the website"
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "sponsorship.benefit", 
+        "fields": {
+            "type": "file", 
+            "name": "Print Logo", 
+            "description": "Logo to appear in print"
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "sponsorship.benefit", 
+        "fields": {
+            "type": "text", 
+            "name": "Sponsor Description", 
+            "description": "Description to appear on website and in print"
+        }
+    }, 
+    {
+        "pk": 9, 
+        "model": "sponsorship.benefitlevel", 
+        "fields": {
+            "other_limits": "", 
+            "benefit": 4, 
+            "max_words": null, 
+            "level": 1
+        }
+    }, 
+    {
+        "pk": 5, 
+        "model": "sponsorship.benefitlevel", 
+        "fields": {
+            "other_limits": "", 
+            "benefit": 3, 
+            "max_words": null, 
+            "level": 1
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "sponsorship.benefitlevel", 
+        "fields": {
+            "other_limits": "", 
+            "benefit": 2, 
+            "max_words": null, 
+            "level": 1
+        }
+    }, 
+    {
+        "pk": 10, 
+        "model": "sponsorship.benefitlevel", 
+        "fields": {
+            "other_limits": "", 
+            "benefit": 4, 
+            "max_words": null, 
+            "level": 2
+        }
+    }, 
+    {
+        "pk": 6, 
+        "model": "sponsorship.benefitlevel", 
+        "fields": {
+            "other_limits": "", 
+            "benefit": 3, 
+            "max_words": null, 
+            "level": 2
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "sponsorship.benefitlevel", 
+        "fields": {
+            "other_limits": "", 
+            "benefit": 2, 
+            "max_words": null, 
+            "level": 2
+        }
+    }, 
+    {
+        "pk": 11, 
+        "model": "sponsorship.benefitlevel", 
+        "fields": {
+            "other_limits": "", 
+            "benefit": 4, 
+            "max_words": null, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 7, 
+        "model": "sponsorship.benefitlevel", 
+        "fields": {
+            "other_limits": "", 
+            "benefit": 3, 
+            "max_words": null, 
+            "level": 3
+        }
+    }, 
+    {
+        "pk": 3, 
+        "model": "sponsorship.benefitlevel", 
+        "fields": {
+            "other_limits": "", 
+            "benefit": 2, 
+            "max_words": null, 
+            "level": 3
+        }
+    }
+]

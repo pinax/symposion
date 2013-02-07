@@ -1,0 +1,37 @@
+{% load i18n %}
+
+<table class="table table-striped table-bordered table-reviews">
+    <thead>
+        <th>#</th>
+        <th>{% trans "Speaker / Title" %}</th>
+        <th>{% trans "Category" %}</th>
+        <th><i class="icon-comment-alt"></i></th>
+        <th>{% trans "+1" %}</th>
+        <th>{% trans "+0" %}</th>
+        <th>{% trans "-0" %}</th>
+        <th>{% trans "-1" %}</th>
+        <th><a href="#" class="tip" title="{% trans "Your Rating" %}"><i class="icon-user"></i></a></th>
+    </thead>
+    
+    <tbody>
+        {% for proposal in proposals %}
+            <tr class="{{ proposal.user_vote_css }}">
+                <td>{{ proposal.number }}</td>
+                <td>
+                    <a href="{% url review_detail proposal.pk %}">
+                        <small><strong>{{ proposal.speaker }}</strong></small>
+                        <br />
+                        {{ proposal.title }}
+                    </a>
+                </td>
+                <td>{{ proposal.track }}</td>
+                <td>{{ proposal.comment_count }}</td>
+                <td>{{ proposal.plus_one }}</td>
+                <td>{{ proposal.plus_zero }}</td>
+                <td>{{ proposal.minus_zero }}</td>
+                <td>{{ proposal.minus_one }}</td>
+                <td>{{ proposal.user_vote|default:"" }}</td>
+            </tr>
+        {% endfor %}
+    </tbody>
+</table>

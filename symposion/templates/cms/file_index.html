@@ -1,0 +1,30 @@
+{% extends "site_base.html" %}
+
+{% block head_title %}Uploaded Files{% endblock %}
+
+{% block body_outer %}
+    <div class="row">
+        <div class="span12">
+            <h1>Files</h1>
+                    
+            {% for file in files %}
+                <div style="margin-top: 1em;">
+                    <form class="pull-right" action="{% url file_delete file.pk %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-error"><i class="icon-trash"></i> delete</button>
+                    </form>
+                    <h3><a href="{{ file.download_url }}">{{ file.file }}</a></h3>
+                    <span style="font-style:italic; color: #999;">Uploaded {{ file.created|date:"N j, Y" }}</span>
+                </div>
+            {% empty %}
+                <p>No uploaded files.</p>
+            {% endfor %}
+            <div style="margin-top: 2em">
+                <a class="btn btn-success" href="{% url file_create %}">
+                    <i class="icon-plus icon-white"></i>
+                    Add File
+                </a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

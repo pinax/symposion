@@ -1,0 +1,120 @@
+{% extends "proposals/base.html" %}
+
+{% load i18n %}
+{% load account_tags %}
+{% load bootstrap_tags %}
+
+{% block head_title %}{{ proposal.title }}{% endblock %}
+
+{% block body %}
+    <div class="pull-right">
+        {% if not proposal.cancelled %}
+            {% if request.user == proposal.speaker.user %}
+                <a href="{% url proposal_edit proposal.pk %}" class="btn">
+                    {% trans "Edit this proposal" %}
+                </a>
+                <a href="{% url proposal_cancel proposal.pk %}" class="btn">
+                    {% trans "Cancel this proposal" %}
+                </a>
+            {% else %}
+                <a href="{% url proposal_leave proposal.pk %}" class="btn">
+                    {% trans "Remove me from this proposal" %}
+                </a>
+            {% endif %}
+        {% else %}
+            {% trans 'Cancelled' }
+        {% endif %}
+    </div>
+    
+    <h3>#{{ proposal.number }}: {{ proposal.title }} ({{ proposal.speaker }}, Track: {{ proposal.track }})</h3>
+    
+    <div class="tabbable">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#proposal-detail" data-toggle="tab">{% trans "Proposal Details" %}</a></li>
+            {% if request.user == proposal.speaker.user %}
+                <li><a href="#proposal-documents" data-toggle="tab">{% trans "Supporting Documents" %}</a></li>
+            {% endif %}
+            {% if message_form %}
+                <li><a href="#proposal-feedback" data-toggle="tab">{% trans "Reviewer Feedback" %} <span class="badge">{{ proposal.messages.all|length }}</span></a></li>
+            {% endif %}
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="proposal-detail">
+                {% include "proposals/_proposal_fields.html" %}
+            </div>
+            {% if request.user == proposal.speaker.user %}
+                <div class="tab-pane" id="proposal-documents">
+                    <h3>{% trans 'Supporting Documents' %}</h3>
+                    
+                    {% if proposal.supporting_documents.exists %}
+                        <table class="table table-striped">
+                            {% for document in proposal.supporting_documents.all %}
+                                <tr>
+                                    <td><a href="{{ document.download_url }}">{{ document.description }}</a></td>
+                                    <td>
+                                    <form style="margin: 0;" method="post" action="{% url proposal_document_delete document.pk %}">
+                                        {% csrf_token %}
+                                        <button type="submit" class="btn btn-mini">{% trans 'delete' %}</button>
+                                    </form>
+                                </td>
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    {% else %}
+                        <p>{% trans 'No supporting documents attached to this proposal.' %}</p>
+                    {% endif %}
+                    <a class="btn btn-small{% if proposal.cancelled %} btn-disabled{% endif %}" href="{% url proposal_document_create proposal.pk %}"><i class="icon-upload"></i> {% trans 'Add Document' %}</a>
+                </div>
+            {% endif %}
+    
+    {% if message_form %}
+        <div class="tab-pane" id="proposal-feedback">
+            
+            <h3>{% trans 'Conversation with Reviewers' %}</h3>
+            
+            {% for message in proposal.messages.all %}
+                <div class="review-box">
+                    <div class="comment">{{ message.message|safe }}</div>
+                    <div class="dateline"><b>{% user_display message.user %}</b> {{ message.submitted_at|timesince }} ago</div>
+                </div>
+                <div class="clear"></div>
+            {% endfor %}
+            
+            <h3>{% trans 'Leave a Message' %}</h3>
+            
+            <p>{% trans 'You can leave a message for the reviewers here.' %}</p>
+            
+            <form action="" method="POST" accept-charset="utf-8">
+                {% csrf_token %}
+                <fieldset>
+                    {{ message_form|as_bootstrap }}
+                </fieldset>
+                <div class="actions">
+                    <button type="submit" name="message_submit" class="btn
+		    primary">{% trans 'Submit' %}</button>
+                </div>
+            </form>
+        </div>
+    {% endif %}
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_script %}
+    <script src="{{ STATIC_URL }}symposion/js/jquery.history.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            var History = window.History;
+            
+            $(window).bind("anchorchange", function() {
+                $(".nav-tabs a[href='" + location.hash + "']").click();
+            });
+            
+            $('#.nav-tabs a[data-toggle="tab"]').on('shown', function (e) {
+                if (History.enabled) {
+                    History.pushState(null, null, $(e.target).attr("href"));
+                }
+            });
+        });
+    </script>
+{% endblock extra_script %}

@@ -1,24 +1,16 @@
 {% extends "theme_base.html" %}
+
 {% load sitetree %}
 
-{% block body_base %}
-    <div class="container">
-        
-        {% include "_messages.html" %}
-        
-        {% block breadcrumbs %}
-            {% sitetree_breadcrumbs from "main" %}
-        {% endblock %}
-        
-        <div class="row">
-            <div class="span9">
-                {% block body %}
-                {% endblock %}
-            </div>
-            <div class="span3">
-                {% block sidebar %}
-                {% endblock %}
-            </div>
+{% block body_outer %}
+    <div class="row">
+        <div class="span9">
+            {% block body %}
+            {% endblock %}
+        </div>
+        <div class="span3">
+            {% block sidebar %}
+            {% endblock %}
         </div>
     </div>
 {% endblock %}

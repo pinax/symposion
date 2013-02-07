@@ -33,7 +33,7 @@ class ProposalSection(models.Model):
     start = models.DateTimeField(null=True, blank=True)
     end = models.DateTimeField(null=True, blank=True)
     closed = models.NullBooleanField()
-    published = models.NullBooleanField()  # @@@ what is this used for?
+    published = models.NullBooleanField()
     
     @classmethod
     def available(cls):
@@ -43,6 +43,16 @@ class ProposalSection(models.Model):
             Q(end__gt=now) | Q(end=None),
             Q(closed=False) | Q(closed=None),
         )
+    
+    def is_available(self):
+        if self.closed:
+            return False
+        now = datetime.datetime.now()
+        if self.start and self.start > now:
+            return False
+        if self.end and self.end < now:
+            return False
+        return True
     
     def __unicode__(self):
         return self.section.name
@@ -97,9 +107,13 @@ class ProposalBase(models.Model):
         return True
     
     @property
+    def section(self):
+        return self.kind.section
+    
+    @property
     def speaker_email(self):
         return self.speaker.email
-
+    
     @property
     def number(self):
         return str(self.pk).zfill(3)
@@ -108,6 +122,13 @@ class ProposalBase(models.Model):
         yield self.speaker
         for speaker in self.additional_speakers.exclude(additionalspeaker__status=AdditionalSpeaker.SPEAKING_STATUS_DECLINED):
             yield speaker
+    
+    def notification_email_context(self):
+        return {
+            "title": self.title,
+            "speaker": self.speaker.name,
+            "kind": self.kind.name,
+        }
 
 
 reversion.register(ProposalBase)

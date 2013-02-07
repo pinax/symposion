@@ -1,0 +1,18 @@
+{% extends "proposals/base.html" %}
+
+{% load i18n %}
+
+{% load bootstrap_tags %}
+
+{% block head_title %}{% trans 'Cancel Proposal' %}{% endblock %}
+
+{% block body %}
+    <h1>Cancel: {{ proposal.title }}</h1>
+    
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <p>Are you sure you want to cancel <b>{{ proposal.title }}</b>?</p>
+        <input class="btn btn-danger" type="submit" value="I am sure" />
+        <a class="btn" href="{% url proposal_detail proposal.pk %}">{% trans 'No, keep it for now' %}</a>
+    </form>
+{% endblock %}

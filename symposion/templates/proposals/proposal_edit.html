@@ -1,0 +1,23 @@
+{% extends "proposals/base.html" %}
+
+{% load bootstrap_tags %}
+{% load markitup_tags %}
+
+{% block head_title %}Editing {{ proposal.title }}{% endblock %}
+
+{% block body %}
+    <h1>Edit: {{ proposal.title }}</h1>
+    
+    <p><a href="{% url proposal_speaker_manage proposal.pk %}">Manage speakers</a></p>
+    
+    <form method="POST" action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        <fieldset>
+            {{ form|as_bootstrap }}
+        </fieldset>
+        <div class="form-actions">
+            <input class="btn btn-primary" type="submit" value="Save" />
+            <a class="btn" href="{% url proposal_detail proposal.pk %}">Cancel</a>
+        </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load cache %}
+{% load sitetree %}
+
+{% block head_title %}Presentation Listing{% endblock %}
+
+{% block extra_head %}
+    <style>
+        .presentation {
+
+        }
+        .presentation h3 {
+            line-height: 1.1em;
+            font-weight: bold;
+        }
+        .presentation h4 {
+
+        }
+        .presentation p {
+            margin-bottom: 0.5em;
+            line-height: 1.2em;
+        }
+    </style>
+{% endblock %}
+
+{% block breadcrumbs %}{% sitetree_breadcrumbs from "main" %}{% endblock %}
+
+{% block body %}
+    <h2>Accepted {{ schedule.section.name }}</h2>
+    {% cache 600 "schedule-list" schedule.section.name %}
+        {% for presentation in presentations %}
+            <div class="row">
+                <div class="span8 presentation well">
+                    <h3><a href="{% url schedule_presentation_detail presentation.pk %}">{{ presentation.title }}</a></h3>
+                    <h4>{{ presentation.speakers|join:", " }} in {{ presentation.proposal.category }}</h4>
+                    {{ presentation.description }}
+                    {% if presentation.slot %}
+                        <h4>
+                            {{ presentation.slot.day.date|date:"l" }}
+                            {{ presentation.slot.start}}&ndash;{{ presentation.slot.end }}
+                            in
+                            {{ presentation.slot.rooms|join:", " }}
+                        </h4>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    {% endcache %}
+{% endblock %}

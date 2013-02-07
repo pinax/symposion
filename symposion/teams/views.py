@@ -1,8 +1,10 @@
-from django.http import Http404
+from django.http import Http404, HttpResponseNotAllowed
 from django.shortcuts import render, redirect, get_object_or_404
 
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+
+from symposion.utils.mail import send_email
 
 from symposion.teams.forms import TeamInvitationForm
 from symposion.teams.models import Team, Membership
@@ -63,6 +65,7 @@ def team_detail(request, slug):
             form = TeamInvitationForm(request.POST, team=team)
             if form.is_valid():
                 form.invite()
+                send_email([form.user.email], "teams_user_invited", context={"team": team})
                 messages.success(request, "Invitation created.")
                 return redirect("team_detail", slug=slug)
         else:
@@ -124,6 +127,11 @@ def team_apply(request, slug):
         membership, created = Membership.objects.get_or_create(team=team, user=request.user)
         membership.state = "applied"
         membership.save()
+        managers = [m.user.email for m in team.managers()]
+        send_email(managers, "teams_user_applied", context={
+            "team": team,
+            "user": request.user
+        })
         messages.success(request, "Applied to join team.")
         return redirect("team_detail", slug=slug)
     else:
@@ -132,51 +140,55 @@ def team_apply(request, slug):
 
 @login_required
 def team_promote(request, pk):
-    if request.method == "POST":
-        membership = get_object_or_404(Membership, pk=pk)
-        state = membership.team.get_state_for_user(request.user)
-        if request.user.is_staff or state == "manager":
-            if membership.state == "member":
-                membership.state = "manager"
-                membership.save()
-                messages.success(request, "Promoted to manager.")
+    if request.method != "POST":
+        return HttpResponseNotAllowed(["POST"])
+    membership = get_object_or_404(Membership, pk=pk)
+    state = membership.team.get_state_for_user(request.user)
+    if request.user.is_staff or state == "manager":
+        if membership.state == "member":
+            membership.state = "manager"
+            membership.save()
+            messages.success(request, "Promoted to manager.")
     return redirect("team_detail", slug=membership.team.slug)
 
 
 @login_required
 def team_demote(request, pk):
-    if request.method == "POST":
-        membership = get_object_or_404(Membership, pk=pk)
-        state = membership.team.get_state_for_user(request.user)
-        if request.user.is_staff or state == "manager":
-            if membership.state == "manager":
-                membership.state = "member"
-                membership.save()
-                messages.success(request, "Demoted from manager.")
+    if request.method != "POST":
+        return HttpResponseNotAllowed(["POST"])
+    membership = get_object_or_404(Membership, pk=pk)
+    state = membership.team.get_state_for_user(request.user)
+    if request.user.is_staff or state == "manager":
+        if membership.state == "manager":
+            membership.state = "member"
+            membership.save()
+            messages.success(request, "Demoted from manager.")
     return redirect("team_detail", slug=membership.team.slug)
 
 
 @login_required
 def team_accept(request, pk):
-    if request.method == "POST":
-        membership = get_object_or_404(Membership, pk=pk)
-        state = membership.team.get_state_for_user(request.user)
-        if request.user.is_staff or state == "manager":
-            if membership.state == "applied":
-                membership.state = "member"
-                membership.save()
-                messages.success(request, "Accepted application.")
+    if request.method != "POST":
+        return HttpResponseNotAllowed(["POST"])
+    membership = get_object_or_404(Membership, pk=pk)
+    state = membership.team.get_state_for_user(request.user)
+    if request.user.is_staff or state == "manager":
+        if membership.state == "applied":
+            membership.state = "member"
+            membership.save()
+            messages.success(request, "Accepted application.")
     return redirect("team_detail", slug=membership.team.slug)
 
 
 @login_required
 def team_reject(request, pk):
-    if request.method == "POST":
-        membership = get_object_or_404(Membership, pk=pk)
-        state = membership.team.get_state_for_user(request.user)
-        if request.user.is_staff or state == "manager":
-            if membership.state == "applied":
-                membership.state = "rejected"
-                membership.save()
-                messages.success(request, "Rejected application.")
+    if request.method != "POST":
+        return HttpResponseNotAllowed(["POST"])
+    membership = get_object_or_404(Membership, pk=pk)
+    state = membership.team.get_state_for_user(request.user)
+    if request.user.is_staff or state == "manager":
+        if membership.state == "applied":
+            membership.state = "rejected"
+            membership.save()
+            messages.success(request, "Rejected application.")
     return redirect("team_detail", slug=membership.team.slug)

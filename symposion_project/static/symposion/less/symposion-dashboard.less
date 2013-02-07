@@ -1,0 +1,96 @@
+// Dashboard panels
+.dashboard-panel {
+    position: relative;
+    clear: both;
+    width: auto;
+    margin-bottom: 2em;
+    overflow: hidden;
+    
+    .dashboard-panel-header {
+        position: relative;
+        height: 40px;
+        line-height: 40px;
+        #gradient > .vertical(@navbarBackgroundHighlight, @navbarBackground);
+        border: 1px solid #D5D5D5;
+        .border-radius(4px 4px 0 0);
+        -webkit-background-clip: padding-box;
+        
+        .header-actions {
+            padding-right: 10px;
+        }
+        
+        h3 {
+            position: relative;
+            top: 2px;
+            left: 10px;
+            display: inline-block;
+            margin-right: 3em;
+            font-size: 14px;
+            font-weight: 600;
+            color: @grayDark;
+            line-height: 18px;
+            text-shadow: 1px 1px 2px rgba(255,255,255,.5);
+        }
+    
+        > [class^="icon-"], > [class*=" icon-"] {
+            display: inline-block;
+            margin-left: 13px;
+            margin-right: -2px;
+            font-size: 16px;
+            color: @grayDark;
+            vertical-align: middle;
+        }
+    }
+
+    .dashboard-panel-content {
+        padding: 40px 15px 15px;
+        border: 1px solid #D5D5D5;
+        .border-radius(5px);
+        .box-shadow(0 1px 1px rgba(0, 0, 0, 0.1));
+        background-color: #fff;
+
+        h3 {
+            font-size:@baseFontSize + 6;
+            font-weight: 800;
+            line-height: 20px;
+            margin-bottom:20px;
+        }
+
+        .actions {
+            .action {
+                width: 22.50%;
+                display: inline-block;
+                padding: 12px 0;
+                margin: 0 .9% 1em;
+                vertical-align: top;
+                text-decoration: none;
+                background: #F3F3F3;
+                border-radius: 5px;
+                text-align:center;
+
+                .widget-icon {
+                    margin-top: .25em;
+                    margin-bottom: .25em;
+                    font-size: 32px;
+                    color: #888;
+                }
+
+                .widget-label {
+                    display: block;
+                    font-weight: 400;
+                    color: #666;
+                }
+            }
+
+            .action:hover {
+                background: #E8E8E8;
+            }
+        }
+    }
+
+    .dashboard-panel-header + .dashboard-panel-content {
+        border-top: none;
+        padding-top: 20px;
+        .border-radius(0 0 4px 4px);
+    }
+}

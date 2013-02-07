@@ -1,0 +1,41 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load thumbnail %}
+
+
+{% block head_title %}{{ speaker.name }}{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="span2">
+            {% if speaker.photo %}
+                <img src="{% thumbnail speaker.photo '128x128' %}" alt="{{ speaker.name }}" />
+            {% else %}
+                &nbsp;
+            {% endif %}
+        </div>
+        <div class="span6">
+            {% if speaker.user == request.user or request.user.is_staff %}
+                <a class="btn pull-right" href="{% url speaker_edit speaker.pk %}">Edit</a>
+            {% endif %}
+            <h1>{{ speaker.name }}</h1>
+            <div class="bio">{{ speaker.biography|safe }}</div>
+            
+            <h2>Presentations</h2>
+            {% for presentation in presentations %}
+                <h3><a href="{% url schedule_presentation_detail presentation.pk %}">{{ presentation.title }}</a></h3>
+                {% if presentation.slot %}
+                    <p>
+                        {{ presentation.slot.day.date|date:"l" }}
+                        {{ presentation.slot.start}}&ndash;{{ presentation.slot.end }}
+                        in
+                        {{ presentation.slot.rooms|join:", " }}
+                    </p>
+                {% endif %}
+            {% empty %}
+                <p>No presentations. This page is only visible to staff until there is a presentation.<p>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

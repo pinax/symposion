@@ -1,0 +1,15 @@
+{% extends "reviews/base.html" %}
+
+{% load bootstrap_tags %}
+
+{% block body %}
+
+    <h1>Bulk Accept</h1>
+    <form action="" method="POST" class="uniForm" accept-charset="utf-8">
+        {% csrf_token %}
+        {{ form|as_bootstrap }}
+        <div class="form-actions">
+            <input class="btn btn-primary" type="submit" name="submit" value="submit" />
+        </div>
+    </form>
+{% endblock %}

@@ -1,0 +1,52 @@
+table.calendar {
+  background-color: #fffff;
+  table-layout: fixed;
+  font-size: 12px;
+  
+  tr {
+    min-height: 36px;
+  }
+  
+  th {
+    text-align: center;
+    
+    &.time {
+      width: 40px;
+    }
+  }
+  
+  td {
+    text-align: center;
+    vertical-align: middle;
+    
+    &.time {
+      vertical-align: top;
+      padding-top: 0;
+      margin-top: 0;
+      color: #444;
+      font-size: 11px;
+    }
+      
+    &.slot {
+      font-weight: bold;
+      text-shadow: #fff 0px 1px 0px;
+      
+      // Customize for slot types per site
+      &.slot-break { background-color: #ECFFFF; }
+      &.slot-plenary { background-color: lighten(#DCDCFF, 3%); }
+      p {
+        padding: 0;
+        margin: 0;
+      }
+    }
+    
+    span.title {
+      font-weight: bold;
+      display: block;
+    }
+    span.speaker {
+      font-weight: normal;
+      display:block;
+    }
+  }
+}

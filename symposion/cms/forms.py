@@ -14,3 +14,8 @@ class PageForm(forms.ModelForm):
             "body": MarkItUpWidget(),
             "path": forms.HiddenInput(),
         }
+
+
+class FileUploadForm(forms.Form):
+    
+    file = forms.FileField()

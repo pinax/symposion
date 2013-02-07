@@ -1,0 +1,82 @@
+{% extends "reviews/base.html" %}
+
+{% block body %}
+    <h1>Voting Status ({{ section_slug }})</h1>
+    
+    {% if key %}
+        <div class="breadcrumbs">
+            <a href="{% url review_status section_slug "positive" %}">Positive</a> |
+            <a href="{% url review_status section_slug "negative" %}">Negative</a> |
+            <a href="{% url review_status section_slug "indifferent" %}">Indifferent</a> |
+            <a href="{% url review_status section_slug "controversial" %}">Controversial</a>  |
+            <a href="{% url review_status section_slug "too_few" %}">Too Few</a> 
+        </div>
+
+        <div>
+            {% if key == "positive" %}
+                <h3>Positive
+                <small>proposals with at least {{ vote_threshold }} vote{{ vote_threshold|pluralize }} and at least one +1 and no &minus;1s</small></h3>
+            {% endif %}
+            {% if key == "negative" %}
+                <h3>Negative
+                <small>proposals with at least {{ vote_threshold }} vote{{ vote_threshold|pluralize }} and at least one &minus;1 and no +1s</small></h3>
+            {% endif %}
+            {% if key == "indifferent" %}
+                <h3>Indifferent
+                <small>proposals with at least {{ vote_threshold }} vote{{ vote_threshold|pluralize }} and neither a +1 or a &minus;1</small></h3>
+            {% endif %}
+            {% if key == "controversial" %}
+                <h3>Controversial
+                <small>proposals with at least {{ vote_threshold }} vote{{ vote_threshold|pluralize }} and both a +1 and &minus;1</small></h3>
+            {% endif %}
+            {% if key == "too_few" %}
+                <h3>Too Few Reviews
+                <small>proposals with fewer than {{ vote_threshold }} vote{{ vote_threshold|pluralize }}</small></h3>
+            {% endif %}
+
+            {% include "reviews/_review_table.html" %}
+
+        </div>
+    {% else %}
+        <p>Reviews are placed into one of five buckets depending on the state of their votes:</p>
+        
+        <dl>
+            <dt>
+                <a href="{% url review_status section_slug "positive" %}">Positive</a>
+                <span class="badge">{{ proposals.positive|length }}</span>
+            </dt>
+            <dd>
+                proposals with at least {{ vote_threshold }} vote{{ vote_threshold|pluralize }} and at least one +1 and no &minus;1s
+            </dd>
+            <dt>
+                <a href="{% url review_status section_slug "negative" %}">Negative</a>
+                <span class="badge">{{ proposals.negative|length }}</span>
+            </dt>
+            <dd>
+                proposals with at least {{ vote_threshold }} vote{{ vote_threshold|pluralize }} and at least one &minus;1 and no +1s
+            </dd>
+            <dt>
+                <a href="{% url review_status section_slug "indifferent" %}">Indifferent</a>
+                <span class="badge">{{ proposals.indifferent|length }}</span>
+            </dt>
+            <dd>
+                proposals with at least {{ vote_threshold }} vote{{ vote_threshold|pluralize }} and neither a +1 or a &minus;1
+            </dd>
+            <dt>
+                <a href="{% url review_status section_slug "controversial" %}">Controversial</a>
+                <span class="badge">{{ proposals.controversial|length }}</span>
+            </dt>
+            <dd>
+                proposals with at least {{ vote_threshold }} vote{{ vote_threshold|pluralize }} and both a +1 and &minus;1
+            </dd>
+            <dt>
+                <a href="{% url review_status section_slug "too_few" %}">Too Few Reviews</a>
+                <span class="badge">{{ proposals.too_few|length }}</span>
+            </dt>
+            <dd>
+                proposals with fewer than {{ vote_threshold }} vote{{ vote_threshold|pluralize }}
+            </dd>
+        </dl>
+    {% endif %}
+
+{% endblock %}

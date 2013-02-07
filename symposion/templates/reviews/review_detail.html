@@ -1,0 +1,198 @@
+{% extends "reviews/base.html" %}
+
+{% load i18n %}
+{% load markitup_tags %}
+{% load bootstrap_tags %}
+{% load account_tags %}
+
+{% block extra_style %}
+    <style type="text/css">
+        body.reviews .markItUpEditor {
+            width: 500px;
+            height: 100px;
+        }
+    </style>
+
+{% endblock %}
+
+{% block body %}
+    {% if request.user.is_staff %}
+        <div class="pull-right">
+            <form class="result-form form-inline" method="POST" action="">
+                {% csrf_token %}
+                <div class="btn-group">
+                    {% if proposal.result.status == "accepted" %}
+                        <a class="btn dropdown-toggle btn-success" data-toggle="dropdown" href="#">Accepted <span class="caret"></span></a>
+                        <div class="dropdown-menu pull-right" style="width: 200px; padding-left: 10px;">
+                            <div class="btn-group">
+                                <input type="submit" name="result_submit" value="reject" class="btn btn-mini btn-danger" />
+                                <input type="submit" name="result_submit" value="standby" class="btn btn-mini" />
+                                <input type="submit" name="result_submit" value="undecide" class="btn btn-mini" />
+                            </div>
+                        </div>
+                    {% else %}
+                        {% if proposal.result.status == "rejected" %}
+                            <a class="btn dropdown-toggle btn-danger" data-toggle="dropdown" href="#">Rejected <span class="caret"></span></a>
+                            <div class="dropdown-menu pull-right" style="width: 200px; padding-left: 10px;">
+                                <div class="btn-group">
+                                    <input type="submit" name="result_submit" value="accept" class="btn btn-mini btn-success" />
+                                    <input type="submit" name="result_submit" value="standby" class="btn btn-mini" />
+                                    <input type="submit" name="result_submit" value="undecide" class="btn btn-mini" />
+                                </div>
+                            </div>
+                        {% else %}
+                            {% if proposal.result.status == "standby" %}
+                                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Standby <span class="caret"></span></a>
+                                <div class="dropdown-menu pull-right" style="width: 200px; padding-left: 10px;">
+                                    <div class="btn-group">
+                                        <input type="submit" name="result_submit" value="accept" class="btn btn-mini btn-success" />
+                                        <input type="submit" name="result_submit" value="reject" class="btn btn-mini btn-danger" />
+                                        <input type="submit" name="result_submit" value="undecide" class="btn btn-mini" />
+                                    </div>
+                                </div>
+                            {% else %}
+                                <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">Undecided <span class="caret"></span></a>
+                                <div class="dropdown-menu pull-right" style="width: 200px; padding-left: 10px;">
+                                    <div class="btn-group">
+                                        <input type="submit" name="result_submit" value="accept" class="btn btn-mini btn-success" />
+                                        <input type="submit" name="result_submit" value="reject" class="btn btn-mini btn-danger" />
+                                        <input type="submit" name="result_submit" value="standby" class="btn btn-mini" />
+                                    </div>
+                                </div>
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+    {% endif %}
+    
+    <h3>#{{ proposal.number }}: {{ proposal.title }} ({{ proposal.speaker }})</h3>
+    
+    <div class="tabbable">
+        <ul class="nav nav-tabs">
+            <li class="active"><a href="#proposal-detail" data-toggle="tab">{% trans "Proposal Details" %}</a></li>
+            <li><a href="#proposal-reviews" data-toggle="tab">{% trans "Reviews" %} <span class="badge">{{ reviews|length }}</span></a></li>
+            <li><a href="#proposal-feedback" data-toggle="tab">{% trans "Speaker Feedback" %} <span class="badge">{{ proposal.messages.all|length }}</span></a></li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="proposal-detail">
+                {% include "proposals/_proposal_fields.html" %}
+            </div>
+            <div class="tab-pane" id="proposal-reviews">
+                
+                <h4>{% trans "Current Results" %}</h4>
+                <table class="table table-striped">
+                    <thead>
+                        <th>+1 votes</th>
+                        <th>+0 votes</th>
+                        <th>-0 votes</th>
+                        <th>-1 votes</th>
+                        <th>{% trans "Total Responses" %}
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ proposal.plus_one }}</td>
+                            <td>{{ proposal.plus_zero }}</td>
+                            <td>{{ proposal.minus_zero }}</td>
+                            <td>{{ proposal.minus_one }}</td>
+                            <td>{{ proposal.total_votes }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <hr />
+                
+                {% if review_form %}
+                    <form method="POST" action="" class="review-form">
+                        <legend>{% trans "Submit Review" %}</legend>
+                        <p>Enter your vote and any comment to go along with it. You can revise your vote or comment multiple times with an existing vote (your previously recorded score will be replaced during calculations). <b>Your vote and comments are not public and will only be viewable by other reviewers.</b></p>
+                        {% csrf_token %}
+                            {{ review_form|as_bootstrap }}
+                            <div class="form-action">
+                                <input type="submit" class="btn btn-primary" name="vote_submit" value="Submit Review" />
+                            </div>
+                    </form>
+                {% else %}
+                    <p>You do not have permission to vote on this proposal.</p>
+                {% endif %}
+
+                {% if reviews %}
+                    <h5>Review Comments</h5>
+                    {% for review in reviews %}
+                        <div class="review-box">
+                            <div class="vote pull-left">
+                                <span>{{ review.vote }}</span>
+                            </div>
+                            {% if is_manager %}
+                                <div class="pull-right">
+                                    <form class="form-inline" action="{% url review_delete review.id %}" method="POST">
+                                        {% csrf_token %}
+                                        <button class="btn btn-mini btn-danger" type="submit">Delete</button>
+                                    </form>
+                                </div>
+                            {% endif %}
+                            <div class="review-content">
+                                <b>{% user_display review.user %}</b>
+                                {{ review.submitted_at|timesince }} ago <br />
+                                {{ review.comment|safe }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+
+                {% markitup_media "no-jquery" %}
+            </div>
+            <div class="tab-pane" id="proposal-feedback">
+                {% if review_messages %}
+                    <h3>{% trans "Conversation with the submitter" %}</h3>
+                    {% for message in review_messages %}
+                        <div class="comment-box">
+                            <div class="commment-content">
+                                <b>{% user_display message.user %}</b>
+                                {{ message.submitted_at|timesince }} ago <br />
+                                {{ message.message|safe }}
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <hr />
+                {% endif %}
+                
+                <form action="" method="POST"accept-charset="utf-8">
+                    <legend>{% trans "Send a message" %}</legend>
+                    <p>
+                        {% blocktrans %}
+                            If you'd like to communicate with the submitter, use the following form and he or she will be
+                            notified and given the opportunity to respond.
+                        {% endblocktrans %}
+                    </p>
+                    {% csrf_token %}
+                    {{ message_form|as_bootstrap }}
+                    <div class="form-actions">
+                        <input type="submit" class="btn btn-primary" name="message_submit" value="Send Message" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_script %}
+    <script src="{{ STATIC_URL }}symposion/js/jquery.history.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            var History = window.History;
+            
+            $(window).bind("anchorchange", function() {
+                $(".nav-tabs a[href='" + location.hash + "']").click();
+            });
+            
+            $('#.nav-tabs a[data-toggle="tab"]').on('shown', function (e) {
+                if (History.enabled) {
+                    History.pushState(null, null, $(e.target).attr("href"));
+                }
+            });
+        });
+    </script>
+    
+{% endblock %}

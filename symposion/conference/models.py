@@ -64,6 +64,7 @@ class Section(models.Model):
     class Meta(object):
         verbose_name = _("section")
         verbose_name_plural = _("sections")
+        ordering = ["start_date"]
 
 
 def current_conference():

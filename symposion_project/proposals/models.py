@@ -3,19 +3,6 @@ from django.db import models
 from symposion.proposals.models import ProposalBase
 
 
-class ProposalCategory(models.Model):
-
-    name = models.CharField(max_length=100)
-    slug = models.SlugField()
-    
-    def __unicode__(self):
-        return self.name
-    
-    class Meta:
-        verbose_name = "proposal category"
-        verbose_name_plural = "proposal categories"
-
-
 class Proposal(ProposalBase):
     
     AUDIENCE_LEVEL_NOVICE = 1
@@ -27,8 +14,7 @@ class Proposal(ProposalBase):
         (AUDIENCE_LEVEL_INTERMEDIATE, "Intermediate"),
         (AUDIENCE_LEVEL_EXPERIENCED, "Experienced"),
     ]
-
-    category = models.ForeignKey(ProposalCategory)
+    
     audience_level = models.IntegerField(choices=AUDIENCE_LEVELS)
     
     recording_release = models.BooleanField(

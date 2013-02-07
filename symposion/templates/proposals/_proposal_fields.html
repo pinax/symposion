@@ -1,0 +1,60 @@
+{% load i18n %}
+
+<dl class="dl-horizontal">
+    <dt>{% trans "Submitted by" %}</dt>
+    <dd>{{ proposal.speaker }}</dd>
+    
+    <dt>{% trans "Track" %}</dt>
+    <dd>{{ proposal.track }}&nbsp;</dd>
+    
+    <dt>{% trans "Audience Level" %}</dt>
+    <dd>{{ proposal.get_audience_level_display }}&nbsp;</dd>
+    
+    {% if proposal.additional_speakers.all %}
+        <dt>{% trans "Additional Speakers" %}</dt>
+        <dd>
+            {% for speaker in proposal.additional_speakers.all %}
+                <li>
+                    {% if speaker.user %}
+                        <strong>{{ speaker.name }}</strong> &lt;{{ speaker.email }}&gt;
+                    {% else %}
+                        {{ speaker.email }} ({% trans "Invitation Sent" %})
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </dd>
+    {% endif %}
+    
+    <dt>{% trans "Description" %}</dt>
+    <dd>{{ proposal.description }}&nbsp;</dd>
+    
+    <dt>{% trans "Abstract" %}</dt>
+    <dd>{{ proposal.abstract|safe }}&nbsp;</dd>
+    
+    <dt>{% trans "Notes" %}</dt>
+    <dd>{{ proposal.additional_notes|safe }}&nbsp;</dd>
+    
+    <dt>{% trans "Speaker Bio" %}</dt>
+    <dd>{{ proposal.speaker.biography|safe }}&nbsp;</dd>
+    
+    <dt>{% trans "Documents" %}</dt>
+    <dd>
+        {% if proposal.supporting_documents.exists %}
+            <table class="table table-striped">
+                {% for document in proposal.supporting_documents.all %}
+                    <tr>
+                        <td><a href="{{ document.download_url }}">{{ document.description }}</a></td>
+                        <td>
+                        <form style="margin: 0;" method="post" action="{% url proposal_document_delete document.pk %}">
+                            {% csrf_token %}
+                            <button type="submit" class="btn btn-mini">delete</button>
+                        </form>
+                    </td>
+                    </tr>
+                {% endfor %}
+            </table>
+        {% else %}
+            No supporting documents attached to this proposal.
+        {% endif %}
+    </dd>
+</dl>

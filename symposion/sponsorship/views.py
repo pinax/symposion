@@ -1,3 +1,4 @@
+from django.http import Http404
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.template import RequestContext
 
@@ -13,8 +14,8 @@ def sponsor_apply(request):
     if request.method == "POST":
         form = SponsorApplicationForm(request.POST, user=request.user)
         if form.is_valid():
-            form.save()
-            return redirect("dashboard")
+            sponsor = form.save()
+            return redirect("sponsor_detail", pk=sponsor.pk)
     else:
         form = SponsorApplicationForm(user=request.user)
     
@@ -24,10 +25,30 @@ def sponsor_apply(request):
 
 
 @login_required
+def sponsor_add(request):
+    if not request.user.is_staff:
+        raise Http404()
+    
+    if request.method == "POST":
+        form = SponsorApplicationForm(request.POST, user=request.user)
+        if form.is_valid():
+            sponsor = form.save(commit=False)
+            sponsor.active = True
+            sponsor.save()
+            return redirect("dashboard")
+    else:
+        form = SponsorApplicationForm(user=request.user)
+    
+    return render_to_response("sponsorship/add.html", {
+        "form": form,
+    }, context_instance=RequestContext(request))
+
+
+@login_required
 def sponsor_detail(request, pk):
     sponsor = get_object_or_404(Sponsor, pk=pk)
     
-    if not sponsor.active or sponsor.applicant != request.user:
+    if sponsor.applicant != request.user:
         return redirect("sponsor_list")
     
     formset_kwargs = {
@@ -44,9 +65,9 @@ def sponsor_detail(request, pk):
             form.save()
             formset.save()
             
-            messages.success(request, "Your sponsorship application has been submitted!")
+            messages.success(request, "Sponsorship details have been updated")
             
-            return redirect(request.path)
+            return redirect("dashboard")
     else:
         form = SponsorDetailsForm(instance=sponsor)
         formset = SponsorBenefitsFormSet(**formset_kwargs)

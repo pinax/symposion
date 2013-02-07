@@ -1,0 +1,117 @@
+{% extends "site_base.html" %}
+
+{% load i18n %}
+{% load sitetree %}
+
+{% block extra_style %}
+    <style type="text/css">
+        div.dataTables_length label {
+            float: left;
+            text-align: left;
+        }
+
+        div.dataTables_length select {
+            width: 75px;
+        }
+
+        div.dataTables_filter label {
+            float: right;
+        }
+
+        div.dataTables_info {
+            padding-top: 8px;
+        }
+
+        div.dataTables_paginate {
+            float: right;
+            margin: 0;
+        }
+
+        table.table {
+            clear: both;
+            margin-bottom: 6px !important;
+            background-color: white;
+        }
+
+        table.table thead .sorting,
+        table.table thead .sorting_asc,
+        table.table thead .sorting_desc,
+        table.table thead .sorting_asc_disabled,
+        table.table thead .sorting_desc_disabled {
+            cursor: pointer;
+            *cursor: hand;
+        }
+
+        table.dataTable th:active {
+            outline: none;
+        }
+    </style>
+{% endblock %}
+
+{% block body_class %}reviews{% endblock %}
+
+{% block body_outer %}
+    <div class="row">
+        <div class="span2">
+            {% block sidebar %}
+                <ul class="nav nav-list well">
+                    {% for section in review_sections %}
+                        <li class="nav-header">
+                            {{ section }}
+                        </li>
+                        <li>
+                            <a href="{% url review_section section.section.slug %}">
+                                {% trans "All Reviews" %}
+                            </a>
+                        </li>
+                        {% comment %}
+                        <li>
+                            <a href="{% url review_section_assignments section.section.slug %}">
+                                {% trans "Your Assignments" %}
+                            </a>
+                        </li>
+                        {% endcomment %}
+                        <li>
+                            <a href="{% url review_status section.section.slug %}">
+                                {% trans "Voting Status" %}
+                            </a>
+                        </li>
+                        {% if request.user.is_staff %}
+                            <li>
+                                <a href="{% url result_notification section.section.slug 'accepted' %}">Result Notification</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            {% endblock %}
+        </div>
+        <div class="span10">
+            {% block body %}
+            {% endblock %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block extra_script %}
+    <script src="{{ STATIC_URL }}datatables/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}tabletools/js/TableTools.min.js" type="text/javascript"></script>
+    <script src="{{ STATIC_URL }}datatables/js/dataTables.bootstrap.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function() {
+            $(".tip").tooltip();
+            $("table.table-reviews").dataTable({
+                "sDom": "<'row'<'span3'l><'span3'T><'span4'f>r>t<'row'<'span3'i><'span5'p>>",
+                "sPaginationType": "bootstrap",
+                "bStateSave": true,
+                "oTableTools": {
+                    "aButtons": [
+                        "copy",
+                        "csv",
+                        "print"
+                    ],
+                    "sSwfPath": "{{ STATIC_URL }}tabletools/swf/copy_csv_xls.swf"
+                }
+            });
+        });
+    </script>
+{% endblock %}

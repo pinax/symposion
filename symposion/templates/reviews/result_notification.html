@@ -1,0 +1,153 @@
+{% extends "reviews/base.html" %}
+
+{% load i18n %}
+
+{% block extra_style %}
+    <style type="text/css">
+        .table-striped tbody tr.selected td {
+            background-color: #F7F4E6;
+        }
+    </style>
+{% endblock %}
+
+{% block body %}
+    
+    <ul class="nav nav-pills">
+        <li{% if status == 'accepted' %} class="active"{% endif %}><a href="{% url result_notification section_slug 'accepted' %}">accepted</a>
+        <li{% if status == 'rejected' %} class="active"{% endif %}><a href="{% url result_notification section_slug 'rejected' %}">rejected</a>
+        <li{% if status == 'standby' %} class="active"{% endif %}><a href="{% url result_notification section_slug 'standby' %}">standby</a>
+    </ul>
+    
+    <h1>Result Notification</h1>
+    
+    <form method="post" action="{% url result_notification_prepare section_slug status %}">
+        
+        {% csrf_token %}
+        
+        <p>
+            Select one or more proposals (<span class="action-counter">0</span> currently selected)
+            <br/>
+            then pick an email template
+            <select name="notification_template">
+                <option value="">[blank]</option>
+                {% for template in notification_templates %}
+                    <option value="{{ template.pk }}">{{ template.label }}</option>
+                {% endfor %}
+            </select>
+            <br/>
+            <button id="next-button" type="submit" class="btn btn-primary" disabled>Next <i class="icon icon-chevron-right"></i></button>
+        </p>
+        
+        <table class="table table-striped table-bordered">
+            <thead>
+                <th><input type="checkbox" id="action-toggle"></th>
+                <th>#</th>
+                <th>{% trans "Speaker / Title" %}</th>
+                <th>{% trans "Category" %}</th>
+                <th>{% trans "Status" %}</th>
+                <th>{% trans "Notified?" %}</th>
+            </thead>
+            
+            <tbody>
+                {% for proposal in proposals %}
+                    <tr>
+                        <td><input class="action-select" type="checkbox" name="_selected_action" value="{{ proposal.pk }}"></td>
+                        <td>{{ proposal.number }}</td>
+                        <td>
+                            <a href="{% url review_detail proposal.pk %}">
+                                <small><strong>{{ proposal.speaker }}</strong></small>
+                                <br />
+                                {{ proposal.title }}
+                            </a>
+                        </td>
+                        <td>{{ proposal.track }}</td>
+                        <td>
+                            {% with proposal.result.status as status %}
+                                <div class="{{ status }}">
+                                    {% if status != "undecided" %}
+                                        <span>{{ status }}</span>
+                                    {% endif %}
+                                </div>
+                            {% endwith %}
+                        </td>
+                        <td>
+                            {% if proposal.notifications.exists %}yes{% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </form>
+{% endblock %}
+
+{% block extra_script %}
+    <script type="text/javascript">
+        (function($) {
+            $.fn.actions = function(opts) {
+                var options = $.extend({}, $.fn.actions.defaults, opts);
+                var actionCheckboxes = $(this);
+                checker = function(checked) {
+                    $(actionCheckboxes).prop("checked", checked)
+                        .parent().parent().toggleClass(options.selectedClass, checked);
+                }
+                updateCounter = function() {
+                    var sel = $(actionCheckboxes).filter(":checked").length;
+                    $(options.counterContainer).html(sel);
+                    $(options.allToggle).prop("checked", function() {
+                        if (sel == actionCheckboxes.length) {
+                            value = true;
+                        } else {
+                            value = false;
+                        }
+                        return value;
+                    });
+                    if (sel == 0) {
+                        $("#next-button").prop("disabled", true);
+                    } else {
+                        $("#next-button").prop("disabled", false);
+                    }
+                }
+                // Check state of checkboxes and reinit state if needed
+                $(this).filter(":checked").each(function(i) {
+                    $(this).parent().parent().toggleClass(options.selectedClass);
+                    updateCounter();
+                });
+                $(options.allToggle).click(function() {
+                    checker($(this).prop("checked"));
+                    updateCounter();
+                });
+                lastChecked = null;
+                $(actionCheckboxes).click(function(event) {
+                    if (!event) { var event = window.event; }
+                    var target = event.target ? event.target : event.srcElement;
+                    if (lastChecked && $.data(lastChecked) != $.data(target) && event.shiftKey == true) {
+                        var inrange = false;
+                        $(lastChecked).prop("checked", target.checked)
+                            .parent().parent().toggleClass(options.selectedClass, target.checked);
+                        $(actionCheckboxes).each(function() {
+                            if ($.data(this) == $.data(lastChecked) || $.data(this) == $.data(target)) {
+                                inrange = (inrange) ? false : true;
+                            }
+                            if (inrange) {
+                                $(this).prop("checked", target.checked)
+                                    .parent().parent().toggleClass(options.selectedClass, target.checked);
+                            }
+                        });
+                    }
+                    $(target).parent().parent().toggleClass(options.selectedClass, target.checked);
+                    lastChecked = target;
+                    updateCounter();
+                });
+            }
+            /* Setup plugin defaults */
+            $.fn.actions.defaults = {
+                counterContainer: "span.action-counter",
+                allToggle: "#action-toggle",
+                selectedClass: "selected"
+            }
+        })($);
+        $(function() {
+            $("tr input.action-select").actions();
+        });
+    </script>
+{% endblock %}
