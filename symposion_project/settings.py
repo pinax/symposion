@@ -93,8 +93,9 @@ TEMPLATE_LOADERS = [
 ]
 
 MIDDLEWARE_CLASSES = [
-    "django.middleware.common.CommonMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
+    "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
@@ -102,6 +103,13 @@ MIDDLEWARE_CLASSES = [
     "reversion.middleware.RevisionMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
 ]
+
+ugettext = lambda s: s
+
+LANGUAGES = (
+    ('en', ugettext('English')),
+    ('fr', ugettext('French')),
+)
 
 ROOT_URLCONF = "symposion_project.urls"
 

@@ -32,6 +32,8 @@ urlpatterns = patterns("",
     url(r"^reviews/", include("symposion.reviews.urls")),
     url(r"^schedule/", include("symposion.schedule.urls")),
     url(r"^markitup/", include("markitup.urls")),
+
+    (r'^i18n/', include('django.conf.urls.i18n')),
     
     url(r"^", include("symposion.cms.urls")),
 )
