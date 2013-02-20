@@ -3,7 +3,7 @@ from django.conf.urls.defaults import *
 
 urlpatterns = patterns("symposion.proposals.views",
     url(r"^submit/$", "proposal_submit", name="proposal_submit"),
-    url(r"^submit/(\w+)/$", "proposal_submit_kind", name="proposal_submit_kind"),
+    url(r"^submit/([\w\-]+)/$", "proposal_submit_kind", name="proposal_submit_kind"),
     url(r"^(\d+)/$", "proposal_detail", name="proposal_detail"),
     url(r"^(\d+)/edit/$", "proposal_edit", name="proposal_edit"),
     url(r"^(\d+)/speakers/$", "proposal_speaker_manage", name="proposal_speaker_manage"),
