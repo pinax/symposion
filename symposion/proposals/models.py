@@ -83,13 +83,13 @@ class ProposalBase(models.Model):
     
     title = models.CharField(max_length=100)
     description = models.TextField(
-        _("Brief Outline"),
+        _("Brief Description"),
         max_length=400,  # @@@ need to enforce 400 in UI
         help_text="If your proposal is accepted this will be made public and printed in the program. Should be one paragraph, maximum 400 characters."
     )
     abstract = MarkupField(
         _("Detailed Abstract"),
-        help_text=_("Detailed description and outline. Will be made public if your proposal is accepted. Edit using <a href='http://daringfireball.net/projects/markdown/basics' target='_blank'>Markdown</a>.")
+        help_text=_("Detailed outline. Will be made public if your proposal is accepted. Edit using <a href='http://daringfireball.net/projects/markdown/basics' target='_blank'>Markdown</a>.")
     )
     additional_notes = MarkupField(
         blank=True,
