@@ -20,7 +20,8 @@
             <input class="btn btn-primary" type="submit" value="Apply" />
             <a class="btn" href="{% url dashboard %}">Cancel</a>
             <p class="help-block">
-                <small>By submitting this sponsor application you are agreeing to the <a href="{% url cms_page "sponsor/terms/" %}" target="_blank">terms and conditions</a>.</small>
+                Be sure to read our <a href="{% url sponsor_prospectus %}">Sponsor Prospectus</a> first!<br />
+                <small>By submitting this sponsor application you are agreeing to the <a href="{% url sponsor_terms %}" target="_blank">terms and conditions</a>.</small>
             </p>
         </div>
     </form>
