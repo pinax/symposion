@@ -1,0 +1,42 @@
+[
+    {
+        "pk": 1, 
+        "model": "proposals.proposalsection", 
+        "fields": {
+            "start": "2013-03-30", 
+            "section": 1, 
+            "end": "2013-06-30", 
+            "closed": null, 
+            "published": null
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "proposals.proposalsection", 
+        "fields": {
+            "start": "2013-03-30", 
+            "section": 2, 
+            "end": "2013-06-30", 
+            "closed": null, 
+            "published": null
+        }
+    }, 
+    {
+        "pk": 1, 
+        "model": "proposals.proposalkind", 
+        "fields": {
+            "section": 1, 
+            "name": "tutorial", 
+            "slug": "tutorial"
+        }
+    }, 
+    {
+        "pk": 2, 
+        "model": "proposals.proposalkind", 
+        "fields": {
+            "section": 2, 
+            "name": "talk", 
+            "slug": "talk"
+        }
+    }
+]
