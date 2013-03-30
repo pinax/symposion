@@ -4,7 +4,7 @@
         "model": "sites.site", 
         "fields": {
             "domain": "localhost",
-            "name": "PyCon CA"
+            "name": "PyCon Canada"
         }
     }
 ]
