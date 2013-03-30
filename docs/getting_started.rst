@@ -3,7 +3,7 @@ Getting Started
 
 Get your environment set up::
 
-    virtualenv pycona-2103-web-env
+    virtualenv pycona-2013-web-env
     . pyconca-2013-web-env/bin/activate
     git clone git://github.com/pyconca/2013-web.git pyconca-2013-web
     cd pyconca-2013-web
@@ -33,3 +33,18 @@ Go test it out::
 
     ./manage.py runserver
     # Go to http://localhost:8000/
+
+For internationalization/i18n:
+
+    cd symposion_project
+    django-admin.py makemessages -a
+    # now make changes to generated .po files ...
+    django-admin.py compilemessages
+
+To build documentation:
+    
+    # Install requirements for docs first
+    pip install -r requirements-docs.txt
+    cd doc/
+    make html
+    open _build/html/index.html
