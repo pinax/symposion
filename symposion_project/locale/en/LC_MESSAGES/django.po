@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-30 11:09-0400\n"
+"POT-Creation-Date: 2013-03-30 12:05-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,9 +29,13 @@ msgstr ""
 msgid "Welcome"
 msgstr ""
 
-#: templates/homepage.html:12
+#: templates/homepage.html:11
 msgid "welcome masthead"
 msgstr "Welcome to PyCon!"
+
+#: templates/site_base.html:56
+msgid "conference date range"
+msgstr "August 9-13, 2013"
 
 #: templates/about/what_next.html:6 templates/about/what_next.html.py:9
 msgid "What Next?"

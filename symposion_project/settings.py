@@ -227,7 +227,7 @@ PROPOSAL_FORMS = {
 }
 
 LOCALE_PATHS = [
-    "translations",
+    "symposion_project/locale",
 ]
 
 # local_settings.py can be used to override environment-specific settings
