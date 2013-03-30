@@ -8,7 +8,21 @@
 {% block body_class %}home{% endblock %}
 
 {% block body %}
-    {% trans "welcome masthead" %}
+    <h3>{% trans "welcome masthead" %}</h3>
+    <ul>
+        <li><strong>Date</strong>: the main conference will be <em>August 9th - 11th</em>, with sprints on <em>August 12th and 13th</em>.</li>
+        <li><strong>Location</strong>: The <a href="http://chestnutconferencecentre.utoronto.ca/contact">Chestnut Conference Centre</a> in Toronto, Canada.</li>
+        <li><strong>Want to speak?</strong> Awesome! Send your proposal to <a href="mailto:proposals@pycon.ca">proposals@pycon.ca</a>.</li>
+        <li><strong>Want to volunteer?</strong> Even better! Email <a href="mailto:board@pycon.ca">board@pycon.ca</a> and we'll get you set up.</li>
+        <li><strong>Want updates?</strong> Follow <a href="https://twitter.com/pyconca">@pyconca</a> to get all the breaking PyCon Canada news.</li>
+    </ul>
+
+    <h3>Looking for PyCon Montréal 2014?</h3>
+    <p>The "big" PyCon (previously known as "PyCon US") will be held in Montréal in 2014! Follow <a href="https://twitter.com/pycon">@pycon</a> for updates related to PyCon Montréal.</p>
+
+    <h3>Looking for PyCon Canada 2012?</h3>
+    <p>The PyCon Canada 2012 website is archived at <a href="http://2012.pycon.ca/">http://2012.pycon.ca</a>.</p>
+
     <form action="/i18n/setlang/" method="post">
         {% csrf_token %}
         <input name="next" type="hidden" value="{{ redirect_to }}" />
