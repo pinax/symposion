@@ -90,37 +90,18 @@
         <div class="dashboard-panel-header">
             <i class="icon-briefcase"></i>
             <h3>{% trans "Sponsorship" %}</h3>
-            <div class="pull-right header-actions">
-                {% if not user.sponsorships.exists %}
-                    <a href="{% url sponsor_apply %}" class="btn">
-                        <i class="icon-plus-sign"></i> Apply to be a sponsor
-                    </a>
-                {% endif %}
-            </div>
         </div>
         
         <div class="dashboard-panel-content">
-            {% if not user.sponsorships.exists %}
-                <p>If you or your organization would be interested in sponsorship opportunities, <a href="{% url sponsor_apply %}">use our online form to apply to be a sponsor</a>.
-            {% else %}
-                <h4>Your Sponsorship</h4>
-                <ul>
-                    {% for sponsorship in user.sponsorships.all %}
-                        <li>
-                            <a href="{% url sponsor_detail sponsorship.pk %}"><b>{{ sponsorship.name }}</b></a>
-                            ({{ sponsorship.level }})
-                            {% if not sponsorship.active %}
-                                <span class="label label-warning">awaiting approval</span>
-                            {% endif %}
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
             {% if user.is_staff %}
                 <p>
                     As staff, you can directly <a href="{% url sponsor_add %}">add a sponsor</a> if the organization isn't
                     applying themselves.
                 </p>
+            {% else %}
+                {* If you want to allow people to see the sponsorships they've
+                    signed themselves up for, this is where you'd add it. *}
+                <p>Please read out <a href="{% url sponsor_prospectus %}">Sponsor Prospectus</a> and get in touch!</p>
             {% endif %}
         </div>
     </div>
