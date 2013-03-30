@@ -11,3 +11,5 @@ See http://eldarion.com/symposion/ for commercial support, customization and hos
 - `pip install -r requirements.txt`
 - `python manage.py syncdb`
 - `python manage.py loaddata fixtures/*`
+
+There are some extra pointers in doc/getting_started.rst.
