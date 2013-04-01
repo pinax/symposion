@@ -1,5 +1,8 @@
 _build
 *.pyc
-dev.db
 site_media
 .*.s?p
+.*-makeplaceholder
+.DS_Store
+.env
+hacking/
