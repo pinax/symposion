@@ -6,7 +6,7 @@
             "start": "2013-03-30", 
             "section": 1, 
             "end": "2013-06-30", 
-            "closed": null, 
+            "closed": true, 
             "published": null
         }
     }, 
@@ -17,7 +17,7 @@
             "start": "2013-03-30", 
             "section": 2, 
             "end": "2013-06-30", 
-            "closed": null, 
+            "closed": true, 
             "published": null
         }
     }, 
