@@ -1,4 +1,4 @@
-all: i18n docs reset
+all: i18n docs static_css reset
 
 .requirements-docs.txt-makeplaceholder: requirements-docs.txt
 	pip install -r $?
@@ -13,6 +13,9 @@ docs: _docs
 i18n:
 	cd symposion_project/; django-admin.py makemessages -a
 	cd symposion_project/; django-admin.py compilemessages
+
+static_css:
+	make -C symposion_project/static build
 
 .requirements.txt-makeplaceholder: requirements.txt
 	pip install -r $?
