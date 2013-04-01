@@ -11,6 +11,9 @@ from symposion.sponsorship.models import Sponsor, SponsorBenefit
 
 @login_required
 def sponsor_apply(request):
+    # We're not using this view; disable it (so it's not runnable but doesn't
+    # cause spurious merge conflicts)
+    raise Http404()
     if request.method == "POST":
         form = SponsorApplicationForm(request.POST, user=request.user)
         if form.is_valid():
@@ -26,6 +29,9 @@ def sponsor_apply(request):
 
 @login_required
 def sponsor_add(request):
+    # We're not using this view; disable it (so it's not runnable but doesn't
+    # cause spurious merge conflicts)
+    raise Http404()
     if not request.user.is_staff:
         raise Http404()
     

@@ -93,15 +93,10 @@
         </div>
         
         <div class="dashboard-panel-content">
-            {% if user.is_staff %}
-                <p>
-                    As staff, you can directly <a href="{% url sponsor_add %}">add a sponsor</a> if the organization isn't
-                    applying themselves.
-                </p>
-            {% else %}
+            {% if not user.is_staff %}
                 {* If you want to allow people to see the sponsorships they've
-                    signed themselves up for, this is where you'd add it. *}
-                <p>Please read out <a href="{% url sponsor_prospectus %}">Sponsor Prospectus</a> and get in touch!</p>
+                    signed themselves up for, this is where you'd add it back in. *}
+                <p>Please read our <a href="{% url sponsor_prospectus %}">Sponsor Prospectus</a> and get in touch!</p>
             {% endif %}
         </div>
     </div>
