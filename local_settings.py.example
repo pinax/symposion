@@ -1,0 +1,30 @@
+DEBUG = False
+TEMPLATE_DEBUG = DEBUG
+
+ADMINS = [
+    'taavi@pycon.ca',
+    'wolever@pycon.ca',
+]
+
+MANGERS = ADMINS
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.mysql", # Add "postgresql_psycopg2", "postgresql", "mysql", "sqlite3" or "oracle".
+        "NAME": "pyconca2013",                       # Or path to database file if using sqlite3.
+        "USER": "pyconca2013",                             # Not used with sqlite3.
+        "PASSWORD": "password",                         # Not used with sqlite3.
+        "HOST": "127.0.0.1",                             # Set to empty string for localhost. Not used with sqlite3.
+        "PORT": "",                             # Set to empty string for default. Not used with sqlite3.
+    }
+}
+
+
+TIME_ZONE = "America/Toronto"
+
+SECRET_KEY = "keep this very secret"
+
+EMAIL_DEBUG = True # No better clue at this point
+
+# ACCOUNT_* things should probably also get updated here
+
