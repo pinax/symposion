@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-30 12:05-0400\n"
+"POT-Creation-Date: 2013-04-06 13:13-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,11 +17,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: settings.py:110
+#: settings.py:112
 msgid "English"
 msgstr ""
 
-#: settings.py:111
+#: settings.py:113
 msgid "French"
 msgstr ""
 
@@ -36,6 +36,13 @@ msgstr "Welcome to PyCon!"
 #: templates/site_base.html:56
 msgid "conference date range"
 msgstr "August 9-13, 2013"
+
+#: templates/sponsor_prospectus.html:9
+msgid "ABOUT_SPONSORSHIP"
+msgstr ""
+"We are in the process of developing a prospectus. In the mean time, if you "
+"are interested in sponsoring PyCon Canada, please contact <a href=\"mailto:"
+"sponsorship@pycon.ca\">sponsorship@pycon.ca</a>."
 
 #: templates/about/what_next.html:6 templates/about/what_next.html.py:9
 msgid "What Next?"

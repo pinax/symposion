@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-03-30 12:05-0400\n"
+"POT-Creation-Date: 2013-04-06 13:13-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,11 +18,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1)\n"
 
-#: settings.py:110
+#: settings.py:112
 msgid "English"
 msgstr ""
 
-#: settings.py:111
+#: settings.py:113
 msgid "French"
 msgstr ""
 
@@ -37,6 +37,10 @@ msgstr "Bienvenue à PyCon!"
 #: templates/site_base.html:56
 msgid "conference date range"
 msgstr "9 au 13 août, 2013"
+
+#: templates/sponsor_prospectus.html:9
+msgid "ABOUT_SPONSORSHIP"
+msgstr ""
 
 #: templates/about/what_next.html:6 templates/about/what_next.html.py:9
 msgid "What Next?"
