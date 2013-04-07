@@ -12,4 +12,5 @@ See http://eldarion.com/symposion/ for commercial support, customization and hos
 - `python manage.py syncdb`
 - `python manage.py loaddata fixtures/*`
 
-There are some extra pointers in docs/getting_started.rst.
+There are some extra pointers in [docs/getting_started.rst](https://github.com/pyconca/2013-web/blob/pyconca2013/docs/getting_started.rst)
+
