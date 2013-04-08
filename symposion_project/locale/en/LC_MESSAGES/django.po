@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-06 13:13-0400\n"
+"POT-Creation-Date: 2013-04-08 05:06-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,6 +25,59 @@ msgstr ""
 msgid "French"
 msgstr ""
 
+#: templates/about.html:9
+msgid "What is PyCon Canada?"
+msgstr ""
+
+#: templates/about.html:11
+msgid ""
+"PyCon Canada is an initiative to strengthen the Canadian Python community."
+msgstr ""
+
+#: templates/about.html:15
+msgid "Our main goals:"
+msgstr ""
+
+#: templates/about.html:20
+msgid "ABOUT_GOAL_SUPPORT"
+msgstr ""
+"Support the efforts of <a href='http://montrealpython.org/2011/03/pycon-2014-"
+"and-2015-in-montreal/'>Montreal Python</a> as they prepare to host <a "
+"href='http://us.pycon.org/'>PyCon North America</a> in 2014 and 2015. This "
+"is the first time that the main PyCon conference is going to be outside of "
+"the US. Let's take this opportunity to showcase the Canadian Python "
+"community, and step up to the challenge as speakers and volunteers. "
+
+#: templates/about.html:23
+msgid "ABOUT_GOAL_STRENGTHEN"
+msgstr ""
+"Strengthen the Canadian Python community by providing more opportunities for "
+"us to share knowledge and ideas, encourage support and education for "
+"speaking at conferences, and increase the visibility of developers, "
+"organizations, and companies within the community. "
+
+#: templates/about.html:26
+msgid "Host an annual Canadian PyCon conference, starting now - 2012!"
+msgstr ""
+
+#: templates/about.html:30
+#, fuzzy
+msgid "ABOUT_VOLUNTEERS"
+msgstr ""
+"PyCon Canada is entirely run by volunteers who are passionate about these "
+"goals. We hope to see you at the 2012 conference! "
+
+#: templates/about.html:34
+msgid "Code of Conduct"
+msgstr ""
+
+#: templates/about.html:35
+msgid "ABOUT_CONDUCT"
+msgstr ""
+"Please familiarize yourself with the <a href='/conduct'>Code of Conduct</a> "
+"and do your part to make sure PyCon Canada doesn't end up on Hacker News for "
+"all the wrong reasons. "
+
 #: templates/homepage.html:6
 msgid "Welcome"
 msgstr ""
@@ -33,7 +86,7 @@ msgstr ""
 msgid "welcome masthead"
 msgstr "Welcome to PyCon!"
 
-#: templates/site_base.html:56
+#: templates/site_base.html:74
 msgid "conference date range"
 msgstr "August 9-13, 2013"
 
@@ -43,22 +96,6 @@ msgstr ""
 "We are in the process of developing a prospectus. In the mean time, if you "
 "are interested in sponsoring PyCon Canada, please contact <a href=\"mailto:"
 "sponsorship@pycon.ca\">sponsorship@pycon.ca</a>."
-
-#: templates/about/what_next.html:6 templates/about/what_next.html.py:9
-msgid "What Next?"
-msgstr ""
-
-#: templates/about/what_next.html:32
-#, python-format
-msgid ""
-"Start by <a href=\"%(signup_url)s\">signing up</a> and <a href="
-"\"%(login_url)s\">logging in</a>."
-msgstr ""
-
-#: templates/about/what_next.html:34
-#, python-format
-msgid "Start by <a href=\"%(login_url)s\">logging in</a>."
-msgstr ""
 
 #~ msgid "This is not a word."
 #~ msgstr "This is not a word."
