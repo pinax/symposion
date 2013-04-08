@@ -76,6 +76,7 @@
         <div class="navbar">
             <div class="navbar-inner">
                 <ul class="nav">
+                    <li><a href="{% url about %}">About</a></li>
                     <li><a href="{% url dashboard %}">Speakers</a></li>
                     <li><a href="{% url sponsor_list %}">Sponsors</a></li>
                     <li><a href="{% url schedule_conference %}">Schedule</a></li>
@@ -100,11 +101,11 @@
 {% block body_base %}
     <div class="container">
         {% include "_messages.html" %}
-        
+
         {# {% block breadcrumbs %} #}
             {# {% sitetree_breadcrumbs from "main" %} #}
         {# {% endblock %} #}
-        
+
         {% block body_outer %}
             <div class="row">
                 <div class="span9">

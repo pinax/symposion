@@ -25,7 +25,12 @@ urlpatterns = patterns("",
         "template": "sponsor_prospectus.html",
     }, name="sponsor_prospectus"),
 
+    url(r"^about/", direct_to_template, {
+        "template": "about.html",
+    }, name="about"),
+
     url(r"^admin/", include(admin.site.urls)),
+
 
     url(r"^account/signup/$", symposion.views.SignupView.as_view(), name="account_signup"),
     url(r"^account/login/$", symposion.views.LoginView.as_view(), name="account_login"),
