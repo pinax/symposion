@@ -23,7 +23,7 @@ Go test it out::
 
     make run
     # Go to http://localhost:6544/
-    # You can login as 'admin' with password 'asdf'
+    # You can login as 'admin@example.com' with password 'asdf'
 
 For internationalization/i18n::
 
