@@ -1,0 +1,38 @@
+{% extends "site_base.html" %}
+
+{% load bootstrap_tags %}
+{% load i18n %}
+
+{% block body %}
+
+<article>
+  <h2>{% trans "What is PyCon Canada?" %}</h2>
+  <p>
+    {% trans "PyCon Canada is an initiative to strengthen the Canadian Python community." %}
+  </p>
+
+  <p>
+    {% trans "Our main goals:" %}
+  </p>
+
+  <ul>
+    <li>
+      {% trans "ABOUT_GOAL_SUPPORT" %}
+    </li>
+    <li>
+      {% trans "ABOUT_GOAL_STRENGTHEN" %}
+    </li>
+    <li>
+      {% trans "Host an annual Canadian PyCon conference, starting now - 2012!" %}
+    </li>
+  </ul>
+
+  <p>{% trans "ABOUT_VOLUNTEERS" %} </p>
+</article>
+
+<article>
+  <h2>{% trans "Code of Conduct" %}</h2>
+  <p>{% trans "ABOUT_CONDUCT" %}</p>
+</article>
+
+{% endblock %}
