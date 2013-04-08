@@ -50,23 +50,23 @@
                         </li>
                         <form id="account_logout_form" class="hide" action="{% url account_logout %}" method="post">{% csrf_token %}</form>
                     {% endif %}
-                      <li>
-                        <form action="/i18n/setlang/" method="post">
-                            {% csrf_token %}
-                            <input name="next" type="hidden" value="{{ redirect_to }}" />
-                            <select class="input-medium" name="language" onchange="this.form.submit();">
-                                {% get_language_info_list for LANGUAGES as languages %}
-                                {% for language in languages %}
-                                  {% if LANGUAGE_CODE == language.code %}
-                                    <option value="{{ language.code }}" selected="selected">{{ language.name_local }} ({{ language.code }})</option>
+                    <li>
+                      <form action="/i18n/setlang/" method="post">
+                        {% csrf_token %}
+                        <input name="next" type="hidden" value="{{ redirect_to }}" />
+                        <select class="input-medium" name="language" onchange="this.form.submit();">
+                          {% get_language_info_list for LANGUAGES as languages %}
+                          {% for language in languages %}
+                          {% if LANGUAGE_CODE == language.code %}
+                          <option value="{{ language.code }}" selected="selected">{{ language.name_local }} ({{ language.code }})</option>
 
-                                  {% else %}
-                                    <option value="{{ language.code }}">{{ language.name_local }} ({{ language.code }})</option>
-                                  {% endif %}
-                                {% endfor %}
-                            </select>
-                        </form>
-                      </li>
+                          {% else %}
+                          <option value="{{ language.code }}">{{ language.name_local }} ({{ language.code }})</option>
+                          {% endif %}
+                          {% endfor %}
+                        </select>
+                      </form>
+                    </li>
                 </ul>
             </div>
 
