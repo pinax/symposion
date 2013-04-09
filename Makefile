@@ -32,7 +32,7 @@ reset: .requirements.txt-makeplaceholder
 		'\nfor u in User.objects.all(): u.set_password("asdf"); u.save()\n'\
 	| ./manage.py shell
 	echo "-----------------------------------------\n"\
-		 "\rUser 'admin' created with password 'asdf'\n"\
+		 "\rUser 'admin@example.com' created with password 'asdf'\n"\
 	     "\r-----------------------------------------"
 
 hacking/dev.db:
