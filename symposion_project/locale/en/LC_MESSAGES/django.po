@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-08 05:06-0400\n"
+"POT-Creation-Date: 2013-04-08 21:38-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,18 +60,17 @@ msgstr ""
 msgid "Host an annual Canadian PyCon conference, starting now - 2012!"
 msgstr ""
 
-#: templates/about.html:30
-#, fuzzy
+#: templates/about.html:31
 msgid "ABOUT_VOLUNTEERS"
 msgstr ""
 "PyCon Canada is entirely run by volunteers who are passionate about these "
 "goals. We hope to see you at the 2012 conference! "
 
-#: templates/about.html:34
+#: templates/about.html:36
 msgid "Code of Conduct"
 msgstr ""
 
-#: templates/about.html:35
+#: templates/about.html:37
 msgid "ABOUT_CONDUCT"
 msgstr ""
 "Please familiarize yourself with the <a href='/conduct'>Code of Conduct</a> "
