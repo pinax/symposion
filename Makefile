@@ -11,8 +11,8 @@ _docs: .requirements-docs.txt-makeplaceholder
 docs: _docs
 
 i18n:
-	cd symposion_project/; django-admin.py makemessages -a
-	cd symposion_project/; django-admin.py compilemessages
+	django-admin.py makemessages -a
+	django-admin.py compilemessages
 
 static_css:
 	make -C symposion_project/static build
