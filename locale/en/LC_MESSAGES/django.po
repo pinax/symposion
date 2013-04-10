@@ -1,0 +1,623 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-04-10 05:21-0400\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: symposion/cms/models.py:23
+msgid "Draft"
+msgstr ""
+
+#: symposion/cms/models.py:24
+msgid "Public"
+msgstr ""
+
+#: symposion/cms/models.py:56
+msgid "Path can only contain letters, numbers and hyphens and end with /"
+msgstr ""
+
+#: symposion/conference/models.py:15
+msgid "title"
+msgstr ""
+
+#: symposion/conference/models.py:18 symposion/conference/models.py:58
+msgid "start date"
+msgstr ""
+
+#: symposion/conference/models.py:19 symposion/conference/models.py:59
+msgid "end date"
+msgstr ""
+
+#: symposion/conference/models.py:22
+msgid "timezone"
+msgstr ""
+
+#: symposion/conference/models.py:41 symposion/conference/models.py:52
+#: symposion/sponsorship/models.py:18
+#, fuzzy
+msgid "conference"
+msgstr "August 9-13, 2013"
+
+#: symposion/conference/models.py:42
+#, fuzzy
+msgid "conferences"
+msgstr "August 9-13, 2013"
+
+#: symposion/conference/models.py:54 symposion/sponsorship/models.py:19
+#: symposion/sponsorship/models.py:151
+msgid "name"
+msgstr ""
+
+#: symposion/conference/models.py:65
+msgid "section"
+msgstr ""
+
+#: symposion/conference/models.py:66
+msgid "sections"
+msgstr ""
+
+#: symposion/proposals/models.py:71
+#: symposion/templates/conference/user_list.html:60
+msgid "Name"
+msgstr ""
+
+#: symposion/proposals/models.py:86
+msgid "Brief Outline"
+msgstr ""
+
+#: symposion/proposals/models.py:91
+msgid "Detailed Abstract"
+msgstr ""
+
+#: symposion/proposals/models.py:92
+msgid ""
+"Detailed description and outline. Will be made public if your talk is "
+"accepted. Edit using <a href='http://daringfireball.net/projects/markdown/"
+"basics' target='_blank'>Markdown</a>."
+msgstr ""
+
+#: symposion/proposals/models.py:96
+msgid ""
+"Anything else you'd like the program committee to know when making their "
+"selection: your past speaking experience, open source community experience, "
+"etc. Edit using <a href='http://daringfireball.net/projects/markdown/basics' "
+"target='_blank'>Markdown</a>."
+msgstr ""
+
+#: symposion/proposals/models.py:144
+msgid "Pending"
+msgstr ""
+
+#: symposion/proposals/models.py:145
+#: symposion/templates/proposals/_pending_proposal_row.html:16
+msgid "Accepted"
+msgstr ""
+
+#: symposion/proposals/models.py:146
+msgid "Declined"
+msgstr ""
+
+#: symposion/sponsorship/models.py:20
+msgid "order"
+msgstr ""
+
+#: symposion/sponsorship/models.py:21
+msgid "cost"
+msgstr ""
+
+#: symposion/sponsorship/models.py:22 symposion/sponsorship/models.py:152
+msgid "description"
+msgstr ""
+
+#: symposion/sponsorship/models.py:22
+msgid "This is private."
+msgstr ""
+
+#: symposion/sponsorship/models.py:26
+msgid "sponsor level"
+msgstr ""
+
+#: symposion/sponsorship/models.py:27
+msgid "sponsor levels"
+msgstr ""
+
+#: symposion/sponsorship/models.py:38
+msgid "applicant"
+msgstr ""
+
+#: symposion/sponsorship/models.py:40
+msgid "Sponsor Name"
+msgstr ""
+
+#: symposion/sponsorship/models.py:41
+msgid "external URL"
+msgstr ""
+
+#: symposion/sponsorship/models.py:42
+msgid "annotation"
+msgstr ""
+
+#: symposion/sponsorship/models.py:43
+msgid "Contact Name"
+msgstr ""
+
+#: symposion/sponsorship/models.py:44
+msgid "Contact Email"
+msgstr ""
+
+#: symposion/sponsorship/models.py:45 symposion/sponsorship/models.py:162
+msgid "level"
+msgstr ""
+
+#: symposion/sponsorship/models.py:46
+msgid "added"
+msgstr ""
+
+#: symposion/sponsorship/models.py:47
+msgid "active"
+msgstr ""
+
+#: symposion/sponsorship/models.py:58 symposion/sponsorship/models.py:177
+msgid "sponsor"
+msgstr ""
+
+#: symposion/sponsorship/models.py:59
+msgid "sponsors"
+msgstr ""
+
+#: symposion/sponsorship/models.py:153
+msgid "type"
+msgstr ""
+
+#: symposion/sponsorship/models.py:161 symposion/sponsorship/models.py:178
+msgid "benefit"
+msgstr ""
+
+#: symposion/sponsorship/models.py:165 symposion/sponsorship/models.py:182
+msgid "max words"
+msgstr ""
+
+#: symposion/sponsorship/models.py:166 symposion/sponsorship/models.py:183
+msgid "other limits"
+msgstr ""
+
+#: symposion/sponsorship/models.py:187
+msgid "text"
+msgstr ""
+
+#: symposion/sponsorship/models.py:188
+msgid "file"
+msgstr ""
+
+#: symposion/templates/dashboard.html:16
+msgid "Speaking"
+msgstr ""
+
+#: symposion/templates/dashboard.html:92
+#: symposion/templates/sponsorship/detail.html:8
+msgid "Sponsorship"
+msgstr ""
+
+#: symposion/templates/dashboard.html:107
+#: symposion/templates/reviews/review_detail.html:75
+msgid "Reviews"
+msgstr ""
+
+#: symposion/templates/dashboard.html:171
+msgid "Teams"
+msgstr ""
+
+#: symposion/templates/boxes/box.html:9
+msgid "Editing content:"
+msgstr ""
+
+#: symposion/templates/cms/page_edit.html:11
+msgid "Edit page at:"
+msgstr ""
+
+#: symposion/templates/conference/user_list.html:59
+msgid "Email"
+msgstr ""
+
+#: symposion/templates/conference/user_list.html:61
+msgid "Speaker Profile?"
+msgstr ""
+
+#: symposion/templates/emails/teams_user_applied/message.html:3
+#, python-format
+msgid ""
+"\n"
+"    <p>\n"
+"        User \"%(username)s\" has applied to join <b>%(team_name)s</b> on "
+"%(site_name)s.\n"
+"    </p>\n"
+"\n"
+"    <p>\n"
+"        To accept this application and see any other pending applications, "
+"visit the following url:\n"
+"        <a href=\"http://%(site_url)s%(team_url)s\">http://%(site_url)s"
+"%(team_url)s</a>\n"
+"    </p>\n"
+msgstr ""
+
+#: symposion/templates/emails/teams_user_applied/subject.txt:1
+#, python-format
+msgid "%(username)s has applied to to join \"%(team)s\""
+msgstr ""
+
+#: symposion/templates/emails/teams_user_invited/message.html:3
+#, python-format
+msgid ""
+"\n"
+"    <p>\n"
+"        You have been invited to join <b>%(team_name)s</b> on "
+"%(site_name)s.\n"
+"    </p>\n"
+"\n"
+"    <p>\n"
+"        To accept this invitation, visit the following url:\n"
+"        <a href=\"http://%(site_url)s%(team_url)s\">http://%(site_url)s"
+"%(team_url)s</a>\n"
+"    </p>\n"
+msgstr ""
+
+#: symposion/templates/emails/teams_user_invited/subject.txt:1
+#, python-format
+msgid "You have been invited to join \"%(team)s\""
+msgstr ""
+
+#: symposion/templates/proposals/_pending_proposal_row.html:12
+msgid "Cancelled"
+msgstr ""
+
+#: symposion/templates/proposals/_pending_proposal_row.html:18
+msgid "Submitted"
+msgstr ""
+
+#: symposion/templates/proposals/_pending_proposal_row.html:21
+msgid "Invited"
+msgstr ""
+
+#: symposion/templates/proposals/_pending_proposal_row.html:30
+msgid "Choose Response"
+msgstr ""
+
+#: symposion/templates/proposals/_pending_proposal_row.html:35
+msgid "Accept invitation"
+msgstr ""
+
+#: symposion/templates/proposals/_pending_proposal_row.html:37
+msgid "Decline invitation"
+msgstr ""
+
+#: symposion/templates/proposals/_proposal_fields.html:4
+msgid "Submitted by"
+msgstr ""
+
+#: symposion/templates/proposals/_proposal_fields.html:7
+msgid "Track"
+msgstr ""
+
+#: symposion/templates/proposals/_proposal_fields.html:10
+msgid "Audience Level"
+msgstr ""
+
+#: symposion/templates/proposals/_proposal_fields.html:14
+msgid "Additional Speakers"
+msgstr ""
+
+#: symposion/templates/proposals/_proposal_fields.html:21
+msgid "Invitation Sent"
+msgstr ""
+
+#: symposion/templates/proposals/_proposal_fields.html:28
+msgid "Description"
+msgstr ""
+
+#: symposion/templates/proposals/_proposal_fields.html:31
+msgid "Abstract"
+msgstr ""
+
+#: symposion/templates/proposals/_proposal_fields.html:34
+msgid "Notes"
+msgstr ""
+
+#: symposion/templates/proposals/_proposal_fields.html:37
+msgid "Speaker Bio"
+msgstr ""
+
+#: symposion/templates/proposals/_proposal_fields.html:40
+msgid "Documents"
+msgstr ""
+
+#: symposion/templates/proposals/proposal_cancel.html:7
+msgid "Cancel Proposal"
+msgstr ""
+
+#: symposion/templates/proposals/proposal_cancel.html:16
+msgid "No, keep it for now"
+msgstr ""
+
+#: symposion/templates/proposals/proposal_detail.html:14
+msgid "Edit this proposal"
+msgstr ""
+
+#: symposion/templates/proposals/proposal_detail.html:17
+msgid "Cancel this proposal"
+msgstr ""
+
+#: symposion/templates/proposals/proposal_detail.html:21
+msgid "Remove me from this proposal"
+msgstr ""
+
+#: symposion/templates/proposals/proposal_detail.html:33
+#: symposion/templates/reviews/review_detail.html:74
+msgid "Proposal Details"
+msgstr ""
+
+#: symposion/templates/proposals/proposal_detail.html:35
+#: symposion/templates/proposals/proposal_detail.html:47
+msgid "Supporting Documents"
+msgstr ""
+
+#: symposion/templates/proposals/proposal_detail.html:38
+msgid "Reviewer Feedback"
+msgstr ""
+
+#: symposion/templates/proposals/proposal_detail.html:57
+msgid "delete"
+msgstr ""
+
+#: symposion/templates/proposals/proposal_detail.html:64
+msgid "No supporting documents attached to this proposal."
+msgstr ""
+
+#: symposion/templates/proposals/proposal_detail.html:66
+msgid "Add Document"
+msgstr ""
+
+#: symposion/templates/proposals/proposal_detail.html:73
+msgid "Conversation with Reviewers"
+msgstr ""
+
+#: symposion/templates/proposals/proposal_detail.html:83
+msgid "Leave a Message"
+msgstr ""
+
+#: symposion/templates/proposals/proposal_detail.html:85
+msgid "You can leave a message for the reviewers here."
+msgstr ""
+
+#: symposion/templates/proposals/proposal_detail.html:94
+msgid "Submit"
+msgstr ""
+
+#: symposion/templates/proposals/proposal_speaker_manage.html:7
+msgid "Proposal:"
+msgstr ""
+
+#: symposion/templates/proposals/proposal_speaker_manage.html:10
+msgid "Edit proposal"
+msgstr ""
+
+#: symposion/templates/proposals/proposal_speaker_manage.html:14
+msgid "Current Speakers"
+msgstr ""
+
+#: symposion/templates/proposals/proposal_speaker_manage.html:20
+msgid "pending invitation"
+msgstr ""
+
+#: symposion/templates/proposals/proposal_speaker_manage.html:24
+msgid "Add another speaker"
+msgstr ""
+
+#: symposion/templates/proposals/proposal_submit.html:6
+msgid "Submit A Proposal"
+msgstr ""
+
+#: symposion/templates/reviews/_review_table.html:6
+#: symposion/templates/reviews/result_notification.html:45
+msgid "Speaker / Title"
+msgstr ""
+
+#: symposion/templates/reviews/_review_table.html:7
+#: symposion/templates/reviews/result_notification.html:46
+msgid "Category"
+msgstr ""
+
+#: symposion/templates/reviews/_review_table.html:9
+msgid "+1"
+msgstr ""
+
+#: symposion/templates/reviews/_review_table.html:10
+msgid "+0"
+msgstr ""
+
+#: symposion/templates/reviews/_review_table.html:11
+msgid "-0"
+msgstr ""
+
+#: symposion/templates/reviews/_review_table.html:12
+msgid "-1"
+msgstr ""
+
+#: symposion/templates/reviews/_review_table.html:13
+msgid "Your Rating"
+msgstr ""
+
+#: symposion/templates/reviews/base.html:64
+msgid "All Reviews"
+msgstr ""
+
+#: symposion/templates/reviews/base.html:77
+msgid "Voting Status"
+msgstr ""
+
+#: symposion/templates/reviews/result_notification.html:47
+msgid "Status"
+msgstr ""
+
+#: symposion/templates/reviews/result_notification.html:48
+msgid "Notified?"
+msgstr ""
+
+#: symposion/templates/reviews/review_detail.html:76
+msgid "Speaker Feedback"
+msgstr ""
+
+#: symposion/templates/reviews/review_detail.html:84
+msgid "Current Results"
+msgstr ""
+
+#: symposion/templates/reviews/review_detail.html:91
+msgid "Total Responses"
+msgstr ""
+
+#: symposion/templates/reviews/review_detail.html:108
+msgid "Submit Review"
+msgstr ""
+
+#: symposion/templates/reviews/review_detail.html:148
+msgid "Conversation with the submitter"
+msgstr ""
+
+#: symposion/templates/reviews/review_detail.html:162
+msgid "Send a message"
+msgstr ""
+
+#: symposion/templates/reviews/review_detail.html:164
+msgid ""
+"\n"
+"                            If you'd like to communicate with the submitter, "
+"use the following form and he or she will be\n"
+"                            notified and given the opportunity to respond.\n"
+"                        "
+msgstr ""
+
+#: symposion/templates/schedule/_slot_edit.html:5
+msgid "Edit Slot"
+msgstr ""
+
+#: symposion/templates/speakers/speaker_create.html:7
+#: symposion/templates/speakers/speaker_create.html:14
+msgid "Create Speaker Profile"
+msgstr ""
+
+#: symposion/templates/speakers/speaker_edit.html:7
+#: symposion/templates/speakers/speaker_edit.html:14
+msgid "Edit Speaker Profile"
+msgstr ""
+
+#: symposion/templates/sponsorship/add.html:7
+#: symposion/templates/sponsorship/add.html:14
+msgid "Add a Sponsor"
+msgstr ""
+
+#: symposion/templates/sponsorship/apply.html:7
+msgid "Apply to be a Sponsor"
+msgstr ""
+
+#: symposion/templates/sponsorship/apply.html:17
+msgid "Apply to Be a Sponsor"
+msgstr ""
+
+#: symposion/templates/sponsorship/list.html:7
+#: symposion/templates/sponsorship/list.html:14
+msgid "About Our Sponsors"
+msgstr ""
+
+#: symposion_project/settings.py:112
+msgid "English"
+msgstr ""
+
+#: symposion_project/settings.py:113
+msgid "French"
+msgstr ""
+
+#: symposion_project/templates/about.html:9
+msgid "What is PyCon Canada?"
+msgstr ""
+
+#: symposion_project/templates/about.html:11
+msgid ""
+"PyCon Canada is an initiative to strengthen the Canadian Python community."
+msgstr ""
+
+#: symposion_project/templates/about.html:15
+msgid "Our main goals:"
+msgstr ""
+
+#: symposion_project/templates/about.html:20
+msgid "ABOUT_GOAL_SUPPORT"
+msgstr ""
+"Support the efforts of <a href='http://montrealpython.org/2011/03/pycon-2014-"
+"and-2015-in-montreal/'>Montreal Python</a> as they prepare to host <a "
+"href='http://us.pycon.org/'>PyCon North America</a> in 2014 and 2015. This "
+"is the first time that the main PyCon conference is going to be outside of "
+"the US. Let's take this opportunity to showcase the Canadian Python "
+"community, and step up to the challenge as speakers and volunteers. "
+
+#: symposion_project/templates/about.html:23
+msgid "ABOUT_GOAL_STRENGTHEN"
+msgstr ""
+"Strengthen the Canadian Python community by providing more opportunities for "
+"us to share knowledge and ideas, encourage support and education for "
+"speaking at conferences, and increase the visibility of developers, "
+"organizations, and companies within the community. "
+
+#: symposion_project/templates/about.html:26
+msgid "Host an annual Canadian PyCon conference, starting now - 2012!"
+msgstr ""
+
+#: symposion_project/templates/about.html:31
+msgid "ABOUT_VOLUNTEERS"
+msgstr ""
+"PyCon Canada is entirely run by volunteers who are passionate about these "
+"goals. We hope to see you at the 2012 conference! "
+
+#: symposion_project/templates/about.html:36
+msgid "Code of Conduct"
+msgstr ""
+
+#: symposion_project/templates/about.html:37
+msgid "ABOUT_CONDUCT"
+msgstr ""
+"Please familiarize yourself with the <a href='/conduct'>Code of Conduct</a> "
+"and do your part to make sure PyCon Canada doesn't end up on Hacker News for "
+"all the wrong reasons. "
+
+#: symposion_project/templates/homepage.html:6
+msgid "Welcome"
+msgstr ""
+
+#: symposion_project/templates/homepage.html:11
+msgid "welcome masthead"
+msgstr "Welcome to PyCon!"
+
+#: symposion_project/templates/site_base.html:74
+msgid "conference date range"
+msgstr "August 9-13, 2013"
+
+#: symposion_project/templates/sponsor_prospectus.html:9
+msgid "ABOUT_SPONSORSHIP"
+msgstr ""
+"We are in the process of developing a prospectus. In the mean time, if you "
+"are interested in sponsoring PyCon Canada, please contact <a href=\"mailto:"
+"sponsorship@pycon.ca\">sponsorship@pycon.ca</a>."
+
+#~ msgid "This is not a word."
+#~ msgstr "This is not a word."
