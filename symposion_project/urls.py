@@ -38,6 +38,10 @@ urlpatterns += i18n_patterns("",
         "template": "venue.html",
     }, name="venue"),
 
+    url(r"^contact/", direct_to_template, {
+        "template": "contact.html",
+    }, name="contact"),
+
     url(r"^admin/", include(admin.site.urls)),
 
     url(r"^account/signup/$", symposion.views.SignupView.as_view(), name="account_signup"),
