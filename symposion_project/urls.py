@@ -14,10 +14,6 @@ import symposion.views
 
 WIKI_SLUG = r"(([\w-]{2,})(/[\w-]{2,})*)"
 
-# this is to keep the cms_page tag working in sponsorship/list template
-PAGE_RE = r"(([\w-]{1,})(/[\w-]{1,})*)/"
-
-
 urlpatterns = patterns("",
     (r'^i18n/', include('django.conf.urls.i18n')),
 )
@@ -53,9 +49,6 @@ urlpatterns += i18n_patterns("",
     url(r"^reviews/", include("symposion.reviews.urls")),
     url(r"^schedule/", include("symposion.schedule.urls")),
     url(r"^markitup/", include("markitup.urls")),
-
-    # this is to keep the cms_page tag working in sponsorship/list template
-    url(r"^(?P<path>%s)$" % PAGE_RE, "page", name="cms_page"),
 )
 
 
