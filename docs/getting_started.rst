@@ -27,7 +27,19 @@ Go test it out::
 
 For internationalization/i18n::
 
+    # simply do:
+    make i18n
+
+
+    # or the good old way:
+
     cd symposion_project
+    django-admin.py makemessages -a
+    # now make changes to generated .po files ...
+    django-admin.py compilemessages
+
+    # also need to change symposion directory
+    cd symposion
     django-admin.py makemessages -a
     # now make changes to generated .po files ...
     django-admin.py compilemessages
