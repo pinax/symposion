@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-19 05:19-0400\n"
+"POT-Creation-Date: 2013-04-19 05:23-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -91,10 +91,17 @@ msgstr ""
 #: templates/contact.html:10
 msgid "CONTACT_US_MAILING_LISTS"
 msgstr ""
+"La plupart de nos discussions se font sur la liste de diffusion <a "
+"href='mailto:pyconca@googlegroups.com'>pyconca@googlegroups.com</a> (<a "
+"href='https://groups.google.com/forum/?fromgroups#!forum/pyconca'>archives</"
+"a>). Le comité d'organisation peut être contacté en privé à <a href='mailto:"
+"organizers@pycon.ca'>organizers@pycon.ca</a>, et le conseil d'administration "
+"(Michael Dibernardo, Taavi Burns and David Wolever) peut être contacté à <a "
+"href='mailto:board@pycon.ca'>board@pycon.ca</a>. "
 
 #: templates/contact.html:12
 msgid "We are also online at:"
-msgstr ""
+msgstr "Nous sommes aussi en ligne sur:"
 
 #: templates/homepage.html:6
 msgid "Welcome"
