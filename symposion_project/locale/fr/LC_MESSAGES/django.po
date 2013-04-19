@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-19 05:23-0400\n"
+"POT-Creation-Date: 2013-04-19 05:27-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -142,26 +142,46 @@ msgstr ""
 #: templates/venue.html:17
 msgid "VENUE_AIRPORTS"
 msgstr ""
+"Toronto a 2 principaux aéroports. <a href='http://www.gtaa.com'>Pearson</a> "
+"est l'aéroport international et est l'endroit où sont basées la plupart des "
+"principales compagnies aériennes domestiques et internationales. L'aéroport "
+"est à 35 minutes de route de Beverley Halls, mais sachez qu'il y a du trafic "
+"dans le centre-ville de Toronto toute la journée, particulièrement lors des "
+"heures de pointe. Prévoyez donc au moins une heure de trajet à partir de "
+"l'aéroport. "
 
 #: templates/venue.html:18
 msgid "VENUE_PORTER"
 msgstr ""
+"<a href='http://www.flyporter.com'>Porter Airlines</a> est situé sur l'Île "
+"de Toronto juste au sud de Union Station, le principal point de transit du "
+"centre-ville de Toronto, donnant accès notamment à Go Transit, TTC (le "
+"service local d'autobus, de tram et de métro) et VIA Rail. "
 
 #: templates/venue.html:19
 msgid "VENUE_VIA"
 msgstr ""
+"VIA est une bonne alternative aux compagnies aériennes si vous venez de "
+"Montréal ou d'Ottawa, par exemple. Il y a souvent des rabais sur les "
+"réservations à l'avance. "
 
 #: templates/venue.html:22
 msgid "If you're coming from the US:"
-msgstr ""
+msgstr "Si vous arrivez des É.U.:"
 
 #: templates/venue.html:24
 msgid "VENUE_PASSPORT_USA"
 msgstr ""
+"Assurez-vous d'avoir un passeport valide et n'oubliez pas de l'amener avec "
+"vous. "
 
 #: templates/venue.html:25
 msgid "VENUE_PORTER_USA"
 msgstr ""
+"<a href='http://www.flyporter.com'>Porter Airlines</a> a des vols fréquents "
+"à des prix raisonnables à destination de Toronto à partir de plusieurs "
+"villes des É.U., notamment Boston, Burlington (VT), Chicago, Myrtle Beach, "
+"New-York et Washington. "
 
 #: templates/venue.html:31
 msgid "Public Transit and Parking"
