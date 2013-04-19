@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-10 05:02-0400\n"
+"POT-Creation-Date: 2013-04-19 05:12-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -84,6 +84,18 @@ msgstr ""
 "et faites votre part afin de faire en sorte que PyCon Canada ne finisse pas "
 "sur Hacker News pour de mauvaises raisons. "
 
+#: templates/contact.html:9
+msgid "Contact"
+msgstr ""
+
+#: templates/contact.html:10
+msgid "CONTACT_US_MAILING_LISTS"
+msgstr ""
+
+#: templates/contact.html:12
+msgid "We are also online at:"
+msgstr ""
+
 #: templates/homepage.html:6
 msgid "Welcome"
 msgstr ""
@@ -92,12 +104,80 @@ msgstr ""
 msgid "welcome masthead"
 msgstr "Bienvenue à PyCon!"
 
-#: templates/site_base.html:74
+#: templates/site_base.html:78
 msgid "conference date range"
 msgstr "9 au 13 août, 2013"
 
 #: templates/sponsor_prospectus.html:9
 msgid "ABOUT_SPONSORSHIP"
+msgstr ""
+
+#: templates/venue.html:9
+msgid "Location"
+msgstr ""
+
+#: templates/venue.html:10
+msgid "VENUE_LOCATION"
+msgstr ""
+
+#: templates/venue.html:12
+msgid "View the complete"
+msgstr ""
+
+#: templates/venue.html:12
+msgid "PyCon Canada 2013 map"
+msgstr ""
+
+#: templates/venue.html:16
+msgid "Getting to Toronto"
+msgstr ""
+
+#: templates/venue.html:17
+msgid "VENUE_AIRPORTS"
+msgstr ""
+
+#: templates/venue.html:18
+msgid "VENUE_PORTER"
+msgstr ""
+
+#: templates/venue.html:19
+msgid "VENUE_VIA"
+msgstr ""
+
+#: templates/venue.html:22
+msgid "If you're coming from the US:"
+msgstr ""
+
+#: templates/venue.html:24
+msgid "VENUE_PASSPORT_USA"
+msgstr ""
+
+#: templates/venue.html:25
+msgid "VENUE_PORTER_USA"
+msgstr ""
+
+#: templates/venue.html:31
+msgid "Public Transit and Parking"
+msgstr ""
+
+#: templates/venue.html:32
+msgid "VENUE_PUBLIC_TRANSIT"
+msgstr ""
+
+#: templates/venue.html:33
+msgid "VENUE_PARKING"
+msgstr ""
+
+#: templates/venue.html:37
+msgid "Food"
+msgstr ""
+
+#: templates/venue.html:38
+msgid "VENUE_FOOD"
+msgstr ""
+
+#: templates/venue.html:42
+msgid "Hotel"
 msgstr ""
 
 #~ msgid "This is not a word."
