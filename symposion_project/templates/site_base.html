@@ -90,9 +90,6 @@
     {% endblock %}
   </div>
 </header>
-
-  <h1><a href="{% url home %}">{{ SITE_NAME }}</a></h1>
-  <h2><a href="{% url home %}"><span style="font-weight: 200;">Toronto, Ontario, Canada &rarr; {% trans "conference date range" %}</span></a></h2>
 {% endblock %}
 
 {% block body_base %}
@@ -104,16 +101,16 @@
   {# {% endblock %} #}
 
   {% block body_outer %}
-  <div class="row">
-    <div class="span9">
+  <div class="row-fluid">
+    <section id="MainContent" class="span9">
       {% block body %}
       {% endblock %}
-    </div>
-    <div class="span3">
+    </section>
+    <aside id="side-sponsors" class="span3">
       {% block sidebar %}
       {% include "_default_sidebar.html" %}
       {% endblock %}
-    </div>
+    </aside>
   </div>
   {% endblock %}
 </div>

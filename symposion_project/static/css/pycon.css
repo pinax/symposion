@@ -1,5 +1,5 @@
 body {
-  background: url(snake_background.jpg) repeat left top;
+  background: url(img/snake_background.jpg) repeat left top;
   color: #333;
   font-family: 'Droid Serif', Georgia, Cambria, "Times New Roman", Times, serif;
   font-size: 16px;
@@ -247,12 +247,12 @@ footer .contact-list span {
 
 /* HOME PAGE */
 #Intro {
-  background: url(snake_background.jpg) repeat left bottom;
+  background: url(img/snake_background.jpg) repeat left bottom;
   padding-bottom: 30px;
   text-align: center;
 }
 #Banner {
-  background: #2B1006 url(bg-stripes.png) repeat left top;
+  background: #2B1006 url(img/bg-stripes.png) repeat left top;
   display: inline-block; /* this fixes IE/Opera block rendering quirks and brings inline with FireFox/Safari/Chrome */
 }
 #Banner h1 {
@@ -358,11 +358,11 @@ footer .contact-list span {
 
 #Register {
   display: inline-block;
-  background: url(bg-register.png) no-repeat left top;
+  background: url(img/bg-register.png) no-repeat left top;
 }
 @media (max-width: 979px) {
   #Register {
-    background: url(bg-register.png) no-repeat left -30px;
+    background: url(img/bg-register.png) no-repeat left -30px;
   }
 }
 #Register a {
@@ -372,11 +372,11 @@ footer .contact-list span {
   margin: 78px 28px 20px;
   text-indent: -9999px;
   overflow: hidden;
-  background: url(btn-register.png) no-repeat left top;
+  background: url(img/btn-register.png) no-repeat left top;
 }
 /* TODO need to set this class name via locale switching */
 #Register a.register-button-fr {
-  background: url(btn-register-fr.png) no-repeat left top;
+  background: url(img/btn-register-fr.png) no-repeat left top;
 }
 @media (max-width: 979px) {
   #Register a {
@@ -437,7 +437,7 @@ aside h1,
   padding: 0 0 20px;
 }
 #Blurbs {
-  background: #ff8a00 url(bg-grid.png) repeat 0 0;
+  background: #ff8a00 url(img/bg-grid.png) repeat 0 0;
   padding-top: 60px;
 }
 
@@ -512,7 +512,7 @@ aside h1,
   }
 }
 #MainContent header h1 {
-  background: #2B1006 url(bg-stripes.png) repeat left top;
+  background: #2B1006 url(img/bg-stripes.png) repeat left top;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 400;
   color: #fff;
@@ -532,7 +532,7 @@ aside h1,
   }
 }
 #side-sponsors {
-  background: #cbc2bc url(bg-grid.png) repeat left top;
+  background: #cbc2bc url(img/bg-grid.png) repeat left top;
 }
 address {
   margin-left: 20px;
