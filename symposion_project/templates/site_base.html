@@ -11,12 +11,15 @@
 
 {% block style_base %}
     <link href="{% static "symposion/css/symposion.css" %}" rel="stylesheet">
+    <link href="{% static "css/pycon.css" %}" rel="stylesheet">
     {% block extra_style %}{% endblock %}
 {% endblock %}
 
 {% block extra_head_base %}
     <link href="{{ STATIC_URL }}img/favicon.ico" rel="shortcut icon" />
     <script src="{% block jquery_src %}{% static "pinax/js/jquery.js" %}{% endblock %}"></script>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
     {% markitup_media "no-jquery" %}
     {% block extra_head %}{% endblock %}
 {% endblock %}
