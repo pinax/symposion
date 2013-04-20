@@ -27,7 +27,6 @@
 {% endblock %}
 
 {% block topbar_base %}
-
 <header id="MainHeader">
   <nav class="navbar clearfix">
     {% block topbar %}
@@ -92,52 +91,51 @@
   </div>
 </header>
 
-
   <h1><a href="{% url home %}">{{ SITE_NAME }}</a></h1>
   <h2><a href="{% url home %}"><span style="font-weight: 200;">Toronto, Ontario, Canada &rarr; {% trans "conference date range" %}</span></a></h2>
 {% endblock %}
 
 {% block body_base %}
-    <div class="container">
-        {% include "_messages.html" %}
+<div class="container">
+  {% include "_messages.html" %}
 
-        {# {% block breadcrumbs %} #}
-            {# {% sitetree_breadcrumbs from "main" %} #}
-        {# {% endblock %} #}
+  {# {% block breadcrumbs %} #}
+  {# {% sitetree_breadcrumbs from "main" %} #}
+  {# {% endblock %} #}
 
-        {% block body_outer %}
-            <div class="row">
-                <div class="span9">
-                    {% block body %}
-                    {% endblock %}
-                </div>
-                <div class="span3">
-                    {% block sidebar %}
-                        {% include "_default_sidebar.html" %}
-                    {% endblock %}
-                </div>
-            </div>
-        {% endblock %}
+  {% block body_outer %}
+  <div class="row">
+    <div class="span9">
+      {% block body %}
+      {% endblock %}
     </div>
+    <div class="span3">
+      {% block sidebar %}
+      {% include "_default_sidebar.html" %}
+      {% endblock %}
+    </div>
+  </div>
+  {% endblock %}
+</div>
 {% endblock %}
 
 {% block footer %}
-    {% include "_footer.html" %}
+  {% include "_footer.html" %}
 {% endblock %}
 
 {% block script_base %}
-    {% analytics %}
-    <script src="{% static "bootstrap/js/bootstrap.js" %}"></script>
-    <script src="{% static "pinax/js/theme.js" %}"></script>
-    <script type="text/javascript">
-        $(function() {
-            $("#logout_link").on("click", function(e) {
-                var form = $($(this).data("form-submit"));
-                form.submit();
-                return false;
-            });
-            $(".required-field").prepend("<span style='color:red;'>* </div>");
+{% analytics %}
+<script src="{% static "bootstrap/js/bootstrap.js" %}"></script>
+<script src="{% static "pinax/js/theme.js" %}"></script>
+<script type="text/javascript">
+  $(function() {
+      $("#logout_link").on("click", function(e) {
+        var form = $($(this).data("form-submit"));
+        form.submit();
+        return false;
         });
-    </script>
-    {% block extra_script %}{% endblock %}
+      $(".required-field").prepend("<span style='color:red;'>* </div>");
+      });
+</script>
+{% block extra_script %}{% endblock %}
 {% endblock %}
