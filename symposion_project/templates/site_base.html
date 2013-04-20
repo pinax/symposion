@@ -10,7 +10,9 @@
 {% block viewport %}{% endblock %}
 
 {% block style_base %}
-    <link href="{% static "symposion/css/symposion.css" %}" rel="stylesheet">
+    <link href="{% static "bootstrap/bootstrap.min.css" %}" rel="stylesheet">
+    <link href="{% static "bootstrap/bootstrap-responsive.min.css" %}" rel="stylesheet">
+    <!--<link href="{% static "symposion/css/symposion.css" %}" rel="stylesheet">-->
     <link href="{% static "css/pycon.css" %}" rel="stylesheet">
     {% block extra_style %}{% endblock %}
 {% endblock %}
@@ -25,86 +27,74 @@
 {% endblock %}
 
 {% block topbar_base %}
-    <div class="container">
-        <header id="masthead">
-            <div class="pull-right">
-                <ul class="nav nav-pills">
-                    {% if not request.user.is_authenticated %}
-                        <li>
-                            <a href="{% url account_login %}">Log in</a>
-                        </li>
-                        <li>
-                            <a href="{% url account_signup %}">Sign up</a>
-                        </li>
-                    {% else %}
-                        <li>
-                            <a href="{% url dashboard %}">Dashboard</a>
-                        </li>
-                        <li>
-                            <a href="{% url account_settings %}">Settings</a>
-                        </li>
-                        {% if request.user.is_staff %}
-                            <li>
-                                <a href="{% url admin:index %}">Admin</a>
-                            </li>
-                        {% endif %}
-                        <li>
-                            <a id="logout_link" href="{% url account_logout %}" data-form-submit="#account_logout_form">Log out</a>
-                        </li>
-                        <form id="account_logout_form" class="hide" action="{% url account_logout %}" method="post">{% csrf_token %}</form>
-                    {% endif %}
-                    <li>
-                      <form action="/i18n/setlang/" method="post">
-                        {% csrf_token %}
 
-                        {% with request.path|slice:"3:" as redirect_url %}
-                        <input name="next" type="hidden" value="{{ redirect_url }}" />
-                        {% endwith %}
+<header id="MainHeader">
+  <nav class="navbar clearfix">
+    {% block topbar %}
+    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </a>
 
-                        <select class="input-medium" name="language" onchange="this.form.submit();">
-                          {% get_language_info_list for LANGUAGES as languages %}
-                          {% for language in languages %}
-                          {% if LANGUAGE_CODE == language.code %}
-                          <option value="{{ language.code }}" selected="selected">{{ language.name_local }} ({{ language.code }})</option>
+    <div class="nav-collapse">
+      {% block nav %}
+      <ul class="nav">
+        <li><a href="{% url home %}"><i class="icon-home icon-white nav-icon"></i></a></li>
+        <li><a href="{% url about %}">About</a></li>
+        <li><a href="{% url venue %}">Venue</a></li>
+        <li><a href="{% url schedule_conference %}">Schedule</a></li>
+        <li><a href="{% url dashboard %}">Speakers</a></li>
+        <li><a href="{% url sponsor_list %}">Sponsors</a></li>
+        <li><a href="{% url contact %}">Contact</a></li>
+        {% if not request.user.is_authenticated %}
+          <li class="nav-spacer nav-auth"><a href="{% url account_login %}">Log in</a></li>
+          <li class="nav-auth"><a href="{% url account_signup %}">Sign up</a></li>
+        {% else %}
+          <li class="nav-auth"><a href="{% url dashboard %}">Dashboard</a></li>
+          <li class="nav-auth"><a href="{% url account_settings %}">Settings</a></li>
 
-                          {% else %}
-                          <option value="{{ language.code }}">{{ language.name_local }} ({{ language.code }})</option>
-                          {% endif %}
-                          {% endfor %}
-                        </select>
-                      </form>
-                    </li>
-                </ul>
-            </div>
+          {% if request.user.is_staff %}
+            <li class="nav-auth"><a href="{% url admin:index %}">Admin</a></li>
+          {% endif %}
 
-            <h1><a href="{% url home %}">{{ SITE_NAME }}</a></h1>
-            <h2><a href="{% url home %}"><span style="font-weight: 200;">Toronto, Ontario, Canada &rarr; {% trans "conference date range" %}</span></a></h2>
-        </header>
-        <div class="navbar">
-            <div class="navbar-inner">
-                <ul class="nav">
-                    <li><a href="{% url about %}">About</a></li>
-                    <li><a href="{% url venue %}">Venue</a></li>
-                    <li><a href="{% url schedule_conference %}">Schedule</a></li>
-                    <li><a href="{% url dashboard %}">Speakers</a></li>
-                    <li><a href="{% url sponsor_list %}">Sponsors</a></li>
-                    <li><a href="{% url contact %}">Contact</a></li>
-                </ul>
-                {% block topbar %}
-                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </a>
-                    <div class="nav-collapse">
-                        {% block nav %}
-                            {% sitetree_menu from "main" include "trunk" template "sitetree/menu_bootstrap.html" %}
-                        {% endblock %}
-                    </div>
-                {% endblock %}
-            </div>
-        </div>
+          <li class="nav-auth"><a id="logout_link" href="{% url account_logout %}" data-form-submit="#account_logout_form">Log out</a></li>
+
+          <form id="account_logout_form" class="hide" action="{% url account_logout %}" method="post">{% csrf_token %}</form>
+        {% endif %}
+
+        <li class="nav-spacer nav-auth">
+          <form action="/i18n/setlang/" method="post" style="margin:0;">
+            {% csrf_token %}
+
+            {% with request.path|slice:"3:" as redirect_url %}
+            <input name="next" type="hidden" value="{{ redirect_url }}" />
+            {% endwith %}
+
+            <select class="input-medium" name="language" onchange="this.form.submit();">
+              {% get_language_info_list for LANGUAGES as languages %}
+              {% for language in languages %}
+              {% if LANGUAGE_CODE == language.code %}
+              <option value="{{ language.code }}" selected="selected">{{ language.name_local }} ({{ language.code }})</option>
+
+              {% else %}
+              <option value="{{ language.code }}">{{ language.name_local }} ({{ language.code }})</option>
+              {% endif %}
+              {% endfor %}
+            </select>
+          </form>
+        </li>
+      </ul>
+      {% sitetree_menu from "main" include "trunk" template "sitetree/menu_bootstrap.html" %}
+      {% endblock %}
     </div>
+    {% endblock %}
+  </div>
+</header>
+
+
+  <h1><a href="{% url home %}">{{ SITE_NAME }}</a></h1>
+  <h2><a href="{% url home %}"><span style="font-weight: 200;">Toronto, Ontario, Canada &rarr; {% trans "conference date range" %}</span></a></h2>
 {% endblock %}
 
 {% block body_base %}
