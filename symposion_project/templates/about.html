@@ -3,8 +3,14 @@
 {% load bootstrap_tags %}
 {% load i18n %}
 
-{% block body %}
+{% block head_title %}{% trans "About" %}{% endblock %}
+{% block page_title %}
+  <hgroup class="clearfix">
+    <h1>{% trans "About" %}</h1>
+  </hgroup>
+{% endblock %}
 
+{% block body %}
 <article>
   <h2>{% trans "What is PyCon Canada?" %}</h2>
   <p>
