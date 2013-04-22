@@ -89,7 +89,7 @@ msgstr ""
 "groups.google.com/forum/?fromgroups#!forum/pyconca'>archives</a>). The "
 "organizing committee can be contacted privately at <a href='mailto:"
 "organizers@pycon.ca'>organizers@pycon.ca</a>, and the board (Michael "
-"Dibernardo, David Wolever and Taavi Burns) can be contacted privately at <a "
+"DiBernardo, David Wolever and Taavi Burns) can be contacted privately at <a "
 "href='mailto:board@pycon.ca'>board@pycon.ca</a>. "
 
 #: templates/contact.html:12
