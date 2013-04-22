@@ -42,6 +42,10 @@ urlpatterns += i18n_patterns("",
         "template": "contact.html",
     }, name="contact"),
 
+    url(r"^conduct/", direct_to_template, {
+        "template": "conduct.html",
+    }, name="conduct"),
+
     url(r"^admin/", include(admin.site.urls)),
 
     url(r"^account/signup/$", symposion.views.SignupView.as_view(), name="account_signup"),

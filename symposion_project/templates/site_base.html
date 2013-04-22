@@ -41,6 +41,7 @@
       <ul class="nav">
         <li><a href="{% url home %}"><i class="icon-home icon-white nav-icon"></i></a></li>
         <li><a href="{% url about %}">About</a></li>
+        <li><a href="{% url conduct %}">Conduct</a></li>
         <li><a href="{% url venue %}">Venue</a></li>
         <li><a href="{% url schedule_conference %}">Schedule</a></li>
         <li><a href="{% url dashboard %}">Speakers</a></li>
@@ -103,6 +104,13 @@
   {% block body_outer %}
   <div class="row-fluid">
     <section id="MainContent" class="span9">
+      <header>
+        {% block page_title %}
+        {% endblock %}
+        <div id="QuickLinks" class="hidden-desktop">
+          <em>{% trans "Quick links" %}:</em> <ul class="unstyled"></ul>
+        </div>
+      </header>
       {% block body %}
       {% endblock %}
     </section>
