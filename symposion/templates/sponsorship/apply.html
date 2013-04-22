@@ -10,20 +10,20 @@
 
 {% block body %}
 
-    {% box "sponsorship-apply" %}
+{% box "sponsorship-apply" %}
 
-    <form method="POST" action="" class="form-horizontal">
-        {% csrf_token %}
-        <legend>{% trans "Apply to Be a Sponsor" %}</legend>
-        {{ form|as_bootstrap }}
-        <div class="form-actions">
-            <input class="btn btn-primary" type="submit" value="Apply" />
-            <a class="btn" href="{% url dashboard %}">Cancel</a>
-            <p class="help-block">
-                Be sure to read our <a href="{% url sponsor_prospectus %}">Sponsor Prospectus</a> first!<br />
-                <small>By submitting this sponsor application you are agreeing to the <a href="{% url sponsor_terms %}" target="_blank">terms and conditions</a>.</small>
-            </p>
-        </div>
-    </form>
+<form method="POST" action="" class="form-horizontal">
+  {% csrf_token %}
+  <legend>{% trans "Apply to Be a Sponsor" %}</legend>
+  {{ form|as_bootstrap }}
+  <div class="form-actions">
+    <input class="btn btn-primary" type="submit" value="Apply" />
+    <a class="btn" href="{% url dashboard %}">Cancel</a>
+    <p class="help-block">
+      Be sure to read our <a href="{% url sponsor_prospectus %}">Sponsor Prospectus</a> first!<br />
+      <small>By submitting this sponsor application you are agreeing to the <a href="{% url sponsor_terms %}" target="_blank">terms and conditions</a>.</small>
+    </p>
+  </div>
+</form>
 
 {% endblock %}
