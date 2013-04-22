@@ -1,0 +1,40 @@
+{% extends "site_base.html" %}
+
+{% load bootstrap_tags %}
+{% load i18n %}
+
+{% block head_title %}{% trans "Code of Conduct" %}{% endblock %}
+{% block page_title %}
+  <hgroup class="clearfix">
+    <h1> {% trans "Code of Conduct" %} </h1>
+  </hgroup>
+{% endblock %}
+
+
+{% block body %}
+
+
+  <article>
+    <h2>{% trans "Code of Conduct" %}</h2>
+    <p>{% trans "CONDUCT_OVERVIEW" %}</p>
+
+    <h2>{% trans "The Short Version" %}</h2>
+    <p>{% trans "CONDUCT_SHORT" %}</p>
+
+    <h2>{% trans "The Longer Version" %}</h2>
+    <p>{% trans "CONDUCT_LONG" %}</p>
+
+    <h2>{% trans "Contact Information" %}</h2>
+    <p>
+      {% trans "CONDUCT_CONTACTS" %}
+      <ul>
+        <li><strong>Michael DiBernardo</strong>: +1 (647) 519-3325</li>
+        <li><strong>Diana Clarke</strong>: +1 (416) 453-3130</li>
+      </ul>
+      {% trans "CONDUCT_POLICE" %}
+    </p>
+
+    <h2>{% trans "License" %}</h2>
+    <p>{% trans CONDUCT_CREDIT %}</p>
+  </article>
+{% endblock %}
