@@ -35,7 +35,9 @@ def sponsor_add(request):
             sponsor = form.save(commit=False)
             sponsor.active = True
             sponsor.save()
-            return redirect("dashboard")
+            return redirect("sponsor_detail", pk=sponsor.pk)
+            # changing default behavior (below) so that admins can add text/logos/files in-dashboard
+            # return redirect("dashboard") 
     else:
         form = SponsorApplicationForm(user=request.user)
     
