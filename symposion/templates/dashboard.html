@@ -132,6 +132,7 @@
                 <h3>{% trans "Reviews" %}</h3>
             </div>
             {% user_reviews as user_reviews %}
+            {% user_not_reviewed as user_not_reviewed %}
             <div class="dashboard-panel-content">
                 <h4>Review Sections</h4>
                 
@@ -158,6 +159,26 @@
                                     {{ review.proposal.title }}
                                 </td>
                                 <td>{{ review.vote }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <h4>Proposals you have yet to review</h4>
+                <table class="table table-condensed">
+                    <thead>
+                        <th>#</th>
+                        <th>Speaker / Title</th>
+                    </thead>
+                    <tbody>
+                        {% for proposal in user_not_reviewed %}
+                            <tr>
+                                <td>{{ proposal.number }}</td>
+                                <td>
+                                    <b>{{ proposal.speaker }}</b>
+                                    <br />
+                                    {{ proposal.title }}
+                                </td>
                             </tr>
                         {% endfor %}
                     </tbody>
