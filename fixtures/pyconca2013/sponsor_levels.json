@@ -5,19 +5,18 @@
         "fields": {
             "conference": 1,
             "description": "", 
-            "cost": 10000, 
-            "name": "Gold", 
+            "cost": 15000, 
+            "name": "Diamond", 
             "order": 0
         }
-    }, 
-    {
+    },{
         "pk": 2, 
         "model": "sponsorship.sponsorlevel", 
         "fields": {
             "conference": 1,
             "description": "", 
-            "cost": 5000, 
-            "name": "Silver", 
+            "cost": 8000, 
+            "name": "Gold", 
             "order": 1
         }
     }, 
@@ -27,9 +26,20 @@
         "fields": {
             "conference": 1,
             "description": "", 
-            "cost": 2000, 
-            "name": "Bronze", 
+            "cost": 5000, 
+            "name": "Silver", 
             "order": 2
+        }
+    }, 
+    {
+        "pk": 4, 
+        "model": "sponsorship.sponsorlevel", 
+        "fields": {
+            "conference": 1,
+            "description": "", 
+            "cost": 1000, 
+            "name": "Bronze", 
+            "order": 3
         }
     }
 ]
