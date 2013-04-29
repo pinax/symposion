@@ -1,7 +1,6 @@
 from django import template
 
 from symposion.reviews.models import Review, ReviewAssignment
-from symposion.proposals.models import ProposalBase
 
 
 register = template.Library()
