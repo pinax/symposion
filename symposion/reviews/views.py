@@ -62,8 +62,10 @@ def proposals_generator(request, queryset, user_pk=None, check_speaker=True):
         yield obj
 
 
+# Returns a list of all proposals, proposals reviewed by the user, or the proposals the user has yet to review
+# depending on the link user clicks in dashboard
 @login_required
-def review_section(request, section_slug, assigned=False):
+def review_section(request, section_slug, assigned=False, reviewed='all'):
     
     if not request.user.has_perm("reviews.can_review_%s" % section_slug):
         return access_not_permitted(request)
@@ -74,18 +76,27 @@ def review_section(request, section_slug, assigned=False):
     if assigned:
         assignments = ReviewAssignment.objects.filter(user=request.user).values_list("proposal__id")
         queryset = queryset.filter(id__in=assignments)
-    
-    queryset = queryset.select_related("result").select_subclasses()
-    
+
+# passing reviewed in from reviews.urls and out to review_list for appropriate template header rendering
+    if reviewed == 'all':
+        queryset = queryset.select_related("result").select_subclasses()
+        reviewed = 'all_reviews'
+    elif reviewed == 'reviewed':
+        queryset = queryset.filter(reviews__user=request.user)
+        reviewed = 'user_reviewed'
+    else:
+        queryset = queryset.exclude(reviews__user=request.user).exclude(speaker=request.user)
+        reviewed = 'user_not_reviewed'
+
     proposals = proposals_generator(request, queryset)
     
     ctx = {
         "proposals": proposals,
         "section": section,
+        "reviewed": reviewed,
     }
     
     return render(request, "reviews/review_list.html", ctx)
-
 
 @login_required
 def review_list(request, section_slug, user_pk):

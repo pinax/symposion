@@ -35,7 +35,7 @@ def sponsor_add(request):
             sponsor = form.save(commit=False)
             sponsor.active = True
             sponsor.save()
-            return redirect("dashboard")
+            return redirect("sponsor_detail", pk=sponsor.pk)
     else:
         form = SponsorApplicationForm(user=request.user)
     
