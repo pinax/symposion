@@ -26,12 +26,16 @@ class Speaker(models.Model):
         default = datetime.datetime.now,
         editable = False
     )
+
+    class Meta:
+        ordering = ['name']
     
     def __unicode__(self):
         if self.user:
             return self.name
         else:
             return "?"
+
     
     def get_absolute_url(self):
         return reverse("speaker_edit")
