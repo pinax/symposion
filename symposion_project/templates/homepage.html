@@ -5,10 +5,16 @@
 
 {% block head_title %}{% trans "Welcome" %}{% endblock %}
 
+{% block extra_head %}
+<script type="text/javascript" src="https://guestlistapp.com/javascripts/guestlist-embed.js"></script>
+{% endblock %}
+
 {% block body_class %}home{% endblock %}
 
 {% block body %}
     <h3>{% trans "welcome masthead" %}</h3>
+    <a class="guestlist-event-161823" href="#"><img width="250" height="60" style="border: 0" src="https://guestlistapp.com/images/embed/register.png" alt="Register for Event" /></a>
+
     <ul>
         <li><strong>Date</strong>: the main conference will be <em>August 9th - 11th</em>, with sprints on <em>August 12th and 13th</em>.</li>
         <li><strong>Location</strong>: The <a href="http://chestnutconferencecentre.utoronto.ca/contact">Chestnut Conference Centre</a> in Toronto, Canada.</li>
