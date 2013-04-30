@@ -131,37 +131,18 @@
                 <i class="icon-briefcase"></i>
                 <h3>{% trans "Reviews" %}</h3>
             </div>
-            {% user_reviews as user_reviews %}
+            
             <div class="dashboard-panel-content">
-                <h4>Review Sections</h4>
+                <h4>Reviews by Section</h4>
                 
                 <ul>
                     {% for section in review_sections %}
-                        <li><a href="{% url review_section section.section.slug %}">{{ section }}</a></li>
+                        <h5>{{ section }}</h5>
+                            <li><a href="{% url review_section section.section.slug %}">All</a></li>
+                            <li><a href="{% url user_reviewed section.section.slug %}">Reviewed by you</a></li>
+                            <li><a href="{% url user_not_reviewed section.section.slug %}">Not Reviewed by you</a></li>
                     {% endfor %}
                 </ul>
-                
-                <h4>Proposals you have reviewed</h4>
-                <table class="table table-condensed">
-                    <thead>
-                        <th>#</th>
-                        <th>Speaker / Title</th>
-                        <th>Your Vote</th>
-                    </thead>
-                    <tbody>
-                        {% for review in user_reviews %}
-                            <tr>
-                                <td>{{ review.proposal.number }}</td>
-                                <td>
-                                    <b>{{ review.proposal.speaker }}</b>
-                                    <br />
-                                    {{ review.proposal.title }}
-                                </td>
-                                <td>{{ review.vote }}</td>
-                            </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
                 
                 {% comment %}
                 <h4>My Assignments</h4>
