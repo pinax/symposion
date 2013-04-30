@@ -3,12 +3,19 @@
 {% block body %}
 	<h3>{{ section }}</h3>
 	{% if reviewed == 'all_reviews' %}
-    	<h4>All proposals</h4>
+    	<h4 class="reviews-list-header">All proposals</h4>
+    	<p class="reviews-toggle">( see<a href="{% url user_reviewed section.section.slug %}"> reviewed</a> or <a href="{% url user_not_reviewed section.section.slug %}">not reviewed </a>)</p>
     {% elif reviewed == 'user_reviewed' %}
-    	<h4>Proposals you have reviewed</h4>
+    	<h4 class="reviews-list-header">Proposals you have reviewed</h4>
+    	<p class="reviews-toggle">( see<a href="{% url review_section section.section.slug %}"> all</a> or <a href="{% url user_not_reviewed section.section.slug %}">not reviewed </a>)</p>
     {% else %}
-    	<h4>Proposals you have not yet reviewed</h4>
+    	<h4 class="reviews-list-header">Proposals you have not reviewed</h4> 
+    	<p class="reviews-toggle">( see<a href="{% url review_section section.section.slug %}"> all</a> or <a href="{% url user_reviewed section.section.slug %}">reviewed </a>)</p>
     {% endif %}
 
     {% include "reviews/_review_table.html" %}
 {% endblock %}
+
+
+
+                            

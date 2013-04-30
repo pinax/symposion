@@ -5332,6 +5332,13 @@ div.box-content .markItUpEditor {
   -moz-border-radius: 0 0 4px 4px;
   border-radius: 0 0 4px 4px;
 }
+.reviews-list-header {
+  display: inline-block;
+}
+.reviews-toggle {
+  display: inline-block; /*display reviews links inline with headers on reviews_list.html*/
+  margin-left: 20px;
+}
 table.calendar {
   background-color: #fffff;
   table-layout: fixed;
