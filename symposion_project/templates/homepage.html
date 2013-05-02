@@ -26,13 +26,13 @@
 
                 <ul id="social">
                     <li>
-                        <a href="" data-toggle="tooltip" data-placement="bottom" data-title="Github"><img src="{{ STATIC_URL }}img/icon-git.png"></a>
+                        <a href="http://github.com/pyconca" data-toggle="tooltip" data-placement="bottom" data-title="Github"><img src="{{ STATIC_URL }}img/icon-git.png"></a>
                     </li>
                     <li>
-                      <a href="" data-toggle="tooltip" data-placement="bottom" data-title="IRC"><img src="{{ STATIC_URL }}img/icon-irc.png"></a>
+                      <a href="irc://irc.freenode.net/#pyconca" data-toggle="tooltip" data-placement="bottom" data-title="IRC"><img src="{{ STATIC_URL }}img/icon-irc.png"></a>
                     </li>
                     <li>
-                        <a href="" data-toggle="tooltip" data-placement="bottom" data-title="Twitter"><img src="{{ STATIC_URL }}img/icon-twitter.png"></a>
+                        <a href="https://twitter.com/pyconca" data-toggle="tooltip" data-placement="bottom" data-title="Twitter"><img src="{{ STATIC_URL }}img/icon-twitter.png"></a>
                     </li>
                 </ul>
 
@@ -57,7 +57,7 @@
                         <div class="span6" id="speak">
                             <h3>Speak</h3>
                             <p>Share your knowledge and cool ideas. Submit your proposal for a talk or tutorial by July 1st to proposals@pycon.ca. We'll be sprinting at the conference too, so you can also send us sprint ideas.</p>
-                            <a href="">More Info »</a>
+                            <a href="{% url dashboard %}">More Info »</a>
                         </div>
                         <div class="span6" id="learn">
                             <h3>Learn</h3>
@@ -69,12 +69,12 @@
                         <div class="span6" id="venue">
                             <h3>Venue</h3>
                             <p>Be there August 9-11, 2013 at Chestnut Conference Centre in Toronto. A short walk from the subway, so when you aren't busy coding or chatting with your colleagues you've got lots of stuff to explore nearby.</p>
-                            <a href="">More Info »</a>
+                            <a href="{% url venue %}">More Info »</a>
                         </div>
                         <div class="span6" id="schedule">
                             <h3>Schedule</h3>
                             <p>Start the fun Friday evening with a mix and mingle. Feed your brain at talks on Saturday, and if your sprint team is eager, you can start that night. Sprint or attend talks and tutorials on Sunday.</p>
-                            <a href="">More Info »</a>
+                            <a href="{% url schedule_conference %}">More Info »</a>
                         </div>
                     </div>
                 </div>
