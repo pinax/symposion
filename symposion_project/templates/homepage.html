@@ -12,23 +12,140 @@
 {% block body_class %}home{% endblock %}
 
 {% block body %}
-    <h3>{% trans "welcome masthead" %}</h3>
-    <a class="guestlist-event-161823" href="#"><img width="250" height="60" style="border: 0" src="https://guestlistapp.com/images/embed/register.png" alt="Register for Event" /></a>
+    <header class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <a class="brand">Pycon 2013</a>
+            </div>
+        </div>
+    </header>
+    <div class="container-fluid content">
+        <div class="row-fluid">
+            <div class="span12">
+                <h1>Pycon Canada <span>2013!</span></h1>
 
-    <ul>
-        <li><strong>Date</strong>: the main conference will be <em>August 9th - 11th</em>, with sprints on <em>August 12th and 13th</em>.</li>
-        <li><strong>Location</strong>: The <a href="http://chestnutconferencecentre.utoronto.ca/contact">Chestnut Conference Centre</a> in Toronto, Canada.</li>
-        <li><strong>Want to speak?</strong> Awesome! Send your proposal to <a href="mailto:proposals@pycon.ca">proposals@pycon.ca</a>.</li>
-        <li><strong>Want to volunteer?</strong> Even better! Email <a href="mailto:board@pycon.ca">board@pycon.ca</a> and we'll get you set up.</li>
-        <li><strong>Want to sponsor?</strong> Great! Email <a href="mailto:sponsorship@pycon.ca">sponsorship@pycon.ca</a> and we'll talk.</li>
-        <li><strong>Want updates?</strong> Follow <a href="https://twitter.com/pyconca">@pyconca</a> to get all the breaking PyCon Canada news.</li>
-    </ul>
+                <ul id="social">
+                    <li>
+                        <a href="" data-toggle="tooltip" data-placement="bottom" data-title="Github"><img src="img/icon-git.png"></a>
+                    </li>
+                    <li>
+                        <a href="" data-toggle="tooltip" data-placement="bottom" data-title="IRC"><img src="img/icon-irc.png"></a>
+                    </li>
+                    <li>
+                        <a href="" data-toggle="tooltip" data-placement="bottom" data-title="Facebook"><img src="img/icon-fb.png"></a>
+                    </li>
+                    <li>
+                        <a href="" data-toggle="tooltip" data-placement="bottom" data-title="Twitter"><img src="img/icon-twitter.png"></a>
+                    </li>
+                </ul>
 
-    <h3>Looking for PyCon Montréal 2014?</h3>
-    <p>The "big" PyCon (previously known as "PyCon US") will be held in Montréal in 2014! Follow <a href="https://twitter.com/pycon">@pycon</a> for updates related to PyCon Montréal.</p>
-
-    <h3>Looking for PyCon Canada 2012?</h3>
-    <p>The PyCon Canada 2012 website is archived at <a href="http://2012.pycon.ca/">http://2012.pycon.ca</a>.</p>
-
-    &nbsp;
+                <h2>You're invited to a kickoff conference, <span>August 9th - 11th</span>, in Toronto, getting us warmed up for the first PyCon North America conference outside the US - Montreal in 2014 and 2015! And when that's done, let's keep the momentum going with an annual PyCon in Canada.</h2>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid" id="info">
+        <div class="row-fluid">
+            <div class="span12">
+                <div id="buy">
+                    <button class="btn">Buy a ticket</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid" id="details">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="content">
+                    <div class="row-fluid">
+                        <div class="span6" id="speak">
+                            <h3>Speak</h3>
+                            <p>Share your knowledge and cool ideas. Submit your proposal for a talk or tutorial by July 1st to proposals@pycon.ca. We'll be sprinting at the conference too, so you can also send us sprint ideas.</p>
+                            <a href="">More Info »</a>
+                        </div>
+                        <div class="span6" id="learn">
+                            <h3>Learn</h3>
+                            <p>One of PyCon Canada's goals is to bring experts from the greater Python community to Canada; giving you the opportunity to be inspired and learn from the best! To get you excited, we'll be announcing our featured speakers, one by one, over the coming weeks.</p>
+                            <a href="">More Info »</a>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span6" id="venue">
+                            <h3>Venue</h3>
+                            <p>Be there August 9-11, 2013 at Chestnut Conference Centre in Toronto. A short walk from the subway, so when you aren't busy coding or chatting with your colleagues you've got lots of stuff to explore nearby.</p>
+                            <a href="">More Info »</a>
+                        </div>
+                        <div class="span6" id="schedule">
+                            <h3>Schedule</h3>
+                            <p>Start the fun Friday evening with a mix and mingle. Feed your brain at talks on Saturday, and if your sprint team is eager, you can start that night. Sprint or attend talks and tutorials on Sunday.</p>
+                            <a href="">More Info »</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12">
+                    <div id="montreal">
+                        <h4>Looking for PyCon Montreal 2014?</h4>
+                        <p>The "big" PyCon (previously known as "PyCon US") will be held in Montreal in 2014! Follow <a href="">@pycon</a> for updates related to PyCon Montreal.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid" id="sponsors">
+        <div class="row-fluid" >
+            <div class="span12">
+                <div class="content">
+                    <h3>
+                        Our Sponsors <span>Interested in a sponsorship opportunity? <a href="">Learn More</a></span>
+                    </h3>
+                    <p>Sponsors go here</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid" id="get-in-touch">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="content">
+                    <h3>Get in touch</h3>
+                    <ul>
+                        <li>
+                            <span>Twitter</span>
+                            <a href="https://twitter.com/pyconca">@pyconca</a>
+                        </li>
+                        <li>
+                            <span>IRC</span>
+                            <a href="">#pyconca</a>
+                        </li>
+                        <li>
+                            <span>Board</span>
+                            <a href="mailto:organizers@pycon.ca">organizers@pycon.ca</a>
+                        </li>
+                        <li>
+                            <span>List</span>
+                            <a href="mailto:pyconca@googlegroups.com">pyconca@googlegroups.com</a>
+                        </li>
+                        <li>
+                            <span>Github</span>
+                            <a href="http://github.com/pyconca">github.com/pyconca</a>
+                        </li>
+                        <li>
+                            <span>Volunteer</span>
+                            <a href="http://pycon.ca/volunteer">@pycon.ca/volunteer</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="content">
+                    <p>&copy; PyCon Canada 2013</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 {% endblock %}

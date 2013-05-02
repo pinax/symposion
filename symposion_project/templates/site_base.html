@@ -10,15 +10,13 @@
 {% block viewport %}{% endblock %}
 
 {% block style_base %}
-    <link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
-    <link href="{% static "bootstrap/css/bootstrap-responsive.min.css" %}" rel="stylesheet">
-    <!--<link href="{% static "symposion/css/symposion.css" %}" rel="stylesheet">-->
-    <link href="{% static "css/pycon.css" %}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}" />
     {% block extra_style %}{% endblock %}
 {% endblock %}
 
 {% block extra_head_base %}
     <link href="{{ STATIC_URL }}img/favicon.ico" rel="shortcut icon" />
+    <script src="{{ STATIC_URL }}js/bootstrap.js"></script>
     <script src="{% block jquery_src %}{% static "pinax/js/jquery.js" %}{% endblock %}"></script>
     <link href='//fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
     <link href='//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
@@ -157,6 +155,9 @@
         });
       $(".required-field").prepend("<span style='color:red;'>* </div>");
       });
+</script>
+<script>
+    $('#social a').tooltip()
 </script>
 {% block extra_script %}{% endblock %}
 {% endblock %}
