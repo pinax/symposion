@@ -71,7 +71,7 @@ def review_section(request, section_slug, assigned=False, reviewed='all'):
         return access_not_permitted(request)
     
     section = get_object_or_404(ProposalSection, section__slug=section_slug)
-    queryset = ProposalBase.objects.filter(kind__section=section)
+    queryset = ProposalBase.objects.filter(kind__section=section.section)
     
     if assigned:
         assignments = ReviewAssignment.objects.filter(user=request.user).values_list("proposal__id")
