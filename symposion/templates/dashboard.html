@@ -2,6 +2,7 @@
 
 {% load i18n %}
 {% load proposal_tags %}
+{% load sponsorship_tags %}
 {% load review_tags %}
 {% load teams_tags %}
 
@@ -100,6 +101,7 @@
         </div>
         
         <div class="dashboard-panel-content">
+        {% if not user.is_staff %}
             {% if not user.sponsorships.exists %}
                 <p>If you or your organization would be interested in sponsorship opportunities, <a href="{% url sponsor_apply %}">use our online form to apply to be a sponsor</a>.
             {% else %}
@@ -116,12 +118,26 @@
                     {% endfor %}
                 </ul>
             {% endif %}
-            {% if user.is_staff %}
+        {% endif %}
+        {% if user.is_staff %}
+            <h4>Sponsorships</h4>
+            {% sponsors as all_sponsors %}
+            <ul>
+                {% for sponsor in all_sponsors %}
+                    <li>
+                        <a href="{% url sponsor_detail sponsor.pk %}"><b>{{ sponsor.name }}</b></a>
+                        ({{ sponsor.level }})
+                        {% if not sponsor.active %}
+                            <span class="label label-warning">awaiting approval</span>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
                 <p>
                     As staff, you can directly <a href="{% url sponsor_add %}">add a sponsor</a> if the organization isn't
                     applying themselves.
                 </p>
-            {% endif %}
+        {% endif %}
         </div>
     </div>
         

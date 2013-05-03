@@ -33,7 +33,6 @@ def sponsor_add(request):
         form = SponsorApplicationForm(request.POST, user=request.user)
         if form.is_valid():
             sponsor = form.save(commit=False)
-            sponsor.active = True
             sponsor.save()
             return redirect("sponsor_detail", pk=sponsor.pk)
     else:
@@ -48,8 +47,9 @@ def sponsor_add(request):
 def sponsor_detail(request, pk):
     sponsor = get_object_or_404(Sponsor, pk=pk)
     
-    if sponsor.applicant != request.user:
-        return redirect("sponsor_list")
+    if not request.user.is_staff:
+        if sponsor.applicant != request.user:
+            return redirect("sponsor_list")
     
     formset_kwargs = {
         "instance": sponsor,
@@ -58,7 +58,7 @@ def sponsor_detail(request, pk):
     
     if request.method == "POST":
         
-        form = SponsorDetailsForm(request.POST, instance=sponsor)
+        form = SponsorDetailsForm(request.POST, user=request.user, instance=sponsor)
         formset = SponsorBenefitsFormSet(request.POST, request.FILES, **formset_kwargs)
         
         if form.is_valid() and formset.is_valid():
@@ -69,7 +69,7 @@ def sponsor_detail(request, pk):
             
             return redirect("dashboard")
     else:
-        form = SponsorDetailsForm(instance=sponsor)
+        form = SponsorDetailsForm(user=request.user, instance=sponsor)
         formset = SponsorBenefitsFormSet(**formset_kwargs)
     
     return render_to_response("sponsorship/detail.html", {

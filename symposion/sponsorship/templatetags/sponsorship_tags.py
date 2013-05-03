@@ -30,9 +30,9 @@ class SponsorsNode(template.Node):
         conference = current_conference()
         if self.level:
             level = self.level.resolve(context)
-            queryset = Sponsor.objects.filter(level__conference = conference, level__name__iexact = level, active = True).order_by("added")
+            queryset = Sponsor.objects.filter(level__conference = conference, level__name__iexact = level).order_by("added")
         else:
-            queryset = Sponsor.objects.filter(level__conference = conference, active = True).order_by("level__order", "added")
+            queryset = Sponsor.objects.filter(level__conference = conference).order_by("level__order", "added")
         context[self.context_var] = queryset
         return u""
 
@@ -65,6 +65,9 @@ def sponsors(parser, token):
     """
     return SponsorsNode.handle_token(parser, token)
 
+@register.filter
+def is_active(sponsors):
+    return sponsors.filter(active=True)
 
 @register.tag
 def sponsor_levels(parser, token):

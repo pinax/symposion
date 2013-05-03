@@ -16,6 +16,8 @@ class SponsorApplicationForm(forms.ModelForm):
             }
         })
         super(SponsorApplicationForm, self).__init__(*args, **kwargs)
+        if not self.user.is_staff:
+            del self.fields["active"]
     
     class Meta:
         model = Sponsor
@@ -24,7 +26,8 @@ class SponsorApplicationForm(forms.ModelForm):
             "external_url",
             "contact_name",
             "contact_email",
-            "level"
+            "level",
+            "active"
         ]
     
     def save(self, commit=True):
@@ -36,13 +39,21 @@ class SponsorApplicationForm(forms.ModelForm):
 
 
 class SponsorDetailsForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop("user")
+        super(SponsorDetailsForm, self).__init__(*args, **kwargs)
+        if not self.user.is_staff:
+            del self.fields["active"]
+
     class Meta:
         model = Sponsor
         fields = [
             "name",
             "external_url",
             "contact_name",
-            "contact_email"
+            "contact_email",
+            "active"
         ]
 
 
