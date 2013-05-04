@@ -9,36 +9,36 @@
 {% endblock %}
 
 {% block body %}
-<article>
-  <h2>{% trans "What is PyCon Canada?" %}</h2>
-  <p>
-    {% trans "PyCon Canada is an initiative to strengthen the Canadian Python community." %}
-  </p>
+<div class="row-fluid">
+  <div class="span12"><div class="content">
+    <div class="span6"><div class="content">
+      <h2>{% trans "What is PyCon Canada?" %}</h2>
+      <p>
+        {% trans "Our main goals:" %}
+      </p>
 
-  <p>
-    {% trans "Our main goals:" %}
-  </p>
+      <ul>
+        <li>
+          <p>{% trans "ABOUT_GOAL_SUPPORT" %}</p>
+        </li>
+        <li>
+          <p>{% trans "ABOUT_GOAL_STRENGTHEN" %}</p>
+        </li>
+        <li>
+          <p>{% trans "Host an annual Canadian PyCon conference, starting now - 2012!" %}</p>
+        </li>
+      </ul>
 
-  <ul>
-    <li>
-      {% trans "ABOUT_GOAL_SUPPORT" %}
-    </li>
-    <li>
-      {% trans "ABOUT_GOAL_STRENGTHEN" %}
-    </li>
-    <li>
-      {% trans "Host an annual Canadian PyCon conference, starting now - 2012!" %}
-    </li>
-  </ul>
+      <p>
+        {% trans "ABOUT_VOLUNTEERS" %}
+      </p>
+    </div></div>
 
-  <p>
-    {% trans "ABOUT_VOLUNTEERS" %}
-  </p>
-</article>
-
-<article>
-  <h2>{% trans "Code of Conduct" %}</h2>
-  <p>{% trans "ABOUT_CONDUCT" %}</p>
-</article>
+    <div class="span6"><div class="content">
+      <h2>{% trans "Code of Conduct" %}</h2>
+      <p>{% trans "ABOUT_CONDUCT" %}</p>
+    </div></div>
+  </div></div>
+</div>
 
 {% endblock %}
