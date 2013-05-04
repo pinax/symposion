@@ -1,95 +1,99 @@
 {% extends "site_base.html" %}
 
-{% load bootstrap_tags %}
 {% load i18n %}
 
 {% block head_title %}{% trans "Venue" %}{% endblock %}
-{% block page_title %}
-  <hgroup class="clearfix">
-    <h1>{% trans "Venue" %}</h1>
-  </hgroup>
+{% block excerpt %}
+    {% trans "The conference will be held at the" %}
+    Chestnut Residence of University of Toronto, Toronto, M5G 1R1
 {% endblock %}
 
 {% block body %}
 
-<article>
+<div class="row-fluid">
+  <div class="span12"><div class="content">
+    <div class="span12"><div class="content">
 
-  <h2>{% trans "Location" %}</h2>
-  <p>{% trans "VENUE_LOCATION" %}</p>
-  <iframe width="100%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.ca/maps?ie=UTF8&amp;cid=12810529130502309021&amp;q=Chestnut+Residence&amp;gl=CA&amp;hl=en&amp;t=m&amp;ll=43.656478,-79.384804&amp;spn=0.007452,0.013733&amp;z=16&amp;iwloc=A&amp;output=embed"></iframe>
-  <small>{% trans "View the complete" %} <a href="https://maps.google.ca/maps?ie=UTF8&amp;cid=12810529130502309021&amp;q=Chestnut+Residence&amp;gl=CA&amp;hl=en&amp;t=m&amp;ll=43.656478,-79.384804&amp;spn=0.007452,0.013733&amp;z=16&amp;iwloc=A&amp;source=embed" style="color:#0000FF;text-align:left">{% trans "PyCon Canada 2013 map" %}</a>.</small>
-</article>
+      <h3>{% trans "Location" %}</h3>
+      <p>{% trans "VENUE_LOCATION" %}</p>
+      <iframe width="100%" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.ca/maps?ie=UTF8&amp;cid=12810529130502309021&amp;q=Chestnut+Residence&amp;gl=CA&amp;hl=en&amp;t=m&amp;ll=43.656478,-79.384804&amp;spn=0.007452,0.013733&amp;z=16&amp;iwloc=A&amp;output=embed"></iframe>
+      <p>{% trans "View the complete" %} <a href="https://maps.google.ca/maps?ie=UTF8&amp;cid=12810529130502309021&amp;q=Chestnut+Residence&amp;gl=CA&amp;hl=en&amp;t=m&amp;ll=43.656478,-79.384804&amp;spn=0.007452,0.013733&amp;z=16&amp;iwloc=A&amp;source=embed" style="color:#0000FF;text-align:left">{% trans "PyCon Canada 2013 map" %}</a>.</p>
+    </div></div>
+    <div class="span12">
+      <div class="row-fluid">
+        <div class="span6">
+          <h3>{% trans "Getting to Toronto" %}</h3>
+          <p>{% trans "VENUE_AIRPORTS" %}</p>
+          <p>{% trans "VENUE_PORTER" %}</p>
+          <p>{% trans "VENUE_VIA" %}</p>
 
-  <article>
-    <h2>{% trans "Getting to Toronto" %}</h2>
-    <p>{% trans "VENUE_AIRPORTS" %}</p>
-    <p>{% trans "VENUE_PORTER" %}</p>
-    <p>{% trans "VENUE_VIA" %}</p>
+          <p>
+            {% trans "If you're coming from the US:" %}
+            <ul>
+              <li><p>{% trans "VENUE_PASSPORT_USA" %}</p></li>
+              <li><p>{% trans "VENUE_PORTER_USA" %}</p></li>
+            </ul>
+          </p>
+        </div>
+        <div class="span6">
+          <h3>{% trans "Public Transit and Parking" %}</h3>
+          <p>{% trans "VENUE_PUBLIC_TRANSIT" %}</p>
+          <p>{% trans "VENUE_PARKING" %}</p>
+        </div>
+      </div>
+      <div class="row-fluid">
+        <div class="span6">
+          <h3>{% trans "Food" %}</h3>
+          <p>{% trans "VENUE_FOOD" %}</p>
+        </div>
+        <div class="span6">
 
-    <p>
-      {% trans "If you're coming from the US:" %}
-      <ul>
-        <li>{% trans "VENUE_PASSPORT_USA" %}</li>
-        <li>{% trans "VENUE_PORTER_USA" %}</li>
-      </ul>
-    </p>
-  </article>
+          <h3>{% trans "Hotel" %}</h3>
+          <p>The recommended hotel for PyCon Canada is the Metropolitan.</p>
 
-  <article>
-    <h2>{% trans "Public Transit and Parking" %}</h2>
-    <p>{% trans "VENUE_PUBLIC_TRANSIT" %}</p>
-    <p>{% trans "VENUE_PARKING" %}</p>
-  </article>
+          <p><address>
+            Metropolitan Hotel Toronto<br>
+            108 Chestnut Street<br>
+            Toronto, Ontario</br>
+            M5G 1R3, Canada<br>
+            (416) 977-5000<br>
+          </address></p>
 
-  <article>
-    <h2>{% trans "Food" %}</h2>
-    <p>{% trans "VENUE_FOOD" %}</p>
-  </article>
+          <p>
+          <strong>Use this link to reserve rooms: </strong>
+          <a href="https://gc.synxis.com/rez.aspx?Hotel=27076&amp;Chain=10237&amp;template=YYZME&amp;shell=YYZME&amp;group=236098">Metropolitan Hotel</a>
+          </p>
 
-  <article>
-    <h2>{% trans "Hotel" %}</h2>
-    <p>The recommended hotel for PyCon Canada is the Metropolitan.</p>
+          <p>
+          The hotel rate is $120 per night 
+          (plus 13% Harmonized Sales Tax, and $8.00 per day room facilities fee).
+          This includes:
+          </p>
+            <ul>
+              <li><p>Two double beds</p></li>
+              <li><p>Free wireless</p></li>
+              <li><p>Local phone calls</p></li>
+              <li><p>Access to the health club</p></li>
+            </ul>
 
-    <address>
-      Metropolitan Hotel Toronto<br>
-      108 Chestnut Street<br>
-      Toronto, Ontario</br>
-      M5G 1R3, Canada<br>
-      (416) 977-5000<br>
-    </address>
+          <p>
+          If you would like to share a hotel room with someone else attending the
+          conference, please see the PyCon Canada
+          <a href="https://github.com/pyconca/2013-wiki/wiki/Room-Sharing">
+          room sharing wiki</a> page.
 
-    <p>
-    <strong>Use this link to reserve rooms: </strong>
-    <a href="https://gc.synxis.com/rez.aspx?Hotel=27076&amp;Chain=10237&amp;template=YYZME&amp;shell=YYZME&amp;group=236098">Metropolitan Hotel</a>
-    </p>
+          <p>
+          The PyCon Canada block of hotel rooms is reserved under the name &ldquo;PYCONCA ASSOCIATION&rdquo;.
+          </p>
 
-    <p>
-    The hotel rate is $120 per night 
-    (plus 13% Harmonized Sales Tax, and $8.00 per day room facilities fee).
-    This includes:
-    </p>
-      <ul>
-        <li>Two double beds</li>
-        <li>Free wireless</li>
-        <li>Local phone calls</li>
-        <li>Access to the health club</li>
-      </ul>
-
-    <p>
-    If you would like to share a hotel room with someone else attending the
-    conference, please see the PyCon Canada
-    <a href="https://github.com/pyconca/2013-wiki/wiki/Room-Sharing">
-    room sharing wiki</a> page.
-
-    <p>
-    The PyCon Canada block of hotel rooms is reserved under the name 'PYCONCA ASSOCIATION'.
-    </p>
-
-    <p>
-    Email <a href='mailto:organizers@pycon.ca'>organizers@pycon.ca</a> if you 
-    run into any trouble reserving your room, or finding someone to share a 
-    room with.
-    </p>
-  </article>
-
+          <p>
+          Email <a href='mailto:organizers@pycon.ca'>organizers@pycon.ca</a> if you 
+          run into any trouble reserving your room, or finding someone to share a 
+          room with.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div></div>
+</div>
 {% endblock %}
