@@ -6165,6 +6165,7 @@ h3, legend {
 #sponsors {
   background: #ffffff url('../img/snake-bg.jpg') top left repeat;
   padding-top: 35px;
+  padding-bottom: 35px;
 }
 #sponsors h3 {
   color: #000000;
@@ -6182,6 +6183,9 @@ h3, legend {
 }
 #sponsors h2 {
   color: black;
+}
+.sponsor-group {
+  text-align: center;
 }
 #get-in-touch {
   background: #36b3d9 url(../img/dark-blue-bg.jpg) top left repeat;
