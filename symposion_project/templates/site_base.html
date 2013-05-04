@@ -1,162 +1,185 @@
-{% extends "symposion_sidebar_base.html" %}
-
-{% load metron_tags %}
 {% load i18n %}
 {% get_current_language as LANGUAGE_CODE %}
-{% load sitetree %}
-{% load markitup_tags %}
 {% load static %}
+<!DOCTYPE html>
+<html lang="{{LANGUAGE_CODE}}">
+<head>
+	<meta name="generator" content="" />
+	<meta charset="utf-8" />
 
-{% block viewport %}{% endblock %}
-
-{% block style_base %}
-    <link href="{% static "bootstrap/css/bootstrap.min.css" %}" rel="stylesheet">
-    <link href="{% static "bootstrap/css/bootstrap-responsive.min.css" %}" rel="stylesheet">
-    <!--<link href="{% static "symposion/css/symposion.css" %}" rel="stylesheet">-->
-    <link href="{% static "css/pycon.css" %}" rel="stylesheet">
-    {% block extra_style %}{% endblock %}
-{% endblock %}
-
-{% block extra_head_base %}
-    <link href="{{ STATIC_URL }}img/favicon.ico" rel="shortcut icon" />
-    <script src="{% block jquery_src %}{% static "pinax/js/jquery.js" %}{% endblock %}"></script>
-    <link href='//fonts.googleapis.com/css?family=Open+Sans:400,600,700' rel='stylesheet' type='text/css'>
-    <link href='//fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic' rel='stylesheet' type='text/css'>
-    {% markitup_media "no-jquery" %}
-    {% block extra_head %}{% endblock %}
-{% endblock %}
-
-{% block topbar_base %}
-<header id="MainHeader">
-  <nav class="navbar clearfix">
-    {% block topbar %}
-    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </a>
-
-    <div class="nav-collapse">
-      {% block nav %}
-      <ul class="nav">
-        <li><a href="{% url home %}"><i class="icon-home icon-white nav-icon"></i></a></li>
-        <li><a href="{% url about %}">About</a></li>
-        <li><a href="{% url conduct %}">Conduct</a></li>
-        <li><a href="{% url venue %}">Venue</a></li>
-        <li><a href="{% url schedule_conference %}">Schedule</a></li>
-        <li><a href="{% url dashboard %}">Speakers</a></li>
-        <li><a href="{% url sponsor_list %}">Sponsors</a></li>
-        <li><a href="{% url contact %}">Contact</a></li>
-        {% if not request.user.is_authenticated %}
-          <li class="nav-spacer nav-auth"><a href="{% url account_login %}">Log in</a></li>
-          <li class="nav-auth"><a href="{% url account_signup %}">Sign up</a></li>
-        {% else %}
-          <li class="nav-auth"><a href="{% url dashboard %}">Dashboard</a></li>
-          <li class="nav-auth"><a href="{% url account_settings %}">Settings</a></li>
-
-          {% if request.user.is_staff %}
-            <li class="nav-auth"><a href="{% url admin:index %}">Admin</a></li>
-          {% endif %}
-
-          <li class="nav-auth"><a id="logout_link" href="{% url account_logout %}" data-form-submit="#account_logout_form">Log out</a></li>
-
-          <form id="account_logout_form" class="hide" action="{% url account_logout %}" method="post">{% csrf_token %}</form>
-        {% endif %}
-
-        <li class="nav-spacer nav-auth">
-          <form action="/i18n/setlang/" method="post" style="margin:0;">
-            {% csrf_token %}
-
-            {% with request.path|slice:"3:" as redirect_url %}
-            <input name="next" type="hidden" value="{{ redirect_url }}" />
-            {% endwith %}
-
-            <select class="input-medium" name="language" onchange="this.form.submit();">
-              {% get_language_info_list for LANGUAGES as languages %}
-              {% for language in languages %}
-              {% if LANGUAGE_CODE == language.code %}
-              <option value="{{ language.code }}" selected="selected">{{ language.name_local }} ({{ language.code }})</option>
-
-              {% else %}
-              <option value="{{ language.code }}">{{ language.name_local }} ({{ language.code }})</option>
-              {% endif %}
-              {% endfor %}
-            </select>
-          </form>
-        </li>
-      </ul>
-      {% sitetree_menu from "main" include "trunk" template "sitetree/menu_bootstrap.html" %}
-      {% endblock %}
-    </div>
-    {% endblock %}
-  </div>
-</header>
-{% endblock %}
-
-{% block body_base %}
-<div class="container">
-  {% include "_messages.html" %}
-
-  {# {% block breadcrumbs %} #}
-  {# {% sitetree_breadcrumbs from "main" %} #}
-  {# {% endblock %} #}
-
-  {% block body_outer %}
-  <div class="row-fluid">
-    <section id="MainContent" class="span9">
-      <header>
-        {% block page_title %}
-        {% endblock %}
-        <div id="QuickLinks" class="hidden-desktop">
-          <em>{% trans "Quick links" %}:</em> <ul class="unstyled"></ul>
+    <title>{% block head_title %}PyCon Canada 2013{% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}" />
+</head>
+<body>
+    <header class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <a class="brand">Pycon 2013</a>
+            </div>
         </div>
-      </header>
-      {% block body %}
-      {% endblock %}
-    </section>
-    <aside id="side-sponsors" class="span3">
-      {% block sidebar %}
-      {% include "_default_sidebar.html" %}
-      {% endblock %}
-    </aside>
-  </div>
-  {% endblock %}
-</div>
+    </header>
+    <div class="container-fluid content">
+        <div class="row-fluid">
+            <div class="span12">
+                <h1>Pycon Canada <span>2013!</span></h1>
+                <ul class="nav">
+                    <li><a href="{% url about %}">About</a></li>
+                    <li><a href="{% url venue %}">Venue</a></li>
+                    <li><a href="{% url schedule_conference %}">Schedule</a></li>
+                    <li><a href="{% url dashboard %}">Speak</a></li>
+                    <li><a href="">Learn</a></li>
+                    <li><a href="{% url sponsor_list %}">Sponsors</a></li>
+                    <li><a href="{% url contact %}">Contact</a></li>
+                </ul>
+                <div class="dropdown" id="language-selector">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown">English (en) <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <li><a tabindex="-1" href="#">English (en)</a></li>
+                        <li><a tabindex="-1" href="#">French (fr)</a></li>
+                    </ul>
+                </div>
+                <ul id="social">
+                    <li>
+                    <a href="https://github.com/pyconca/" data-toggle="tooltip" data-placement="bottom" data-title="Github"><img src="{% static "img/icon-git.png" %}"></a>
+                    </li>
+                    <li>
+                    <a href="irc://irc.freenode.net/pyconca" data-toggle="tooltip" data-placement="bottom" data-title="IRC"><img src="{% static "img/icon-irc.png" %}"></a>
+                    </li>
+                    <li>
+                    <a href="" data-toggle="tooltip" data-placement="bottom" data-title="Facebook"><img src="{% static "img/icon-fb.png" %}"></a>
+                    </li>
+                    <li>
+                    <a href="https://twitter.com/pyconca" data-toggle="tooltip" data-placement="bottom" data-title="Twitter"><img src="{% static "img/icon-twitter.png" %}"></a>
+                    </li>
+                </ul>
 
-{% block footer %}
-  {% include "_footer.html" %}
-{% endblock %}
-
-{% endblock %}
-
-
-{% block script_base %}
-{% analytics %}
-<script type="text/javascript">
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-35491606-1']);
-  _gaq.push(['_setDomainName', 'pycon.ca']);
-  _gaq.push(['_trackPageview']);
-  _gaq.push(['_require', 'inpage_linkid', '//www.google-analytics.com/plugins/ga/inpage_linkid.js']);
-
-  (function() {
-    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-  })();
-</script>
-
-<script src="{% static "bootstrap/js/bootstrap.js" %}"></script>
-<script src="{% static "pinax/js/theme.js" %}"></script>
-<script type="text/javascript">
-  $(function() {
-      $("#logout_link").on("click", function(e) {
-        var form = $($(this).data("form-submit"));
-        form.submit();
-        return false;
+                <h2>You're invited to a kickoff conference, <span>August 9th - 11th</span>, in Toronto, getting us warmed up for the first PyCon North America conference outside the US - Montreal in 2014 and 2015! And when that's done, let's keep the momentum going with an annual PyCon in Canada.</h2>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid" id="info">
+        <div class="row-fluid">
+            <div class="span12">
+                <div id="buy">
+                    <button class="btn">Buy a ticket</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid" id="details">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="content">
+                    <div class="row-fluid">
+                        <div class="span6" id="speak">
+                            <h3>Speak</h3>
+                            <p>Share your knowledge and cool ideas. Submit your proposal for a talk or tutorial by July 1st to proposals@pycon.ca. We'll be sprinting at the conference too, so you can also send us sprint ideas.</p>
+                            <a href="{% url dashboard %}">More Info »</a>
+                        </div>
+                        <div class="span6" id="learn">
+                            <h3>Learn</h3>
+                            <p>One of PyCon Canada's goals is to bring experts from the greater Python community to Canada; giving you the opportunity to be inspired and learn from the best! To get you excited, we'll be announcing our featured speakers, one by one, over the coming weeks.</p>
+                            <a href="">More Info »</a>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span6" id="venue">
+                            <h3>Venue</h3>
+                            <p>Be there August 9-11, 2013 at Chestnut Conference Centre in Toronto. A short walk from the subway, so when you aren't busy coding or chatting with your colleagues you've got lots of stuff to explore nearby.</p>
+                            <a href="{% url venue %}">More Info »</a>
+                        </div>
+                        <div class="span6" id="schedule">
+                            <h3>Schedule</h3>
+                            <p>Start the fun Friday evening with a mix and mingle. Feed your brain at talks on Saturday, and if your sprint team is eager, you can start that night. Sprint or attend talks and tutorials on Sunday.</p>
+                            <a href="{% url schedule_conference %}">More Info »</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12">
+                    <div id="montreal">
+                        <h4>Looking for PyCon Montreal 2014?</h4>
+                        <p>The "big" PyCon (previously known as "PyCon US") will be held in Montreal in 2014! Follow <a href="https://twitter.com/pycon">@pycon</a> for updates related to PyCon Montreal.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid" id="sponsors">
+        <div class="row-fluid" >
+            <div class="span12">
+                <div class="content">
+                    <h3>
+                        Our Sponsors <span>Interested in a sponsorship opportunity? <a href="">Learn More</a></span>
+                    </h3>
+                    <p>Sponsors go here</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid" id="get-in-touch">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="content">
+                    <h3>Get in touch</h3>
+                    <ul>
+                        <li>
+                            <span>Twitter</span>
+                            <a href="https://twitter.com/pyconca">@pyconca</a>
+                        </li>
+                        <li>
+                            <span>IRC</span>
+                            <a href="irc://irc.freenode.net/pyconca">#pyconca</a>
+                        </li>
+                        <li>
+                            <span>Board</span>
+                            <a href="mailto:organizers@pycon.ca">organizers@pycon.ca</a>
+                        </li>
+                        <li>
+                            <span>List</span>
+                            <a href="mailto:pyconca@googlegroups.com">pyconca@googlegroups.com</a>
+                        </li>
+                        <li>
+                            <span>Github</span>
+                            <a href="https://github.com/pyconca">github.com/pyconca</a>
+                        </li>
+                        <li>
+                            <span>Volunteer</span>
+                            <a href="">@pycon.ca/volunteer</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="content">
+                    <a class="brand">Pycon 2013</a>
+                    <ul class="footer-nav">
+                        <li><a href="{% url about %}">About</a></li>
+                        <li><a href="{% url venue %}">Venue</a></li>
+                        <li><a href="{% url schedule_conference %}">Schedule</a></li>
+                        <li><a href="{% url dashboard %}">Speak</a></li>
+                        <li><a href="">Learn</a></li>
+                        <li><a href="{% url sponsor_list %}">Sponsors</a></li>
+                        <li><a href="{% url contact %}">Contact</a></li>
+                    </ul>
+                    <p>&copy; PyCon Canada 2013</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="{% static "js/jquery.js" %}"></script>
+    <script src="{% static "js/bootstrap.js" %}"></script>
+    <script>
+        $(document).ready(function () {
+            $('#social a').tooltip();
         });
-      $(".required-field").prepend("<span style='color:red;'>* </div>");
-      });
-</script>
-{% block extra_script %}{% endblock %}
-{% endblock %}
+    </script>
+</body>
+</html>
+

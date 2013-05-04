@@ -1,0 +1,574 @@
+@import "framework/bootstrap.less";
+@import "framework/responsive.less";
+@import "custom-responsive.less";
+
+// Structures
+// -------------------------------
+body
+{
+    background: @bodyBackground;
+}
+
+
+.content
+{
+    margin: 0 auto;
+    max-width: 960px;
+    position: relative;
+}
+
+header
+{
+    background: transparent url('../img/top-header.jpg') top left repeat-x;
+
+    .brand
+    {
+        background: transparent url('../img/pycon-logo.png') top left no-repeat;
+        height: 162px;
+        width: 162px;
+        display: block;
+        text-indent: -9999px;
+        margin: 30px auto;
+    }
+}
+
+
+footer
+{
+    background: @black;
+    padding: 20px 0;
+
+    p
+    {
+        opacity: 0.8;
+        float: right;
+    }
+
+    .brand
+    {
+        background: transparent url('../img/pycon-logo-sm.png') top left no-repeat;
+        height: 77px;
+        width: 77px;
+        display: block;
+        text-indent: -9999px;
+        float: left;
+        margin-right: 3%;
+    }
+
+    .footer-nav
+    {
+        list-style: none;
+        padding-top: 25px;
+        
+        li
+        {
+            float: left;
+            margin-right: 1%;
+
+            a
+            {
+                font-family: @sansFontFamily;
+                color: @white;
+                font-size: 14px;
+
+                &:hover 
+                {
+                    color: @yellow;
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+}
+
+// Type
+// -------------------------------
+
+@font-face 
+{
+    font-family: 'bignoodletitlingregular';
+    src: url('font/big_noodle_titling-webfont.eot');
+    src: url('font/big_noodle_titling-webfont.eot?#iefix') format('embedded-opentype'),
+    url('font/big_noodle_titling-webfont.woff') format('woff'),
+    url('font/big_noodle_titling-webfont.ttf') format('truetype'),
+    url('font/big_noodle_titling-webfont.svg#bignoodletitlingregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+h1, h2, h3, h4
+{
+    font-family: 'bignoodletitlingregular', Impact, Arial;
+    text-transform: uppercase;
+    font-weight: normal;
+    text-align: center;
+
+    span
+    {
+        color: @yellow;
+    }
+}
+
+
+h1
+{
+    font-size: 8em;
+    line-height: 1em;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+    border-top: 3px #88d4ec solid;
+    border-bottom: 3px #88d4ec solid;
+    padding: 30px 0 0;
+}
+
+h2
+{
+    font-size: 3em;
+    line-height: 1.4em;
+    letter-spacing: 0.06em;
+    text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+    margin-top: 1em;
+}
+
+h3
+{
+    text-align: left;
+    font-size: 4em;
+    line-height: 1.4em;
+    border-bottom: 3px @blue solid;
+    margin-bottom: 0.5em;
+}
+
+// Nav
+// -------------------------------
+.nav
+{
+    list-style: none;
+    overflow: auto;
+    margin: 1em 0 -10px;
+    
+    li
+    {
+        float: left;
+        width: 14%;
+        text-align: center;
+        line-height: 40px;
+        height: 40px;
+
+        &.active
+        {
+            a
+            {
+                color: #0f394a;
+                text-shadow: 0 1px 1px rgba(255,255,255,0.5);
+            }
+        }
+
+        a
+        {
+            font-family: 'bignoodletitlingregular', Impact, Arial;
+            color: @white;
+            font-size: 28px;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.5);
+
+            &:hover
+            {
+                background: none;
+                color: #0f394a;
+                text-shadow: 0 1px 1px rgba(255,255,255,0.5);
+            }
+        }
+    }
+}
+
+// Sections
+// -------------------------------
+#language-selector
+{
+    position: absolute;
+    top: -30px;
+    right: 30px;
+    
+    a
+    {
+        color: @white;
+        font-family: @sansFontFamily;
+    }
+
+    .dropdown-menu
+    {
+        background: @blueDark;
+        border-radius: 0;
+        border: none;
+        right: 0 !important;
+    }
+
+    .caret
+    {
+        border-top-color: @white !important;
+        opacity: 0.8;
+    }
+}
+
+
+// Sections
+// -------------------------------
+
+#social
+{
+    list-style: none;
+    margin: 0;
+    position: absolute;
+    overflow: auto;
+    top: -30px;
+    left: 30px;
+
+    li
+    {
+        float: left;
+        margin-left: 12px;
+
+        a
+        {
+            opacity: 0.5;
+
+            &:hover
+            {
+                opacity: 1;
+            }
+        }
+    }
+}
+
+#info
+{
+    background: transparent url('../img/body-pattern.jpg') left 29px repeat-x;   
+    
+    > .row-fluid
+    {
+        margin: 0 auto;
+
+        &:first-child
+        {
+            max-width: 960px;
+        }
+    }
+}
+
+
+#buy
+{
+    background: transparent url('../img/cn-tower.png') left top no-repeat;
+    height: 290px;
+    max-width: 1280px;
+    margin: 0 auto;
+    position: relative;
+
+    .btn
+    {
+        background: @red url('../img/button-bg.jpg') top left repeat-x;
+        color: @white;
+        text-shadow: 0 1px 1px rgba(0,0,0,0.5);
+        border: 8px solid rgba(255,255,255,0.3);
+        -webkit-background-clip: padding-box; /* for Safari */
+        background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
+        font-size: 1.8461em;
+        padding: 12px 40px;
+        line-height: 1.5em;
+        border-radius: 7px;
+        position: absolute;
+        right: 12.5%;
+        top: 40px;
+        text-transform: uppercase;
+        font-family: Rockwell, "Courier Bold", "Trebuchet MS", Georgia, Times, "Times New Roman", serif;
+        letter-spacing: 2px;
+
+        &:hover
+        {
+            background: lighten(@red,7%);
+            -webkit-background-clip: padding-box; /* for Safari */
+            background-clip: padding-box; /* for IE9+, Firefox 4+, Opera, Chrome */
+        }
+    }
+}
+
+#body-content
+{
+    background: @black;
+    padding-top: 35px;
+    padding-bottom: 50px;
+
+    h2
+    {
+        text-align: left;
+        text-shadow: none;
+        font-size: 2.8em;
+        letter-spacing: 0;
+        margin-top: 0;
+    }
+
+    img + h2, ul + h2, p + h2
+    {
+        margin-top: 1em;
+    }
+
+    p
+    {
+        font-size: 15px;
+        line-height: 22px;
+
+        a
+        {
+            font-weight: bold;
+            color: @yellow;
+            font-size: 1.2em;
+        }
+
+        strong
+        {
+            font-weight: bold;
+            font-size: 1.5em;
+        }
+    }
+
+    .checklist
+    {
+        li
+        {
+            list-style: none;
+            background: transparent url('../img/checklist-bullet.png') left 5px no-repeat;
+            padding-left: 25px;
+        }
+    }
+}
+
+
+.sponsor-bar
+{
+    background: @white;
+    padding: 10px 15px;
+    text-align: center;
+
+    h2
+    {
+        color: @black;
+        text-align: center !important;
+    }
+
+    h3
+    {
+        font-family: @sansFontFamily;
+        color: @black;
+        font-weight: normal;
+        font-size: 1.2em;
+        padding: 10px;
+        background: @white url('../img/blue-strike-through.png') left 19px repeat-x;
+        border-bottom: none;
+        text-align: center;
+
+        span
+        {
+            background: @white;
+            padding: 0 10px;
+            color: @black;
+        }
+    }
+
+    ul
+    {
+        margin: 0;
+        
+        li
+        {
+            clear: both;
+            overflow: auto;
+
+            img
+            {
+                margin: 10px 0;
+            }
+        }
+    }
+
+    a
+    {
+        font-family: 'bignoodletitlingregular', Impact, Arial;
+        text-transform: uppercase;
+        font-size: 2em;
+        display: block;
+        margin: 1.5em 0;
+
+        &:hover
+        {
+            text-decoration: none;
+        }
+    }
+}
+
+#details
+{
+    background: @black;
+    padding-top: 35px;
+    padding-bottom: 20px;
+    
+    .row-fluid
+    {
+        margin-bottom: 30px;
+    }
+
+    .span6
+    {
+        p
+        {
+            font-size: 1.23em;
+            line-height: 1.5em;
+        }
+
+        a
+        {
+            color: @yellow;
+            font-family: 'bignoodletitlingregular', Impact, Arial;
+            text-transform: uppercase;
+            font-size: 1.25em;
+            letter-spacing: 1px;
+        }
+
+        &#speak
+        {
+            h3
+            {
+                background: transparent url('../img/icon-speak.png') top right no-repeat;
+            }
+        }
+
+        &#learn
+        {
+            h3
+            {
+                background: transparent url('../img/icon-learn.png') top right no-repeat;
+            }
+        }
+
+        &#venue
+        {
+            h3
+            {
+                background: transparent url('../img/icon-venue.png') top right no-repeat;
+            }
+        }
+
+        &#schedule
+        {
+            h3
+            {
+                background: transparent url('../img/icon-schedule.png') top right no-repeat;
+            }
+        }
+    }
+
+    #montreal
+    {
+        background: @green url('../img/green-bg.jpg') top left repeat;
+        margin: 35px auto 0;
+        padding: 20px;
+        width: 80%;
+        max-width: 920px;
+
+        h4
+        {
+            font-size: 3em;
+            line-height: 1.4em;
+            text-align: left;
+            letter-spacing: 1px;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+        }
+
+        p
+        {
+            font-size: 1.53em;
+            line-height: 1.25em;
+            text-shadow: 0 1px 1px rgba(0,0,0,0.3);
+
+            a
+            {
+                color: darken(@green, 25%);
+                font-family: @sansFontFamily;
+                text-shadow: none;
+            }
+        }
+    }
+}
+
+#sponsors
+{
+    background: @white url('../img/snake-bg.jpg') top left repeat;
+    padding-top: 35px;
+    
+    h3
+    {
+        color: @black;
+        text-shadow: none;
+        text-align: left;
+        font-size: 4.2em;
+
+        span
+        {
+            font-size: 20px;
+            font-family: @sansFontFamily;
+            text-transform: none;
+            color: @gray;
+            float: right;
+            display: block;
+        }
+    }
+}
+
+
+#get-in-touch
+{
+    background: @blue url(../img/dark-blue-bg.jpg) top left repeat;
+    padding-top: 35px;
+    padding-bottom: 45px; 
+
+    h3
+    {
+        border-color: #88d4ec;
+    }
+
+    ul
+    {
+        list-style: none;
+        overflow: auto;
+        margin: 0;
+
+        li
+        {
+            float: left;
+            margin-right: 2.79555%;
+
+
+            span
+            {
+                display: block;
+                font-family: @sansFontFamily;
+                font-size: 0.9em;
+                text-transform: uppercase;
+                color: @white;
+                opacity: 0.6;
+                font-weight: normal;
+            }
+
+            a
+            {
+                color: @white;
+                font-size: 1.1em;
+                font-weight: normal;
+                text-transform: uppercase;
+            }
+        }
+    }
+}
+
+
+

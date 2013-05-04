@@ -1,0 +1,35 @@
+@media (max-width: 767px) {
+  h1 {
+    font-size: 5em !important;
+  }
+  h2 {
+    font-size: 2.4em !important;
+  }
+  #details #speak,
+  #details #venue {
+    margin-bottom: 1em;
+  }
+  #buy .btn {
+    left: 20% !important;
+  }
+  #sponsors h3 {
+    line-height: 1em !important;
+  }
+  #sponsors h3 span {
+    float: none !important;
+    font-size: 15px !important;
+    line-height: 1.5em;
+    margin-bottom: 1em;
+  }
+  #get-in-touch li {
+    float: none !important;
+    margin-bottom: 1em;
+  }
+  #get-in-touch li span {
+    font-size: 13px !important;
+    padding-bottom: 2px;
+  }
+  #get-in-touch li a {
+    font-size: 20px !important;
+  }
+}
