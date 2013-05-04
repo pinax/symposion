@@ -36,13 +36,27 @@
                     <li><a href="{% url "contact" %}">Contact</a></li>
                 </ul>
                 <div class="dropdown" id="language-selector">
-                    <a href="" class="dropdown-toggle" data-toggle="dropdown">English (en) <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                        <li><a tabindex="-1" href="#">English (en)</a></li>
-                        <li><a tabindex="-1" href="#">French (fr)</a></li>
-                    </ul>
+                  <form action="/i18n/setlang/" method="post" style="margin:0;">
+                    {% csrf_token %}
+
+                    {% with request.path|slice:"3:" as redirect_url %}
+                    <input name="next" type="hidden" value="{{ redirect_url }}" />
+                    {% endwith %}
+
+                    <select class="input-medium" name="language" onchange="this.form.submit();">
+                      {% get_language_info_list for LANGUAGES as languages %}
+                      {% for language in languages %}
+                      {% if LANGUAGE_CODE == language.code %}
+                      <option value="{{ language.code }}" selected="selected">{{ language.name_local }} ({{ language.code }})</option>
+
+                      {% else %}
+                      <option value="{{ language.code }}">{{ language.name_local }} ({{ language.code }})</option>
+                      {% endif %}
+                      {% endfor %}
+                    </select>
+                  </form>
                 </div>
+
                 <ul id="social">
                     <li>
                     <a href="https://github.com/pyconca/" data-toggle="tooltip" data-placement="bottom" data-title="Github"><img src="{% static "img/icon-git.png" %}"></a>
