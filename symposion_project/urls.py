@@ -38,6 +38,10 @@ urlpatterns += i18n_patterns("",
         "template": "venue.html",
     }, name="venue"),
 
+    url(r"^learn/", direct_to_template, {
+        "template": "learn.html",
+    }, name="learn"),
+
     url(r"^contact/", direct_to_template, {
         "template": "contact.html",
     }, name="contact"),
