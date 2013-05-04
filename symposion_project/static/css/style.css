@@ -768,6 +768,7 @@ blockquote:after {
 address {
   display: block;
   margin-bottom: 18px;
+  margin-left: 18px;
   font-style: normal;
   line-height: 18px;
 }
