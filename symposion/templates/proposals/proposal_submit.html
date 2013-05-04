@@ -1,12 +1,10 @@
 {% extends "proposals/base.html" %}
 
-{% load boxes_tags %}
 {% load i18n %}
 
 {% block page_title %}{% trans "Submit A Proposal" %}{% endblock %}
 
 {% block body %}
-    {% box "proposal_submit" %}
     
     {% if kinds %}
         <p>Select what kind of proposal you'd like to submit:</p>

@@ -5,7 +5,7 @@
 {% load review_tags %}
 {% load teams_tags %}
 
-{% block head_title %}Dashboard{% endblock %}
+{% block head_title %}{% trans "Dashboard" %}{% endblock %}
 
 {% block body_class %}auth{% endblock %}
 
@@ -16,15 +16,15 @@
             <h3>{% trans "Speaking" %}</h3>
             <div class="pull-right header-actions">
                 {% if not user.speaker_profile %}
-                    <a href="{% url speaker_create %}" class="btn">
-                        <i class="icon-plus-sign"></i> Create a speaker profile
+                    <a href="{% url speaker_create %}">
+                        Create a speaker profile &raquo;
                     </a>
                 {% else %}
-                    <a href="{% url speaker_edit %}" class="btn">
-                        <i class="icon-pencil"></i> Edit your speaker profile
+                    <a href="{% url speaker_edit %}">
+                        Edit your speaker profile &raquo;
                     </a>
-                    <a href="{% url proposal_submit %}" class="btn">
-                        <i class="icon-plus-sign"></i> Submit a new proposal
+                    <a href="{% url proposal_submit %}">
+                        Submit a new proposal &raquo;
                     </a>
                 {% endif %}
             </div>
@@ -96,6 +96,8 @@
             {% if not user.is_staff %}
                 {# If you want to allow people to see the sponsorships they've signed themselves up for, this is where you'd add it back in. #}
                 <p>Please read our <a href="{% url sponsor_prospectus %}">Sponsor Prospectus</a> and get in touch!</p>
+            {% else %}
+            <p>Hey, you're PyCon Canada staff! Check out the <a href="{% url admin:sponsorship_sponsor_changelist %}">Sponsorship Admin</a>.</p>
             {% endif %}
         </div>
     </div>

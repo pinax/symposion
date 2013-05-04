@@ -4,149 +4,161 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="{{LANGUAGE_CODE}}">
-  <head>
-    <meta name="generator" content="" />
-    <meta charset="utf-8" />
+<head>
+	<meta name="generator" content="" />
+	<meta charset="utf-8" />
 
     <title>{% block head_title %}{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}" />
     {% block extra_head %}
     <script type="text/javascript" src="https://guestlistapp.com/javascripts/guestlist-embed.js"></script>
     {% endblock %}
-  </head>
-  <body>
+</head>
+<body>
     {% block logo_header %}<div style="height: 35px;">&nbsp;</div>{% endblock %}
     <div class="container-fluid content">
-      <div class="row-fluid">
-        <div class="span12">
-          {% block shouty_pycon_canada %}{% endblock %}
-          <ul class="nav">
-            <li><a href="{% url "about" %}">About</a></li>
-            <li><a href="{% url "venue" %}">Venue</a></li>
-            <li><a href="{% url "schedule_conference" %}">Schedule</a></li>
-            <li><a href="{% url "dashboard" %}">Speak</a></li>
-            <li><a href="{% url "learn" %}">Learn</a></li>
-            <li><a href="{% url "sponsor_list" %}">Sponsors</a></li>
-            <li><a href="{% url "contact" %}">Contact</a></li>
-          </ul>
-          <div class="dropdown" id="language-selector">
-            <form action="/i18n/setlang/" method="post" style="margin:0;">
-              {% csrf_token %}
+        <div class="row-fluid">
+            <div class="span12">
+                {% block shouty_pycon_canada %}{% endblock %}
+                <ul class="nav">
+                    <li><a href="{% url "about" %}">About</a></li>
+                    <li><a href="{% url "venue" %}">Venue</a></li>
+                    <li><a href="{% url "schedule_conference" %}">Schedule</a></li>
+                    <li><a href="{% url "dashboard" %}">Speak</a></li>
+                    <li><a href="{% url "learn" %}">Learn</a></li>
+                    <li><a href="{% url "sponsor_list" %}">Sponsors</a></li>
+                    <li><a href="{% url "contact" %}">Contact</a></li>
+                </ul>
+                <div class="dropdown" id="language-selector">
+                  <form action="/i18n/setlang/" method="post" style="margin:0;">
+                    {% csrf_token %}
 
-              {% with request.path|slice:"3:" as redirect_url %}
-              <input name="next" type="hidden" value="{{ redirect_url }}" />
-              {% endwith %}
+                    {% with request.path|slice:"3:" as redirect_url %}
+                    <input name="next" type="hidden" value="{{ redirect_url }}" />
+                    {% endwith %}
 
-              <select class="input-medium" name="language" onchange="this.form.submit();">
-                {% get_language_info_list for LANGUAGES as languages %}
-                {% for language in languages %}
-                {% if LANGUAGE_CODE == language.code %}
-                <option value="{{ language.code }}" selected="selected">{{ language.name_local }} ({{ language.code }})</option>
+                    <select class="input-medium" name="language" onchange="this.form.submit();">
+                      {% get_language_info_list for LANGUAGES as languages %}
+                      {% for language in languages %}
+                      {% if LANGUAGE_CODE == language.code %}
+                      <option value="{{ language.code }}" selected="selected">{{ language.name_local }} ({{ language.code }})</option>
 
-                {% else %}
-                <option value="{{ language.code }}">{{ language.name_local }} ({{ language.code }})</option>
-                {% endif %}
-                {% endfor %}
-              </select>
-            </form>
-          </div>
+                      {% else %}
+                      <option value="{{ language.code }}">{{ language.name_local }} ({{ language.code }})</option>
+                      {% endif %}
+                      {% endfor %}
+                    </select>
+                  </form>
+                </div>
 
-          <ul id="social">
-            <li>
-              <a href="{% url "home" %}" data-toggle="tooltip" data-placement="bottom" data-title="Home"><img src="{% static "img/icon-home.png" %}"></a>
-            </li>
-            <li>
-              <a href="https://github.com/pyconca/" data-toggle="tooltip" data-placement="bottom" data-title="Github"><img src="{% static "img/icon-git.png" %}"></a>
-            </li>
-            <li>
-              <a href="irc://irc.freenode.net/#pyconca" data-toggle="tooltip" data-placement="bottom" data-title="IRC"><img src="{% static "img/icon-irc.png" %}"></a>
-            </li>
-            <li>
-              <a href="https://twitter.com/pyconca" data-toggle="tooltip" data-placement="bottom" data-title="Twitter"><img src="{% static "img/icon-twitter.png" %}"></a>
-            </li>
-          </ul>
+                <div class="session_management">
+                  {% if user.is_authenticated %}
+                    <a href="{% url "account_logout" %}">Log out &raquo;</a>
+                  {% else %}
+                    <a href="{% url "account_signup" %}">Sign up &raquo;</a>
+                    &nbsp;
+                    <a href="{% url "account_login" %}">Log in &raquo;</a>
+                  {% endif %}
+                  &nbsp;
+                </div>
 
-          <h2>{% block excerpt %}{% endblock %}</h2>
+                <ul id="social">
+                    <li>
+                    <a href="{% url "home" %}" data-toggle="tooltip" data-placement="bottom" data-title="Home"><img src="{% static "img/icon-home.png" %}"></a>
+                    </li>
+                    <li>
+                    <a href="https://github.com/pyconca/" data-toggle="tooltip" data-placement="bottom" data-title="Github"><img src="{% static "img/icon-git.png" %}"></a>
+                    </li>
+                    <li>
+                    <a href="irc://irc.freenode.net/#pyconca" data-toggle="tooltip" data-placement="bottom" data-title="IRC"><img src="{% static "img/icon-irc.png" %}"></a>
+                    </li>
+                    <li>
+                    <a href="https://twitter.com/pyconca" data-toggle="tooltip" data-placement="bottom" data-title="Twitter"><img src="{% static "img/icon-twitter.png" %}"></a>
+                    </li>
+                </ul>
+
+                <h2>{% block excerpt %}{% endblock %}</h2>
+            </div>
         </div>
-      </div>
     </div>
     <div class="container-fluid" id="info">
-      <div class="row-fluid">
-        <div class="span12">
-          <div id="buy">
-            <button class="btn guestlist-event-161823" action="#">Buy a ticket</button>
-          </div>
+        <div class="row-fluid">
+            <div class="span12">
+                <div id="buy">
+                    <button class="btn guestlist-event-161823" action="#">Buy a ticket</button>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
     <div class="container-fluid" id="details">
-      {% block body_outer %}
-      {% block body %}{% endblock %}
-      {% endblock %}
+        {% block body_outer %}
+            {% block body %}{% endblock %}
+        {% endblock %}
     </div>
     <div class="container-fluid" id="get-in-touch">
-      <div class="row-fluid">
-        <div class="span12">
-          <div class="content">
-            <h3>Get in touch</h3>
-            <ul>
-              <li>
-                <span>Twitter</span>
-                <a href="https://twitter.com/pyconca">@pyconca</a>
-              </li>
-              <li>
-                <span>IRC</span>
-                <a href="irc://irc.freenode.net/#pyconca">#pyconca</a>
-              </li>
-              <li>
-                <span>Board</span>
-                <a href="mailto:organizers@pycon.ca">organizers@pycon.ca</a>
-              </li>
-              <li>
-                <span>List</span>
-                <a href="mailto:pyconca@googlegroups.com">pyconca@googlegroups.com</a>
-              </li>
-              <li>
-                <span>Github</span>
-                <a href="https://github.com/pyconca">github.com/pyconca</a>
-              </li>
-              <li>
-                <span>Volunteer</span>
-                <a href="">@pycon.ca/volunteer</a>
-              </li>
-            </ul>
-          </div>
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="content">
+                    <h3>Get in touch</h3>
+                    <ul>
+                        <li>
+                            <span>Twitter</span>
+                            <a href="https://twitter.com/pyconca">@pyconca</a>
+                        </li>
+                        <li>
+                            <span>IRC</span>
+                            <a href="irc://irc.freenode.net/#pyconca">#pyconca</a>
+                        </li>
+                        <li>
+                            <span>Board</span>
+                            <a href="mailto:organizers@pycon.ca">organizers@pycon.ca</a>
+                        </li>
+                        <li>
+                            <span>List</span>
+                            <a href="mailto:pyconca@googlegroups.com">pyconca@googlegroups.com</a>
+                        </li>
+                        <li>
+                            <span>Github</span>
+                            <a href="https://github.com/pyconca">github.com/pyconca</a>
+                        </li>
+                        <li>
+                            <span>Volunteer</span>
+                            <a href="">@pycon.ca/volunteer</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
     <footer class="container-fluid">
-      <div class="row-fluid">
-        <div class="span12">
-          <div class="content">
-            <a class="brand">Pycon 2013</a>
-            <ul class="footer-nav">
-              <li><a href="{% url "about" %}">About</a></li>
-              <li><a href="{% url "venue" %}">Venue</a></li>
-              <li><a href="{% url "schedule_conference" %}">Schedule</a></li>
-              <li><a href="{% url "dashboard" %}">Speak</a></li>
-              <li><a href="{% url "learn" %}">Learn</a></li>
-              <li><a href="{% url "sponsor_list" %}">Sponsors</a></li>
-              <li><a href="{% url "contact" %}">Contact</a></li>
-            </ul>
-            <p>
-              &copy; PyCon Canada 2013<br/>
-              Logo by <a href="https://twitter.com/jess_sanson">Jess Sanson</a>
-            </p>
-          </div>
+        <div class="row-fluid">
+            <div class="span12">
+                <div class="content">
+                    <a class="brand">Pycon 2013</a>
+                    <ul class="footer-nav">
+                        <li><a href="{% url "about" %}">About</a></li>
+                        <li><a href="{% url "venue" %}">Venue</a></li>
+                        <li><a href="{% url "schedule_conference" %}">Schedule</a></li>
+                        <li><a href="{% url "dashboard" %}">Speak</a></li>
+                        <li><a href="{% url "learn" %}">Learn</a></li>
+                        <li><a href="{% url "sponsor_list" %}">Sponsors</a></li>
+                        <li><a href="{% url "contact" %}">Contact</a></li>
+                    </ul>
+                    <p class="copyright-notice">
+                      &copy; PyCon Canada 2013<br />
+                      Logo by <a href="https://twitter.com/jess_sanson">Jess Sanson</a><br />
+                      Background by <a href="https://twitter.com/KMarincic">Kirsten Marincic</a>
+                    </p>
+                </div>
+            </div>
         </div>
-      </div>
     </footer>
     <script src="{% static "js/jquery.js" %}"></script>
     <script src="{% static "js/bootstrap.js" %}"></script>
     <script>
-      $(document).ready(function () {
-        $('#social a').tooltip();
-      });
+        $(document).ready(function () {
+            $('#social a').tooltip();
+        });
     </script>
     <script type="text/javascript">
       var _gaq = _gaq || [];
@@ -156,10 +168,11 @@
       _gaq.push(['_require', 'inpage_linkid', '//www.google-analytics.com/plugins/ga/inpage_linkid.js']);
 
       (function() {
-       var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-       ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-       })();
-</script>
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
 </body>
 </html>
+
