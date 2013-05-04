@@ -11,7 +11,7 @@
   <div class="span12">
     <div class="content">
         <form method="POST" action="{% url "account_login" %}" autocapitalize="off" class="form-horizontal"{% if form.is_multipart %} enctype="multipart/form-data"{% endif %} id="login-form">
-            <h3>{% trans "Log in to an existing account" %}</h3>
+            <legend>{% trans "Log in to an existing account" %}</legend>
             {% csrf_token %}
             {{ form|as_bootstrap }}
             {% if redirect_field_value %}

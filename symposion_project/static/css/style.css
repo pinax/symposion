@@ -832,17 +832,6 @@ fieldset {
   margin: 0;
   border: 0;
 }
-legend {
-  display: block;
-  width: 100%;
-  padding: 0;
-  margin-bottom: 27px;
-  font-size: 19.5px;
-  line-height: 36px;
-  color: #333333;
-  border: 0;
-  border-bottom: 1px solid #eee;
-}
 legend small {
   font-size: 13.5px;
   color: #999999;
@@ -5893,7 +5882,8 @@ footer .footer-nav li a:hover {
 h1,
 h2,
 h3,
-h4 {
+h4,
+legend {
   font-family: 'bignoodletitlingregular', Impact, Arial;
   text-transform: uppercase;
   font-weight: normal;
@@ -5920,7 +5910,7 @@ h2 {
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
   margin-top: 1em;
 }
-h3 {
+h3, legend {
   text-align: left;
   font-size: 4em;
   line-height: 1.4em;
@@ -6225,7 +6215,7 @@ h3 {
   font-weight: normal;
   text-transform: uppercase;
 }
-#login-form label {
+form label {
   color: white;
 }
 .form-actions {
