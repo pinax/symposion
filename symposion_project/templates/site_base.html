@@ -83,7 +83,9 @@
         </div>
     </div>
     <div class="container-fluid" id="details">
-        {% block body %}{% endblock %}
+        {% block body_outer %}
+            {% block body %}{% endblock %}
+        {% endblock %}
     </div>
     <div class="container-fluid" id="get-in-touch">
         <div class="row-fluid">
