@@ -1,5 +1,8 @@
 {% extends "site_base.html" %}
 
+{% load sponsorship_tags %}
+{% load thumbnail %}
+
 {% load i18n %}
 {% load boxes_tags %}
 
@@ -71,7 +74,19 @@ You're invited to a kickoff conference, <span>August 9th - 11th</span>, in Toron
                     <h3>
                         Our Sponsors <span>Interested in a sponsorship opportunity? <a href="">Learn More</a></span>
                     </h3>
-                    <p>Sponsors go here</p>
+                    {% sponsor_levels as levels %}
+                    {% for level in levels %}
+                        {% if level.sponsors %}
+                            <h2>{{ level.name }}</h2>
+                            {% for sponsor in level.sponsors %}
+                                <div>
+                                    <a href="{{ sponsor.external_url }}">
+                                        <img src="{% thumbnail sponsor.website_logo '100x60' %}" alt="{{ sponsor.name }}" />
+                                    </a>
+                                </div>
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
                 </div>
             </div>
         </div>

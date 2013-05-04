@@ -6190,6 +6190,9 @@ h3 {
   float: right;
   display: block;
 }
+#sponsors h2 {
+  color: black;
+}
 #get-in-touch {
   background: #36b3d9 url(../img/dark-blue-bg.jpg) top left repeat;
   padding-top: 35px;
