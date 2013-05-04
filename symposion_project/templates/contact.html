@@ -14,46 +14,53 @@
 {% block body %}
 
 <article>
-  <h2>{% trans "Contact" %}</h2>
-  <p>{% trans "CONTACT_US_MAILING_LISTS" %}</p>
+<div class="row-fluid">
+  <div class="span12"><div class="content">
+    <div class="span3"></div>
+    <div class="span6"><div class="content">
+      <h3>{% trans "Contact" %}</h3>
+      <p>{% trans "CONTACT_US_MAILING_LISTS" %}</p>
 
-  <p>{% trans "We are also online at:" %}</p>
-  <ul>
-    <li>#<a href="irc://irc.freenode.net/#pyconca">pyconca</a></li>
-    <li>@<a href="https://twitter.com/pyconca">pyconca</a></li>
-    <li><a href="https://github.com/pyconca">github.com/pyconca</a></li>
-  </ul>
+      <p>{% trans "We are also online at:" %}</p>
+      <ul>
+        <li><p>#<a href="irc://irc.freenode.net/#pyconca">pyconca</a></p></li>
+        <li><p>@<a href="https://twitter.com/pyconca">pyconca</a></p></li>
+        <li><p><a href="https://github.com/pyconca">github.com/pyconca</a></p></li>
+      </ul>
+    </div></div>
+  </div></div>
+</div>
 
-  <script charset="utf-8" src="//widgets.twimg.com/j/2/widget.js"></script>
-  <script>
-  new TWTR.Widget({
-    version: 2,
-    type: 'search',
-    search: 'pycon.ca OR \"PyCon Canada\" OR pyconca',
-    interval: 30000,
-    title: 'Aug 9th-13th 2013, Toronto',
-    subject: 'PyCon Canada',
-    width: 'auto',
-    height: 400,
-    theme: {
-      shell: {
-        background: '#210D05',
-        color: '#ffffff'
-      },
-      tweets: {
-        background: '#ffffff',
-        color: '#444444',
-        links: '#0f7774'
-      }
-    },
-    features: {
-      scrollbar: true,
-      loop: false,
-      live: true,
-      behavior: 'all'
-    }
-  }).render().start();
-  </script>
+<script charset="utf-8" src="//widgets.twimg.com/j/2/widget.js"></script>
+<script>
+new TWTR.Widget({
+version: 2,
+type: 'search',
+search: 'pycon.ca OR \"PyCon Canada\" OR pyconca',
+interval: 30000,
+title: 'Aug 9th-13th 2013, Toronto',
+subject: 'PyCon Canada',
+width: 'auto',
+height: 400,
+theme: {
+  shell: {
+    background: '#210D05',
+    color: '#ffffff'
+  },
+  tweets: {
+    background: '#ffffff',
+    color: '#444444',
+    links: '#0f7774'
+  }
+},
+features: {
+  scrollbar: true,
+  loop: false,
+  live: true,
+  behavior: 'all'
+}
+}).render().start();
+</script>
 
 {% endblock %}
 
