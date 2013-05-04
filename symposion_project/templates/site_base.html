@@ -15,17 +15,11 @@
     {% endblock %}
 </head>
 <body>
-    <header class="container-fluid">
-        <div class="row-fluid">
-            <div class="span12">
-                <a class="brand">Pycon 2013</a>
-            </div>
-        </div>
-    </header>
+    {% block logo_header %}{% endblock %}
     <div class="container-fluid content">
         <div class="row-fluid">
             <div class="span12">
-                <h1>Pycon Canada <span>2013!</span></h1>
+                {% block shouty_pycon_canada %}{% endblock %}
                 <ul class="nav">
                     <li><a href="{% url "about" %}">About</a></li>
                     <li><a href="{% url "venue" %}">Venue</a></li>
