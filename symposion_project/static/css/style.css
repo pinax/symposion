@@ -6222,3 +6222,9 @@ h3 {
   font-weight: normal;
   text-transform: uppercase;
 }
+#login-form label {
+  color: white;
+}
+.form-actions {
+  background: none;
+}
