@@ -6231,6 +6231,18 @@ h3 {
 .form-actions {
   background: none;
 }
+.session_management {
+  font-family: 'bignoodletitlingregular', Impact, Arial;
+  font-size: 1.5em;
+  color: white;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
+  position: absolute;
+  top: -23px;
+  right: 190px;
+}
+.session_management a {
+  color: white;
+}
 .copyright-notice {
   position: absolute;
   top: 10px;

@@ -51,6 +51,17 @@
                   </form>
                 </div>
 
+                <div class="session_management">
+                  {% if user.is_authenticated %}
+                    <a href="{% url "account_logout" %}">Log out &raquo;</a>
+                  {% else %}
+                    <a href="{% url "account_signup" %}">Sign up &raquo;</a>
+                    &nbsp;
+                    <a href="{% url "account_login" %}">Log in &raquo;</a>
+                  {% endif %}
+                  &nbsp;
+                </div>
+
                 <ul id="social">
                     <li>
                     <a href="{% url "home" %}" data-toggle="tooltip" data-placement="bottom" data-title="Home"><img src="{% static "img/icon-home.png" %}"></a>
