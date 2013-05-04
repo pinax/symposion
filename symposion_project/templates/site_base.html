@@ -9,7 +9,9 @@
 
     <title>{% block head_title %}{% endblock %}</title>
     <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}" />
-    {% block extra_head %}{% endblock %}
+    {% block extra_head %}
+    <script type="text/javascript" src="https://guestlistapp.com/javascripts/guestlist-embed.js"></script>
+    {% endblock %}
 </head>
 <body>
     <header class="container-fluid">
@@ -59,9 +61,8 @@
     <div class="container-fluid" id="info">
         <div class="row-fluid">
             <div class="span12">
-                <div id="buy">
-                    <button class="btn">Buy a ticket</button>
-                    <!-- TODO --><a class="guestlist-event-161823" href="#"><img width="250" height="60" style="border: 0" src="https://guestlistapp.com/images/embed/register.png" alt="Register for Event" /></a>
+                <div id="buy" class="guestlist-event-161823">
+                    <button class="btn" action="#">Buy a ticket</button>
                 </div>
             </div>
         </div>
