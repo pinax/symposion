@@ -4,10 +4,8 @@
 {% load i18n %}
 
 {% block head_title %}{% trans "About" %}{% endblock %}
-{% block page_title %}
-  <hgroup class="clearfix">
-    <h1>{% trans "About" %}</h1>
-  </hgroup>
+{% block excerpt %}
+    {% trans "PyCon Canada is an initiative to strengthen the Canadian Python community." %}
 {% endblock %}
 
 {% block body %}
