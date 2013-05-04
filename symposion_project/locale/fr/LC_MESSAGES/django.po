@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-04 18:49-0400\n"
+"POT-Creation-Date: 2013-05-04 19:47-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -225,7 +225,7 @@ msgstr ""
 msgid "We are also online at:"
 msgstr "Nous sommes aussi en ligne sur:"
 
-#: templates/homepage.html:8
+#: templates/homepage.html:5
 msgid "Welcome"
 msgstr ""
 
@@ -238,7 +238,7 @@ msgid ""
 "A place to announce our featured speakers, one by one, over the coming weeks."
 msgstr ""
 
-#: templates/site_base.html:88
+#: templates/site_base.html:90
 msgid "Buy a ticket"
 msgstr "Acheter un billet"
 

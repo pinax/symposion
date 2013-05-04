@@ -312,7 +312,10 @@ msgstr ""
 
 #: templates/venue.html:40
 msgid "VENUE_PUBLIC_TRANSIT"
-msgstr ""
+msgstr "The nearest <a href=\"http://ttc.ca/\">TTC</a> subway stop is St. "
+"Patrick Station, on the Yonge-Univeristy-Spadina line. Dundas streetcars "
+"also stop at Chestnut Street. Cash fare is $3, "
+"or tokens can be purchased at discounted rates."
 
 #: templates/venue.html:41
 msgid "VENUE_PARKING"
