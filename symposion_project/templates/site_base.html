@@ -15,7 +15,7 @@
     {% endblock %}
 </head>
 <body>
-    {% block logo_header %}{% endblock %}
+    {% block logo_header %}<div style="height: 35px;">&nbsp;</div>{% endblock %}
     <div class="container-fluid content">
         <div class="row-fluid">
             <div class="span12">
@@ -52,6 +52,9 @@
                 </div>
 
                 <ul id="social">
+                    <li>
+                    <a href="{% url "home" %}" data-toggle="tooltip" data-placement="bottom" data-title="Home"><img src="{% static "img/icon-home.png" %}"></a>
+                    </li>
                     <li>
                     <a href="https://github.com/pyconca/" data-toggle="tooltip" data-placement="bottom" data-title="Github"><img src="{% static "img/icon-git.png" %}"></a>
                     </li>
