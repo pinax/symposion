@@ -1,4 +1,6 @@
 {% load url from future %}
+{% load thumbnail %}
+{% load sponsorship_tags %}
 {% load i18n %}
 {% get_current_language as LANGUAGE_CODE %}
 {% load static %}
@@ -15,7 +17,7 @@
     {% endblock %}
 </head>
 <body>
-    {% block logo_header %}<div style="height: 35px;">&nbsp;</div>{% endblock %}
+    {% block logo_header %}<div style="height: 35px;"></div>{% endblock %}
     <div class="container-fluid content">
         <div class="row-fluid">
             <div class="span12">
@@ -77,7 +79,7 @@
                     </li>
                 </ul>
 
-                <h2>{% block excerpt %}{% endblock %}</h2>
+                {% block excerpt %}{% endblock %}
             </div>
         </div>
     </div>
@@ -85,7 +87,7 @@
         <div class="row-fluid">
             <div class="span12">
                 <div id="buy">
-                    <button class="btn guestlist-event-161823" action="#">Buy a ticket</button>
+                  <button class="btn guestlist-event-161823" action="#">{% trans "Buy a ticket" %}</button>
                 </div>
             </div>
         </div>
@@ -94,6 +96,36 @@
         {% block body_outer %}
             {% block body %}{% endblock %}
         {% endblock %}
+    </div>
+    <div class="container-fluid" id="sponsors">
+        <div class="row-fluid" >
+            <div class="span12">
+                <div class="content">
+                    <h3>
+                        Our Sponsors <span>Interested in a sponsorship opportunity? <a href="">Learn More</a></span>
+                    </h3>
+                    {% sponsor_levels as levels %}
+                    {% for level in levels %}
+                        {% if level.sponsors %}
+                            <h2>{{ level.name }}</h2>
+                            <div class="sponsor-group">
+                            {% for sponsor in level.sponsors %}
+                                    <a href="{{ sponsor.external_url }}">
+                                      {% if level.name == 'Diamond' %}
+                                        <img src="{% thumbnail sponsor.website_logo '400x240' %}" alt="{{ sponsor.name }}" />
+                                      {% elif level.name == 'Gold' %}
+                                        <img src="{% thumbnail sponsor.website_logo '200x120' %}" alt="{{ sponsor.name }}" />
+                                      {% else %}
+                                        <img src="{% thumbnail sponsor.website_logo '100x60' %}" alt="{{ sponsor.name }}" />
+                                      {% endif %}
+                                    </a>
+                            {% endfor %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
     </div>
     <div class="container-fluid" id="get-in-touch">
         <div class="row-fluid">
@@ -110,20 +142,26 @@
                             <a href="irc://irc.freenode.net/#pyconca">#pyconca</a>
                         </li>
                         <li>
-                            <span>Board</span>
-                            <a href="mailto:organizers@pycon.ca">organizers@pycon.ca</a>
+                            <span>Github</span>
+                            <a href="https://github.com/pyconca">github.com/pyconca</a>
                         </li>
+                      </ul>
+                      <ul>
                         <li>
                             <span>List</span>
                             <a href="mailto:pyconca@googlegroups.com">pyconca@googlegroups.com</a>
                         </li>
                         <li>
-                            <span>Github</span>
-                            <a href="https://github.com/pyconca">github.com/pyconca</a>
+                            <span>Board</span>
+                            <a href="mailto:board@pycon.ca">board@pycon.ca</a>
+                        </li>
+                        <li>
+                            <span>Organizers</span>
+                            <a href="mailto:organizers@pycon.ca">organizers@pycon.ca</a>
                         </li>
                         <li>
                             <span>Volunteer</span>
-                            <a href="">@pycon.ca/volunteer</a>
+                            <a href="mailto:board@pycon.ca?subject=I%20want%20to%20volunteer%20for%20PyCon%20Canada%202013!">board@pycon.ca</a>
                         </li>
                     </ul>
                 </div>
@@ -134,6 +172,11 @@
         <div class="row-fluid">
             <div class="span12">
                 <div class="content">
+                    <p class="copyright-notice">
+                      &copy; PyCon Canada 2013<br />
+                      Logo by <a href="https://twitter.com/jess_sanson">Jess Sanson</a><br />
+                      Background by <a href="https://twitter.com/KMarincic">Kirsten Marincic</a>
+                    </p>
                     <a class="brand">Pycon 2013</a>
                     <ul class="footer-nav">
                         <li><a href="{% url "about" %}">About</a></li>
@@ -144,11 +187,6 @@
                         <li><a href="{% url "sponsor_list" %}">Sponsors</a></li>
                         <li><a href="{% url "contact" %}">Contact</a></li>
                     </ul>
-                    <p class="copyright-notice">
-                      &copy; PyCon Canada 2013<br />
-                      Logo by <a href="https://twitter.com/jess_sanson">Jess Sanson</a><br />
-                      Background by <a href="https://twitter.com/KMarincic">Kirsten Marincic</a>
-                    </p>
                 </div>
             </div>
         </div>

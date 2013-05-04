@@ -1,14 +1,11 @@
 {% extends "site_base.html" %}
 
-{% load sponsorship_tags %}
-{% load thumbnail %}
-
 {% load i18n %}
 
 {% block head_title %}{% trans "Welcome" %}{% endblock %}
 
 {% block excerpt %}
-You're invited to a kickoff conference, <span>August 9th - 11th</span>, in Toronto, getting us warmed up for the first PyCon North America conference outside the US &mdash; Montr&eacute;al in 2014 and 2015! And when that's done, let's keep the momentum going with an annual PyCon in Canada.
+<h2>You're invited to a kickoff conference, <span>August 9th - 11th</span>, in Toronto, getting us warmed up for the first PyCon North America conference outside the US &mdash; Montr&eacute;al in 2014 and 2015! And when that's done, let's keep the momentum going with an annual PyCon in Canada.</h2>
 {% endblock %}
 
 {% block body_class %}home{% endblock %}
@@ -62,30 +59,6 @@ You're invited to a kickoff conference, <span>August 9th - 11th</span>, in Toron
                 <div id="montreal">
                     <h4>Looking for PyCon Montr&eacute;al 2014?</h4>
                     <p>The "big" PyCon (previously known as "PyCon US") will be held in Montr&eacute;al in 2014! Follow <a href="https://twitter.com/pycon">@pycon</a> for updates related to PyCon Montr&eacute;al.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="container-fluid" id="sponsors">
-        <div class="row-fluid" >
-            <div class="span12">
-                <div class="content">
-                    <h3>
-                        Our Sponsors <span>Interested in a sponsorship opportunity? <a href="">Learn More</a></span>
-                    </h3>
-                    {% sponsor_levels as levels %}
-                    {% for level in levels %}
-                        {% if level.sponsors %}
-                            <h2>{{ level.name }}</h2>
-                            {% for sponsor in level.sponsors %}
-                                <div>
-                                    <a href="{{ sponsor.external_url }}">
-                                        <img src="{% thumbnail sponsor.website_logo '100x60' %}" alt="{{ sponsor.name }}" />
-                                    </a>
-                                </div>
-                            {% endfor %}
-                        {% endif %}
-                    {% endfor %}
                 </div>
             </div>
         </div>
