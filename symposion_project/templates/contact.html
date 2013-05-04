@@ -16,7 +16,6 @@
 <article>
 <div class="row-fluid">
   <div class="span12"><div class="content">
-    <div class="span3"></div>
     <div class="span6"><div class="content">
       <h3>{% trans "Contact" %}</h3>
       <p>{% trans "CONTACT_US_MAILING_LISTS" %}</p>
@@ -28,39 +27,12 @@
         <li><p><a href="https://github.com/pyconca">github.com/pyconca</a></p></li>
       </ul>
     </div></div>
+    <div class="span6"><div class="content">
+      <a class="twitter-timeline" data-dnt="true" href="https://twitter.com/search?q=%23pyconca+OR+pycon.ca+OR+%22PyCon+Canada%22" data-widget-id="330781231698550784">Tweets about "#pyconca OR pycon.ca OR "PyCon Canada""</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+    </div></div>
   </div></div>
 </div>
-
-<script charset="utf-8" src="//widgets.twimg.com/j/2/widget.js"></script>
-<script>
-new TWTR.Widget({
-version: 2,
-type: 'search',
-search: 'pycon.ca OR \"PyCon Canada\" OR pyconca',
-interval: 30000,
-title: 'Aug 9th-13th 2013, Toronto',
-subject: 'PyCon Canada',
-width: 'auto',
-height: 400,
-theme: {
-  shell: {
-    background: '#210D05',
-    color: '#ffffff'
-  },
-  tweets: {
-    background: '#ffffff',
-    color: '#444444',
-    links: '#0f7774'
-  }
-},
-features: {
-  scrollbar: true,
-  loop: false,
-  live: true,
-  behavior: 'all'
-}
-}).render().start();
-</script>
 
 {% endblock %}
 
