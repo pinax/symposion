@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-22 05:46-0400\n"
+"POT-Creation-Date: 2013-05-04 18:49-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,51 +26,47 @@ msgstr ""
 msgid "French"
 msgstr ""
 
-#: templates/_footer.html:20
+#: templates/_footer.html:18
 #, fuzzy
-msgid "© PyCon Canada 2012"
+msgid "© PyCon Canada 2013"
 msgstr "Qu'est-ce que PyCon Canada?"
 
 #: templates/_footer.html:22
-msgid "Photo by camstatic"
-msgstr ""
-
-#: templates/_footer.html:28
 msgid "Get in touch"
 msgstr ""
 
-#: templates/_footer.html:32
+#: templates/_footer.html:26
 msgid "Board"
 msgstr ""
 
-#: templates/_footer.html:33
+#: templates/_footer.html:27
 msgid "List"
 msgstr ""
 
-#: templates/_footer.html:35
+#: templates/_footer.html:29
 msgid "Volunteer"
 msgstr ""
 
-#: templates/about.html:6 templates/about.html.py:9
+#: templates/about.html:5
 msgid "About"
 msgstr ""
 
-#: templates/about.html:15
-msgid "What is PyCon Canada?"
-msgstr "Qu'est-ce que PyCon Canada?"
-
-#: templates/about.html:17
+#: templates/about.html:7
 msgid ""
 "PyCon Canada is an initiative to strengthen the Canadian Python community."
 msgstr ""
 "PyCon Canada est une initiative qui a pour but de renforcer la communauté "
 "Python canadienne."
 
-#: templates/about.html:21
+#: templates/about.html:14
+msgid "What is PyCon Canada?"
+msgstr "Qu'est-ce que PyCon Canada?"
+
+#: templates/about.html:16
 msgid "Our main goals:"
 msgstr "Nos objectifs principaux:"
 
-#: templates/about.html:26
+#: templates/about.html:21
 msgid "ABOUT_GOAL_SUPPORT"
 msgstr ""
 "Supporter les efforts de <a href='http://montrealpython.org/2011/03/"
@@ -81,7 +77,7 @@ msgstr ""
 "la vitalité de la communauté Python canadienne, et acceptons le défi comme "
 "présentateur et volontaire. "
 
-#: templates/about.html:29
+#: templates/about.html:24
 msgid "ABOUT_GOAL_STRENGTHEN"
 msgstr ""
 "Renforcer la communauté Python canadienne en nous bâtissant de nouvelles "
@@ -90,24 +86,24 @@ msgstr ""
 "visibilité des développeurs, des organisations et des compagnies dans notre "
 "communauté. "
 
-#: templates/about.html:32
+#: templates/about.html:27
 msgid "Host an annual Canadian PyCon conference, starting now - 2012!"
 msgstr ""
 "Accueillir une conférence annuelle PyCon Canada, en commencant maintenant, "
 "en 2012!"
 
-#: templates/about.html:37
+#: templates/about.html:32
 msgid "ABOUT_VOLUNTEERS"
 msgstr ""
 "PyCon Canada est entièrement organisé par des volontaires passionés par ces "
 "objectifs. Nous espérons vous voir à la conférence 2012! "
 
-#: templates/about.html:42 templates/conduct.html:6
+#: templates/about.html:37 templates/conduct.html:6
 #: templates/conduct.html.py:9 templates/conduct.html:18
 msgid "Code of Conduct"
 msgstr "Code de conduite"
 
-#: templates/about.html:43
+#: templates/about.html:38
 msgid "ABOUT_CONDUCT"
 msgstr ""
 "Veuillez vous familiariser avec le <a href='/conduct'>Code de conduite</a> "
@@ -210,11 +206,11 @@ msgid "License"
 msgstr ""
 
 #: templates/contact.html:6 templates/contact.html.py:9
-#: templates/contact.html:17
+#: templates/contact.html:20
 msgid "Contact"
 msgstr ""
 
-#: templates/contact.html:18
+#: templates/contact.html:21
 msgid "CONTACT_US_MAILING_LISTS"
 msgstr ""
 "La plupart de nos discussions se font sur la liste de diffusion <a "
@@ -225,19 +221,28 @@ msgstr ""
 "(Michael Dibernardo, Taavi Burns and David Wolever) peut être contacté à <a "
 "href='mailto:board@pycon.ca'>board@pycon.ca</a>. "
 
-#: templates/contact.html:20
+#: templates/contact.html:23
 msgid "We are also online at:"
 msgstr "Nous sommes aussi en ligne sur:"
 
-#: templates/homepage.html:6
+#: templates/homepage.html:8
 msgid "Welcome"
 msgstr ""
 
-#: templates/homepage.html:11
-msgid "welcome masthead"
-msgstr "Bienvenue à PyCon!"
+#: templates/learn.html:5
+msgid "Learn"
+msgstr ""
 
-#: templates/site_base.html:111
+#: templates/learn.html:7
+msgid ""
+"A place to announce our featured speakers, one by one, over the coming weeks."
+msgstr ""
+
+#: templates/site_base.html:88
+msgid "Buy a ticket"
+msgstr "Acheter un billet"
+
+#: templates/site_base.old.html:111
 msgid "Quick links"
 msgstr ""
 
@@ -245,8 +250,12 @@ msgstr ""
 msgid "ABOUT_SPONSORSHIP"
 msgstr ""
 
-#: templates/venue.html:6 templates/venue.html.py:9
+#: templates/venue.html:5
 msgid "Venue"
+msgstr ""
+
+#: templates/venue.html:7
+msgid "The conference will be held at the"
 msgstr ""
 
 #: templates/venue.html:17
@@ -265,11 +274,11 @@ msgstr ""
 msgid "PyCon Canada 2013 map"
 msgstr ""
 
-#: templates/venue.html:24
+#: templates/venue.html:25
 msgid "Getting to Toronto"
 msgstr ""
 
-#: templates/venue.html:25
+#: templates/venue.html:26
 msgid "VENUE_AIRPORTS"
 msgstr ""
 "Toronto a 2 principaux aéroports. <a href='http://www.gtaa.com'>Pearson</a> "
@@ -280,7 +289,7 @@ msgstr ""
 "heures de pointe. Prévoyez donc au moins une heure de trajet à partir de "
 "l'aéroport. "
 
-#: templates/venue.html:26
+#: templates/venue.html:27
 msgid "VENUE_PORTER"
 msgstr ""
 "<a href='http://www.flyporter.com'>Porter Airlines</a> est situé sur l'Île "
@@ -288,24 +297,24 @@ msgstr ""
 "centre-ville de Toronto, donnant accès notamment à Go Transit, TTC (le "
 "service local d'autobus, de tram et de métro) et VIA Rail. "
 
-#: templates/venue.html:27
+#: templates/venue.html:28
 msgid "VENUE_VIA"
 msgstr ""
 "VIA est une bonne alternative aux compagnies aériennes si vous venez de "
 "Montréal ou d'Ottawa, par exemple. Il y a souvent des rabais sur les "
 "réservations à l'avance. "
 
-#: templates/venue.html:30
+#: templates/venue.html:31
 msgid "If you're coming from the US:"
 msgstr "Si vous arrivez des É.U.:"
 
-#: templates/venue.html:32
+#: templates/venue.html:33
 msgid "VENUE_PASSPORT_USA"
 msgstr ""
 "Assurez-vous d'avoir un passeport valide et n'oubliez pas de l'amener avec "
 "vous. "
 
-#: templates/venue.html:33
+#: templates/venue.html:34
 msgid "VENUE_PORTER_USA"
 msgstr ""
 "<a href='http://www.flyporter.com'>Porter Airlines</a> a des vols fréquents "
@@ -325,17 +334,32 @@ msgstr ""
 msgid "VENUE_PARKING"
 msgstr ""
 
-#: templates/venue.html:45
+#: templates/venue.html:46
 msgid "Food"
 msgstr ""
 
-#: templates/venue.html:46
+#: templates/venue.html:47
 msgid "VENUE_FOOD"
 msgstr ""
 
-#: templates/venue.html:50
+#: templates/venue.html:51
 msgid "Hotel"
 msgstr ""
+
+#: templates/account/login.html:7 templates/account/login.html.py:22
+msgid "Log in"
+msgstr ""
+
+#: templates/account/login.html:14
+msgid "Log in to an existing account"
+msgstr ""
+
+#: templates/account/login.html:21
+msgid "Forgot your password?"
+msgstr ""
+
+#~ msgid "welcome masthead"
+#~ msgstr "Bienvenue à PyCon!"
 
 #~ msgid "conference date range"
 #~ msgstr "9 au 13 août, 2013"
