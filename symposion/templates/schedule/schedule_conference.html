@@ -2,7 +2,6 @@
 
 {% load i18n %}
 {% load bootstrap_tags %}
-{% load boxes_tags %}
 {% load cache %}
 
 {% block head_title %}{% trans "Conference Schedule" %}{% endblock %}
@@ -31,7 +30,6 @@
                 {% endcache %}
             {% endfor %}
             
-            {% box "schedule_bottom" %}
         </div>
     </div>
 {% endblock %}
