@@ -13,6 +13,7 @@
   <title>{% block head_title %}{% endblock %}</title>
   <link rel="stylesheet" type="text/css" href="{% static "css/style.css" %}" />
   {% block extra_head %}
+  <link href="{{ STATIC_URL }}img/favicon.ico" rel="shortcut icon" />
   <script type="text/javascript" src="https://guestlistapp.com/javascripts/guestlist-embed.js"></script>
   {% endblock %}
 </head>
