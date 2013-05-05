@@ -1,32 +1,67 @@
 {% load i18n %}
+{% load url from future %}
 
-<footer class="footer">
-  <div class="container">
-    <div class="row-fluid">
-      <div class="span6">
-        <nav>
-          <ul class="unstyled">
-            <li><a href="{% url home %}"><i class="icon-home icon-white nav-icon"></i></a></li>
-            <li><a href="{% url about %}">About</a></li>
-            <li><a href="{% url venue %}">Venue</a></li>
-            <li><a href="{% url schedule_conference %}">Schedule</a></li>
-            <li><a href="{% url dashboard %}">Speakers</a></li>
-            <li><a href="{% url sponsor_list %}">Sponsors</a></li>
-            <li><a href="{% url contact %}">Contact</a></li>
-          </ul>
-        </nav>
-        <p> {% trans "© PyCon Canada 2013" %} </p>
+<div class="container-fluid" id="get-in-touch">
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="content">
+        <h3>Get in touch</h3>
+        <ul>
+          <li>
+            <span>Twitter</span>
+            <a href="https://twitter.com/pyconca">@pyconca</a>
+          </li>
+          <li>
+            <span>IRC</span>
+            <a href="irc://irc.freenode.net/#pyconca">#pyconca</a>
+          </li>
+          <li>
+            <span>Github</span>
+            <a href="https://github.com/pyconca">github.com/pyconca</a>
+          </li>
+        </ul>
+        </br>
+        <ul>
+          <li>
+            <span>{% trans "List" %}</span>
+            <a href="mailto:pyconca@googlegroups.com">pyconca@googlegroups.com</a>
+          </li>
+          <li>
+            <span>{% trans "Board" %}</span>
+            <a href="mailto:board@pycon.ca">board@pycon.ca</a>
+          </li>
+          <li>
+            <span>{% trans "Organizers" %}</span>
+            <a href="mailto:organizers@pycon.ca">organizers@pycon.ca</a>
+          </li>
+          <li>
+            <span>{% trans "Volunteer" %}</span>
+            <a href="mailto:board@pycon.ca?subject=I%20want%20to%20volunteer%20for%20PyCon%20Canada%202013!">board@pycon.ca</a>
+          </li>
+        </ul>
       </div>
-
-      <div class="span6">
-        <div class="fake-head">{% trans "Get in touch" %}</div>
-        <ul class="unstyled contact-list">
-          <li><span>Twitter</span> <a href="http://twitter.com/pyconca">@pyconca</a></li>
-          <li><span>IRC</span> <a href="irc://irc.freenode.net/#pyconca">#pyconca</a></li>
-          <li><span>{% trans "Board" %}</span> <a href="mailto:organizers@pycon.ca">organizers@pycon.ca</a></li>
-          <li><span>{% trans "List" %}</span> <a href="mailto:pyconca@googlegroups.com">pyconca@googlegroups.com</a></li>
-          <li><span>GitHub</span> <a href="http://github.com/pyconca">github.com/pyconca</a></li>
-          <li><span>{% trans "Volunteer" %}</span> <a href="${request.application_url}/volunteer">pycon.ca/volunteer</a></li>
+    </div>
+  </div>
+</div>
+<footer class="container-fluid">
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="content">
+        <p class="copyright-notice">
+          &copy; PyCon Canada 2013<br />
+          Logo by <a href="https://twitter.com/jess_sanson">Jess Sanson</a><br />
+          Background by <a href="https://twitter.com/KMarincic">Kirsten Marincic</a>
+        </p>
+        <a class="brand">Pycon 2013</a>
+        <ul class="footer-nav">
+          <li><a href="{% url "home" %}"><i class="icon-home icon-white nav-icon"></i></a></li>
+          <li><a href="{% url "about" %}">About</a></li>
+          <li><a href="{% url "venue" %}">Venue</a></li>
+          <li><a href="{% url "schedule_conference" %}">Schedule</a></li>
+          <li><a href="{% url "dashboard" %}">Speak</a></li>
+          <li><a href="{% url "learn" %}">Learn</a></li>
+          <li><a href="{% url "sponsor_list" %}">Sponsors</a></li>
+          <li><a href="{% url "contact" %}">Contact</a></li>
         </ul>
       </div>
     </div>
