@@ -1,6 +1,10 @@
 {% extends "site_base.html" %}
-
+{% load url from future %}
+{% load thumbnail %}
+{% load sponsorship_tags %}
 {% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
+{% load static %}
 
 {% block head_title %}{% trans "Welcome" %}{% endblock %}
 
@@ -24,43 +28,76 @@
 <h1>Pycon Canada <span>2013!</span></h1>
 {% endblock %}
 
-{% block body %}
-    <div class="row-fluid">
-        <div class="span12">
-            <div class="content">
-                <div class="row-fluid">
-                    <div class="span6" id="speak">
-                        <h3>Speak</h3>
-                        <p>Share your knowledge and cool ideas. Submit your proposal for a talk or tutorial by July 1st to proposals@pycon.ca. We'll be sprinting at the conference too, so you can also send us sprint ideas.</p>
-                        <a href="{% url dashboard %}">More Info »</a>
-                    </div>
-                    <div class="span6" id="learn">
-                        <h3>Learn</h3>
-                        <p>One of PyCon Canada's goals is to bring experts from the greater Python community to Canada; giving you the opportunity to be inspired and learn from the best! To get you excited, we'll be announcing our featured speakers, one by one, over the coming weeks.</p>
-                        <a href="">More Info »</a>
-                    </div>
-                </div>
-                <div class="row-fluid">
-                    <div class="span6" id="venue">
-                        <h3>Venue</h3>
-                        <p>Be there August 9-11, 2013 at Chestnut Conference Centre in Toronto. A short walk from the subway, so when you aren't busy coding or chatting with your colleagues you've got lots of stuff to explore nearby.</p>
-                        <a href="{% url venue %}">More Info »</a>
-                    </div>
-                    <div class="span6" id="schedule">
-                        <h3>Schedule</h3>
-                        <p>Start the fun Friday evening with a mix and mingle. Feed your brain at talks on Saturday, and if your sprint team is eager, you can start that night. Sprint or attend talks and tutorials on Sunday.</p>
-                        <a href="{% url schedule_conference %}">More Info »</a>
-                    </div>
-                </div>
-            </div>
+{% block body_outer %}
+<div class="container-fluid" id="details">
+  <div class="row-fluid">
+    <div class="span12">
+      <div class="content">
+        <div class="row-fluid">
+          <div class="span6" id="speak">
+            <h3>Speak</h3>
+            <p>Share your knowledge and cool ideas. Submit your proposal for a talk or tutorial by July 1st to proposals@pycon.ca. We'll be sprinting at the conference too, so you can also send us sprint ideas.</p>
+            <a href="{% url "dashboard" %}">More Info »</a>
+          </div>
+          <div class="span6" id="learn">
+            <h3>Learn</h3>
+            <p>One of PyCon Canada's goals is to bring experts from the greater Python community to Canada; giving you the opportunity to be inspired and learn from the best! To get you excited, we'll be announcing our featured speakers, one by one, over the coming weeks.</p>
+            <a href="">More Info »</a>
+          </div>
         </div>
         <div class="row-fluid">
-            <div class="span12">
-                <div id="montreal">
-                    <h4>Looking for PyCon Montr&eacute;al 2014?</h4>
-                    <p>The "big" PyCon (previously known as "PyCon US") will be held in Montr&eacute;al in 2014! Follow <a href="https://twitter.com/pycon">@pycon</a> for updates related to PyCon Montr&eacute;al.</p>
-                </div>
-            </div>
+          <div class="span6" id="venue">
+            <h3>Venue</h3>
+            <p>Be there August 9-11, 2013 at Chestnut Conference Centre in Toronto. A short walk from the subway, so when you aren't busy coding or chatting with your colleagues you've got lots of stuff to explore nearby.</p>
+            <a href="{% url "venue" %}">More Info »</a>
+          </div>
+          <div class="span6" id="schedule">
+            <h3>Schedule</h3>
+            <p>Start the fun Friday evening with a mix and mingle. Feed your brain at talks on Saturday, and if your sprint team is eager, you can start that night. Sprint or attend talks and tutorials on Sunday.</p>
+            <a href="{% url "schedule_conference" %}">More Info »</a>
+          </div>
         </div>
+      </div>
     </div>
+    <div class="row-fluid">
+      <div class="span12">
+        <div id="montreal">
+          <h4>Looking for PyCon Montr&eacute;al 2014?</h4>
+          <p>The "big" PyCon (previously known as "PyCon US") will be held in Montr&eacute;al in 2014! Follow <a href="https://twitter.com/pycon">@pycon</a> for updates related to PyCon Montr&eacute;al.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid" id="sponsors">
+  <div class="row-fluid" >
+    <div class="span12">
+      <div class="content">
+        <h3>
+          Our Sponsors <span>Interested in a sponsorship opportunity? <a href="{% url "sponsor_prospectus" %}">Learn More</a></span>
+        </h3>
+        {% sponsor_levels as levels %}
+        {% for level in levels %}
+        {% if level.sponsors %}
+        <h2>{{ level.name }}</h2>
+        <div class="sponsor-group">
+          {% for sponsor in level.sponsors %}
+          <a href="{{ sponsor.external_url }}">
+            {% if level.name == 'Diamond' %}
+            <img src="{% thumbnail sponsor.website_logo '400x240' %}" alt="{{ sponsor.name }}" />
+            {% elif level.name == 'Gold' %}
+            <img src="{% thumbnail sponsor.website_logo '200x120' %}" alt="{{ sponsor.name }}" />
+            {% else %}
+            <img src="{% thumbnail sponsor.website_logo '100x60' %}" alt="{{ sponsor.name }}" />
+            {% endif %}
+          </a>
+          {% endfor %}
+        </div>
+        {% endif %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
 {% endblock %}
