@@ -1,4 +1,4 @@
-{% extends "site_base.html" %}
+{% extends "content_base.html" %}
 
 {% load i18n %}
 {% load bootstrap_tags %}
@@ -11,25 +11,17 @@
 {% block right %}
 {% endblock %}
 
-{% block body_outer %}
-    <div class="row">
-        <div class="span12">
-            <div class="page-head">
-                <h3>{% trans "Conference Schedule" %}</h3>
-                {% block breadcrumbs %}{% endblock %}
-            </div>
-        </div>
-        <div class="span12">
-            
-            {% for section in sections %}
-                {% cache 600 "schedule-table" section.schedule.section %}
-                    {% for timetable in section.days %}
-                        <h3>{{ section.schedule.section.name }} — {{ timetable.day.date }}</h3>
-                        {% include "schedule/_grid.html" %}
-                    {% endfor %}
-                {% endcache %}
-            {% endfor %}
-            
-        </div>
-    </div>
+{% block one_column %}
+
+  <h3>{% trans "Conference Schedule" %}</h3>
+  {% block breadcrumbs %}{% endblock %}
+  {% for section in sections %}
+    {% cache 600 "schedule-table" section.schedule.section %}
+      {% for timetable in section.days %}
+        <h2>{{ section.schedule.section.name }} — {{ timetable.day.date }}</h2>
+      {% include "schedule/_grid.html" %}
+      {% endfor %}
+    {% endcache %}
+  {% endfor %}
+
 {% endblock %}

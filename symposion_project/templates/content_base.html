@@ -15,6 +15,7 @@
         <div class="row-fluid">
           <div class="span12">
             <h3> {% block page_name %}{% endblock %}</h3>
+            {% block one_column %}
             <div class="row-fluid">
               <div class="span8">
                 {% block body %}{% endblock %}
@@ -23,6 +24,7 @@
                 {% include "_sponsor_bar.html" %}
               </div>
             </div>
+            {% endblock %}
           </div>
         </div>
       </div>
