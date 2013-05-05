@@ -188,8 +188,8 @@ msgstr "Informations de contact"
 msgid "CONDUCT_CONTACTS"
 msgstr ""
 "Si vous êtes victime d'harcèlement, témoin d'un harcèlement ou avez tout "
-"autre souci, veuillez contacter un membre du comité d'administration - Diana "
-"Clarke, Nicola Yap, ou David Wolever.<br><br>Si le cas est particulièrement "
+"autre souci, veuillez contacter un membre du comité d'administration - Michael "
+"DiBernardo, Taavi Burns, ou David Wolever.<br><br>Si le cas est particulièrement "
 "urgent, veuillez appeler/contacter une de ces personnes:"
 
 #: templates/conduct.html:34

@@ -170,8 +170,8 @@ msgstr ""
 msgid "CONDUCT_CONTACTS"
 msgstr ""
 "If you are being harassed, notice that someone else is being harassed, or "
-"have any other concerns, please contact a member of conference board - Diana "
-"Clarke, Nicola Yap, or David Wolever. <br> <br>  If the matter is especially "
+"have any other concerns, please contact a member of conference board - Michael "
+"DiBernardo, Taavi Burns, or David Wolever. <br> <br>  If the matter is especially "
 "urgent, please call/contact any of these individuals: "
 
 #: templates/conduct.html:34
