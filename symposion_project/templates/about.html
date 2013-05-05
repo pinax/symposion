@@ -1,4 +1,4 @@
-{% extends "site_base.html" %}
+{% extends "content_base.html" %}
 
 {% load i18n %}
 
@@ -8,33 +8,24 @@
 {% endblock %}
 
 {% block body %}
-<div class="row-fluid">
-  <div class="span12"><div class="content">
-    <div class="span6"><div class="content">
-      <h3>{% trans "What is PyCon Canada?" %}</h3>
-      <p>
-        {% trans "Our main goals:" %}
-      </p>
+<h2>{% trans "What is PyCon Canada?" %}</h2>
+<p>
+  {% trans "Our main goals:" %}
+</p>
 
-      <ul>
-        <li>
-          <p>{% trans "ABOUT_GOAL_SUPPORT" %}</p>
-        </li>
-        <li>
-          <p>{% trans "ABOUT_GOAL_STRENGTHEN" %}</p>
-        </li>
-      </ul>
+<ul>
+  <li>
+    <p>{% trans "ABOUT_GOAL_SUPPORT" %}</p>
+  </li>
+  <li>
+    <p>{% trans "ABOUT_GOAL_STRENGTHEN" %}</p>
+  </li>
+</ul>
 
-      <p>
-        {% trans "ABOUT_VOLUNTEERS" %}
-      </p>
-    </div></div>
+<p>
+  {% trans "ABOUT_VOLUNTEERS" %}
+</p>
 
-    <div class="span6"><div class="content">
-      <h3>{% trans "Code of Conduct" %}</h3>
-      <p>{% trans "ABOUT_CONDUCT" %}</p>
-    </div></div>
-  </div></div>
-</div>
-
+<h2>{% trans "Code of Conduct" %}</h2>
+<p>{% trans "ABOUT_CONDUCT" %}</p>
 {% endblock %}
