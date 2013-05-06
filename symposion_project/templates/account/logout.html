@@ -9,8 +9,7 @@
 {% block one_column %}
 <form method="POST" action="/en/account/logout/" class="form-horizontal">
   <legend>Log out</legend>
-  <fieldset>
-    <div style="display:none"><input type="hidden" name="csrfmiddlewaretoken" value="Bu6odZiO34b3kBUDmzNFihyGZOk45gvf"></div>
+    {% csrf_token %}
     <p>{% trans "Are you sure you want to log out?" %}</p>
     <div class="form-actions">
       <button type="submit" class="btn btn-primary">Log out</button>
