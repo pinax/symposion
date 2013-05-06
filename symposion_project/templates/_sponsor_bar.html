@@ -1,12 +1,24 @@
+{% load url from future %}
+{% load sponsorship_tags %}
+{% load thumbnail %}
 {% load i18n %}
 
 <div class="sponsor-bar">
   <h2>Our Sponsors</h2>
   <ul>
-    <li><h3><span>Gold</span></h3></li>
-    <li><h3><span>Silver</span></h3></li>
-    <li><h3><span>Our Mothership</span></h3></li>
+    {% sponsor_levels as levels %}
+    {% for level in levels %}
+    <li>
+      <h3><span>{{ level.name }}</span></h3>
+      <div class="sponsor-group">
+      {% for sponsor in level.sponsors %}
+      <a href="{{ sponsor.external_url }}">
+        <img src="{% thumbnail sponsor.website_logo '100x60' %}" alt="{{ sponsor.name }}" />
+      </a>
+      {% endfor %}
+    </li>
+    {% endfor %}
   </ul>
-  <a href="">view full list of sponsors »</a>
-  <a href="">Sponsorship Details »</a>
+  <a href="{% url "sponsor_list" %}">{% trans "View full list of sponsors" %} »</a>
+  <a href="{% url "sponsor_prospectus" %}">{% trans "Sponsorship details" %} »</a>
 </div>
