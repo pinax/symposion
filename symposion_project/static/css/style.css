@@ -1690,7 +1690,7 @@ table {
 }
 .table tbody tr:hover td,
 .table tbody tr:hover th {
-  background-color: #f5f5f5;
+  background-color: #123;
 }
 table .span1 {
   float: none;
