@@ -5,8 +5,8 @@
         "fields": {
             "start": "2013-03-30", 
             "section": 1, 
-            "end": "2013-06-30", 
-            "closed": true, 
+            "end": "2013-06-20", 
+            "closed": false, 
             "published": null
         }
     }, 
@@ -16,8 +16,8 @@
         "fields": {
             "start": "2013-03-30", 
             "section": 2, 
-            "end": "2013-06-30", 
-            "closed": true, 
+            "end": "2013-06-20", 
+            "closed": false, 
             "published": null
         }
     }, 
