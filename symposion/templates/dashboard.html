@@ -14,6 +14,8 @@
         <div class="dashboard-panel-header">
             <i class="icon-bullhorn"></i>
             <h3>{% trans "Speaking" %}</h3>
+            {# Brutal hack. Also, the trans block needs to interpolate the date so that it can be put in the correct place during translation. #}
+            <p>{% trans "The submission deadline is" %} {{ review_sections.0.end|date:"N j, Y" }}.</p>
             <div class="pull-right header-actions">
                 {% if not user.speaker_profile %}
                     <a href="{% url speaker_create %}">
