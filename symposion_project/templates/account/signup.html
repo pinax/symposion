@@ -1,0 +1,68 @@
+{% extends "content_base.html" %}
+
+{% load url from future %}
+{% load i18n %}
+{% load bootstrap_tags %}
+
+{% block head_title %}{% trans "Sign up" %}{% endblock %}
+
+{% block one_column %}
+<form id="signup_form" method="post" action="/en/account/signup/" autocapitalize="off" class="form-horizontal">
+  <legend>Sign up</legend>
+  {% csrf_token %}
+  <fieldset>
+    <div id="div_id_signup-email" class="control-group  ">
+      <label for="id_signup-email" class="control-label required-field">
+        Email
+      </label>
+      <div class="controls">
+        <input type="text" name="signup-email" id="id_signup-email">
+      </div>
+    </div>
+    <div id="div_id_signup-email_confirm" class="control-group  ">
+      <label for="id_signup-email_confirm" class="control-label required-field">
+        Confirm Email
+      </label>
+      <div class="controls">
+        <input type="text" name="signup-email_confirm" id="id_signup-email_confirm">
+      </div>
+    </div>
+    <div id="div_id_signup-first_name" class="control-group  ">
+      <label for="id_signup-first_name" class="control-label required-field">
+        First name
+      </label>
+      <div class="controls">
+        <input type="text" name="signup-first_name" id="id_signup-first_name">
+      </div>
+    </div>
+    <div id="div_id_signup-last_name" class="control-group  ">
+      <label for="id_signup-last_name" class="control-label required-field">
+        Last name
+      </label>
+      <div class="controls">
+        <input type="text" name="signup-last_name" id="id_signup-last_name">
+      </div>
+    </div>
+    <div id="div_id_signup-password" class="control-group  ">
+      <label for="id_signup-password" class="control-label required-field">
+        Password
+      </label>
+      <div class="controls">
+        <input type="password" name="signup-password" id="id_signup-password">
+      </div>
+    </div>
+    <div id="div_id_signup-password_confirm" class="control-group  ">
+      <label for="id_signup-password_confirm" class="control-label required-field">
+        Password (again)
+      </label>
+      <div class="controls">
+        <input type="password" name="signup-password_confirm" id="id_signup-password_confirm">
+      </div>
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Sign up</button>
+    </div>
+  </fieldset>
+</form>
+{% endblock %}
+
