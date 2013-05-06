@@ -6249,3 +6249,9 @@ form label {
   float: right;
   margin-top: 8px;
 }
+.controls input[type=text], .controls input[type=password] {
+    width: 50%;
+}
+.controls textarea {
+    width: 100%;
+}
