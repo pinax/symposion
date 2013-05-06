@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-04 18:49-0400\n"
+"POT-Creation-Date: 2013-05-06 18:18-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,27 +25,31 @@ msgstr ""
 msgid "French"
 msgstr ""
 
-#: templates/_footer.html:18
-msgid "© PyCon Canada 2013"
-msgstr ""
-
-#: templates/_footer.html:22
-msgid "Get in touch"
-msgstr ""
-
 #: templates/_footer.html:26
-msgid "Board"
-msgstr ""
-
-#: templates/_footer.html:27
 msgid "List"
 msgstr ""
 
-#: templates/_footer.html:29
+#: templates/_footer.html:30
+msgid "Board"
+msgstr ""
+
+#: templates/_footer.html:34
+msgid "Organizers"
+msgstr ""
+
+#: templates/_footer.html:38
 msgid "Volunteer"
 msgstr ""
 
-#: templates/about.html:5
+#: templates/_sponsor_bar.html:22
+msgid "View full list of sponsors"
+msgstr ""
+
+#: templates/_sponsor_bar.html:23
+msgid "Sponsorship details"
+msgstr ""
+
+#: templates/about.html:5 templates/about.html.py:11
 msgid "About"
 msgstr ""
 
@@ -54,15 +58,15 @@ msgid ""
 "PyCon Canada is an initiative to strengthen the Canadian Python community."
 msgstr ""
 
-#: templates/about.html:14
+#: templates/about.html:12
 msgid "What is PyCon Canada?"
 msgstr ""
 
-#: templates/about.html:16
+#: templates/about.html:14
 msgid "Our main goals:"
 msgstr ""
 
-#: templates/about.html:21
+#: templates/about.html:19
 msgid "ABOUT_GOAL_SUPPORT"
 msgstr ""
 "Support the efforts of <a href='http://montrealpython.org/2011/03/pycon-2014-"
@@ -72,7 +76,7 @@ msgstr ""
 "the US. Let's take this opportunity to showcase the Canadian Python "
 "community, and step up to the challenge as speakers and volunteers. "
 
-#: templates/about.html:24
+#: templates/about.html:22
 msgid "ABOUT_GOAL_STRENGTHEN"
 msgstr ""
 "Strengthen the Canadian Python community by providing more opportunities for "
@@ -81,28 +85,24 @@ msgstr ""
 "organizations, and companies within the community. "
 
 #: templates/about.html:27
-msgid "Host an annual Canadian PyCon conference, starting now - 2012!"
-msgstr ""
-
-#: templates/about.html:32
 msgid "ABOUT_VOLUNTEERS"
 msgstr ""
 "PyCon Canada is entirely run by volunteers who are passionate about these "
 "goals. We hope to see you at the 2012 conference! "
 
-#: templates/about.html:37 templates/conduct.html:6
-#: templates/conduct.html.py:9 templates/conduct.html:18
+#: templates/about.html:30 templates/conduct.html:6
+#: templates/conduct.html.py:9 templates/conduct.html:15
 msgid "Code of Conduct"
 msgstr ""
 
-#: templates/about.html:38
+#: templates/about.html:31
 msgid "ABOUT_CONDUCT"
 msgstr ""
 "Please familiarize yourself with the <a href='/conduct'>Code of Conduct</a> "
 "and do your part to make sure PyCon Canada doesn't end up on Hacker News for "
 "all the wrong reasons. "
 
-#: templates/conduct.html:19
+#: templates/conduct.html:16
 msgid "CONDUCT_OVERVIEW"
 msgstr ""
 "PyCon Canada is a community conference intended for networking and "
@@ -116,11 +116,11 @@ msgstr ""
 "at any PyCon Canada event are required to conform to the following Code of "
 "Conduct. Organizers will enforce this code throughout the event. "
 
-#: templates/conduct.html:21
+#: templates/conduct.html:18
 msgid "The Short Version"
 msgstr ""
 
-#: templates/conduct.html:22
+#: templates/conduct.html:19
 msgid "CONDUCT_SHORT"
 msgstr ""
 "PyCon Canada is dedicated to providing a harassment-free conference "
@@ -137,11 +137,11 @@ msgstr ""
 "without a refund at the sole discretion of the conference organizers. <br> "
 "<br>  Thank you for helping make this a welcoming, friendly event for all."
 
-#: templates/conduct.html:24
+#: templates/conduct.html:21
 msgid "The Longer Version"
 msgstr ""
 
-#: templates/conduct.html:25
+#: templates/conduct.html:22
 msgid "CONDUCT_LONG"
 msgstr ""
 "Harassment includes offensive verbal comments related to gender, sexual "
@@ -162,19 +162,19 @@ msgstr ""
 "they deem appropriate, including warning the offender or expulsion from the "
 "conference with no refund. "
 
-#: templates/conduct.html:27
+#: templates/conduct.html:24
 msgid "Contact Information"
 msgstr ""
 
-#: templates/conduct.html:29
+#: templates/conduct.html:26
 msgid "CONDUCT_CONTACTS"
 msgstr ""
 "If you are being harassed, notice that someone else is being harassed, or "
-"have any other concerns, please contact a member of conference board - Michael "
-"DiBernardo, Taavi Burns, or David Wolever. <br> <br>  If the matter is especially "
-"urgent, please call/contact any of these individuals: "
+"have any other concerns, please contact a member of conference board - "
+"Michael DiBernardo, Taavi Burns, or David Wolever. <br> <br>  If the matter "
+"is especially urgent, please call/contact any of these individuals: "
 
-#: templates/conduct.html:34
+#: templates/conduct.html:31
 msgid "CONDUCT_POLICE"
 msgstr ""
 "Conference staff will be happy to help participants contact hotel/venue "
@@ -182,16 +182,16 @@ msgstr ""
 "those experiencing harassment to feel safe for the duration of the "
 "conference. We value your attendance. "
 
-#: templates/conduct.html:37
+#: templates/conduct.html:34
 msgid "License"
 msgstr ""
 
 #: templates/contact.html:6 templates/contact.html.py:9
-#: templates/contact.html:20
+#: templates/contact.html:15
 msgid "Contact"
 msgstr ""
 
-#: templates/contact.html:21
+#: templates/contact.html:16
 msgid "CONTACT_US_MAILING_LISTS"
 msgstr ""
 "The majority of our discussion occurs on the mailing list <a href='mailto:"
@@ -202,11 +202,11 @@ msgstr ""
 "DiBernardo, David Wolever and Taavi Burns) can be contacted privately at <a "
 "href='mailto:board@pycon.ca'>board@pycon.ca</a>. "
 
-#: templates/contact.html:23
+#: templates/contact.html:18
 msgid "We are also online at:"
 msgstr ""
 
-#: templates/homepage.html:8
+#: templates/homepage.html:9
 msgid "Welcome"
 msgstr ""
 
@@ -219,7 +219,7 @@ msgid ""
 "A place to announce our featured speakers, one by one, over the coming weeks."
 msgstr ""
 
-#: templates/site_base.html:88
+#: templates/site_base.html:94
 msgid "Buy a ticket"
 msgstr ""
 
@@ -227,14 +227,18 @@ msgstr ""
 msgid "Quick links"
 msgstr ""
 
-#: templates/sponsor_prospectus.html:9
+#: templates/sponsor_prospectus.html:7
+msgid "About Sponsorship"
+msgstr ""
+
+#: templates/sponsor_prospectus.html:10
 msgid "ABOUT_SPONSORSHIP"
 msgstr ""
 "We are in the process of developing a prospectus. In the mean time, if you "
 "are interested in sponsoring PyCon Canada, please contact <a href=\"mailto:"
 "sponsorship@pycon.ca\">sponsorship@pycon.ca</a>."
 
-#: templates/venue.html:5
+#: templates/venue.html:5 templates/venue.html.py:12
 msgid "Venue"
 msgstr ""
 
@@ -242,29 +246,29 @@ msgstr ""
 msgid "The conference will be held at the"
 msgstr ""
 
-#: templates/venue.html:17
+#: templates/venue.html:13
 msgid "Location"
 msgstr ""
 
-#: templates/venue.html:18
+#: templates/venue.html:14
 msgid "VENUE_LOCATION"
 msgstr ""
 "The conference will be held at: Chestnut Residence of University of "
 "Toronto,  Toronto, M5G 1R1"
 
-#: templates/venue.html:20
+#: templates/venue.html:16
 msgid "View the complete"
 msgstr ""
 
-#: templates/venue.html:20
+#: templates/venue.html:16
 msgid "PyCon Canada 2013 map"
 msgstr ""
 
-#: templates/venue.html:25
+#: templates/venue.html:18
 msgid "Getting to Toronto"
 msgstr ""
 
-#: templates/venue.html:26
+#: templates/venue.html:19
 msgid "VENUE_AIRPORTS"
 msgstr ""
 "Toronto has 2 major airports. <a href='http://www.gtaa.com'>Pearson</a> is "
@@ -274,7 +278,7 @@ msgstr ""
 "busy all day and is particularly busy during peak rush hour. Allow at least "
 "an hour for travel time from the airport. "
 
-#: templates/venue.html:27
+#: templates/venue.html:20
 msgid "VENUE_PORTER"
 msgstr ""
 "<a href='http://www.flyporter.com'>Porter Airlines</a> has frequent, "
@@ -282,23 +286,23 @@ msgstr ""
 "including Boston, Burlington (VT), Chicago, Myrtle Beach, New York, and "
 "Washington. "
 
-#: templates/venue.html:28
+#: templates/venue.html:21
 msgid "VENUE_VIA"
 msgstr ""
 "VIA is a good alternative to the airlines if you are coming from somewhere "
 "like Montreal or Ottawa. Advance pricing is often available at a discount. "
 
-#: templates/venue.html:31
+#: templates/venue.html:23
 msgid "If you're coming from the US:"
 msgstr ""
 
-#: templates/venue.html:33
+#: templates/venue.html:25
 msgid "VENUE_PASSPORT_USA"
 msgstr ""
 "Make sure that you've got a valid passport and don't forget to bring it with "
 "you. "
 
-#: templates/venue.html:34
+#: templates/venue.html:26
 msgid "VENUE_PORTER_USA"
 msgstr ""
 "<a href='http://www.flyporter.com'>Porter Airlines</a> has frequent, "
@@ -306,50 +310,66 @@ msgstr ""
 "including Boston, Burlington (VT), Chicago, Myrtle Beach, New York, and "
 "Washington. "
 
-#: templates/venue.html:39
+#: templates/venue.html:30
 msgid "Public Transit and Parking"
 msgstr ""
 
-#: templates/venue.html:40
+#: templates/venue.html:31
 msgid "VENUE_PUBLIC_TRANSIT"
-msgstr "The nearest <a href=\"http://ttc.ca/\">TTC</a> subway stop is St. "
-"Patrick Station, on the Yonge-Univeristy-Spadina line. Dundas streetcars "
-"also stop at Chestnut Street. Cash fare is $3, "
-"or tokens can be purchased at discounted rates."
+msgstr ""
+"The nearest <a href=\"http://ttc.ca/\">TTC</a> subway stop is St. Patrick "
+"Station, on the Yonge-Univeristy-Spadina line. Dundas streetcars also stop "
+"at Chestnut Street. Cash fare is $3, or tokens can be purchased at "
+"discounted rates."
 
-#: templates/venue.html:41
+#: templates/venue.html:32
 msgid "VENUE_PARKING"
 msgstr ""
 
-#: templates/venue.html:46
+#: templates/venue.html:34
 msgid "Food"
 msgstr ""
 
-#: templates/venue.html:47
+#: templates/venue.html:35
 msgid "VENUE_FOOD"
-msgstr ""
+msgstr "TBA"
 
-#: templates/venue.html:51
+#: templates/venue.html:37
 msgid "Hotel"
 msgstr ""
 
-#: templates/account/login.html:7 templates/account/login.html.py:22
+#: templates/account/login.html:7 templates/account/login.html.py:19
 msgid "Log in"
 msgstr ""
 
-#: templates/account/login.html:14
+#: templates/account/login.html:11
 msgid "Log in to an existing account"
 msgstr ""
 
-#: templates/account/login.html:21
+#: templates/account/login.html:18
 msgid "Forgot your password?"
 msgstr ""
 
+#: templates/account/logout.html:7
+msgid "Log out"
+msgstr ""
+
+#: templates/account/logout.html:13
+msgid "Are you sure you want to log out?"
+msgstr ""
+
+#: templates/account/signup.html:7
+msgid "Sign up"
+msgstr ""
+
+#: templates/schedule/schedule_conference.html:7
+#: templates/schedule/schedule_conference.html:16
+#, fuzzy
+msgid "Conference Schedule"
+msgstr "August 9-13, 2013"
+
 #~ msgid "welcome masthead"
 #~ msgstr "Welcome to PyCon!"
-
-#~ msgid "conference date range"
-#~ msgstr "August 9-13, 2013"
 
 #~ msgid "This is not a word."
 #~ msgstr "This is not a word."
