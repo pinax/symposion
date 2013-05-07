@@ -34,6 +34,7 @@
             <div class="span12">
                 {% block shouty_pycon_canada %}{% endblock %}
                 <ul class="nav">
+                    <li><a href="{% url "home" %}"><img src="{% static "img/favicon_logo.png" %}" alt="Home Page"></a></li>
                     <li><a href="{% url "about" %}">About</a></li>
                     <li><a href="{% url "venue" %}">Venue</a></li>
                     <li><a href="{% url "schedule_conference" %}">Schedule</a></li>
@@ -76,9 +77,6 @@
                 </div>
 
                 <ul id="social">
-                    <li>
-                    <a href="{% url "home" %}" data-toggle="tooltip" data-placement="bottom" data-title="Home"><img src="{% static "img/icon-home.png" %}"></a>
-                    </li>
                     <li>
                     <a href="https://github.com/pyconca/" data-toggle="tooltip" data-placement="bottom" data-title="Github"><img src="{% static "img/icon-git.png" %}"></a>
                     </li>

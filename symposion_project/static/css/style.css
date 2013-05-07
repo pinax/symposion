@@ -1820,7 +1820,7 @@ table .span24 {
   *margin-right: .3em;
   line-height: 14px;
   vertical-align: text-top;
-  background-image: asset-url("twitter/bootstrap/glyphicons-halflings.png");
+  background-image: url("img/glyphicons-halflings.png");
   background-position: 14px 14px;
   background-repeat: no-repeat;
 }
@@ -1833,7 +1833,7 @@ table .span24 {
   *margin-left: 0;
 }
 .icon-white {
-  background-image: asset-url("twitter/bootstrap/glyphicons-halflings-white.png");
+  background-image: url("img/glyphicons-halflings-white.png");
 }
 .icon-glass {
   background-position: 0      0;
@@ -5928,14 +5928,15 @@ h3, legend {
 .nav {
   list-style: none;
   overflow: auto;
-  margin: 1em 0 -10px;
+  margin: 10px 0 -30px;
 }
 .nav li {
   float: left;
-  width: 14%;
+  margin-left: 30px;
+  margin-right: 30px;
   text-align: center;
-  line-height: 40px;
-  height: 40px;
+  line-height: 45px;
+  height: 45px;
 }
 @media (max-width: 630px) {
   .nav li {
