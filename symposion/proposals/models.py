@@ -84,8 +84,8 @@ class ProposalBase(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField(
         _("Brief Outline"),
-        max_length=400,  # @@@ need to enforce 400 in UI
-        help_text="If your talk is accepted this will be made public and printed in the program. Should be one paragraph, maximum 400 characters."
+        max_length=300,  # @@@ need to enforce 300 in UI
+        help_text="If your talk is accepted this will be made public and printed in the program. Should be one paragraph, maximum 300 characters."
     )
     abstract = MarkupField(
         _("Detailed Abstract"),

@@ -9,9 +9,9 @@ class ProposalForm(forms.ModelForm):
     
     def clean_description(self):
         value = self.cleaned_data["description"]
-        if len(value) > 400:
+        if len(value) > 300:
             raise forms.ValidationError(
-                u"The description must be less than 400 characters"
+                u"The description must be no more than 300 characters"
             )
         return value
 
