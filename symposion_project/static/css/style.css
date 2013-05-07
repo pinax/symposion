@@ -5928,7 +5928,7 @@ h3, legend {
 .nav {
   list-style: none;
   overflow: auto;
-  margin: 10px 0 -30px;
+  margin: 10px 0 -10px;
 }
 .nav li {
   float: left;
