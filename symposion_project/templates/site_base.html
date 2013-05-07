@@ -20,7 +20,15 @@
 </head>
 
 <body>
-    {% block logo_header %}<div style="height: 35px;"></div>{% endblock %}
+    <header>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span12">
+                    <a class="{% block logo_header_class %}content-brand{% endblock %}">PyCon Canada 2013</a>
+                </div>
+            </div>
+        </div>
+    </header>
     <div class="container-fluid content">
         <div class="row-fluid">
             <div class="span12">

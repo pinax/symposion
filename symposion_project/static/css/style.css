@@ -5830,13 +5830,21 @@ body {
 header {
   background: transparent url('../img/top-header.jpg') top left repeat-x;
 }
-header .brand {
+header .splash-brand {
   background: transparent url('../img/pycon-logo.png') top left no-repeat;
   height: 162px;
   width: 162px;
   display: block;
   text-indent: -9999px;
   margin: 30px auto;
+}
+header .content-brand {
+  background: transparent url('../img/pycon-logo-sm.png') top left no-repeat;
+  height: 77px;
+  width: 77px;
+  display: block;
+  text-indent: -9999px;
+  margin: 15px auto;
 }
 footer {
   background: #000000;
