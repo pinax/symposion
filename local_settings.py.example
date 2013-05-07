@@ -6,6 +6,8 @@ ADMINS = [
     'wolever@pycon.ca',
 ]
 
+DEFAULT_FROM_EMAIL = 'organizers@pycon.ca'
+
 MANGERS = ADMINS
 
 DATABASES = {
