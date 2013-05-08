@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-07 21:08-0400\n"
+"POT-Creation-Date: 2013-05-07 22:04-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -337,6 +337,7 @@ msgid "Log out"
 msgstr ""
 
 #: templates/site_base.html:73 templates/account/signup.html:7
+#: templates/account/signup.html.py:12 templates/account/signup.html:20
 msgid "Sign up"
 msgstr ""
 
