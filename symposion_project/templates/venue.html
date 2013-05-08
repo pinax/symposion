@@ -35,7 +35,7 @@
 <p>{% trans "VENUE_FOOD" %}</p>
 
 <h2>{% trans "Hotel" %}</h2>
-<p>The recommended hotel for PyCon Canada is the conference venue, the Chestnut Residence:</p>
+<p>{% trans "The recommended hotel for PyCon Canada is the conference venue, the Chestnut Residence" %}:</p>
 
 <p><address>
   89 Chestnut St<br />
@@ -44,19 +44,34 @@
   416-978-8863
 </address></p>
 
-<p>
-<strong>Rates and a link to reserve rooms are pending.</strong>
-</p>
+<p>{% blocktrans %}
+To make a reservation over the phone, please call 416-977-0707
+between the hours of 9am and 7pm Eastern time and mention code "1308 PYCONCA".
+{% endblocktrans %}</p>
 
-<p>
+<p>{% blocktrans %}
+To make a reservation on the web head to the
+<a href="https://quokkatraveltools.nucleus.com/HotelResSys/SignIn/CustWelcome.cfm?P=417&amp;R=1234976191">online reservation system</a>.
+The approval code is "1308 PYCONCA". Follow the reservation process by creating
+a new account. The cut off date for the group rate is July 9, 2013.
+{% endblocktrans %}</p>
+
+<p>{% blocktrans %}
+You can also contact the residence by emailing
+<a href="mailto:frontdesk.chestnut@utoronto.ca">frontdesk.chestnut@utoronto.ca</a>.
+{% endblocktrans %}</p>
+
+<p>{% blocktrans %}
 If you would like to share a hotel room with someone else attending the
 conference, please see the PyCon Canada
-<a href="https://github.com/pyconca/2013-wiki/wiki/Room-Sharing">
-  room sharing wiki</a> page.
+<a href="https://github.com/pyconca/2013-wiki/wiki/Room-Sharing">room sharing wiki</a>
+page.
+{% endblocktrans %}</p>
 
-<p>
-  Email <a href='mailto:organizers@pycon.ca'>organizers@pycon.ca</a> if you 
-  run into any trouble reserving your room, or finding someone to share a 
-  room with.
-</p>
+<p>{% blocktrans %}
+Email
+<a href="mailto:organizers@pycon.ca?subject=I%20need%20help%20finding%20a%20room!">organizers@pycon.ca</a>
+if you run into any trouble reserving your room, or finding someone to share a
+room with.
+{% endblocktrans%}</p>
 {% endblock %}

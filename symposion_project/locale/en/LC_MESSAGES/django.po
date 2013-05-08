@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-07 22:29-0400\n"
+"POT-Creation-Date: 2013-05-07 23:29-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -331,21 +331,25 @@ msgstr ""
 msgid "PyCon Canada 2013"
 msgstr ""
 
-#: templates/site_base.html:71 templates/account/logout.html:7
+#: templates/site_base.html:71
+msgid "Dashboard"
+msgstr ""
+
+#: templates/site_base.html:73 templates/account/logout.html:7
 msgid "Log out"
 msgstr ""
 
-#: templates/site_base.html:73 templates/account/signup.html:7
+#: templates/site_base.html:75 templates/account/signup.html:7
 #: templates/account/signup.html.py:12 templates/account/signup.html:20
 msgid "Sign up"
 msgstr ""
 
-#: templates/site_base.html:75 templates/account/login.html:7
+#: templates/site_base.html:77 templates/account/login.html:7
 #: templates/account/login.html.py:19
 msgid "Log in"
 msgstr ""
 
-#: templates/site_base.html:101
+#: templates/site_base.html:103
 msgid "Buy a ticket"
 msgstr ""
 
@@ -460,6 +464,61 @@ msgstr "TBA"
 msgid "Hotel"
 msgstr ""
 
+#: templates/venue.html:38
+msgid ""
+"The recommended hotel for PyCon Canada is the conference venue, the Chestnut "
+"Residence"
+msgstr ""
+
+#: templates/venue.html:47
+msgid ""
+"\n"
+"To make a reservation over the phone, please call 416-977-0707\n"
+"between the hours of 9am and 7pm Eastern time and mention code \"1308 PYCONCA"
+"\".\n"
+msgstr ""
+
+#: templates/venue.html:52
+msgid ""
+"\n"
+"To make a reservation on the web head to the\n"
+"<a href=\"https://quokkatraveltools.nucleus.com/HotelResSys/SignIn/"
+"CustWelcome.cfm?P=417&amp;R=1234976191\">online reservation system</a>.\n"
+"The approval code is \"1308 PYCONCA\". Follow the reservation process by "
+"creating\n"
+"a new account. The cut off date for the group rate is July 9, 2013.\n"
+msgstr ""
+
+#: templates/venue.html:59
+msgid ""
+"\n"
+"You can also contact the residence by emailing\n"
+"<a href=\"mailto:frontdesk.chestnut@utoronto.ca\">frontdesk."
+"chestnut@utoronto.ca</a>.\n"
+msgstr ""
+
+#: templates/venue.html:64
+msgid ""
+"\n"
+"If you would like to share a hotel room with someone else attending the\n"
+"conference, please see the PyCon Canada\n"
+"<a href=\"https://github.com/pyconca/2013-wiki/wiki/Room-Sharing\">room "
+"sharing wiki</a>\n"
+"page.\n"
+msgstr ""
+
+#: templates/venue.html:71
+#, python-format
+msgid ""
+"\n"
+"Email\n"
+"<a href=\"mailto:organizers@pycon.ca?subject=I%%20need%%20help%%20finding"
+"%%20a%%20room!\">organizers@pycon.ca</a>\n"
+"if you run into any trouble reserving your room, or finding someone to share "
+"a\n"
+"room with.\n"
+msgstr ""
+
 #: templates/account/login.html:11
 msgid "Log in to an existing account"
 msgstr ""
@@ -470,6 +529,51 @@ msgstr ""
 
 #: templates/account/logout.html:13
 msgid "Are you sure you want to log out?"
+msgstr ""
+
+#: templates/account/password_reset.html:8
+#: templates/account/password_reset.html:14
+msgid "Password reset"
+msgstr ""
+
+#: templates/account/password_reset.html:15
+msgid ""
+"Forgotten your password? Enter your email address below, and we'll send you "
+"an email allowing you to reset it."
+msgstr ""
+
+#: templates/account/password_reset.html:20
+msgid "Reset my password"
+msgstr ""
+
+#: templates/account/password_reset.html:25
+msgid ""
+"If you have any trouble resetting your password, contact us at <a href="
+"\"mailto:organizers@pycon.ca\">organizers@pycon.ca</a>."
+msgstr ""
+
+#: templates/account/password_reset_sent.html:7
+#: templates/account/password_reset_sent.html:10
+msgid "Password reset sent"
+msgstr ""
+
+#: templates/account/password_reset_sent.html:12
+#, python-format
+msgid ""
+"We have sent you an email. If you do not receive it within a few minutes, "
+"try resending or contact us at <a href=\"mailto:"
+"%(THEME_ACCOUNT_CONTACT_EMAIL)s\">%(THEME_ACCOUNT_CONTACT_EMAIL)s</a>."
+msgstr ""
+
+#: templates/account/password_reset_sent.html:18
+msgid "Resend"
+msgstr ""
+
+#: templates/account/password_reset_sent.html:21
+msgid ""
+"We have resent the password email. If you do not receive it within a few "
+"minutes, contact us at <a href=\"mailto:organizers@pycon.ca"
+"\">organizers@pycon.ca</a>."
 msgstr ""
 
 #: templates/schedule/schedule_conference.html:7
