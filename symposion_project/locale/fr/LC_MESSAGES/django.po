@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-06 18:18-0400\n"
+"POT-Creation-Date: 2013-05-07 20:54-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -226,8 +226,78 @@ msgstr "Nous sommes aussi en ligne sur:"
 msgid "Welcome"
 msgstr ""
 
-#: templates/learn.html:5
+#: templates/homepage.html:12
+msgid ""
+"You're invited to the second annual PyCon Canada <span>August 9th - 13th in "
+"Toronto</span> getting us warmed up for the first PyCon US outside of the US "
+"&mdash; Montréal in 2014 and 2015!"
+msgstr ""
+
+#: templates/homepage.html:20
+#, fuzzy
+msgid "Pycon Canada <span>2013!</span>"
+msgstr "Qu'est-ce que PyCon Canada?"
+
+#: templates/homepage.html:30 templates/speak.html:6
+msgid "Speak"
+msgstr ""
+
+#: templates/homepage.html:31
+msgid "HOMEPAGE_SPEAK_BLURB"
+msgstr ""
+
+#: templates/homepage.html:32
+msgid "Submit a proposal"
+msgstr ""
+
+#: templates/homepage.html:35 templates/learn.html:5
 msgid "Learn"
+msgstr ""
+
+#: templates/homepage.html:36
+msgid "HOMEPAGE_LEARN_BLURB"
+msgstr ""
+
+#: templates/homepage.html:37 templates/homepage.html.py:44
+#: templates/homepage.html:49
+msgid "More Info"
+msgstr ""
+
+#: templates/homepage.html:42 templates/venue.html:5
+#: templates/venue.html.py:12
+msgid "Venue"
+msgstr ""
+
+#: templates/homepage.html:43
+msgid "VENUE_HOMEPAGE_BLURB"
+msgstr ""
+
+#: templates/homepage.html:47
+msgid "Schedule"
+msgstr ""
+
+#: templates/homepage.html:48
+msgid "HOMEPAGE_SCHEDULE_BLURB"
+msgstr ""
+
+#: templates/homepage.html:57
+msgid "Looking for PyCon Montréal 2014?"
+msgstr ""
+
+#: templates/homepage.html:58
+msgid "LOOKING_FOR_BIG_PYCON"
+msgstr ""
+
+#: templates/homepage.html:59
+msgid "FOLLOW_AT_PYCON_FOR_MONTREAL"
+msgstr ""
+
+#: templates/homepage.html:71
+msgid "Our Sponsors <span>Interested in a sponsorship opportunity?"
+msgstr ""
+
+#: templates/homepage.html:71
+msgid "Learn More"
 msgstr ""
 
 #: templates/learn.html:7
@@ -235,12 +305,12 @@ msgid ""
 "A place to announce our featured speakers, one by one, over the coming weeks."
 msgstr ""
 
-#: templates/site_base.html:94
+#: templates/site_base.html:101
 msgid "Buy a ticket"
 msgstr "Acheter un billet"
 
-#: templates/site_base.old.html:111
-msgid "Quick links"
+#: templates/speak.html:9
+msgid "Speakers"
 msgstr ""
 
 #: templates/sponsor_prospectus.html:7
@@ -249,10 +319,6 @@ msgstr ""
 
 #: templates/sponsor_prospectus.html:10
 msgid "ABOUT_SPONSORSHIP"
-msgstr ""
-
-#: templates/venue.html:5 templates/venue.html.py:12
-msgid "Venue"
 msgstr ""
 
 #: templates/venue.html:7
@@ -376,10 +442,6 @@ msgstr ""
 #, fuzzy
 msgid "Conference Schedule"
 msgstr "9 au 13 août, 2013"
-
-#, fuzzy
-#~ msgid "© PyCon Canada 2013"
-#~ msgstr "Qu'est-ce que PyCon Canada?"
 
 #~ msgid "Host an annual Canadian PyCon conference, starting now - 2012!"
 #~ msgstr ""

@@ -9,7 +9,7 @@
 {% block head_title %}{% trans "Welcome" %}{% endblock %}
 
 {% block excerpt %}
-<h2>You're invited to the second annual PyCon Canada <span>August 9th - 13th in Toronto</span> getting us warmed up for the first PyCon US outside of the US &mdash; Montr&eacute;al in 2014 and 2015!</h2>
+<h2>{% trans "You're invited to the second annual PyCon Canada <span>August 9th - 13th in Toronto</span> getting us warmed up for the first PyCon US outside of the US &mdash; Montréal in 2014 and 2015!" %}</h2>
 {% endblock %}
 
 {% block body_class %}home{% endblock %}
@@ -17,7 +17,7 @@
 {% block logo_header_class %}splash-brand{% endblock %}
 
 {% block shouty_pycon_canada %}
-<h1>Pycon Canada <span>2013!</span></h1>
+<h1>{% trans "Pycon Canada <span>2013!</span>" %}</h1>
 {% endblock %}
 
 {% block body_outer %}
@@ -27,26 +27,26 @@
       <div class="content">
         <div class="row-fluid">
           <div class="span6" id="speak">
-            <h3>Speak</h3>
-            <p>Share your knowledge and cool ideas. Submit your proposal for a talk or tutorial by June 21st. We'll be sprinting at the conference too, so you can also send us sprint ideas.</p>
-            <a href="{% url "speak" %}">Submit a proposal »</a>
+            <h3>{% trans "Speak" %}</h3>
+            <p>{% trans "HOMEPAGE_SPEAK_BLURB" %}</p>
+            <a href="{% url "speak" %}">{% trans "Submit a proposal" %} »</a>
           </div>
           <div class="span6" id="learn">
-            <h3>Learn</h3>
-            <p>One of PyCon Canada's goals is to bring experts from the greater Python community to Canada; giving you the opportunity to be inspired and learn from the best! To get you excited, we'll be announcing our featured speakers, one by one, over the coming weeks.</p>
-            <a href="">More Info »</a>
+            <h3>{% trans "Learn" %}</h3>
+            <p>{% trans "HOMEPAGE_LEARN_BLURB" %}</p>
+            <a href="">{% trans "More Info" %} »</a>
           </div>
         </div>
         <div class="row-fluid">
           <div class="span6" id="venue">
-            <h3>Venue</h3>
-            <p>Be there August 9-13, 2013 at Chestnut Conference Centre in Toronto. A short walk from the subway, so when you aren't busy coding or chatting with your colleagues you've got lots of stuff to explore nearby.</p>
-            <a href="{% url "venue" %}">More Info »</a>
+            <h3>{% trans "Venue" %}</h3>
+            <p>{% trans "VENUE_HOMEPAGE_BLURB" %}</p>
+            <a href="{% url "venue" %}">{% trans "More Info" %} »</a>
           </div>
           <div class="span6" id="schedule">
-            <h3>Schedule</h3>
-            <p>Start the fun Friday evening with a mix and mingle. Feed your brain at talks on Saturday, and if your sprint team is eager, you can start that night. Sprint or attend talks and tutorials on Sunday.</p>
-            <a href="{% url "schedule_conference" %}">More Info »</a>
+            <h3>{% trans "Schedule" %}</h3>
+            <p>{% trans "HOMEPAGE_SCHEDULE_BLURB" %}</p>
+            <a href="{% url "schedule_conference" %}">{% trans "More Info" %} »</a>
           </div>
         </div>
       </div>
@@ -54,8 +54,9 @@
     <div class="row-fluid">
       <div class="span12">
         <div id="montreal">
-          <h4>Looking for PyCon Montr&eacute;al 2014?</h4>
-          <p>The "big" PyCon (previously known as "PyCon US") will be held in Montr&eacute;al in 2014! Follow <a href="https://twitter.com/pycon">@pycon</a> for updates related to PyCon Montr&eacute;al.</p>
+          <h4>{% trans "Looking for PyCon Montréal 2014?" %}</h4>
+          <p>{% trans "LOOKING_FOR_BIG_PYCON" %}
+          {% trans "FOLLOW_AT_PYCON_FOR_MONTREAL" %}</p>
         </div>
       </div>
     </div>
@@ -67,7 +68,7 @@
     <div class="span12">
       <div class="content">
         <h3>
-          Our Sponsors <span>Interested in a sponsorship opportunity? <a href="{% url "sponsor_prospectus" %}">Learn More</a></span>
+          {% trans "Our Sponsors <span>Interested in a sponsorship opportunity?" %} <a href="{% url "sponsor_prospectus" %}">{% trans "Learn More" %}</a></span>
         </h3>
         {% sponsor_levels as levels %}
         {% for level in levels %}
