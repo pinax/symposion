@@ -27,8 +27,11 @@ PyCon conference in Montr&eacute;al.</p>
 considered. Tutorials are 3 hours. We also welcome ideas for sprints. The
 deadline to submit talks and tutorials is June 21st, 2013.</p>
 
-<p>Please <a href="{% url "account_signup" %}">Create an Account &raquo;</a> and then log in to access
-the <a href="{% url "dashboard" %}">dashboard &raquo;</a>.</p>
+{% if user.is_authenticated %}
+<p>Head over to the <a href="{% url "dashboard" %}">dashboard &raquo;</a> to submit a proposal.</p>
+{% else %}
+<p>Please <a href="{% url "account_signup" %}">Create an Account &raquo;</a> or <a href="{% url "account_login" %}">Log in &raquo;</a>.</p>
+{% endif %}
 
 <p>Submit your talk if you are logged in. You will need to include the
 following information in talk and tutorial proposals:</p>
