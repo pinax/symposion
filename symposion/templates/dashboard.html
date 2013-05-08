@@ -14,7 +14,10 @@
         <div class="dashboard-panel-header">
             <i class="icon-bullhorn"></i>
             <h3>{% trans "Speaking" %}</h3>
-            <p>{% trans "The submission deadline is June 21st, 2013." %}</p>
+            <p>
+                {% trans "The submission deadline is June 21st, 2013." %}
+                {% trans "Please note that <em>everyone</em> pays for a ticket to PyCon, including speakers!" %}
+            </p>
             <div class="pull-right header-actions">
                 {% if not user.speaker_profile %}
                     <a href="{% url speaker_create %}">
