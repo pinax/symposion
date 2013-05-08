@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-22 05:46-0400\n"
+"POT-Creation-Date: 2013-05-08 09:13-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -197,19 +197,33 @@ msgstr ""
 msgid "file"
 msgstr ""
 
+#: templates/dashboard.html:8
+msgid "Dashboard"
+msgstr ""
+
 #: templates/dashboard.html:16
 msgid "Speaking"
 msgstr ""
 
-#: templates/dashboard.html:92 templates/sponsorship/detail.html:8
+#: templates/dashboard.html:18
+msgid "The submission deadline is June 21st, 2013."
+msgstr ""
+
+#: templates/dashboard.html:19
+msgid ""
+"Please note that <em>everyone</em> pays for a ticket to PyCon, including "
+"speakers!"
+msgstr ""
+
+#: templates/dashboard.html:96 templates/sponsorship/detail.html:8
 msgid "Sponsorship"
 msgstr ""
 
-#: templates/dashboard.html:107 templates/reviews/review_detail.html:75
+#: templates/dashboard.html:113 templates/reviews/review_detail.html:75
 msgid "Reviews"
 msgstr ""
 
-#: templates/dashboard.html:171
+#: templates/dashboard.html:177
 msgid "Teams"
 msgstr ""
 
@@ -418,7 +432,7 @@ msgstr ""
 msgid "Add another speaker"
 msgstr ""
 
-#: templates/proposals/proposal_submit.html:6
+#: templates/proposals/proposal_submit.html:5
 msgid "Submit A Proposal"
 msgstr ""
 
@@ -505,28 +519,33 @@ msgstr ""
 msgid "Edit Slot"
 msgstr ""
 
-#: templates/speakers/speaker_create.html:7
-#: templates/speakers/speaker_create.html:14
+#: templates/schedule/schedule_conference.html:7
+#: templates/schedule/schedule_conference.html:16
+msgid "Conference Schedule"
+msgstr ""
+
+#: templates/speakers/speaker_create.html:6
+#: templates/speakers/speaker_create.html:12
 msgid "Create Speaker Profile"
 msgstr ""
 
-#: templates/speakers/speaker_edit.html:7
-#: templates/speakers/speaker_edit.html:14
+#: templates/speakers/speaker_edit.html:6
+#: templates/speakers/speaker_edit.html:12
 msgid "Edit Speaker Profile"
 msgstr ""
 
-#: templates/sponsorship/add.html:7 templates/sponsorship/add.html.py:14
+#: templates/sponsorship/add.html:6 templates/sponsorship/add.html.py:13
 msgid "Add a Sponsor"
 msgstr ""
 
-#: templates/sponsorship/apply.html:7
+#: templates/sponsorship/apply.html:6
 msgid "Apply to be a Sponsor"
 msgstr ""
 
-#: templates/sponsorship/apply.html:17
+#: templates/sponsorship/apply.html:15
 msgid "Apply to Be a Sponsor"
 msgstr ""
 
-#: templates/sponsorship/list.html:7 templates/sponsorship/list.html.py:14
+#: templates/sponsorship/list.html:7 templates/sponsorship/list.html.py:12
 msgid "About Our Sponsors"
 msgstr ""
