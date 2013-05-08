@@ -68,6 +68,8 @@
 
                 <div class="session_management">
                   {% if user.is_authenticated %}
+                    <a href="{% url "dashboard" %}">{% trans "Dashboard" %} &raquo;</a>
+                    &nbsp;
                     <a href="{% url "account_logout" %}">{% trans "Log out" %} &raquo;</a>
                   {% else %}
                     <a href="{% url "account_signup" %}">{% trans "Sign up" %} &raquo;</a>
