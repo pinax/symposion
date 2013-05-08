@@ -18,6 +18,15 @@
         }
     },
     {
+        "pk": 3,
+        "model": "schedule.schedule",
+        "fields": {
+            "section": 3,
+            "published": true,
+            "hidden": false
+        }
+    },
+    {
         "pk": 1,
         "model": "schedule.day",
         "fields": {

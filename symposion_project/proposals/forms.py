@@ -2,7 +2,7 @@ from django import forms
 
 from markitup.widgets import MarkItUpWidget
 
-from symposion_project.proposals.models import TalkProposal, TutorialProposal, PosterProposal
+from symposion_project.proposals.models import TalkProposal, TutorialProposal, PosterProposal, LightningProposal
 
 
 class ProposalForm(forms.ModelForm):
@@ -46,6 +46,24 @@ class TutorialProposalForm(ProposalForm):
             "additional_notes",
             "recording_release",
 
+        ]
+        widgets = {
+            "abstract": MarkItUpWidget(),
+            "additional_notes": MarkItUpWidget(),
+        }
+
+
+class LightningProposalForm(ProposalForm):
+
+    class Meta:
+        model = LightningProposal
+        fields = [
+            "title",
+            "audience_level",
+            "description",
+            "abstract",
+            "additional_notes",
+            "recording_release",
         ]
         widgets = {
             "abstract": MarkItUpWidget(),

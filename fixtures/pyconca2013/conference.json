@@ -30,5 +30,16 @@
             "end_date": "2013-08-11", 
             "slug": "talks"
         }
+    }, 
+    {
+        "pk": 3, 
+        "model": "conference.section", 
+        "fields": {
+            "conference": 1, 
+            "start_date": "2013-08-10", 
+            "name": "Lightning Talks", 
+            "end_date": "2013-08-11", 
+            "slug": "lightning"
+        }
     }
 ]

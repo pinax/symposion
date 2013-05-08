@@ -9,7 +9,7 @@
             "closed": false, 
             "published": null
         }
-    }, 
+    },
     {
         "pk": 2, 
         "model": "proposals.proposalsection", 
@@ -20,13 +20,24 @@
             "closed": false, 
             "published": null
         }
+    },
+    {
+        "pk": 3, 
+        "model": "proposals.proposalsection", 
+        "fields": {
+            "start": "2013-03-30", 
+            "section": 3, 
+            "end": "2013-06-21", 
+            "closed": false, 
+            "published": null
+        }
     }, 
     {
         "pk": 1, 
         "model": "proposals.proposalkind", 
         "fields": {
             "section": 1, 
-            "name": "tutorial", 
+            "name": "Tutorial", 
             "slug": "tutorial"
         }
     }, 
@@ -35,8 +46,17 @@
         "model": "proposals.proposalkind", 
         "fields": {
             "section": 2, 
-            "name": "talk", 
+            "name": "Talk", 
             "slug": "talk"
+        }
+    },
+    {
+        "pk": 3, 
+        "model": "proposals.proposalkind", 
+        "fields": {
+            "section": 3, 
+            "name": "Lightning talk", 
+            "slug": "lightning"
         }
     }
 ]
