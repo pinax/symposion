@@ -32,6 +32,7 @@
     <div class="container-fluid content">
         <div class="row-fluid">
             <div class="span12">
+                {% include "_messages.html" %}
                 {% block shouty_pycon_canada %}{% endblock %}
                 <ul class="nav">
                     <li><a href="{% url "home" %}"><img src="{% static "img/favicon_logo.png" %}" alt="Home Page"></a></li>
