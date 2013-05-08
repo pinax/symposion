@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-07 23:29-0400\n"
+"POT-Creation-Date: 2013-05-08 00:10-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,11 +20,11 @@ msgstr ""
 
 #: settings.py:112
 msgid "English"
-msgstr ""
+msgstr "anglais"
 
 #: settings.py:113
 msgid "French"
-msgstr ""
+msgstr "français"
 
 #: templates/_footer.html:8
 msgid "Get in touch"
@@ -44,51 +44,51 @@ msgstr ""
 
 #: templates/_footer.html:38
 msgid "Volunteer"
-msgstr ""
+msgstr "Volontaire"
 
 #: templates/_footer.html:52
 msgid "Logo by"
-msgstr ""
+msgstr "Logo par"
 
 #: templates/_footer.html:53
 msgid "Background by"
-msgstr ""
+msgstr "fond par"
 
 #: templates/_footer.html:58 templates/about.html:5 templates/about.html.py:11
 #: templates/site_base.html:39
 msgid "About"
-msgstr ""
+msgstr "À propos"
 
 #: templates/_footer.html:59 templates/homepage.html:42
 #: templates/site_base.html:40 templates/venue.html:5
 #: templates/venue.html.py:12
 msgid "Venue"
-msgstr ""
+msgstr "Lieu"
 
 #: templates/_footer.html:60 templates/homepage.html:47
 #: templates/site_base.html:41
 msgid "Schedule"
-msgstr ""
+msgstr "Horaire"
 
 #: templates/_footer.html:61 templates/homepage.html:30
 #: templates/site_base.html:42 templates/speak.html:6
 msgid "Speak"
-msgstr ""
+msgstr "Présenter"
 
 #: templates/_footer.html:62 templates/homepage.html:35 templates/learn.html:5
 #: templates/site_base.html:43
 msgid "Learn"
-msgstr ""
+msgstr "Apprendre"
 
 #: templates/_footer.html:63 templates/site_base.html:44
 msgid "Sponsors"
-msgstr ""
+msgstr "Sponsors"
 
 #: templates/_footer.html:64 templates/contact.html:6
 #: templates/contact.html.py:9 templates/contact.html:15
 #: templates/site_base.html:45
 msgid "Contact"
-msgstr ""
+msgstr "Contact"
 
 #: templates/_sponsor_bar.html:22
 msgid "View full list of sponsors"
@@ -137,7 +137,7 @@ msgstr ""
 msgid "ABOUT_VOLUNTEERS"
 msgstr ""
 "PyCon Canada est entièrement organisé par des volontaires passionés par ces "
-"objectifs. Nous espérons vous voir à la conférence 2012! "
+"objectifs. Nous espérons vous voir à la conférence 2013!"
 
 #: templates/about.html:30 templates/conduct.html:6
 #: templates/conduct.html.py:9 templates/conduct.html:15
@@ -263,16 +263,15 @@ msgstr "Nous sommes aussi en ligne sur:"
 
 #: templates/homepage.html:9
 msgid "Welcome"
-msgstr ""
+msgstr "Bienvenue"
 
 #: templates/homepage.html:12
 msgid "HOMEPAGE_SPLASH"
 msgstr ""
 
 #: templates/homepage.html:20
-#, fuzzy
 msgid "Pycon Canada <span>2013!</span>"
-msgstr "Qu'est-ce que PyCon Canada?"
+msgstr ""
 
 #: templates/homepage.html:31
 msgid "HOMEPAGE_SPEAK_BLURB"
@@ -317,7 +316,7 @@ msgstr ""
 
 #: templates/homepage.html:71
 msgid "Learn More"
-msgstr ""
+msgstr "En savoir plus"
 
 #: templates/learn.html:7
 msgid ""
@@ -325,9 +324,8 @@ msgid ""
 msgstr ""
 
 #: templates/site_base.html:27
-#, fuzzy
 msgid "PyCon Canada 2013"
-msgstr "Qu'est-ce que PyCon Canada?"
+msgstr ""
 
 #: templates/site_base.html:71
 msgid "Dashboard"
@@ -335,7 +333,7 @@ msgstr ""
 
 #: templates/site_base.html:73 templates/account/logout.html:7
 msgid "Log out"
-msgstr ""
+msgstr "Se déconnecter"
 
 #: templates/site_base.html:75 templates/account/signup.html:7
 #: templates/account/signup.html.py:12 templates/account/signup.html:20
@@ -569,17 +567,5 @@ msgstr ""
 
 #: templates/schedule/schedule_conference.html:7
 #: templates/schedule/schedule_conference.html:16
-#, fuzzy
 msgid "Conference Schedule"
-msgstr "9 au 13 août, 2013"
-
-#~ msgid "Host an annual Canadian PyCon conference, starting now - 2012!"
-#~ msgstr ""
-#~ "Accueillir une conférence annuelle PyCon Canada, en commencant "
-#~ "maintenant, en 2012!"
-
-#~ msgid "welcome masthead"
-#~ msgstr "Bienvenue à PyCon!"
-
-#~ msgid "This is not a word."
-#~ msgstr "Ceci n'est pas un mot."
+msgstr ""
