@@ -67,14 +67,16 @@
                 </div>
 
                 <div class="session_management">
-                  {% if user.is_authenticated %}
-                    <a href="{% url "dashboard" %}">{% trans "Dashboard" %} &raquo;</a>
-                    &nbsp;
-                    <a href="{% url "account_logout" %}">{% trans "Log out" %} &raquo;</a>
-                  {% else %}
+                  {% if not request.user.is_authenticated %}
                     <a href="{% url "account_signup" %}">{% trans "Sign up" %} &raquo;</a>
                     &nbsp;
                     <a href="{% url "account_login" %}">{% trans "Log in" %} &raquo;</a>
+                  {% else %}
+                    <a href="{% url "dashboard" %}">{% trans "Dashboard" %} &raquo;</a>
+                    &nbsp;
+                    <a href="{% url "account_settings" %}">{% trans "Settings" %} &raquo;</a>
+                    &nbsp;
+                    <form id="account_logout_form" action="{% url "account_logout" %}" method="post" style="display:inline-block">{% csrf_token %}<a href="#" onclick="$(this).closest('form').submit()">{% trans "Log out" %} &raquo;</a> </form>
                   {% endif %}
                   &nbsp;
                 </div>
