@@ -5,7 +5,7 @@
   <div class="row-fluid">
     <div class="span12">
       <div class="content">
-        <h3>Get in touch</h3>
+          <h3>{% trans "Get in touch" %}</h3>
         <ul>
           <li>
             <span>Twitter</span>
@@ -49,19 +49,19 @@
       <div class="content">
         <p class="copyright-notice">
           &copy; PyCon Canada 2013<br />
-          Logo by <a href="https://twitter.com/jess_sanson">Jess Sanson</a><br />
-          Background by <a href="https://twitter.com/KMarincic">Kirsten Marincic</a>
+          {% trans "Logo by" %} <a href="https://twitter.com/jess_sanson">Jess Sanson</a><br />
+          {% trans "Background by" %} <a href="https://twitter.com/KMarincic">Kirsten Marincic</a>
         </p>
         <a class="brand">Pycon 2013</a>
         <ul class="footer-nav">
           <li><a href="{% url "home" %}"><i class="icon-home icon-white nav-icon"></i></a></li>
-          <li><a href="{% url "about" %}">About</a></li>
-          <li><a href="{% url "venue" %}">Venue</a></li>
-          <li><a href="{% url "schedule_conference" %}">Schedule</a></li>
-          <li><a href="{% url "speak" %}">Speak</a></li>
-          <li><a href="{% url "learn" %}">Learn</a></li>
-          <li><a href="{% url "sponsor_list" %}">Sponsors</a></li>
-          <li><a href="{% url "contact" %}">Contact</a></li>
+          <li><a href="{% url "about" %}">{% trans "About" %}</a></li>
+          <li><a href="{% url "venue" %}">{% trans "Venue" %}</a></li>
+          <li><a href="{% url "schedule_conference" %}">{% trans "Schedule" %}</a></li>
+          <li><a href="{% url "speak" %}">{% trans "Speak" %}</a></li>
+          <li><a href="{% url "learn" %}">{% trans "Learn" %}</a></li>
+          <li><a href="{% url "sponsor_list" %}">{% trans "Sponsors" %}</a></li>
+          <li><a href="{% url "contact" %}">{% trans "Contact" %}</a></li>
         </ul>
       </div>
     </div>

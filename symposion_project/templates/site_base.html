@@ -24,7 +24,7 @@
         <div class="container-fluid">
             <div class="row-fluid">
                 <div class="span12">
-                    <a class="{% block logo_header_class %}content-brand{% endblock %}">PyCon Canada 2013</a>
+                    <a class="{% block logo_header_class %}content-brand{% endblock %}">{% trans "PyCon Canada 2013" %}</a>
                 </div>
             </div>
         </div>
@@ -36,13 +36,13 @@
                 {% block shouty_pycon_canada %}{% endblock %}
                 <ul class="nav">
                     <li><a href="{% url "home" %}"><img src="{% static "img/favicon_logo.png" %}" alt="Home Page"></a></li>
-                    <li><a href="{% url "about" %}">About</a></li>
-                    <li><a href="{% url "venue" %}">Venue</a></li>
-                    <li><a href="{% url "schedule_conference" %}">Schedule</a></li>
-                    <li><a href="{% url "speak" %}">Speak</a></li>
-                    <li><a href="{% url "learn" %}">Learn</a></li>
-                    <li><a href="{% url "sponsor_list" %}">Sponsors</a></li>
-                    <li><a href="{% url "contact" %}">Contact</a></li>
+                    <li><a href="{% url "about" %}">{% trans "About" %}</a></li>
+                    <li><a href="{% url "venue" %}">{% trans "Venue" %}</a></li>
+                    <li><a href="{% url "schedule_conference" %}">{% trans "Schedule" %}</a></li>
+                    <li><a href="{% url "speak" %}">{% trans "Speak" %}</a></li>
+                    <li><a href="{% url "learn" %}">{% trans "Learn" %}</a></li>
+                    <li><a href="{% url "sponsor_list" %}">{% trans "Sponsors" %}</a></li>
+                    <li><a href="{% url "contact" %}">{% trans "Contact" %}</a></li>
                 </ul>
                 <div class="dropdown" id="language-selector">
                   <form action="/i18n/setlang/" method="post" style="margin:0;">
@@ -68,11 +68,11 @@
 
                 <div class="session_management">
                   {% if user.is_authenticated %}
-                    <a href="{% url "account_logout" %}">Log out &raquo;</a>
+                    <a href="{% url "account_logout" %}">{% trans "Log out" %} &raquo;</a>
                   {% else %}
-                    <a href="{% url "account_signup" %}">Sign up &raquo;</a>
+                    <a href="{% url "account_signup" %}">{% trans "Sign up" %} &raquo;</a>
                     &nbsp;
-                    <a href="{% url "account_login" %}">Log in &raquo;</a>
+                    <a href="{% url "account_login" %}">{% trans "Log in" %} &raquo;</a>
                   {% endif %}
                   &nbsp;
                 </div>
