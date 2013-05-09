@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-09 18:26-0400\n"
+"POT-Creation-Date: 2013-05-09 18:54-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,38 +55,38 @@ msgid "Background by"
 msgstr "Fond par"
 
 #: templates/_footer.html:58 templates/about.html:5 templates/about.html.py:11
-#: templates/site_base.html:39
+#: templates/site_base.html:38
 msgid "About"
 msgstr "À propos"
 
 #: templates/_footer.html:59 templates/homepage.html:42
-#: templates/site_base.html:40 templates/venue.html:5
+#: templates/site_base.html:39 templates/venue.html:5
 #: templates/venue.html.py:12
 msgid "Venue"
 msgstr "Lieu"
 
 #: templates/_footer.html:60 templates/homepage.html:47
-#: templates/site_base.html:41
+#: templates/site_base.html:40
 msgid "Schedule"
 msgstr "Horaire"
 
 #: templates/_footer.html:61 templates/homepage.html:30
-#: templates/site_base.html:42 templates/speak.html:6
+#: templates/site_base.html:41 templates/speak.html:6
 msgid "Speak"
 msgstr "Présenter"
 
 #: templates/_footer.html:62 templates/homepage.html:35 templates/learn.html:5
-#: templates/site_base.html:43
+#: templates/site_base.html:42
 msgid "Learn"
 msgstr "Apprendre"
 
-#: templates/_footer.html:63 templates/site_base.html:44
+#: templates/_footer.html:63 templates/site_base.html:43
 msgid "Sponsors"
 msgstr "Sponsors"
 
 #: templates/_footer.html:64 templates/contact.html:6
 #: templates/contact.html.py:9 templates/contact.html:15
-#: templates/site_base.html:45
+#: templates/site_base.html:44
 msgid "Contact"
 msgstr "Contact"
 
@@ -324,33 +324,33 @@ msgid ""
 "A place to announce our featured speakers, one by one, over the coming weeks."
 msgstr ""
 
-#: templates/site_base.html:27
+#: templates/site_base.html:26
 msgid "PyCon Canada 2013"
 msgstr ""
 
-#: templates/site_base.html:71 templates/account/signup.html:7
+#: templates/site_base.html:70 templates/account/signup.html:7
 #: templates/account/signup.html.py:12 templates/account/signup.html:20
 msgid "Sign up"
 msgstr ""
 
-#: templates/site_base.html:73 templates/account/login.html:7
+#: templates/site_base.html:72 templates/account/login.html:7
 #: templates/account/login.html.py:19
 msgid "Log in"
 msgstr ""
 
-#: templates/site_base.html:75
+#: templates/site_base.html:74
 msgid "Dashboard"
 msgstr ""
 
-#: templates/site_base.html:77
+#: templates/site_base.html:76
 msgid "Settings"
 msgstr ""
 
-#: templates/site_base.html:79 templates/account/logout.html:7
+#: templates/site_base.html:78 templates/account/logout.html:7
 msgid "Log out"
 msgstr "Se déconnecter"
 
-#: templates/site_base.html:105
+#: templates/site_base.html:104
 msgid "Buy a ticket"
 msgstr "Acheter un billet"
 
@@ -358,11 +358,11 @@ msgstr "Acheter un billet"
 msgid "Speakers"
 msgstr ""
 
-#: templates/sponsor_prospectus.html:7
+#: templates/sponsor_prospectus.html:10
 msgid "About Sponsorship"
 msgstr ""
 
-#: templates/sponsor_prospectus.html:10
+#: templates/sponsor_prospectus.html:13
 msgid "ABOUT_SPONSORSHIP"
 msgstr ""
 
