@@ -52,9 +52,9 @@
 
 {% block one_column %}
     <div class="row-fluid">
-        <div class="span3">
+        <div class="span2">
             {% block sidebar %}
-                <ul class="nav nav-list well">
+                <ul class="nav-list">
                     {% for section in review_sections %}
                         <li class="nav-header">
                             {{ section }}
@@ -85,7 +85,7 @@
                 </ul>
             {% endblock %}
         </div>
-        <div class="span9">
+        <div class="span10">
             {% block body %}
             {% endblock %}
         </div>
