@@ -1,4 +1,4 @@
-{% extends "site_base.html" %}
+{% extends "content_base.html" %}
 
 {% load i18n %}
 {% load sitetree %}
@@ -50,9 +50,9 @@
 
 {% block body_class %}reviews{% endblock %}
 
-{% block body_outer %}
-    <div class="row">
-        <div class="span2">
+{% block one_column %}
+    <div class="row-fluid">
+        <div class="span3">
             {% block sidebar %}
                 <ul class="nav nav-list well">
                     {% for section in review_sections %}
@@ -85,7 +85,7 @@
                 </ul>
             {% endblock %}
         </div>
-        <div class="span10">
+        <div class="span9">
             {% block body %}
             {% endblock %}
         </div>
