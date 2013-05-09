@@ -46,8 +46,6 @@
             </div>
             {% if request.user == proposal.speaker.user %}
                 <div class="tab-pane" id="proposal-documents">
-                    <h3>{% trans 'Supporting Documents' %}</h3>
-                    
                     {% if proposal.supporting_documents.exists %}
                         <table class="table table-striped">
                             {% for document in proposal.supporting_documents.all %}
@@ -72,7 +70,7 @@
     {% if message_form %}
         <div class="tab-pane" id="proposal-feedback">
             
-            <h3>{% trans 'Conversation with Reviewers' %}</h3>
+            <h2>{% trans 'Conversation with Reviewers' %}</h2>
             
             {% for message in proposal.messages.all %}
                 <div class="review-box">
@@ -81,8 +79,9 @@
                 </div>
                 <div class="clear"></div>
             {% endfor %}
+            <hr>
             
-            <h3>{% trans 'Leave a Message' %}</h3>
+            <h2>{% trans 'Leave a Message' %}</h2>
             
             <p>{% trans 'You can leave a message for the reviewers here.' %}</p>
             

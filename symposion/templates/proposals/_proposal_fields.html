@@ -39,22 +39,21 @@
     
     <dt>{% trans "Documents" %}</dt>
     <dd>
-        {% if proposal.supporting_documents.exists %}
-            <table class="table table-striped">
-                {% for document in proposal.supporting_documents.all %}
-                    <tr>
-                        <td><a href="{{ document.download_url }}">{{ document.description }}</a></td>
-                        <td>
-                        <form style="margin: 0;" method="post" action="{% url proposal_document_delete document.pk %}">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-mini">delete</button>
-                        </form>
-                    </td>
-                    </tr>
-                {% endfor %}
-            </table>
-        {% else %}
-            No supporting documents attached to this proposal.
-        {% endif %}
+      {% if proposal.supporting_documents.exists %}
+        <ul>
+          {% for document in proposal.supporting_documents.all %}
+            <li>
+              <a href="{{ document.download_url }}">{{ document.description }}</a>
+              &nbsp;
+              <form style="margin: 0; display:inline-block;" method="post" action="{% url proposal_document_delete document.pk %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-mini">delete</button>
+              </form>
+            </li>
+          {% endfor %}
+        <ul>
+      {% else %}
+        No supporting documents attached to this proposal.
+      {% endif %}
     </dd>
 </dl>

@@ -3357,6 +3357,7 @@ input[type="submit"].btn.btn-mini {
 .tab-content > .active,
 .pill-content > .active {
   display: block;
+  width: 99%;
 }
 .tabs-below > .nav-tabs {
   border-top: 1px solid #ddd;
@@ -5927,7 +5928,7 @@ h4, legend {
 .nav {
   list-style: none;
   overflow: auto;
-  margin: 10px 0 -10px;
+  margin: 10px 0;
 }
 .nav li {
   float: left;
