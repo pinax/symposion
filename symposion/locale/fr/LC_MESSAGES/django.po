@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-09 18:26-0400\n"
+"POT-Creation-Date: 2013-05-09 18:54-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -219,7 +219,8 @@ msgstr ""
 msgid "Sponsorship"
 msgstr ""
 
-#: templates/dashboard.html:113 templates/reviews/review_detail.html:75
+#: templates/dashboard.html:113 templates/reviews/base.html:6
+#: templates/reviews/review_detail.html:75
 msgid "Reviews"
 msgstr ""
 
@@ -359,7 +360,7 @@ msgid "No, keep it for now"
 msgstr ""
 
 #: templates/proposals/proposal_detail.html:15
-#: templates/proposals/proposal_speaker_manage.html:8
+#: templates/proposals/proposal_speaker_manage.html:10
 msgid "Edit this proposal"
 msgstr ""
 
@@ -412,19 +413,23 @@ msgstr ""
 msgid "Submit"
 msgstr ""
 
-#: templates/proposals/proposal_speaker_manage.html:10
-msgid "Proposal:"
+#: templates/proposals/proposal_speaker_manage.html:6
+msgid "Proposal Speakers"
 msgstr ""
 
 #: templates/proposals/proposal_speaker_manage.html:12
+msgid "Proposal:"
+msgstr ""
+
+#: templates/proposals/proposal_speaker_manage.html:14
 msgid "Current Speakers"
 msgstr ""
 
-#: templates/proposals/proposal_speaker_manage.html:18
+#: templates/proposals/proposal_speaker_manage.html:20
 msgid "pending invitation"
 msgstr ""
 
-#: templates/proposals/proposal_speaker_manage.html:22
+#: templates/proposals/proposal_speaker_manage.html:24
 msgid "Add another speaker"
 msgstr ""
 
@@ -466,11 +471,11 @@ msgstr ""
 msgid "Your Rating"
 msgstr ""
 
-#: templates/reviews/base.html:64
+#: templates/reviews/base.html:66
 msgid "All Reviews"
 msgstr ""
 
-#: templates/reviews/base.html:77
+#: templates/reviews/base.html:79
 msgid "Voting Status"
 msgstr ""
 
@@ -547,5 +552,5 @@ msgid "Apply to Be a Sponsor"
 msgstr ""
 
 #: templates/sponsorship/list.html:7 templates/sponsorship/list.html.py:12
-msgid "About Our Sponsors"
+msgid "Our Sponsors"
 msgstr ""
