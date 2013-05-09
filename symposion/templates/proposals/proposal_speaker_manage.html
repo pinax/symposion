@@ -3,6 +3,8 @@
 
 {% load bootstrap_tags %}
 
+{% block head_title %}{% trans "Proposal Speakers" %}{% endblock %}
+
 {% block body %}
   <div class="pull-right">
     <a href="{% url proposal_edit proposal.pk %}" class="btn"><i class="icon-pencil"></i> {% trans 'Edit this proposal' %} </a>
