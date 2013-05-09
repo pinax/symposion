@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-08 00:15-0400\n"
+"POT-Creation-Date: 2013-05-09 18:26-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -226,10 +226,6 @@ msgstr ""
 "those experiencing harassment to feel safe for the duration of the "
 "conference. We value your attendance. "
 
-#: templates/conduct.html:34
-msgid "License"
-msgstr ""
-
 #: templates/contact.html:16
 msgid "CONTACT_US_MAILING_LISTS"
 msgstr ""
@@ -372,8 +368,10 @@ msgstr ""
 #: templates/sponsor_prospectus.html:10
 msgid "ABOUT_SPONSORSHIP"
 msgstr ""
-"We are in the process of developing a prospectus. In the mean time, if you "
-"are interested in sponsoring PyCon Canada, please contact <a href=\"mailto:"
+"If you are interested in sponsoring PyCon Canada 2013, you can view "
+"ourprospectus <a href=\"/site_media/static/PyCon%20Canada"
+"%202013%20sponsorship%20prospectus.pdf\">here</a>. If you have any questions "
+"or would like to discuss a custom package, please contact <a href=\"mailto:"
 "sponsorship@pycon.ca\">sponsorship@pycon.ca</a>."
 
 #: templates/venue.html:7
