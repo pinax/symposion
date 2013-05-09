@@ -4,12 +4,12 @@
 {% load thumbnail %}
 {% load i18n %}
 
-{% block head_title %}{% trans "About Our Sponsors" %}{% endblock %}
+{% block head_title %}{% trans "Our Sponsors" %}{% endblock %}
 
 {% block body_class %}sponsorships{% endblock %}
 
 {% block one_column %}
-<h3>{% trans "About Our Sponsors" %}</h3>
+<h3>{% trans "Our Sponsors" %}</h3>
 <p><a href="{% url sponsor_prospectus %}">Learn how to become a sponsor &raquo;</a></p>
 
 {% sponsor_levels as levels %}
