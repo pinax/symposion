@@ -5926,6 +5926,11 @@ h3, legend {
   border-bottom: 3px #36b3d9 solid;
   margin-bottom: 0.5em;
 }
+h4, legend {
+  text-align: left;
+  font-size: 1.6em;
+  line-height: 1.6em;
+}
 .nav {
   list-style: none;
   overflow: auto;

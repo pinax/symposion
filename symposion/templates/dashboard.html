@@ -92,20 +92,20 @@
         </div>
     </div>
     
-    <div class="dashboard-panel">
-        <div class="dashboard-panel-header">
-            <h3>{% trans "Sponsorship" %}</h3>
-        </div>
+    <!--<div class="dashboard-panel">-->
+        <!--<div class="dashboard-panel-header">-->
+            <!--<h3>{% trans "Sponsorship" %}</h3>-->
+        <!--</div>-->
         
-        <div class="dashboard-panel-content">
-            {% if not user.is_staff %}
-                {# If you want to allow people to see the sponsorships they've signed themselves up for, this is where you'd add it back in. #}
-                <p>Please read our <a href="{% url sponsor_prospectus %}">Sponsor Prospectus</a> and get in touch!</p>
-            {% else %}
-            <p>Hey, you're PyCon Canada staff! Check out the <a href="{% url admin:sponsorship_sponsor_changelist %}">Sponsorship Admin</a>.</p>
-            {% endif %}
-        </div>
-    </div>
+        <!--<div class="dashboard-panel-content">-->
+            <!--{% if not user.is_staff %}-->
+                <!--[> If you want to allow people to see the sponsorships they've signed themselves up for, this is where you'd add it back in. <]-->
+                <!--<p>Please read our <a href="{% url sponsor_prospectus %}">Sponsor Prospectus</a> and get in touch!</p>-->
+            <!--{% else %}-->
+            <!--<p>Hey, you're PyCon Canada staff! Check out the <a href="{% url admin:sponsorship_sponsor_changelist %}">Sponsorship Admin</a>.</p>-->
+            <!--{% endif %}-->
+        <!--</div>-->
+    <!--</div>-->
         
     {% if review_sections %}
         <div class="dashboard-panel">
