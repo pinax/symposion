@@ -6074,7 +6074,8 @@ h3, legend {
 }
 #body-content p strong {
   font-weight: bold;
-  font-size: 1.5em;
+  font-size: 1.0em;
+  color: #36b3d9;
 }
 #body-content .checklist li {
   list-style: none;
