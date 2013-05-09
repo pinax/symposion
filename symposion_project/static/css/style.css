@@ -3210,16 +3210,15 @@ input[type="submit"].btn.btn-mini {
   border-bottom: 1px solid #ddd;
 }
 .nav-tabs > li {
-  margin-bottom: -1px;
+  margin-bottom: -2px;
 }
 .nav-tabs > li > a {
   padding-top: 8px;
-  padding-bottom: 8px;
+  padding-bottom: 2px;
   line-height: 18px;
-  border: 1px solid transparent;
-  -webkit-border-radius: 4px 4px 0 0;
-  -moz-border-radius: 4px 4px 0 0;
-  border-radius: 4px 4px 0 0;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  border-radius: 2px;
 }
 .nav-tabs > li > a:hover {
   border-color: #eeeeee #eeeeee #dddddd;
@@ -3262,14 +3261,8 @@ input[type="submit"].btn.btn-mini {
   border-radius: 0;
 }
 .nav-tabs.nav-stacked > li:first-child > a {
-  -webkit-border-radius: 4px 4px 0 0;
-  -moz-border-radius: 4px 4px 0 0;
-  border-radius: 4px 4px 0 0;
 }
 .nav-tabs.nav-stacked > li:last-child > a {
-  -webkit-border-radius: 0 0 4px 4px;
-  -moz-border-radius: 0 0 4px 4px;
-  border-radius: 0 0 4px 4px;
 }
 .nav-tabs.nav-stacked > li > a:hover {
   border-color: #ddd;
@@ -5961,9 +5954,19 @@ h4, legend {
   font-size: 28px;
   text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
 }
+.nav-tabs li a {
+  font-family: 'bignoodletitlingregular', Impact, Arial;
+  color: #ffffff;
+  font-size: 22px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5);
+}
 .nav li a:hover {
   background: none;
   color: #0f394a;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+.nav-tabs li a:hover {
+  color: #A0A0A0;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
 }
 #language-selector {
