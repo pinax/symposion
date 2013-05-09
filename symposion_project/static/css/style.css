@@ -1610,7 +1610,7 @@ table {
   line-height: 18px;
   text-align: left;
   vertical-align: top;
-  border-top: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
 }
 .table th {
   font-weight: bold;
@@ -1686,7 +1686,7 @@ table {
 }
 .table-striped tbody tr:nth-child(odd) td,
 .table-striped tbody tr:nth-child(odd) th {
-  background-color: #f9f9f9;
+  background-color: #000000;
 }
 .table tbody tr:hover td,
 .table tbody tr:hover th {
