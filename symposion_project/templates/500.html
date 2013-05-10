@@ -1,0 +1,12 @@
+{% extends "content_base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Server Error" %}{% endblock %}
+
+{% block one_column %}
+<header class="jumbotron subhead" id="overview">
+  <h1>{% trans "Something went wrong" %}</h1>
+  <p class="lead">{% trans "We're sorry but a server error has occurred. We've been notified and will look into it as soon as possible." %}</p>
+</header>
+{% endblock %}

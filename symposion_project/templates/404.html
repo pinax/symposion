@@ -1,0 +1,12 @@
+{% extends "content_base.html" %}
+
+{% load i18n %}
+
+{% block head_title %}{% trans "Not Found" %}{% endblock %}
+
+{% block one_column %}
+<header class="jumbotron subhead" id="overview">
+  <h1>{% trans "Page not found" %}</h1>
+  <p class="lead">{% trans "We're sorry but that page could not be found." %}</p>
+</header>
+{% endblock %}
