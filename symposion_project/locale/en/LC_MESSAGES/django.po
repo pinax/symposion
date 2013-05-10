@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-10 11:39-0400\n"
+"POT-Creation-Date: 2013-05-10 13:46-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,7 +60,7 @@ msgstr ""
 
 #: templates/_footer.html:59 templates/homepage.html:42
 #: templates/site_base.html:39 templates/venue.html:5
-#: templates/venue.html.py:12
+#: templates/venue.html.py:11
 msgid "Venue"
 msgstr ""
 
@@ -375,32 +375,32 @@ msgstr ""
 "ca\">sponsorship@pycon.ca</a>."
 
 #: templates/venue.html:7
-msgid "The conference will be held at the"
+msgid ""
+"The conference will be held at the Chestnut Conference Centre in the heart "
+"of downtown Toronto, minutes away from transit, attractions, and food."
 msgstr ""
 
-#: templates/venue.html:13
+#: templates/venue.html:12
 msgid "Location"
 msgstr ""
 
-#: templates/venue.html:14
+#: templates/venue.html:13
 msgid "VENUE_LOCATION"
-msgstr ""
-"The conference will be held at: Chestnut Residence of University of "
-"Toronto,  Toronto, M5G 1R1"
+msgstr "The conference will be held at the Chestnut Conference Centre:"
 
-#: templates/venue.html:16
+#: templates/venue.html:15
 msgid "View the complete"
 msgstr ""
 
-#: templates/venue.html:16
+#: templates/venue.html:15
 msgid "PyCon Canada 2013 map"
 msgstr ""
 
-#: templates/venue.html:18
+#: templates/venue.html:17
 msgid "Getting to Toronto"
 msgstr ""
 
-#: templates/venue.html:19
+#: templates/venue.html:18
 msgid "VENUE_AIRPORTS"
 msgstr ""
 "Toronto has 2 major airports. <a href='http://www.gtaa.com'>Pearson</a> is "
@@ -410,7 +410,7 @@ msgstr ""
 "busy all day and is particularly busy during peak rush hour. Allow at least "
 "an hour for travel time from the airport. "
 
-#: templates/venue.html:20
+#: templates/venue.html:19
 msgid "VENUE_PORTER"
 msgstr ""
 "<a href='http://www.flyporter.com'>Porter Airlines</a> has frequent, "
@@ -418,23 +418,23 @@ msgstr ""
 "including Boston, Burlington (VT), Chicago, Myrtle Beach, New York, and "
 "Washington. "
 
-#: templates/venue.html:21
+#: templates/venue.html:20
 msgid "VENUE_VIA"
 msgstr ""
 "VIA is a good alternative to the airlines if you are coming from somewhere "
 "like Montreal or Ottawa. Advance pricing is often available at a discount. "
 
-#: templates/venue.html:23
+#: templates/venue.html:22
 msgid "If you're coming from the US:"
 msgstr ""
 
-#: templates/venue.html:25
+#: templates/venue.html:24
 msgid "VENUE_PASSPORT_USA"
 msgstr ""
 "Make sure that you've got a valid passport and don't forget to bring it with "
 "you. "
 
-#: templates/venue.html:26
+#: templates/venue.html:25
 msgid "VENUE_PORTER_USA"
 msgstr ""
 "<a href='http://www.flyporter.com'>Porter Airlines</a> has frequent, "
@@ -442,11 +442,11 @@ msgstr ""
 "including Boston, Burlington (VT), Chicago, Myrtle Beach, New York, and "
 "Washington. "
 
-#: templates/venue.html:30
+#: templates/venue.html:29
 msgid "Public Transit and Parking"
 msgstr ""
 
-#: templates/venue.html:31
+#: templates/venue.html:30
 msgid "VENUE_PUBLIC_TRANSIT"
 msgstr ""
 "The nearest <a href=\"http://ttc.ca/\">TTC</a> subway stop is St. Patrick "
@@ -454,29 +454,29 @@ msgstr ""
 "at Chestnut Street. Cash fare is $3, or tokens can be purchased at "
 "discounted rates."
 
-#: templates/venue.html:32
+#: templates/venue.html:31
 msgid "VENUE_PARKING"
-msgstr ""
+msgstr "Parking details TBA."
 
-#: templates/venue.html:34
+#: templates/venue.html:33
 msgid "Food"
 msgstr ""
 
-#: templates/venue.html:35
+#: templates/venue.html:34
 msgid "VENUE_FOOD"
 msgstr "TBA"
 
-#: templates/venue.html:37
+#: templates/venue.html:36
 msgid "Hotel"
 msgstr ""
 
-#: templates/venue.html:38
+#: templates/venue.html:37
 msgid ""
 "The recommended hotel for PyCon Canada is the conference venue, the Chestnut "
 "Residence"
 msgstr ""
 
-#: templates/venue.html:47
+#: templates/venue.html:46
 msgid ""
 "\n"
 "To make a reservation over the phone, please call 416-977-0707\n"
@@ -484,7 +484,7 @@ msgid ""
 "\".\n"
 msgstr ""
 
-#: templates/venue.html:52
+#: templates/venue.html:51
 msgid ""
 "\n"
 "To make a reservation on the web head to the\n"
@@ -495,7 +495,7 @@ msgid ""
 "a new account. The cut off date for the group rate is July 9, 2013.\n"
 msgstr ""
 
-#: templates/venue.html:59
+#: templates/venue.html:58
 msgid ""
 "\n"
 "You can also contact the residence by emailing\n"
@@ -503,7 +503,7 @@ msgid ""
 "chestnut@utoronto.ca</a>.\n"
 msgstr ""
 
-#: templates/venue.html:64
+#: templates/venue.html:63
 msgid ""
 "\n"
 "If you would like to share a hotel room with someone else attending the\n"
@@ -513,7 +513,7 @@ msgid ""
 "page.\n"
 msgstr ""
 
-#: templates/venue.html:71
+#: templates/venue.html:70
 #, python-format
 msgid ""
 "\n"
