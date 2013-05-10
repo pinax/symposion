@@ -19,7 +19,13 @@ class Proposal(ProposalBase):
     
     recording_release = models.BooleanField(
         default=True,
-        help_text="By submitting your talk proposal, you agree to give permission to the conference organizers to record, edit, and release audio and/or video of your presentation. If you do not agree to this, please uncheck this box."
+        help_text=(
+            'By submitting your talk proposal, you agree to license the '
+            'presentation video and audio under the '
+            '<a href="http://creativecommons.org/licenses/by-sa/2.5/ca/">Creative Commons Attribution-ShareAlike <img src="https://i.creativecommons.org/l/by-sa/2.5/ca/88x31.png" /></a> '
+            'license (like most of '
+            '<a href="http://en.wikipedia.org/wiki/Wikipedia:Copyrights">Wikipedia</a>). '
+            'If you do not agree to this, please uncheck this box.')
     )
     
     class Meta:
