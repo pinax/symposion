@@ -30,6 +30,7 @@ EMAIL_DEBUG = True # No better clue at this point
 
 # ACCOUNT_* things should probably also get updated here
 
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTOCOL', 'https')
 
 LOGGING = {
     'version': 1,
