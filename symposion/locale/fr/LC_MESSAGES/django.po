@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-08 09:13-0400\n"
+"POT-Creation-Date: 2013-05-10 14:34-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -201,6 +201,7 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
+<<<<<<< HEAD
 #: templates/dashboard.html:16
 msgid "Speaking"
 msgstr ""
@@ -220,6 +221,27 @@ msgid "Sponsorship"
 msgstr ""
 
 #: templates/dashboard.html:113 templates/reviews/review_detail.html:75
+=======
+#: templates/dashboard.html:32
+msgid "Speaking"
+msgstr ""
+
+#: templates/dashboard.html:34
+msgid "The submission deadline is June 21st, 2013."
+msgstr ""
+
+#: templates/dashboard.html:35
+msgid ""
+"Please note that <a href='http://jessenoller.com/blog/2011/05/25/pycon-"
+"everybody-pays'>everyone</a> pays for a ticket to PyCon, including speakers!"
+msgstr ""
+
+#: templates/dashboard.html:97 templates/sponsorship/detail.html:8
+msgid "Sponsorship"
+msgstr ""
+
+#: templates/dashboard.html:113 templates/reviews/base.html:6
+#: templates/reviews/review_detail.html:75
 msgid "Reviews"
 msgstr ""
 
@@ -358,29 +380,29 @@ msgstr ""
 msgid "No, keep it for now"
 msgstr ""
 
-#: templates/proposals/proposal_detail.html:14
+#: templates/proposals/proposal_detail.html:15
+#: templates/proposals/proposal_speaker_manage.html:10
 msgid "Edit this proposal"
 msgstr ""
 
-#: templates/proposals/proposal_detail.html:17
+#: templates/proposals/proposal_detail.html:19
 msgid "Cancel this proposal"
 msgstr ""
 
-#: templates/proposals/proposal_detail.html:21
+#: templates/proposals/proposal_detail.html:23
 msgid "Remove me from this proposal"
 msgstr ""
 
-#: templates/proposals/proposal_detail.html:33
+#: templates/proposals/proposal_detail.html:35
 #: templates/reviews/review_detail.html:74
 msgid "Proposal Details"
 msgstr ""
 
-#: templates/proposals/proposal_detail.html:35
-#: templates/proposals/proposal_detail.html:47
+#: templates/proposals/proposal_detail.html:37
 msgid "Supporting Documents"
 msgstr ""
 
-#: templates/proposals/proposal_detail.html:38
+#: templates/proposals/proposal_detail.html:40
 msgid "Reviewer Feedback"
 msgstr ""
 
@@ -400,24 +422,24 @@ msgstr ""
 msgid "Conversation with Reviewers"
 msgstr ""
 
-#: templates/proposals/proposal_detail.html:83
+#: templates/proposals/proposal_detail.html:84
 msgid "Leave a Message"
 msgstr ""
 
-#: templates/proposals/proposal_detail.html:85
+#: templates/proposals/proposal_detail.html:86
 msgid "You can leave a message for the reviewers here."
 msgstr ""
 
-#: templates/proposals/proposal_detail.html:94
+#: templates/proposals/proposal_detail.html:95
 msgid "Submit"
 msgstr ""
 
-#: templates/proposals/proposal_speaker_manage.html:7
-msgid "Proposal:"
+#: templates/proposals/proposal_speaker_manage.html:6
+msgid "Proposal Speakers"
 msgstr ""
 
-#: templates/proposals/proposal_speaker_manage.html:10
-msgid "Edit proposal"
+#: templates/proposals/proposal_speaker_manage.html:12
+msgid "Proposal:"
 msgstr ""
 
 #: templates/proposals/proposal_speaker_manage.html:14
@@ -434,6 +456,10 @@ msgstr ""
 
 #: templates/proposals/proposal_submit.html:5
 msgid "Submit A Proposal"
+msgstr ""
+
+#: templates/proposals/proposal_submit.html:9
+msgid "Submit a talk"
 msgstr ""
 
 #: templates/reviews/_review_table.html:6
@@ -466,11 +492,11 @@ msgstr ""
 msgid "Your Rating"
 msgstr ""
 
-#: templates/reviews/base.html:64
+#: templates/reviews/base.html:66
 msgid "All Reviews"
 msgstr ""
 
-#: templates/reviews/base.html:77
+#: templates/reviews/base.html:79
 msgid "Voting Status"
 msgstr ""
 
@@ -547,5 +573,5 @@ msgid "Apply to Be a Sponsor"
 msgstr ""
 
 #: templates/sponsorship/list.html:7 templates/sponsorship/list.html.py:12
-msgid "About Our Sponsors"
+msgid "Our Sponsors"
 msgstr ""

@@ -6,12 +6,13 @@
 
 {% block body %}
     
+<h3> {% trans "Submit a talk" %} </h3>
     {% if kinds %}
         <p>Select what kind of proposal you'd like to submit:</p>
     
         <ul>
             {% for kind in kinds %}
-                <li><a href="{% url proposal_submit_kind kind.slug %}">{{ kind }}</a></li>
+              <li><p><a href="{% url proposal_submit_kind kind.slug %}">{{ kind }}</a></p></li>
             {% endfor %}
         </ul>
     {% else %}

@@ -11,27 +11,29 @@
 
 {% block one_column %}
     <div class="dashboard-panel">
+        <div class="pull-right header-actions">
+            {% if not user.speaker_profile %}
+                <a href="{% url speaker_create %}" class="btn">
+                  <i class="icon-user"></i> 
+                    Create a speaker profile
+                </a>
+            {% else %}
+                <a href="{% url speaker_edit %}" class="btn">
+                  <i class="icon-pencil"></i>
+                    Edit your speaker profile
+                </a>
+                <a href="{% url proposal_submit %}" class="btn btn-success">
+                  <i class="icon-upload"></i>
+                    Submit a new proposal
+                </a>
+            {% endif %}
+        </div>
         <div class="dashboard-panel-header">
-            <i class="icon-bullhorn"></i>
             <h3>{% trans "Speaking" %}</h3>
             <p>
                 {% trans "The submission deadline is June 21st, 2013." %}
-                {% trans "Please note that <em>everyone</em> pays for a ticket to PyCon, including speakers!" %}
+                {% trans "Please note that <a href='http://jessenoller.com/blog/2011/05/25/pycon-everybody-pays'>everyone</a> pays for a ticket to PyCon, including speakers!" %}
             </p>
-            <div class="pull-right header-actions">
-                {% if not user.speaker_profile %}
-                    <a href="{% url speaker_create %}">
-                        Create a speaker profile &raquo;
-                    </a>
-                {% else %}
-                    <a href="{% url speaker_edit %}">
-                        Edit your speaker profile &raquo;
-                    </a>
-                    <a href="{% url proposal_submit %}">
-                        Submit a new proposal &raquo;
-                    </a>
-                {% endif %}
-            </div>
         </div>
         
         <div class="dashboard-panel-content">
@@ -90,26 +92,24 @@
         </div>
     </div>
     
-    <div class="dashboard-panel">
-        <div class="dashboard-panel-header">
-            <i class="icon-briefcase"></i>
-            <h3>{% trans "Sponsorship" %}</h3>
-        </div>
+    <!--<div class="dashboard-panel">-->
+        <!--<div class="dashboard-panel-header">-->
+            <!--<h3>{% trans "Sponsorship" %}</h3>-->
+        <!--</div>-->
         
-        <div class="dashboard-panel-content">
-            {% if not user.is_staff %}
-                {# If you want to allow people to see the sponsorships they've signed themselves up for, this is where you'd add it back in. #}
-                <p>Please read our <a href="{% url sponsor_prospectus %}">Sponsor Prospectus</a> and get in touch!</p>
-            {% else %}
-            <p>Hey, you're PyCon Canada staff! Check out the <a href="{% url admin:sponsorship_sponsor_changelist %}">Sponsorship Admin</a>.</p>
-            {% endif %}
-        </div>
-    </div>
+        <!--<div class="dashboard-panel-content">-->
+            <!--{% if not user.is_staff %}-->
+                <!--[> If you want to allow people to see the sponsorships they've signed themselves up for, this is where you'd add it back in. <]-->
+                <!--<p>Please read our <a href="{% url sponsor_prospectus %}">Sponsor Prospectus</a> and get in touch!</p>-->
+            <!--{% else %}-->
+            <!--<p>Hey, you're PyCon Canada staff! Check out the <a href="{% url admin:sponsorship_sponsor_changelist %}">Sponsorship Admin</a>.</p>-->
+            <!--{% endif %}-->
+        <!--</div>-->
+    <!--</div>-->
         
     {% if review_sections %}
         <div class="dashboard-panel">
             <div class="dashboard-panel-header">
-                <i class="icon-briefcase"></i>
                 <h3>{% trans "Reviews" %}</h3>
             </div>
             {% user_reviews as user_reviews %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-08 00:15-0400\n"
+"POT-Creation-Date: 2013-05-10 14:34-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,38 +55,38 @@ msgid "Background by"
 msgstr "Fond par"
 
 #: templates/_footer.html:58 templates/about.html:5 templates/about.html.py:11
-#: templates/site_base.html:39
+#: templates/site_base.html:38
 msgid "About"
 msgstr "À propos"
 
 #: templates/_footer.html:59 templates/homepage.html:42
-#: templates/site_base.html:40 templates/venue.html:5
-#: templates/venue.html.py:12
+#: templates/site_base.html:39 templates/venue.html:5
+#: templates/venue.html.py:11
 msgid "Venue"
 msgstr "Lieu"
 
 #: templates/_footer.html:60 templates/homepage.html:47
-#: templates/site_base.html:41
+#: templates/site_base.html:40
 msgid "Schedule"
 msgstr "Horaire"
 
 #: templates/_footer.html:61 templates/homepage.html:30
-#: templates/site_base.html:42 templates/speak.html:6
+#: templates/site_base.html:41 templates/speak.html:6
 msgid "Speak"
 msgstr "Présenter"
 
 #: templates/_footer.html:62 templates/homepage.html:35 templates/learn.html:5
-#: templates/site_base.html:43
+#: templates/site_base.html:42
 msgid "Learn"
 msgstr "Apprendre"
 
-#: templates/_footer.html:63 templates/site_base.html:44
+#: templates/_footer.html:63 templates/site_base.html:43
 msgid "Sponsors"
 msgstr "Sponsors"
 
 #: templates/_footer.html:64 templates/contact.html:6
 #: templates/contact.html.py:9 templates/contact.html:15
-#: templates/site_base.html:45
+#: templates/site_base.html:44
 msgid "Contact"
 msgstr "Contact"
 
@@ -242,10 +242,6 @@ msgstr ""
 "cible d'harcèlement afin qu'ils se sentent en sécurité pendant la "
 "conférence. Nous apprécions votre présence. "
 
-#: templates/conduct.html:34
-msgid "License"
-msgstr ""
-
 #: templates/contact.html:16
 msgid "CONTACT_US_MAILING_LISTS"
 msgstr ""
@@ -328,33 +324,33 @@ msgid ""
 "A place to announce our featured speakers, one by one, over the coming weeks."
 msgstr ""
 
-#: templates/site_base.html:27
+#: templates/site_base.html:26
 msgid "PyCon Canada 2013"
 msgstr ""
 
-#: templates/site_base.html:71 templates/account/signup.html:7
+#: templates/site_base.html:70 templates/account/signup.html:7
 #: templates/account/signup.html.py:12 templates/account/signup.html:20
 msgid "Sign up"
 msgstr ""
 
-#: templates/site_base.html:73 templates/account/login.html:7
+#: templates/site_base.html:72 templates/account/login.html:7
 #: templates/account/login.html.py:19
 msgid "Log in"
 msgstr ""
 
-#: templates/site_base.html:75
+#: templates/site_base.html:74
 msgid "Dashboard"
 msgstr ""
 
-#: templates/site_base.html:77
+#: templates/site_base.html:76
 msgid "Settings"
 msgstr ""
 
-#: templates/site_base.html:79 templates/account/logout.html:7
+#: templates/site_base.html:78 templates/account/logout.html:7
 msgid "Log out"
 msgstr "Se déconnecter"
 
-#: templates/site_base.html:105
+#: templates/site_base.html:104
 msgid "Buy a ticket"
 msgstr "Acheter un billet"
 
@@ -362,39 +358,41 @@ msgstr "Acheter un billet"
 msgid "Speakers"
 msgstr ""
 
-#: templates/sponsor_prospectus.html:7
+#: templates/sponsor_prospectus.html:10
 msgid "About Sponsorship"
 msgstr ""
 
-#: templates/sponsor_prospectus.html:10
+#: templates/sponsor_prospectus.html:13
 msgid "ABOUT_SPONSORSHIP"
 msgstr ""
 
 #: templates/venue.html:7
-msgid "The conference will be held at the"
+msgid ""
+"The conference will be held at the Chestnut Conference Centre in the heart "
+"of downtown Toronto, minutes away from transit, attractions, and food."
 msgstr ""
 
-#: templates/venue.html:13
+#: templates/venue.html:12
 msgid "Location"
 msgstr ""
 
-#: templates/venue.html:14
+#: templates/venue.html:13
 msgid "VENUE_LOCATION"
 msgstr ""
 
-#: templates/venue.html:16
+#: templates/venue.html:15
 msgid "View the complete"
 msgstr ""
 
-#: templates/venue.html:16
+#: templates/venue.html:15
 msgid "PyCon Canada 2013 map"
 msgstr ""
 
-#: templates/venue.html:18
+#: templates/venue.html:17
 msgid "Getting to Toronto"
 msgstr ""
 
-#: templates/venue.html:19
+#: templates/venue.html:18
 msgid "VENUE_AIRPORTS"
 msgstr ""
 "Toronto a 2 principaux aéroports. <a href='http://www.gtaa.com'>Pearson</a> "
@@ -405,7 +403,7 @@ msgstr ""
 "heures de pointe. Prévoyez donc au moins une heure de trajet à partir de "
 "l'aéroport. "
 
-#: templates/venue.html:20
+#: templates/venue.html:19
 msgid "VENUE_PORTER"
 msgstr ""
 "<a href='http://www.flyporter.com'>Porter Airlines</a> est situé sur l'Île "
@@ -413,24 +411,24 @@ msgstr ""
 "centre-ville de Toronto, donnant accès notamment à Go Transit, TTC (le "
 "service local d'autobus, de tram et de métro) et VIA Rail. "
 
-#: templates/venue.html:21
+#: templates/venue.html:20
 msgid "VENUE_VIA"
 msgstr ""
 "VIA est une bonne alternative aux compagnies aériennes si vous venez de "
 "Montréal ou d'Ottawa, par exemple. Il y a souvent des rabais sur les "
 "réservations à l'avance. "
 
-#: templates/venue.html:23
+#: templates/venue.html:22
 msgid "If you're coming from the US:"
 msgstr "Si vous arrivez des É.U.:"
 
-#: templates/venue.html:25
+#: templates/venue.html:24
 msgid "VENUE_PASSPORT_USA"
 msgstr ""
 "Assurez-vous d'avoir un passeport valide et n'oubliez pas de l'amener avec "
 "vous. "
 
-#: templates/venue.html:26
+#: templates/venue.html:25
 msgid "VENUE_PORTER_USA"
 msgstr ""
 "<a href='http://www.flyporter.com'>Porter Airlines</a> a des vols fréquents "
@@ -438,37 +436,37 @@ msgstr ""
 "villes des É.U., notamment Boston, Burlington (VT), Chicago, Myrtle Beach, "
 "New-York et Washington. "
 
-#: templates/venue.html:30
+#: templates/venue.html:29
 msgid "Public Transit and Parking"
 msgstr ""
 
-#: templates/venue.html:31
+#: templates/venue.html:30
 msgid "VENUE_PUBLIC_TRANSIT"
 msgstr ""
 
-#: templates/venue.html:32
+#: templates/venue.html:31
 msgid "VENUE_PARKING"
 msgstr ""
 
-#: templates/venue.html:34
+#: templates/venue.html:33
 msgid "Food"
 msgstr ""
 
-#: templates/venue.html:35
+#: templates/venue.html:34
 msgid "VENUE_FOOD"
 msgstr ""
 
-#: templates/venue.html:37
+#: templates/venue.html:36
 msgid "Hotel"
 msgstr ""
 
-#: templates/venue.html:38
+#: templates/venue.html:37
 msgid ""
 "The recommended hotel for PyCon Canada is the conference venue, the Chestnut "
 "Residence"
 msgstr ""
 
-#: templates/venue.html:47
+#: templates/venue.html:46
 msgid ""
 "\n"
 "To make a reservation over the phone, please call 416-977-0707\n"
@@ -476,7 +474,7 @@ msgid ""
 "\".\n"
 msgstr ""
 
-#: templates/venue.html:52
+#: templates/venue.html:51
 msgid ""
 "\n"
 "To make a reservation on the web head to the\n"
@@ -487,7 +485,7 @@ msgid ""
 "a new account. The cut off date for the group rate is July 9, 2013.\n"
 msgstr ""
 
-#: templates/venue.html:59
+#: templates/venue.html:58
 msgid ""
 "\n"
 "You can also contact the residence by emailing\n"
@@ -495,7 +493,7 @@ msgid ""
 "chestnut@utoronto.ca</a>.\n"
 msgstr ""
 
-#: templates/venue.html:64
+#: templates/venue.html:63
 msgid ""
 "\n"
 "If you would like to share a hotel room with someone else attending the\n"
@@ -505,7 +503,7 @@ msgid ""
 "page.\n"
 msgstr ""
 
-#: templates/venue.html:71
+#: templates/venue.html:70
 #, python-format
 msgid ""
 "\n"

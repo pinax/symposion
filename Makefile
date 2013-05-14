@@ -45,4 +45,4 @@ run: hacking/dev.db
 
 restart_prod:
 	./manage.py collectstatic --noinput
-	sudo supervisorctl restart gunicorn-2013-staging.pycon.ca
+	sudo supervisorctl restart gunicorn-2013.pycon.ca

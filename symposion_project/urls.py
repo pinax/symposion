@@ -23,9 +23,6 @@ urlpatterns += i18n_patterns("",
         "template": "homepage.html",
     }, name="home"),
 
-    url(r"^sponsors/terms/$", direct_to_template, {
-        "template": "sponsor_terms.html",
-    }, name="sponsor_terms"),
     url(r"^sponsors/prospectus/$", direct_to_template, {
         "template": "sponsor_prospectus.html",
     }, name="sponsor_prospectus"),
