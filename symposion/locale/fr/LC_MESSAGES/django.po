@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-10 14:34-0400\n"
+"POT-Creation-Date: 2013-05-14 10:33-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -201,27 +201,6 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
-<<<<<<< HEAD
-#: templates/dashboard.html:16
-msgid "Speaking"
-msgstr ""
-
-#: templates/dashboard.html:18
-msgid "The submission deadline is June 21st, 2013."
-msgstr ""
-
-#: templates/dashboard.html:19
-msgid ""
-"Please note that <em>everyone</em> pays for a ticket to PyCon, including "
-"speakers!"
-msgstr ""
-
-#: templates/dashboard.html:96 templates/sponsorship/detail.html:8
-msgid "Sponsorship"
-msgstr ""
-
-#: templates/dashboard.html:113 templates/reviews/review_detail.html:75
-=======
 #: templates/dashboard.html:32
 msgid "Speaking"
 msgstr ""
