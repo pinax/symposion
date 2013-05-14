@@ -14,3 +14,7 @@ See http://eldarion.com/symposion/ for commercial support, customization and hos
 
 There are some extra pointers in [docs/getting_started.rst](https://github.com/pyconca/2013-web/blob/pyconca2013/docs/getting_started.rst)
 
+## Translation
+
+- `python manage.py makemessages -a -l fr`
+- `python manage.py compilemessages`

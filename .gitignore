@@ -6,3 +6,6 @@ site_media
 .DS_Store
 .env
 hacking/
+db.sqlite3
+local_settings.py
+symposion.egg-info/
