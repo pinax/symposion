@@ -31,7 +31,9 @@
       <div class="span10">
         <h5>{{ sponsor.name }}</h5>
         <p><a href="{{ sponsor.external_url }}">{{ sponsor.external_url }}</a></p>
-        <p>{{ sponsor.listing_text|urlize|linebreaks }}</p>
+        {% if sponsor.listing_text %}
+            <p>{{ sponsor.listing_text|urlize|linebreaks }}</p>
+        {% endif %}
       </div>
     </div>
     {% endif %}
