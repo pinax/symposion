@@ -6212,6 +6212,12 @@ h4, legend {
 #sponsors h2 {
   color: black;
 }
+#sponsors h5, #sponsors p {
+  color: black;
+}
+#sponsors p a {
+  color: #b52a2a;
+}
 .sponsor-group {
   text-align: center;
 }
