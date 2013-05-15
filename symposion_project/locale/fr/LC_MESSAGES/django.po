@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-10 14:34-0400\n"
+"POT-Creation-Date: 2013-05-15 04:13-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,6 +25,32 @@ msgstr "anglais"
 #: settings.py:113
 msgid "French"
 msgstr "français"
+
+#: templates/404.html:5
+msgid "Not Found"
+msgstr ""
+
+#: templates/404.html:8
+msgid "Page not found"
+msgstr ""
+
+#: templates/404.html:9
+msgid "We're sorry but that page could not be found."
+msgstr ""
+
+#: templates/500.html:5
+msgid "Server Error"
+msgstr ""
+
+#: templates/500.html:8
+msgid "Something went wrong"
+msgstr ""
+
+#: templates/500.html:9
+msgid ""
+"We're sorry but a server error has occurred. We've been notified and will "
+"look into it as soon as possible."
+msgstr ""
 
 #: templates/_footer.html:8
 msgid "Get in touch"
@@ -576,3 +602,20 @@ msgstr ""
 #: templates/schedule/schedule_conference.html:16
 msgid "Conference Schedule"
 msgstr ""
+
+#: templates/schedule/schedule_conference.html:26
+msgid "SPRINT_WHAT"
+msgstr ""
+"Les Sprints de développement à PyCon sont deux jours intensifs "
+"d'apprentissage et de développement sur des projets open-source de votre "
+"choix, dans un environnement où l'on fait équipe. C'est un temps pour se "
+"réunir entre collègues, anciens et nouveaux, afin de partager ce que vous "
+"avez appris et l'appliquer à un projet open-source.<br><br>Au beau milieu "
+"d'une salle de sprint, faisant équipe avec autant de concentration que "
+"d'humour, c'est le temps de tester, corriger les bugs, ajouter de nouvelles "
+"fonctionnalités et améliorer la documentation. C'est aussi le temps "
+"d'agrandir votre réseau de contacts, se faire des amis, et étabir des "
+"relations qui vont au-dalà de la conférence.<br><br>PyCon fournit l'espace "
+"et l'infrastructure (réseau, alimentation, tables et chaises); vous apportez "
+"vos compétences, l'humanité, et l'intelligence (oh, n'oubliez pas votre "
+"ordinateur)."

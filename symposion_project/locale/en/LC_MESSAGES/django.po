@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-10 14:34-0400\n"
+"POT-Creation-Date: 2013-05-15 04:13-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,6 +23,32 @@ msgstr ""
 
 #: settings.py:113
 msgid "French"
+msgstr ""
+
+#: templates/404.html:5
+msgid "Not Found"
+msgstr ""
+
+#: templates/404.html:8
+msgid "Page not found"
+msgstr ""
+
+#: templates/404.html:9
+msgid "We're sorry but that page could not be found."
+msgstr ""
+
+#: templates/500.html:5
+msgid "Server Error"
+msgstr ""
+
+#: templates/500.html:8
+msgid "Something went wrong"
+msgstr ""
+
+#: templates/500.html:9
+msgid ""
+"We're sorry but a server error has occurred. We've been notified and will "
+"look into it as soon as possible."
 msgstr ""
 
 #: templates/_footer.html:8
@@ -587,6 +613,20 @@ msgstr ""
 #, fuzzy
 msgid "Conference Schedule"
 msgstr "August 9-13, 2013"
+
+#: templates/schedule/schedule_conference.html:26
+msgid "SPRINT_WHAT"
+msgstr ""
+"PyCon Development Sprints are two days of intensive learning and development "
+"on an open source project of your choice, in a team environment. It's a time "
+"to come together with colleagues, old and new, to share what you've learned "
+"and apply it to an open source project.<br><br>In the crucible of a sprint "
+"room, teaming with both focus and humor, it's a time to test, fix bugs, add "
+"new features, and improve documentation. And it's a time to network, make "
+"friends, and build relationships that go beyond the conference.<br><br>PyCon "
+"provides the space and infrastructure (network, power, tables & chairs); you "
+"bring your skills, humanity, and brainpower (oh! and don't forget your "
+"computer)."
 
 #~ msgid "welcome masthead"
 #~ msgstr "Welcome to PyCon!"
