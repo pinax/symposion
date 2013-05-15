@@ -5932,8 +5932,7 @@ h4, legend {
 }
 .nav li {
   float: left;
-  margin-left: 30px;
-  margin-right: 30px;
+  width: 12%;
   text-align: center;
   line-height: 45px;
   height: 45px;
