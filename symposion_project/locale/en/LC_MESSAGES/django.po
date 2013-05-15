@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-15 04:13-0400\n"
+"POT-Creation-Date: 2013-05-15 14:27-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -503,53 +503,39 @@ msgid ""
 msgstr ""
 
 #: templates/venue.html:46
-msgid ""
-"\n"
-"To make a reservation over the phone, please call 416-977-0707\n"
-"between the hours of 9am and 7pm Eastern time and mention code \"1308 PYCONCA"
-"\".\n"
+msgid "HOTEL_RESERVATION_PHONE"
 msgstr ""
+"To make a reservation over the phone, please call 416-977-0707 between the "
+"hours of 9am and 7pm Eastern time and mention code &ldquo;1308PYCONCA&rdquo;."
 
-#: templates/venue.html:51
-msgid ""
-"\n"
-"To make a reservation on the web head to the\n"
-"<a href=\"https://quokkatraveltools.nucleus.com/HotelResSys/SignIn/"
-"CustWelcome.cfm?P=417&amp;R=1234976191\">online reservation system</a>.\n"
-"The approval code is \"1308 PYCONCA\". Follow the reservation process by "
-"creating\n"
-"a new account. The cut off date for the group rate is July 9, 2013.\n"
+#: templates/venue.html:48
+msgid "HOTEL_RESERVATION_WEB"
 msgstr ""
+"To make a reservation on the web head to the <a href=\"https://"
+"quokkatraveltools.nucleus.com/HotelResSys/SignIn/CustWelcome.cfm?P=417&amp;"
+"R=1234976191\">online reservation system</a>. The approval code is "
+"&ldquo;1308PYCONCA&rdquo;. Follow the reservation process by creating a new "
+"account. The cut off date for the group rate is July 9, 2013."
 
-#: templates/venue.html:58
-msgid ""
-"\n"
-"You can also contact the residence by emailing\n"
-"<a href=\"mailto:frontdesk.chestnut@utoronto.ca\">frontdesk."
-"chestnut@utoronto.ca</a>.\n"
+#: templates/venue.html:50
+msgid "HOTEL_RESERVATION_CONTACT"
 msgstr ""
+"You can also contact the residence by emailing <a href=\"mailto:frontdesk."
+"chestnut@utoronto.ca\">frontdesk.chestnut@utoronto.ca</a>."
 
-#: templates/venue.html:63
-msgid ""
-"\n"
-"If you would like to share a hotel room with someone else attending the\n"
-"conference, please see the PyCon Canada\n"
-"<a href=\"https://github.com/pyconca/2013-wiki/wiki/Room-Sharing\">room "
-"sharing wiki</a>\n"
-"page.\n"
+#: templates/venue.html:52
+msgid "HOTEL_ROOM_SHARING"
 msgstr ""
+"If you would like to share a hotel room with someone else attending the "
+"conference, please see the PyCon Canada <a href=\"https://github.com/"
+"pyconca/2013-wiki/wiki/Room-Sharing\">room sharing wiki</a> page."
 
-#: templates/venue.html:70
-#, python-format
-msgid ""
-"\n"
-"Email\n"
-"<a href=\"mailto:organizers@pycon.ca?subject=I%%20need%%20help%%20finding"
-"%%20a%%20room!\">organizers@pycon.ca</a>\n"
-"if you run into any trouble reserving your room, or finding someone to share "
-"a\n"
-"room with.\n"
+#: templates/venue.html:54
+msgid "HOTEL_TROUBLE"
 msgstr ""
+"Email <a href=\"mailto:organizers@pycon.ca?subject=I%%20need%%20help%"
+"%20finding%%20a%%20room!\">organizers@pycon.ca</a> if you run into any "
+"trouble reserving your room, or finding someone to share a room with."
 
 #: templates/account/login.html:11
 msgid "Log in to an existing account"
