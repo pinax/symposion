@@ -57,7 +57,7 @@ For internationalization/i18n, either do:
     $ django-admin.py compilemessages
 
     # go back to project root directory
-    $ cd $(git rev-parse --show-toplevel)
+    $ cd "$(git rev-parse --show-toplevel)"
 
     # also need to change symposion directory
     $ cd symposion
