@@ -49,11 +49,15 @@ For internationalization/i18n, either do:
 
 ...or the good old way:
 
+    # change the symposion_project directory
     $ cd symposion_project
     $ django-admin.py makemessages -a
 
     # now make changes to generated .po files ...
     $ django-admin.py compilemessages
+
+    # go back to project root directory
+    $ cd $(git rev-parse --show-toplevel)
 
     # also need to change symposion directory
     $ cd symposion
