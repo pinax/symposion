@@ -32,7 +32,7 @@ Install requirements and reset the development environment:
     -----------------------------------------
 
 Start the server! Go to `http://localhost:6544/`; you can log in with
-`admin@example.com`/`asdf`. 
+`admin@example.com`/`asdf`.
 
     $ make run
     ./manage.py runserver 127.0.0.1:6544
@@ -67,6 +67,14 @@ For internationalization/i18n, either do:
     $ django-admin.py compilemessages
 
 To build documentation::
-    
+
     $ make docs
+
+## Deploying
+
+  $ ssh pycon.ca
+  $ cd /data/web/2013.pycon.ca/pyconca
+  $ . /data/virtualenvs/2013.pycon.ca/bin/activate
+  $ git pull # Note the hash, I usually push a deploy tag from my local repo pointed at this hash
+  $ make restart_prod
 
