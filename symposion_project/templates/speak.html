@@ -7,45 +7,33 @@
 
 {% block body %}
 <h3>{% trans "Speakers" %}</h3>
-<p>The schedule for PyCon 2013 includes talks, tutorials, and sprints over
-Saturday and Sunday.</p>
+<p>{% blocktrans %}The schedule for PyCon 2013 includes talks, tutorials, and
+sprints over Saturday and Sunday.{% endblocktrans %}</p>
 
-<p>We welcome everyone in the Canadian Python community to come and share your
-ideas, experiences, and expertise. Whether you're new to Python or a seasoned
-expert, if you've got something interesting to share, we want to hear about it.
-A conference with a diverse set of good topics will give everyone the
-opportunity to learn something new and cool.</p>
+<p>{% blocktrans %}We welcome everyone in the Canadian Python community to come and share your ideas, experiences, and expertise. Whether you're new to Python or a seasoned expert, if you've got something interesting to share, we want to hear about it.  A conference with a diverse set of good topics will give everyone the opportunity to learn something new and cool.{% endblocktrans %}</p>
 
-<p>Nervous about your lack of presenter experience? We'll work to connect you
-with resources and people to help you prepare. You might also consider
-co-presenting with a more experienced presenter. And once you've rocked PyCon
-Canada 2013, you can take that experience to help you gear up for the big 
-PyCon conference in Montr&eacute;al.</p>
+<p>{% blocktrans %}Nervous about your lack of presenter experience? We'll work to connect you with resources and people to help you prepare. You might also consider co-presenting with a more experienced presenter. And once you've rocked PyCon Canada 2013, you can take that experience to help you gear up for the big PyCon conference in Montréal.{% endblocktrans %}</p>
 
 <h3>Submitting a Talk or Tutorial</h3>
-<p>We would prefer 20 minute talks, although 45 minute talks will also be
-considered. Tutorials are 3 hours. You can also sign up for a Lightning Talk of
-5 minutes. We also welcome ideas for sprints. The deadline to submit talks and
-tutorials is June 21st, 2013.</p>
+<p>{% blocktrans %}We would prefer 20 minute talks, although 45 minute talks will also be considered. Tutorials are 3 hours. You can also sign up for a Lightning Talk of 5 minutes. We also welcome ideas for sprints. The deadline to submit talks and tutorials is June 21st, 2013.{% endblocktrans %}</p>
 
 {% if user.is_authenticated %}
-<p>Head over to the <a href="{% url "dashboard" %}">dashboard &raquo;</a> to submit a proposal.</p>
+    {% url "dashboard" as dashboard_url %}
+    <p>{% blocktrans with dashboard_url=dashboard_url %}Head over to the <a href="{{ dashboard_url }}">dashboard &raquo;</a> to submit a proposal.{% endblocktrans %}</p>
 {% else %}
-<p>Please <a href="{% url "account_signup" %}">Create an Account &raquo;</a> or <a href="{% url "account_login" %}">Log in &raquo;</a>.</p>
+    {% url "account_signup" as account_signup_url %}
+    {% url "account_login" as account_login_url %}
+    <p>{% blocktrans with account_signup_url=account_signup_url account_login_url=account_login_url %}Please <a href="{{ account_signup_url }}">Create an Account &raquo;</a> or <a href="{{ account_login_url }}">Log in &raquo;</a>.{% endblocktrans %}</p>
 {% endif %}
 
-<p>Submit your talk if you are logged in. You will need to include the
-following information in talk and tutorial proposals:</p>
+<p>{% blocktrans %}Submit your talk if you are logged in. You will need to include the following information in talk and tutorial proposals:{% endblocktrans %}</p>
 <ul>
-    <li><p>Name of the talk or tutorial</p></li>
-    <li><p>Length of the talk/tutorial</p></li>
-    <li><p>Intended audience (assumed level of knowledge)</p></li>
-    <li><p>Abstract for the talk/tutorial - 300 chars max</p></li>
-    <li><p>Outline of the talk/tutorial</p></li>
-    <li><p>Additional notes for the proposal reviewers. This can include
-    additional background information such as links to other presentations you
-    have done, or links to blog posts, articles or code related to your
-    presentation.</p></li>
+    <li><p>{% trans "Name of the talk or tutorial" %}</p></li>
+    <li><p>{% trans "Length of the talk/tutorial" %}</p></li>
+    <li><p>{% trans "Intended audience (assumed level of knowledge)" %}</p></li>
+    <li><p>{% trans "Abstract for the talk/tutorial - 300 chars max" %}</p></li>
+    <li><p>{% trans "Outline of the talk/tutorial" %}</p></li>
+    <li><p>{% blocktrans %}Additional notes for the proposal reviewers. This can include additional background information such as links to other presentations you have done, or links to blog posts, articles or code related to your presentation.{% endblocktrans %}</p></li>
 </ul>
 {% endblock %}
 

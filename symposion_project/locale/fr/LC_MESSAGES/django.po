@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-21 07:29-0400\n"
+"POT-Creation-Date: 2013-05-21 11:04-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -321,8 +321,8 @@ msgid "HOMEPAGE_LEARN_BLURB"
 msgstr ""
 "L'un des buts premiers de PyCon Canada est de rassembler les experts de la "
 "communauté Python au Canada, vous donnant la possibilité d'apprendre et vous "
-"inspirer des meilleurs! Pour vous donner l'eau à la bouche, nous "
-"annoncerons nos conférenciers un par un dans les semaines à suivre."
+"inspirer des meilleurs! Pour vous donner l'eau à la bouche, nous annoncerons "
+"nos conférenciers un par un dans les semaines à suivre."
 
 #: templates/homepage.html:37 templates/homepage.html.py:44
 #: templates/homepage.html:49
@@ -332,8 +332,8 @@ msgstr "Plus d'information"
 #: templates/homepage.html:43
 msgid "VENUE_HOMEPAGE_BLURB"
 msgstr ""
-"Soyez des notres du 9 au 13 août 2013 au Chestnut Conference Centre "
-"à Toronto. La conférence est à quelques mètre du métro et en plein centre-"
+"Soyez des notres du 9 au 13 août 2013 au Chestnut Conference Centre à "
+"Toronto. La conférence est à quelques mètre du métro et en plein centre-"
 "ville, ce qui vous laissera la chance d'explorer la ville reine lorsque vous "
 "ne serez pas occupé à coder ou partager avec les autres pythoneux."
 
@@ -412,6 +412,85 @@ msgstr "Acheter un billet"
 #: templates/speak.html:9
 msgid "Speakers"
 msgstr "Conférenciers"
+
+#: templates/speak.html:10
+msgid ""
+"The schedule for PyCon 2013 includes talks, tutorials, and\n"
+"sprints over Saturday and Sunday."
+msgstr ""
+
+#: templates/speak.html:13
+msgid ""
+"We welcome everyone in the Canadian Python community to come and share your "
+"ideas, experiences, and expertise. Whether you're new to Python or a "
+"seasoned expert, if you've got something interesting to share, we want to "
+"hear about it.  A conference with a diverse set of good topics will give "
+"everyone the opportunity to learn something new and cool."
+msgstr ""
+
+#: templates/speak.html:15
+msgid ""
+"Nervous about your lack of presenter experience? We'll work to connect you "
+"with resources and people to help you prepare. You might also consider co-"
+"presenting with a more experienced presenter. And once you've rocked PyCon "
+"Canada 2013, you can take that experience to help you gear up for the big "
+"PyCon conference in Montréal."
+msgstr ""
+
+#: templates/speak.html:18
+msgid ""
+"We would prefer 20 minute talks, although 45 minute talks will also be "
+"considered. Tutorials are 3 hours. You can also sign up for a Lightning Talk "
+"of 5 minutes. We also welcome ideas for sprints. The deadline to submit "
+"talks and tutorials is June 21st, 2013."
+msgstr ""
+
+#: templates/speak.html:22
+#, python-format
+msgid ""
+"Head over to the <a href=\"%(dashboard_url)s\">dashboard &raquo;</a> to "
+"submit a proposal."
+msgstr ""
+
+#: templates/speak.html:26
+#, python-format
+msgid ""
+"Please <a href=\"%(account_signup_url)s\">Create an Account &raquo;</a> or "
+"<a href=\"%(account_login_url)s\">Log in &raquo;</a>."
+msgstr ""
+
+#: templates/speak.html:29
+msgid ""
+"Submit your talk if you are logged in. You will need to include the "
+"following information in talk and tutorial proposals:"
+msgstr ""
+
+#: templates/speak.html:31
+msgid "Name of the talk or tutorial"
+msgstr ""
+
+#: templates/speak.html:32
+msgid "Length of the talk/tutorial"
+msgstr ""
+
+#: templates/speak.html:33
+msgid "Intended audience (assumed level of knowledge)"
+msgstr ""
+
+#: templates/speak.html:34
+msgid "Abstract for the talk/tutorial - 300 chars max"
+msgstr ""
+
+#: templates/speak.html:35
+msgid "Outline of the talk/tutorial"
+msgstr ""
+
+#: templates/speak.html:36
+msgid ""
+"Additional notes for the proposal reviewers. This can include additional "
+"background information such as links to other presentations you have done, "
+"or links to blog posts, articles or code related to your presentation."
+msgstr ""
 
 #: templates/sponsor_prospectus.html:10
 msgid "About Sponsorship"
