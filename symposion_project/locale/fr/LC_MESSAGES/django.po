@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-15 14:27-0400\n"
+"POT-Creation-Date: 2013-05-21 07:29-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -82,37 +82,41 @@ msgstr "Logo par"
 msgid "Background by"
 msgstr "Fond par"
 
-#: templates/_footer.html:58 templates/about.html:5 templates/about.html.py:11
+#: templates/_footer.html:54
+msgid "Design by"
+msgstr "Conception par"
+
+#: templates/_footer.html:59 templates/about.html:5 templates/about.html.py:11
 #: templates/site_base.html:38
 msgid "About"
 msgstr "À propos"
 
-#: templates/_footer.html:59 templates/homepage.html:42
+#: templates/_footer.html:60 templates/homepage.html:42
 #: templates/site_base.html:39 templates/venue.html:5
 #: templates/venue.html.py:11
 msgid "Venue"
 msgstr "Lieu"
 
-#: templates/_footer.html:60 templates/homepage.html:47
+#: templates/_footer.html:61 templates/homepage.html:47
 #: templates/site_base.html:40
 msgid "Schedule"
 msgstr "Horaire"
 
-#: templates/_footer.html:61 templates/homepage.html:30
+#: templates/_footer.html:62 templates/homepage.html:30
 #: templates/site_base.html:41 templates/speak.html:6
 msgid "Speak"
 msgstr "Présenter"
 
-#: templates/_footer.html:62 templates/homepage.html:35 templates/learn.html:5
+#: templates/_footer.html:63 templates/homepage.html:35 templates/learn.html:5
 #: templates/site_base.html:42
 msgid "Learn"
 msgstr "Apprendre"
 
-#: templates/_footer.html:63 templates/site_base.html:43
+#: templates/_footer.html:64 templates/site_base.html:43
 msgid "Sponsors"
 msgstr "Sponsors"
 
-#: templates/_footer.html:64 templates/contact.html:6
+#: templates/_footer.html:65 templates/contact.html:6
 #: templates/contact.html.py:9 templates/contact.html:15
 #: templates/site_base.html:44
 msgid "Contact"
@@ -253,7 +257,7 @@ msgstr ""
 msgid "Contact Information"
 msgstr "Informations de contact"
 
-#: templates/conduct.html:26
+#: templates/conduct.html:25
 msgid "CONDUCT_CONTACTS"
 msgstr ""
 "Si vous êtes victime d'harcèlement, témoin d'un harcèlement ou avez tout "
@@ -261,7 +265,7 @@ msgstr ""
 "Michael DiBernardo, Taavi Burns, ou David Wolever.<br><br>Si le cas est "
 "particulièrement urgent, veuillez appeler/contacter une de ces personnes:"
 
-#: templates/conduct.html:31
+#: templates/conduct.html:30
 msgid "CONDUCT_POLICE"
 msgstr ""
 "Le personnel de la conférence se fera un plaisir d'aider les participants à "
@@ -291,7 +295,11 @@ msgstr "Bienvenue"
 
 #: templates/homepage.html:12
 msgid "HOMEPAGE_SPLASH"
-msgstr "Vous êtes invités à la deuxième édition de la conférence annuelle PyCon Canada, du 9 au 13 aoûts à Toronto. Ce n'est qu'un réchauffement pour la première édition de PyCon US à l'extérieur des États-Unis à Montréal en 2014 et 2015 !"
+msgstr ""
+"Vous êtes invités à la deuxième édition de la conférence annuelle PyCon "
+"Canada, du 9 au 13 aoûts à Toronto. Ce n'est qu'un réchauffement pour la "
+"première édition de PyCon US à l'extérieur des États-Unis à Montréal en 2014 "
+"et 2015 !"
 
 #: templates/homepage.html:20
 msgid "Pycon Canada <span>2013!</span>"
@@ -300,10 +308,9 @@ msgstr "PyCon Canada <span>2013 !</span>"
 #: templates/homepage.html:31
 msgid "HOMEPAGE_SPEAK_BLURB"
 msgstr ""
-"Partagez votre connaissance et vos idées. Soumettez une proposition "
-"de présentation ou un tutoriel avant le 21 juin. Nous allons sprinter "
-"après la conférence également, alors vous pouvez nous envoyer vos idées"
-"de sprint."
+"Partagez votre connaissance et vos idées. Soumettez une proposition de "
+"présentation ou un tutoriel avant le 21 juin. Nous allons sprinter après la "
+"conférence également, alors vous pouvez nous envoyer vos idéesde sprint."
 
 #: templates/homepage.html:32
 msgid "Submit a proposal"
@@ -314,8 +321,8 @@ msgid "HOMEPAGE_LEARN_BLURB"
 msgstr ""
 "L'un des buts premiers de PyCon Canada est de rassembler les experts de la "
 "communauté Python au Canada, vous donnant la possibilité d'apprendre et vous "
-"inspirer des meilleurs! Pour vous donner l'eau à la bouche, nous annoncerons"
-"nos conférenciers un par un dans les semaines à suivre"
+"inspirer des meilleurs! Pour vous donner l'eau à la bouche, nous "
+"annonceronsnos conférenciers un par un dans les semaines à suivre"
 
 #: templates/homepage.html:37 templates/homepage.html.py:44
 #: templates/homepage.html:49
@@ -324,18 +331,19 @@ msgstr "Plus d'information"
 
 #: templates/homepage.html:43
 msgid "VENUE_HOMEPAGE_BLURB"
-msgstr "Soyez des notres du 9 au 13 août 2013 au Chestnut Conference Centre à"
-"Toronto. La conférence est à quelques mètre du métro et en plein "
-"centre-ville, ce qui vous laissera la chance d'explorer la ville reine "
-"lorsque vous ne serez pas occupé à coder ou partager avec les autres "
-"pythoneux."
+msgstr ""
+"Soyez des notres du 9 au 13 août 2013 au Chestnut Conference Centre "
+"àToronto. La conférence est à quelques mètre du métro et en plein centre-"
+"ville, ce qui vous laissera la chance d'explorer la ville reine lorsque vous "
+"ne serez pas occupé à coder ou partager avec les autres pythoneux."
 
 #: templates/homepage.html:48
 msgid "HOMEPAGE_SCHEDULE_BLURB"
-msgstr "Commencez votre aventure le vendredi soir avec le party "
-"d'ouverture. Continuez samedi avec les conférences et vous pourrez même "
-"commencer les aprints cette soirée là. Terminez avec les sprints, ou "
-"les tutoriels et les présentations dimanche"
+msgstr ""
+"Commencez votre aventure le vendredi soir avec le party d'ouverture. "
+"Continuez samedi avec les conférences et vous pourrez même commencer les "
+"aprints cette soirée là. Terminez avec les sprints, ou les tutoriels et les "
+"présentations dimanche"
 
 #: templates/homepage.html:57
 msgid "Looking for PyCon Montréal 2014?"
@@ -348,8 +356,8 @@ msgstr "Le « vrai » PyCon (anciennement PyCon US) sera à Montréal en 2014 !"
 #: templates/homepage.html:59
 msgid "FOLLOW_AT_PYCON_FOR_MONTREAL"
 msgstr ""
-"Suivez <a href=\"https://twitter.com/pycon\">@pycon</a> pour restez au"
-"courant des nouvelles pour PyCon Montréal"
+"Suivez <a href=\"https://twitter.com/pycon\">@pycon</a> pour restez "
+"aucourant des nouvelles pour PyCon Montréal"
 
 #: templates/homepage.html:71
 #, fuzzy
@@ -413,18 +421,19 @@ msgstr "À propos des commandites"
 msgid "ABOUT_SPONSORSHIP"
 msgstr ""
 "Si vous êtes intéressés à commanditer PyCon Canada 2013, vous pouvez voir "
-"notre prospectus <a href=\"/site_media/static/PyCon%20Canada%202013%20sponsorship"
-"%20prospectus.pdf\">ici</a>. Si vous avez des questions ou voulez discuter "
-"d'une forfait de commandite personnalisé, contactez-nous à "
-"<a href=\"mailto:sponsorship@pycon.ca\">sponsorship@pycon.ca</a>."
+"notre prospectus <a href=\"/site_media/static/PyCon%20Canada"
+"%202013%20sponsorship%20prospectus.pdf\">ici</a>. Si vous avez des questions "
+"ou voulez discuter d'une forfait de commandite personnalisé, contactez-nous "
+"à <a href=\"mailto:sponsorship@pycon.ca\">sponsorship@pycon.ca</a>."
 
 #: templates/venue.html:7
 msgid ""
 "The conference will be held at the Chestnut Conference Centre in the heart "
 "of downtown Toronto, minutes away from transit, attractions, and food."
-msgstr "La conférence aura lieu au Cestnut Conference Centre, en plein "
-"coeur du centre-ville de Toronto, à quelques minutes à pied du transport en "
-"commun, d'attractions, et restaurants."
+msgstr ""
+"La conférence aura lieu au Cestnut Conference Centre, en plein coeur du "
+"centre-ville de Toronto, à quelques minutes à pied du transport en commun, "
+"d'attractions, et restaurants."
 
 #: templates/venue.html:12
 msgid "Location"
@@ -522,8 +531,8 @@ msgstr "Hôtel"
 msgid ""
 "The recommended hotel for PyCon Canada is the conference venue, the Chestnut "
 "Residence"
-msgstr "PyCon Canda recommande l'hôtel même de la conférence : le Chestnut "
-"Residence."
+msgstr ""
+"PyCon Canda recommande l'hôtel même de la conférence : le Chestnut Residence."
 
 #: templates/venue.html:46
 msgid "HOTEL_RESERVATION_PHONE"
@@ -533,21 +542,20 @@ msgstr ""
 
 #: templates/venue.html:48
 msgid "HOTEL_RESERVATION_WEB"
-msgstr "Pour faire une réservation par Internet, rendez-vous au "
-"<a href=\"https://"
+msgstr ""
+"Pour faire une réservation par Internet, rendez-vous au <a href=\"https://"
 "quokkatraveltools.nucleus.com/HotelResSys/SignIn/CustWelcome.cfm?P=417&amp;"
 "R=1234976191\">sur le système de réservation en ligne</a>. Le code "
 "d'approbation est &ldquo;1308PYCONCA&rdquo;. Le processus de réservation "
-"requiert un compte sur ce système. La date limite pour le code du groupe "
-"est le 9 juillet 2013."
+"requiert un compte sur ce système. La date limite pour le code du groupe est "
+"le 9 juillet 2013."
 
 #: templates/venue.html:50
 msgid "HOTEL_RESERVATION_CONTACT"
 msgstr ""
-"Vous pouvez contacter la résendence par courriel à l'adresse suivante : "
-"<a href=\"mailto:frontdesk."
-"chestnut@utoronto.ca\">frontdesk.chestnut@utoronto.ca</a>."
-
+"Vous pouvez contacter la résendence par courriel à l'adresse suivante : <a "
+"href=\"mailto:frontdesk.chestnut@utoronto.ca\">frontdesk.chestnut@utoronto."
+"ca</a>."
 
 #: templates/venue.html:52
 msgid "HOTEL_ROOM_SHARING"
@@ -560,9 +568,9 @@ msgstr ""
 #: templates/venue.html:54
 msgid "HOTEL_TROUBLE"
 msgstr ""
-"Contactez-nous si vous avez des problèmes avec la réservation d'une "
-" chambre à : <a href=\"mailto:organizers@pycon.ca?subject=I%%20need%%20help%"
-"%20finding%%20a%%20room!\">organizers@pycon.ca</a>."
+"Contactez-nous si vous avez des problèmes avec la réservation d'une  chambre "
+"à : <a href=\"mailto:organizers@pycon.ca?subject=I%%20need%%20help%%20finding"
+"%%20a%%20room!\">organizers@pycon.ca</a>."
 
 #: templates/account/login.html:11
 msgid "Log in to an existing account"
@@ -599,8 +607,8 @@ msgid ""
 "\"mailto:organizers@pycon.ca\">organizers@pycon.ca</a>."
 msgstr ""
 "Si vous avez des problèmes avec le processus de réinitialisation de votre "
-"mot de passe, communiquez avec nous : <a href="
-"\"mailto:organizers@pycon.ca\">organizers@pycon.ca</a>."
+"mot de passe, communiquez avec nous : <a href=\"mailto:organizers@pycon.ca"
+"\">organizers@pycon.ca</a>."
 
 #: templates/account/password_reset_sent.html:7
 #: templates/account/password_reset_sent.html:10
@@ -614,11 +622,9 @@ msgid ""
 "try resending or contact us at <a href=\"mailto:"
 "%(THEME_ACCOUNT_CONTACT_EMAIL)s\">%(THEME_ACCOUNT_CONTACT_EMAIL)s</a>."
 msgstr ""
-"Nous vous avons envoyé un courriel. Si vous ne le recevez pas d'ici "
-"quelques minutes, vous pouvez le renvoyer ou communiquer avec "
-"nous : <a href=\"mailto:"
+"Nous vous avons envoyé un courriel. Si vous ne le recevez pas d'ici quelques "
+"minutes, vous pouvez le renvoyer ou communiquer avec nous : <a href=\"mailto:"
 "%(THEME_ACCOUNT_CONTACT_EMAIL)s\">%(THEME_ACCOUNT_CONTACT_EMAIL)s</a>."
-
 
 #: templates/account/password_reset_sent.html:18
 msgid "Resend"
@@ -629,11 +635,11 @@ msgid ""
 "We have resent the password email. If you do not receive it within a few "
 "minutes, contact us at <a href=\"mailto:organizers@pycon.ca"
 "\">organizers@pycon.ca</a>."
-msgstr "Nous avons renvoyé votre courriel concernant la réinitialisation de "
-"votre mot de passe. Si vous ne le recevez pas d'ici quelques minutes, "
-"communiquez directement avec nous : <a href=\"mailto:organizers@pycon.ca"
+msgstr ""
+"Nous avons renvoyé votre courriel concernant la réinitialisation de votre "
+"mot de passe. Si vous ne le recevez pas d'ici quelques minutes, communiquez "
+"directement avec nous : <a href=\"mailto:organizers@pycon.ca"
 "\">organizers@pycon.ca</a>."
-
 
 #: templates/schedule/schedule_conference.html:7
 #: templates/schedule/schedule_conference.html:16

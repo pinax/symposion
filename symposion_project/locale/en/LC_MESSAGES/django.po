@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-15 14:27-0400\n"
+"POT-Creation-Date: 2013-05-21 07:29-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -79,37 +79,41 @@ msgstr ""
 msgid "Background by"
 msgstr ""
 
-#: templates/_footer.html:58 templates/about.html:5 templates/about.html.py:11
+#: templates/_footer.html:54
+msgid "Design by"
+msgstr ""
+
+#: templates/_footer.html:59 templates/about.html:5 templates/about.html.py:11
 #: templates/site_base.html:38
 msgid "About"
 msgstr ""
 
-#: templates/_footer.html:59 templates/homepage.html:42
+#: templates/_footer.html:60 templates/homepage.html:42
 #: templates/site_base.html:39 templates/venue.html:5
 #: templates/venue.html.py:11
 msgid "Venue"
 msgstr ""
 
-#: templates/_footer.html:60 templates/homepage.html:47
+#: templates/_footer.html:61 templates/homepage.html:47
 #: templates/site_base.html:40
 msgid "Schedule"
 msgstr ""
 
-#: templates/_footer.html:61 templates/homepage.html:30
+#: templates/_footer.html:62 templates/homepage.html:30
 #: templates/site_base.html:41 templates/speak.html:6
 msgid "Speak"
 msgstr ""
 
-#: templates/_footer.html:62 templates/homepage.html:35 templates/learn.html:5
+#: templates/_footer.html:63 templates/homepage.html:35 templates/learn.html:5
 #: templates/site_base.html:42
 msgid "Learn"
 msgstr ""
 
-#: templates/_footer.html:63 templates/site_base.html:43
+#: templates/_footer.html:64 templates/site_base.html:43
 msgid "Sponsors"
 msgstr ""
 
-#: templates/_footer.html:64 templates/contact.html:6
+#: templates/_footer.html:65 templates/contact.html:6
 #: templates/contact.html.py:9 templates/contact.html:15
 #: templates/site_base.html:44
 msgid "Contact"
@@ -236,7 +240,7 @@ msgstr ""
 msgid "Contact Information"
 msgstr ""
 
-#: templates/conduct.html:26
+#: templates/conduct.html:25
 msgid "CONDUCT_CONTACTS"
 msgstr ""
 "If you are being harassed, notice that someone else is being harassed, or "
@@ -244,7 +248,7 @@ msgstr ""
 "Michael DiBernardo, Taavi Burns, or David Wolever. <br> <br>  If the matter "
 "is especially urgent, please call/contact any of these individuals: "
 
-#: templates/conduct.html:31
+#: templates/conduct.html:30
 msgid "CONDUCT_POLICE"
 msgstr ""
 "Conference staff will be happy to help participants contact hotel/venue "
