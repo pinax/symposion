@@ -322,7 +322,7 @@ msgstr ""
 "L'un des buts premiers de PyCon Canada est de rassembler les experts de la "
 "communauté Python au Canada, vous donnant la possibilité d'apprendre et vous "
 "inspirer des meilleurs! Pour vous donner l'eau à la bouche, nous "
-"annonceronsnos conférenciers un par un dans les semaines à suivre"
+"annoncerons nos conférenciers un par un dans les semaines à suivre."
 
 #: templates/homepage.html:37 templates/homepage.html.py:44
 #: templates/homepage.html:49
@@ -333,7 +333,7 @@ msgstr "Plus d'information"
 msgid "VENUE_HOMEPAGE_BLURB"
 msgstr ""
 "Soyez des notres du 9 au 13 août 2013 au Chestnut Conference Centre "
-"àToronto. La conférence est à quelques mètre du métro et en plein centre-"
+"à Toronto. La conférence est à quelques mètre du métro et en plein centre-"
 "ville, ce qui vous laissera la chance d'explorer la ville reine lorsque vous "
 "ne serez pas occupé à coder ou partager avec les autres pythoneux."
 
@@ -343,7 +343,7 @@ msgstr ""
 "Commencez votre aventure le vendredi soir avec le party d'ouverture. "
 "Continuez samedi avec les conférences et vous pourrez même commencer les "
 "aprints cette soirée là. Terminez avec les sprints, ou les tutoriels et les "
-"présentations dimanche"
+"présentations dimanche."
 
 #: templates/homepage.html:57
 msgid "Looking for PyCon Montréal 2014?"
@@ -445,7 +445,7 @@ msgstr "La conférence aura lieu au Chestnut Conference Centre :"
 
 #: templates/venue.html:15
 msgid "View the complete"
-msgstr "Voir "
+msgstr "Voir"
 
 #: templates/venue.html:15
 msgid "PyCon Canada 2013 map"
