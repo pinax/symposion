@@ -195,7 +195,8 @@ class SponsorBenefit(models.Model):
     
     def clean(self):
         if self.max_words and len(self.text.split()) > self.max_words:
-            raise ValidationError("Sponsorship level only allows for %s words." % self.max_words)
+            raise ValidationError("Sponsorship level only allows for %s words, you provided %d." % (
+                self.max_words, len(self.text.split())))
     
     def data_fields(self):
         """

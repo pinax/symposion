@@ -6218,6 +6218,9 @@ h4, legend {
 #sponsors p a {
   color: #b52a2a;
 }
+.sponsor-level-vspace {
+  height: 3em;
+}
 .sponsor-group {
   text-align: center;
 }
