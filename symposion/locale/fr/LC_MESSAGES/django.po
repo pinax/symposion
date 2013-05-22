@@ -446,7 +446,7 @@ msgstr "Vous pouvez laissez un message pour le comité de sélection ici."
 
 #: templates/proposals/proposal_detail.html:95
 msgid "Submit"
-msgstr "SOumettre"
+msgstr "Soumettre"
 
 #: templates/proposals/proposal_speaker_manage.html:6
 msgid "Proposal Speakers"
@@ -474,7 +474,7 @@ msgstr "Soumettre une proposition"
 
 #: templates/proposals/proposal_submit.html:9
 msgid "Submit a talk"
-msgstr "Soumettre une proposotion de conférence"
+msgstr "Soumettre une proposition de conférence"
 
 #: templates/reviews/_review_table.html:6
 #: templates/reviews/result_notification.html:45
