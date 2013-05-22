@@ -216,7 +216,7 @@ msgstr "Présenter"
 
 #: templates/dashboard.html:34
 msgid "The submission deadline is June 21st, 2013."
-msgstr "La date limite de soumission est le 21 Juin 2013"
+msgstr "La date limite de soumission est le 21 Juin 2013."
 
 #: templates/dashboard.html:35
 msgid ""
