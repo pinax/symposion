@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-21 11:04-0400\n"
+"POT-Creation-Date: 2013-05-22 16:52-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -423,14 +423,14 @@ msgid ""
 "talks and tutorials is June 21st, 2013."
 msgstr ""
 
-#: templates/speak.html:22
+#: templates/speak.html:22 templates/speak.html.py:50
 #, python-format
 msgid ""
 "Head over to the <a href=\"%(dashboard_url)s\">dashboard &raquo;</a> to "
 "submit a proposal."
 msgstr ""
 
-#: templates/speak.html:26
+#: templates/speak.html:26 templates/speak.html.py:54
 #, python-format
 msgid ""
 "Please <a href=\"%(account_signup_url)s\">Create an Account &raquo;</a> or "
@@ -468,6 +468,32 @@ msgid ""
 "Additional notes for the proposal reviewers. This can include additional "
 "background information such as links to other presentations you have done, "
 "or links to blog posts, articles or code related to your presentation."
+msgstr ""
+
+#: templates/speak.html:39
+msgid "Lightning Talks"
+msgstr ""
+
+#: templates/speak.html:40
+msgid ""
+"<a href=\"http://en.wikipedia.org/wiki/Lightning_talk\">Lightning talks</a>\n"
+"are 5 minute talks that are done in quick succession. At PyCon USA, "
+"lightning\n"
+"talks are drawn from a hat, on the spot during the conference. Due to their\n"
+"ever increasing popularity, a large number of people end up not being able "
+"to\n"
+"present the 5 minute talks they prepared (too many talks, too little time), "
+"so\n"
+"we've decided to try something new. PyCon Canada will be confirming 12\n"
+"lightning talks in advance, and we have one reserved for you!"
+msgstr ""
+
+#: templates/speak.html:57
+msgid ""
+"Not sure if lightning talks are for you? <a\n"
+"href=\"http://perl.plover.com/lt/osc2003/lightning-talks.html\">Read some "
+"more\n"
+"about them</a>, watch some videos of past PyCon lightning talks:"
 msgstr ""
 
 #: templates/sponsor_prospectus.html:10
