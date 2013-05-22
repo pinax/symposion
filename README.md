@@ -72,9 +72,9 @@ To build documentation::
 
 ## Deploying
 
-  $ ssh pycon.ca
-  $ cd /data/web/2013.pycon.ca/pyconca
-  $ . /data/virtualenvs/2013.pycon.ca/bin/activate
-  $ git pull # Note the hash, I usually push a deploy tag from my local repo pointed at this hash
-  $ make restart_prod
+    $ ssh pycon.ca
+    $ cd /data/web/2013.pycon.ca/pyconca
+    $ . /data/virtualenvs/2013.pycon.ca/bin/activate
+    $ git pull # Note the hash, I usually push a deploy tag from my local repo pointed at this hash
+    $ make restart_prod
 
