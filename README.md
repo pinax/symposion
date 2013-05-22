@@ -78,3 +78,7 @@ To build documentation::
     $ git pull # Note the hash, I usually push a deploy tag from my local repo pointed at this hash
     $ make restart_prod
 
+## Translation
+
+- `python manage.py makemessages -a -l fr`
+- `python manage.py compilemessages`

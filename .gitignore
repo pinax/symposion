@@ -7,3 +7,6 @@ site_media
 .env
 hacking/
 tags
+db.sqlite3
+local_settings.py
+symposion.egg-info/

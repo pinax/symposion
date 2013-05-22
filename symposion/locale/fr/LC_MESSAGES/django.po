@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-15 04:13-0400\n"
+"POT-Creation-Date: 2013-05-21 21:30-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,47 +20,49 @@ msgstr ""
 
 #: cms/models.py:23
 msgid "Draft"
-msgstr ""
+msgstr "Brouillon"
 
 #: cms/models.py:24
 msgid "Public"
-msgstr ""
+msgstr "Publique"
 
 #: cms/models.py:56
 msgid "Path can only contain letters, numbers and hyphens and end with /"
 msgstr ""
+"Un chemin ne peut que contenir que des lettres, des nombres et traits "
+"d'union et se terminer avec un /"
 
 #: conference/models.py:15
 msgid "title"
-msgstr ""
+msgstr "Titre"
 
 #: conference/models.py:18 conference/models.py:58
 msgid "start date"
-msgstr ""
+msgstr "Date de début"
 
 #: conference/models.py:19 conference/models.py:59
 msgid "end date"
-msgstr ""
+msgstr "Date de fin"
 
 #: conference/models.py:22
 msgid "timezone"
-msgstr ""
+msgstr "fuseau horaire"
 
 #: conference/models.py:41 conference/models.py:52 sponsorship/models.py:18
 msgid "conference"
-msgstr ""
+msgstr "conférence"
 
 #: conference/models.py:42
 msgid "conferences"
-msgstr ""
+msgstr "conférences"
 
 #: conference/models.py:54 sponsorship/models.py:19 sponsorship/models.py:151
 msgid "name"
-msgstr ""
+msgstr "nom"
 
 #: conference/models.py:65
 msgid "section"
-msgstr ""
+msgstr "section"
 
 #: conference/models.py:66
 msgid "sections"
@@ -68,15 +70,15 @@ msgstr ""
 
 #: proposals/models.py:71 templates/conference/user_list.html:60
 msgid "Name"
-msgstr ""
+msgstr "Nom"
 
 #: proposals/models.py:86
 msgid "Brief Outline"
-msgstr ""
+msgstr "Brève présentation"
 
 #: proposals/models.py:91
 msgid "Detailed Abstract"
-msgstr ""
+msgstr "Résumé détaillé"
 
 #: proposals/models.py:92
 msgid ""
@@ -84,6 +86,9 @@ msgid ""
 "accepted. Edit using <a href='http://daringfireball.net/projects/markdown/"
 "basics' target='_blank'>Markdown</a>."
 msgstr ""
+"Description détaillée et présentation. Serons publique si votre "
+"présentation  est acceptée. Veuillez utiliser le <a href='http://"
+"daringfireball.net/projects/markdown/' target='_blank'>Markdown</a>."
 
 #: proposals/models.py:96
 msgid ""
@@ -92,157 +97,164 @@ msgid ""
 "etc. Edit using <a href='http://daringfireball.net/projects/markdown/basics' "
 "target='_blank'>Markdown</a>."
 msgstr ""
+"N'importe quoi que vous voudriez présenter au commité de programme pour la "
+"sélection: vos expériences de présentateur passé, expériences dans des  "
+"communités open sources, etc. Éditez en utilisant <a href='http://"
+"daringfireball.net/projects/markdown/basics' target='_blank'>Markdown</a>."
 
 #: proposals/models.py:144
 msgid "Pending"
-msgstr ""
+msgstr "En attente"
 
 #: proposals/models.py:145 templates/proposals/_pending_proposal_row.html:16
 msgid "Accepted"
-msgstr ""
+msgstr "Accepté"
 
 #: proposals/models.py:146
 msgid "Declined"
-msgstr ""
+msgstr "Refusé"
 
 #: sponsorship/models.py:20
 msgid "order"
-msgstr ""
+msgstr "ordre"
 
 #: sponsorship/models.py:21
 msgid "cost"
-msgstr ""
+msgstr "coût"
 
 #: sponsorship/models.py:22 sponsorship/models.py:152
 msgid "description"
-msgstr ""
+msgstr "description"
 
 #: sponsorship/models.py:22
 msgid "This is private."
-msgstr ""
+msgstr "Ceci est privé"
 
 #: sponsorship/models.py:26
 msgid "sponsor level"
-msgstr ""
+msgstr "Niveau de sponsorship"
 
 #: sponsorship/models.py:27
 msgid "sponsor levels"
-msgstr ""
+msgstr "Niveaux de commanditaires"
 
 #: sponsorship/models.py:38
 msgid "applicant"
-msgstr ""
+msgstr "proposeur"
 
 #: sponsorship/models.py:40
 msgid "Sponsor Name"
-msgstr ""
+msgstr "Nom du commanditaire"
 
 #: sponsorship/models.py:41
 msgid "external URL"
-msgstr ""
+msgstr "URL externe"
 
 #: sponsorship/models.py:42
 msgid "annotation"
-msgstr ""
+msgstr "annotation"
 
 #: sponsorship/models.py:43
 msgid "Contact Name"
-msgstr ""
+msgstr "Nom du contact"
 
 #: sponsorship/models.py:44
 msgid "Contact Email"
-msgstr ""
+msgstr "Courriel du contact"
 
 #: sponsorship/models.py:45 sponsorship/models.py:162
 msgid "level"
-msgstr ""
+msgstr "niveau"
 
 #: sponsorship/models.py:46
 msgid "added"
-msgstr ""
+msgstr "ajouté"
 
 #: sponsorship/models.py:47
 msgid "active"
-msgstr ""
+msgstr "actif"
 
 #: sponsorship/models.py:58 sponsorship/models.py:177
 msgid "sponsor"
-msgstr ""
+msgstr "commanditaire"
 
 #: sponsorship/models.py:59
 msgid "sponsors"
-msgstr ""
+msgstr "commanditaires"
 
 #: sponsorship/models.py:153
 msgid "type"
-msgstr ""
+msgstr "type"
 
 #: sponsorship/models.py:161 sponsorship/models.py:178
 msgid "benefit"
-msgstr ""
+msgstr "avantages"
 
 #: sponsorship/models.py:165 sponsorship/models.py:182
 msgid "max words"
-msgstr ""
+msgstr "nombre maximum de mots"
 
 #: sponsorship/models.py:166 sponsorship/models.py:183
 msgid "other limits"
-msgstr ""
+msgstr "autres limites"
 
 #: sponsorship/models.py:187
 msgid "text"
-msgstr ""
+msgstr "texte"
 
 #: sponsorship/models.py:188
 msgid "file"
-msgstr ""
+msgstr "fichier"
 
 #: templates/dashboard.html:8
 msgid "Dashboard"
-msgstr ""
+msgstr "tableau de bord"
 
 #: templates/dashboard.html:32
 msgid "Speaking"
-msgstr ""
+msgstr "Présenter"
 
 #: templates/dashboard.html:34
 msgid "The submission deadline is June 21st, 2013."
-msgstr ""
+msgstr "La date limite de soumission est le 21 Juin 2013"
 
 #: templates/dashboard.html:35
 msgid ""
 "Please note that <a href='http://jessenoller.com/blog/2011/05/25/pycon-"
 "everybody-pays'>everyone</a> pays for a ticket to PyCon, including speakers!"
 msgstr ""
+"Veuillez noter que <a href='http://jessenoller.com/blog/2011/05/25/pycon-"
+"everybody-pays'>tout le minde</a> paye son billet à PyCon, incluant les "
+"présentateurs!"
 
 #: templates/dashboard.html:97 templates/sponsorship/detail.html:8
 msgid "Sponsorship"
-msgstr ""
+msgstr "Commanditer"
 
 #: templates/dashboard.html:113 templates/reviews/base.html:6
 #: templates/reviews/review_detail.html:75
 msgid "Reviews"
-msgstr ""
+msgstr "Analyses"
 
 #: templates/dashboard.html:177
 msgid "Teams"
-msgstr ""
+msgstr "Équipes"
 
 #: templates/boxes/box.html:9
 msgid "Editing content:"
-msgstr ""
+msgstr "Édtier le contenu"
 
 #: templates/cms/page_edit.html:11
 msgid "Edit page at:"
-msgstr ""
+msgstr "Éditer la page à::"
 
 #: templates/conference/user_list.html:59
 msgid "Email"
-msgstr ""
+msgstr "Courriel"
 
 #: templates/conference/user_list.html:61
 msgid "Speaker Profile?"
-msgstr ""
+msgstr "Profile de présentateur?"
 
 #: templates/emails/teams_user_applied/message.html:3
 #, python-format
@@ -260,11 +272,23 @@ msgid ""
 "%(team_url)s</a>\n"
 "    </p>\n"
 msgstr ""
+"\n"
+"    <p>\n"
+"        L'usager \"%(username)s\" désire rejoindre <b>%(team_name)s</b> à "
+"%(site_name)s.\n"
+"    </p>\n"
+"\n"
+"    <p>\n"
+"        Pour accepter l'application et voir les autres demandes en attente, "
+"visiter l'adresse suivante : \n"
+"        <a href=\"http://%(site_url)s%(team_url)s\">http://%(site_url)s"
+"%(team_url)s</a>\n"
+"    </p>\n"
 
 #: templates/emails/teams_user_applied/subject.txt:1
 #, python-format
 msgid "%(username)s has applied to to join \"%(team)s\""
-msgstr ""
+msgstr "%(username)s demande de rejoindre \"%(team)s\""
 
 #: templates/emails/teams_user_invited/message.html:3
 #, python-format
@@ -281,235 +305,246 @@ msgid ""
 "%(team_url)s</a>\n"
 "    </p>\n"
 msgstr ""
+"\n"
+"    <p>\n"
+"        Vous avez été invité de rejoindre <b>%(team_name)s</b> sur "
+"%(site_name)s.\n"
+"    </p>\n"
+"\n"
+"    <p>\n"
+"        Pour accepter cette invitation, visitez l'adresse suivante :\n"
+"        <a href=\"http://%(site_url)s%(team_url)s\">http://%(site_url)s"
+"%(team_url)s</a>\n"
+"    </p>\n"
 
 #: templates/emails/teams_user_invited/subject.txt:1
 #, python-format
 msgid "You have been invited to join \"%(team)s\""
-msgstr ""
+msgstr "Vous avez été invité à rejoindre \"%(team)s\""
 
 #: templates/proposals/_pending_proposal_row.html:12
 msgid "Cancelled"
-msgstr ""
+msgstr "Annulé"
 
 #: templates/proposals/_pending_proposal_row.html:18
 msgid "Submitted"
-msgstr ""
+msgstr "Envoyé"
 
 #: templates/proposals/_pending_proposal_row.html:21
 msgid "Invited"
-msgstr ""
+msgstr "Invité"
 
 #: templates/proposals/_pending_proposal_row.html:30
 msgid "Choose Response"
-msgstr ""
+msgstr "Choisir une réponse"
 
 #: templates/proposals/_pending_proposal_row.html:35
 msgid "Accept invitation"
-msgstr ""
+msgstr "Accepter l'invitation"
 
 #: templates/proposals/_pending_proposal_row.html:37
 msgid "Decline invitation"
-msgstr ""
+msgstr "Refuser l'invitation"
 
 #: templates/proposals/_proposal_fields.html:4
 msgid "Submitted by"
-msgstr ""
+msgstr "Envoyé par"
 
 #: templates/proposals/_proposal_fields.html:7
 msgid "Track"
-msgstr ""
+msgstr "Track"
 
 #: templates/proposals/_proposal_fields.html:10
 msgid "Audience Level"
-msgstr ""
+msgstr "Niveau technique"
 
 #: templates/proposals/_proposal_fields.html:14
 msgid "Additional Speakers"
-msgstr ""
+msgstr "Conférenciers additionnels"
 
 #: templates/proposals/_proposal_fields.html:21
 msgid "Invitation Sent"
-msgstr ""
+msgstr "Invitation envoyé"
 
 #: templates/proposals/_proposal_fields.html:28
 msgid "Description"
-msgstr ""
+msgstr "Description"
 
 #: templates/proposals/_proposal_fields.html:31
 msgid "Abstract"
-msgstr ""
+msgstr "Abstract"
 
 #: templates/proposals/_proposal_fields.html:34
 msgid "Notes"
-msgstr ""
+msgstr "Commentaires"
 
 #: templates/proposals/_proposal_fields.html:37
 msgid "Speaker Bio"
-msgstr ""
+msgstr "Biographie"
 
 #: templates/proposals/_proposal_fields.html:40
 msgid "Documents"
-msgstr ""
+msgstr "Documents"
 
 #: templates/proposals/proposal_cancel.html:7
 msgid "Cancel Proposal"
-msgstr ""
+msgstr "Annuler la proposition"
 
 #: templates/proposals/proposal_cancel.html:16
 msgid "No, keep it for now"
-msgstr ""
+msgstr "Non, laisser tout comme ça"
 
 #: templates/proposals/proposal_detail.html:15
 #: templates/proposals/proposal_speaker_manage.html:10
 msgid "Edit this proposal"
-msgstr ""
+msgstr "Modifier cette proposition"
 
 #: templates/proposals/proposal_detail.html:19
 msgid "Cancel this proposal"
-msgstr ""
+msgstr "Annuler cette proposition"
 
 #: templates/proposals/proposal_detail.html:23
 msgid "Remove me from this proposal"
-msgstr ""
+msgstr "Me retirer de cette proposition"
 
 #: templates/proposals/proposal_detail.html:35
 #: templates/reviews/review_detail.html:74
 msgid "Proposal Details"
-msgstr ""
+msgstr "Détails de la proposition"
 
 #: templates/proposals/proposal_detail.html:37
 msgid "Supporting Documents"
-msgstr ""
+msgstr "Documents additionnels"
 
 #: templates/proposals/proposal_detail.html:40
 msgid "Reviewer Feedback"
-msgstr ""
+msgstr "Commentaires du comité de sélection"
 
 #: templates/proposals/proposal_detail.html:57
 msgid "delete"
-msgstr ""
+msgstr "supprimer"
 
 #: templates/proposals/proposal_detail.html:64
 msgid "No supporting documents attached to this proposal."
-msgstr ""
+msgstr "Non, des documents additionnels sont joint à cette proposition"
 
 #: templates/proposals/proposal_detail.html:66
 msgid "Add Document"
-msgstr ""
+msgstr "Ajouter un document"
 
 #: templates/proposals/proposal_detail.html:73
 msgid "Conversation with Reviewers"
-msgstr ""
+msgstr "Échange avec le comité de sélection"
 
 #: templates/proposals/proposal_detail.html:84
 msgid "Leave a Message"
-msgstr ""
+msgstr "Laisser un message"
 
 #: templates/proposals/proposal_detail.html:86
 msgid "You can leave a message for the reviewers here."
-msgstr ""
+msgstr "Vous pouvez laissez un message pour le comité de sélection ici."
 
 #: templates/proposals/proposal_detail.html:95
 msgid "Submit"
-msgstr ""
+msgstr "SOumettre"
 
 #: templates/proposals/proposal_speaker_manage.html:6
 msgid "Proposal Speakers"
-msgstr ""
+msgstr "Conférenciers de la proposition"
 
 #: templates/proposals/proposal_speaker_manage.html:12
 msgid "Proposal:"
-msgstr ""
+msgstr "Proposition :"
 
 #: templates/proposals/proposal_speaker_manage.html:14
 msgid "Current Speakers"
-msgstr ""
+msgstr "Conférenciers actuels :"
 
 #: templates/proposals/proposal_speaker_manage.html:20
 msgid "pending invitation"
-msgstr ""
+msgstr "invitation en attente"
 
 #: templates/proposals/proposal_speaker_manage.html:24
 msgid "Add another speaker"
-msgstr ""
+msgstr "Ajouté un autre conférencier"
 
 #: templates/proposals/proposal_submit.html:5
 msgid "Submit A Proposal"
-msgstr ""
+msgstr "Soumettre une proposition"
 
 #: templates/proposals/proposal_submit.html:9
 msgid "Submit a talk"
-msgstr ""
+msgstr "Soumettre une proposotion de conférence"
 
 #: templates/reviews/_review_table.html:6
 #: templates/reviews/result_notification.html:45
 msgid "Speaker / Title"
-msgstr ""
+msgstr "Conférencier / Titre"
 
 #: templates/reviews/_review_table.html:7
 #: templates/reviews/result_notification.html:46
 msgid "Category"
-msgstr ""
+msgstr "Catégorie"
 
 #: templates/reviews/_review_table.html:9
 msgid "+1"
-msgstr ""
+msgstr "+1"
 
 #: templates/reviews/_review_table.html:10
 msgid "+0"
-msgstr ""
+msgstr "+0"
 
 #: templates/reviews/_review_table.html:11
 msgid "-0"
-msgstr ""
+msgstr "-0"
 
 #: templates/reviews/_review_table.html:12
 msgid "-1"
-msgstr ""
+msgstr "-1"
 
 #: templates/reviews/_review_table.html:13
 msgid "Your Rating"
-msgstr ""
+msgstr "Votre score"
 
 #: templates/reviews/base.html:66
 msgid "All Reviews"
-msgstr ""
+msgstr "Tous les commentaires"
 
 #: templates/reviews/base.html:79
 msgid "Voting Status"
-msgstr ""
+msgstr "État du vote"
 
 #: templates/reviews/result_notification.html:47
 msgid "Status"
-msgstr ""
+msgstr "État"
 
 #: templates/reviews/result_notification.html:48
 msgid "Notified?"
-msgstr ""
+msgstr "Signalé?"
 
 #: templates/reviews/review_detail.html:76
 msgid "Speaker Feedback"
-msgstr ""
+msgstr "Réponse des conférenciers"
 
 #: templates/reviews/review_detail.html:84
 msgid "Current Results"
-msgstr ""
+msgstr "Résultats actuels"
 
 #: templates/reviews/review_detail.html:91
 msgid "Total Responses"
-msgstr ""
+msgstr "Réponses totales"
 
 #: templates/reviews/review_detail.html:108
 msgid "Submit Review"
-msgstr ""
+msgstr "Soumettre le commentaire"
 
 #: templates/reviews/review_detail.html:148
 msgid "Conversation with the submitter"
-msgstr ""
+msgstr "Échange avec les proposeurs"
 
 #: templates/reviews/review_detail.html:162
 msgid "Send a message"
-msgstr ""
+msgstr "Envoyer un message"
 
 #: templates/reviews/review_detail.html:164
 msgid ""
@@ -519,38 +554,43 @@ msgid ""
 "                            notified and given the opportunity to respond.\n"
 "                        "
 msgstr ""
+"\n"
+"                            Si vous voulez communiquer avec la personne qui "
+"a soumis la demande, utilisez le formulaire ci-bas et la personne sera "
+"averti par courriel et aura la possibilité de répondre.\n"
+"                        "
 
 #: templates/schedule/_slot_edit.html:5
 msgid "Edit Slot"
-msgstr ""
+msgstr "Modifier le créneau d'horaire"
 
 #: templates/schedule/schedule_conference.html:7
 #: templates/schedule/schedule_conference.html:16
 msgid "Conference Schedule"
-msgstr ""
+msgstr "Horaire de la conférence"
 
 #: templates/speakers/speaker_create.html:6
 #: templates/speakers/speaker_create.html:12
 msgid "Create Speaker Profile"
-msgstr ""
+msgstr "Créer un profil de conférencier"
 
 #: templates/speakers/speaker_edit.html:6
 #: templates/speakers/speaker_edit.html:12
 msgid "Edit Speaker Profile"
-msgstr ""
+msgstr "Modifier le profil de conférencier"
 
 #: templates/sponsorship/add.html:6 templates/sponsorship/add.html.py:13
 msgid "Add a Sponsor"
-msgstr ""
+msgstr "Ajouter un commanditaire"
 
 #: templates/sponsorship/apply.html:6
 msgid "Apply to be a Sponsor"
-msgstr ""
+msgstr "Soumettre une demande de commandite"
 
 #: templates/sponsorship/apply.html:15
 msgid "Apply to Be a Sponsor"
-msgstr ""
+msgstr "Soumettre une demande de commandite"
 
 #: templates/sponsorship/list.html:7 templates/sponsorship/list.html.py:12
 msgid "Our Sponsors"
-msgstr ""
+msgstr "Nos commanditaires"
