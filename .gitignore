@@ -6,3 +6,4 @@ site_media
 .DS_Store
 .env
 hacking/
+tags

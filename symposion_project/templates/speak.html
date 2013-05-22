@@ -19,7 +19,7 @@ opportunity to learn something new and cool.</p>
 <p>Nervous about your lack of presenter experience? We'll work to connect you
 with resources and people to help you prepare. You might also consider
 co-presenting with a more experienced presenter. And once you've rocked PyCon
-Canada 2013, you can take that experience to help you gear up for the big 
+Canada 2013, you can take that experience to help you gear up for the big
 PyCon conference in Montr&eacute;al.</p>
 
 <h3>Submitting a Talk or Tutorial</h3>
@@ -28,23 +28,45 @@ considered. Tutorials are 3 hours. We also welcome ideas for sprints. The
 deadline to submit talks and tutorials is June 21st, 2013.</p>
 
 {% if user.is_authenticated %}
-<p>Head over to the <a href="{% url "dashboard" %}">dashboard &raquo;</a> to submit a proposal.</p>
+  <p>Head over to the <a href="{% url "dashboard" %}">dashboard &raquo;</a> to submit a proposal.</p>
 {% else %}
-<p>Please <a href="{% url "account_signup" %}">Create an Account &raquo;</a> or <a href="{% url "account_login" %}">Log in &raquo;</a>.</p>
+  <p>Please <a href="{% url "account_signup" %}?next={% url "dashboard" %}">create an account &raquo;</a> or <a href="{% url "account_login" %}?next={% url "dashboard" %}">log in &raquo;</a>.</p>
 {% endif %}
 
-<p>Submit your talk if you are logged in. You will need to include the
-following information in talk and tutorial proposals:</p>
+<p>To submit a talk or tutorial, you will need to include:</p>
 <ul>
-    <li><p>Name of the talk or tutorial</p></li>
-    <li><p>Length of the talk/tutorial</p></li>
-    <li><p>Intended audience (assumed level of knowledge)</p></li>
-    <li><p>Abstract for the talk/tutorial - 300 chars max</p></li>
-    <li><p>Outline of the talk/tutorial</p></li>
-    <li><p>Additional notes for the proposal reviewers. This can include
+    <li>Name of the talk or tutorial</li>
+    <li>Length of the talk/tutorial</li>
+    <li>Intended audience (assumed level of knowledge)</li>
+    <li>Abstract for the talk/tutorial - 300 chars max</li>
+    <li>Outline of the talk/tutorial</li>
+    <li>Additional notes for the proposal reviewers. This can include
     additional background information such as links to other presentations you
     have done, or links to blog posts, articles or code related to your
-    presentation.</p></li>
+    presentation.</li>
+</ul>
+
+<h3>Lightning Talks</h3>
+<p><a href="http://en.wikipedia.org/wiki/Lightning_talk">Lightning talks</a>
+are 5 minute talks that are done in quick succession. At PyCon USA, lightning
+talks are drawn from a hat, on the spot during the conference. Due to their
+ever increasing popularity, a large number of people end up not being able to
+present the 5 minute talks they prepared (too many talks, too little time), so
+we've decided to try something new. PyCon Canada will be confirming 12
+lightning talks in advance, and we have one reserved for you!</p>
+
+{% if user.is_authenticated %}
+  <p>Head over to the <a href="{% url "dashboard" %}">dashboard &raquo;</a> to submit a proposal.</p>
+{% else %}
+  <p>Please <a href="{% url "account_signup" %}?next={% url "dashboard" %}">create an account &raquo;</a> or <a href="{% url "account_login" %}?next={% url "dashboard" %}">log in &raquo;</a>.</p>
+{% endif %}
+
+<p>Not sure if lightning talks are for you? <a
+href="http://perl.plover.com/lt/osc2003/lightning-talks.html">Read some more
+about them</a>, watch some videos of past PyCon lightning talks:</p>
+
+<ul>
+  <li><a href="http://pyvideo.org/search?models=videos.video&q=lightning+talks">http://pyvideo.org/search?models=videos.video&am;q=lightning+talks</a></li>
+  <li><a href="http://blip.tv/search?q=pycon+lightning+talks">http://blip.tv/search?q=pycon+lightning+talks</a></li>
 </ul>
 {% endblock %}
-
