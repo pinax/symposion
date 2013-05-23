@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-22 17:27-0400\n"
+"POT-Creation-Date: 2013-05-22 22:49-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -97,6 +97,7 @@ msgid "Pending"
 msgstr ""
 
 #: proposals/models.py:145 templates/proposals/_pending_proposal_row.html:16
+#: templates/proposals/_proposal_row.html:16
 msgid "Accepted"
 msgstr ""
 
@@ -367,10 +368,12 @@ msgid "You have been invited to join \"%(team)s\""
 msgstr ""
 
 #: templates/proposals/_pending_proposal_row.html:12
+#: templates/proposals/_proposal_row.html:12
 msgid "Cancelled"
 msgstr ""
 
 #: templates/proposals/_pending_proposal_row.html:18
+#: templates/proposals/_proposal_row.html:18
 msgid "Submitted"
 msgstr ""
 
@@ -428,6 +431,18 @@ msgstr ""
 
 #: templates/proposals/_proposal_fields.html:40
 msgid "Documents"
+msgstr ""
+
+#: templates/proposals/_proposal_row.html:21
+msgid "Associated"
+msgstr ""
+
+#: templates/proposals/_proposal_row.html:29
+msgid "Edit"
+msgstr ""
+
+#: templates/proposals/_proposal_row.html:30
+msgid "Manage Additional Speakers"
 msgstr ""
 
 #: templates/proposals/proposal_cancel.html:7
