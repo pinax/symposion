@@ -43,6 +43,8 @@ Start the server! Go to `http://localhost:6544/`; you can log in with
     Development server is running at http://127.0.0.1:6544/
     Quit the server with CONTROL-C.
 
+## Translation
+
 For internationalization/i18n, either do:
 
     $ make i18n
@@ -77,8 +79,3 @@ To build documentation::
     $ . /data/virtualenvs/2013.pycon.ca/bin/activate
     $ git pull # Note the hash, I usually push a deploy tag from my local repo pointed at this hash
     $ make restart_prod
-
-## Translation
-
-- `python manage.py makemessages -a -l fr`
-- `python manage.py compilemessages`
