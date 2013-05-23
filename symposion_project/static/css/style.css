@@ -5934,15 +5934,17 @@ h4, legend {
   overflow: auto;
   margin: 10px 0;
 }
+.nav li.home {
+  width: 50px;
+}
 .nav li {
   float: left;
-  margin-left: 30px;
-  margin-right: 30px;
+  width: 13%;
   text-align: center;
   line-height: 45px;
   height: 45px;
 }
-@media (max-width: 630px) {
+@media (max-width: 767px) {
   .nav li {
     width: auto;
     min-width: 0px;
