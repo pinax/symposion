@@ -77,7 +77,13 @@
         <h2>{{ level.name }}</h2>
         <div class="sponsor-group">
           {% for sponsor in level.sponsors %}
-          <a href="{{ sponsor.external_url }}">
+          <a href="{{ sponsor.external_url }}"
+              {% if sponsor.listing_text %}
+                data-title="{{ sponsor.name }}"
+                data-content="{{ sponsor.listing_text|linebreaks }}"
+              {% endif %}
+              class="sponsor-tooltip"
+              >
             {% if level.name == 'Diamond' %}
             <img src="{% thumbnail sponsor.website_logo '400x240' %}" alt="{{ sponsor.name }}" />
             {% elif level.name == 'Gold' %}

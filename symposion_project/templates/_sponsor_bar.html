@@ -12,7 +12,13 @@
       <h3><span>{{ level.name }}</span></h3>
       <div class="sponsor-group">
       {% for sponsor in level.sponsors %}
-      <a href="{{ sponsor.external_url }}">
+      <a href="{{ sponsor.external_url }}"
+          {% if sponsor.listing_text %}
+            data-title="{{ sponsor.name }}"
+            data-content="{{ sponsor.listing_text|linebreaks }}"
+          {% endif %}
+          class="sponsor-tooltip"
+          >
         <img src="{% thumbnail sponsor.website_logo '150x80' %}" alt="{{ sponsor.name }}" />
       </a>
       {% endfor %}

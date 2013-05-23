@@ -4202,7 +4202,7 @@ input[type="submit"].btn.btn-mini {
 .popover-title {
   padding: 9px 15px;
   line-height: 1;
-  background-color: #f5f5f5;
+  background-color: white;
   border-bottom: 1px solid #eee;
   -webkit-border-radius: 3px 3px 0 0;
   -moz-border-radius: 3px 3px 0 0;
@@ -4210,7 +4210,7 @@ input[type="submit"].btn.btn-mini {
 }
 .popover-content {
   padding: 14px;
-  background-color: #ffffff;
+  background: #ffffff url('../img/snake-bg.jpg') top left repeat;
   -webkit-border-radius: 0 0 3px 3px;
   -moz-border-radius: 0 0 3px 3px;
   border-radius: 0 0 3px 3px;
@@ -4222,6 +4222,10 @@ input[type="submit"].btn.btn-mini {
 .popover-content ul,
 .popover-content ol {
   margin-bottom: 0;
+  color: black;
+}
+.popover h3 {
+  color: black;
 }
 .thumbnails {
   margin-left: -20px;
