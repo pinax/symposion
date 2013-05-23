@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-21 21:30-0400\n"
+"POT-Creation-Date: 2013-05-22 17:27-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -210,6 +210,18 @@ msgstr "fichier"
 msgid "Dashboard"
 msgstr "tableau de bord"
 
+#: templates/dashboard.html:18
+msgid "Create a speaker profile"
+msgstr "Créer un profil de conférencier"
+
+#: templates/dashboard.html:23
+msgid "Edit your speaker profile"
+msgstr "Modifier le profil de conférencier"
+
+#: templates/dashboard.html:27
+msgid "Submit a new proposal"
+msgstr "Soumettre une proposition"
+
 #: templates/dashboard.html:32
 msgid "Speaking"
 msgstr "Présenter"
@@ -227,18 +239,87 @@ msgstr ""
 "everybody-pays'>tout le minde</a> paye son billet à PyCon, incluant les "
 "présentateurs!"
 
-#: templates/dashboard.html:97 templates/sponsorship/detail.html:8
-msgid "Sponsorship"
-msgstr "Commanditer"
+#: templates/dashboard.html:42
+#, python-format
+msgid ""
+"To submit a proposal, you must first <a href=\"%(speaker_create_url)s"
+"\">create a speaker profile</a>."
+msgstr ""
 
-#: templates/dashboard.html:113 templates/reviews/base.html:6
+#: templates/dashboard.html:44
+msgid "Your Proposals"
+msgstr ""
+
+#: templates/dashboard.html:48 templates/dashboard.html.py:66
+#: templates/dashboard.html:82
+msgid "Title"
+msgstr "Titre"
+
+#: templates/dashboard.html:49 templates/dashboard.html.py:67
+#: templates/dashboard.html:83
+msgid "Session type"
+msgstr ""
+
+#: templates/dashboard.html:50 templates/dashboard.html.py:68
+#: templates/dashboard.html:84 templates/reviews/result_notification.html:47
+msgid "Status"
+msgstr "État"
+
+#: templates/dashboard.html:51 templates/dashboard.html.py:69
+#: templates/dashboard.html:85
+msgid "Actions"
+msgstr ""
+
+#: templates/dashboard.html:58
+msgid "No proposals submitted yet."
+msgstr ""
+
+#: templates/dashboard.html:63
+msgid "Proposals you have joined as an additional speaker"
+msgstr ""
+
+#: templates/dashboard.html:79
+msgid "Proposals you have been invited to join"
+msgstr ""
+
+#: templates/dashboard.html:99 templates/reviews/base.html:6
 #: templates/reviews/review_detail.html:75
 msgid "Reviews"
 msgstr "Analyses"
 
-#: templates/dashboard.html:177
+#: templates/dashboard.html:103
+msgid "Review Sections"
+msgstr ""
+
+#: templates/dashboard.html:111
+msgid "Proposals you have reviewed"
+msgstr ""
+
+#: templates/dashboard.html:114
+msgid "#"
+msgstr ""
+
+#: templates/dashboard.html:115 templates/reviews/_review_table.html:6
+#: templates/reviews/result_notification.html:45
+msgid "Speaker / Title"
+msgstr "Conférencier / Titre"
+
+#: templates/dashboard.html:116
+#, fuzzy
+msgid "Your Vote"
+msgstr "Votre score"
+
+#: templates/dashboard.html:163
 msgid "Teams"
 msgstr "Équipes"
+
+#: templates/dashboard.html:168
+msgid "Your Teams"
+msgstr ""
+
+#: templates/dashboard.html:189
+msgid "Available Teams"
+msgstr ""
 
 #: templates/boxes/box.html:9
 msgid "Editing content:"
@@ -476,11 +557,6 @@ msgstr "Soumettre une proposition"
 msgid "Submit a talk"
 msgstr "Soumettre une proposition de conférence"
 
-#: templates/reviews/_review_table.html:6
-#: templates/reviews/result_notification.html:45
-msgid "Speaker / Title"
-msgstr "Conférencier / Titre"
-
 #: templates/reviews/_review_table.html:7
 #: templates/reviews/result_notification.html:46
 msgid "Category"
@@ -513,10 +589,6 @@ msgstr "Tous les commentaires"
 #: templates/reviews/base.html:79
 msgid "Voting Status"
 msgstr "État du vote"
-
-#: templates/reviews/result_notification.html:47
-msgid "Status"
-msgstr "État"
 
 #: templates/reviews/result_notification.html:48
 msgid "Notified?"
@@ -590,6 +662,10 @@ msgstr "Soumettre une demande de commandite"
 #: templates/sponsorship/apply.html:15
 msgid "Apply to Be a Sponsor"
 msgstr "Soumettre une demande de commandite"
+
+#: templates/sponsorship/detail.html:8
+msgid "Sponsorship"
+msgstr "Commanditer"
 
 #: templates/sponsorship/list.html:7 templates/sponsorship/list.html.py:12
 msgid "Our Sponsors"

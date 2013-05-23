@@ -15,16 +15,16 @@
             {% if not user.speaker_profile %}
                 <a href="{% url speaker_create %}" class="btn">
                   <i class="icon-user"></i> 
-                    Create a speaker profile
+                    {% trans "Create a speaker profile" %}
                 </a>
             {% else %}
                 <a href="{% url speaker_edit %}" class="btn">
                   <i class="icon-pencil"></i>
-                    Edit your speaker profile
+                    {% trans "Edit your speaker profile" %}
                 </a>
                 <a href="{% url proposal_submit %}" class="btn btn-success">
                   <i class="icon-upload"></i>
-                    Submit a new proposal
+                    {% trans "Submit a new proposal" %}
                 </a>
             {% endif %}
         </div>
@@ -38,34 +38,35 @@
         
         <div class="dashboard-panel-content">
             {% if not user.speaker_profile %}
-                <p>To submit a proposal, you must first <a href="{% url speaker_create %}">create a speaker profile</a>.</p>
+                {% url speaker_create as speaker_create_url %}
+                <p>{% blocktrans with speaker_create_url=speaker_create_url %}To submit a proposal, you must first <a href="{{ speaker_create_url }}">create a speaker profile</a>.{% endblocktrans %}</p>
             {% else %}
-                <h4>Your Proposals</h4>
+                <h4>{% trans "Your Proposals" %}</h4>
                 {% if user.speaker_profile.proposals.exists %}
                     <table class="table">
                         <tr>
-                            <th>Title</th>
-                            <th>Session type</th>
-                            <th>Status</th>
-                            <th>Actions</th>
+                            <th>{% trans "Title" %}</th>
+                            <th>{% trans "Session type" %}</th>
+                            <th>{% trans "Status" %}</th>
+                            <th>{% trans "Actions" %}</th>
                         </tr>
                         {% for proposal in user.speaker_profile.proposals.all %}
                             {% include "proposals/_proposal_row.html" %}
                         {% endfor %}
                     </table>
                 {% else %}
-                    <p>No proposals submitted yet.</p>
+                    <p>{% trans "No proposals submitted yet." %}</p>
                 {% endif %}
             
                 {% associated_proposals as associated_proposals %}
                 {% if associated_proposals %}
-                    <h4>Proposals you have joined as an additional speaker</h4>
+                    <h4>{% trans "Proposals you have joined as an additional speaker" %}</h4>
                     <table class="table">
                         <tr>
-                            <th>Title</th>
-                            <th>Session type</th>
-                            <th>Status</th>
-                            <th>Actions</th>
+                            <th>{% trans "Title" %}</th>
+                            <th>{% trans "Session type" %}</th>
+                            <th>{% trans "Status" %}</th>
+                            <th>{% trans "Actions" %}</th>
                         </tr>
                         {% for proposal in associated_proposals %}
                             {% include "proposals/_proposal_row.html" %}
@@ -75,13 +76,13 @@
                 
                 {% pending_proposals as pending_proposals %}
                 {% if pending_proposals %}
-                    <h4>Proposals you have been invited to join</h4>
+                    <h4>{% trans "Proposals you have been invited to join" %}</h4>
                     <table class="table">
                         <tr>
-                            <th>Title</th>
-                            <th>Session type</th>
-                            <th>Status</th>
-                            <th>Actions</th>
+                            <th>{% trans "Title" %}</th>
+                            <th>{% trans "Session type" %}</th>
+                            <th>{% trans "Status" %}</th>
+                            <th>{% trans "Actions" %}</th>
                         </tr>
                         {% for proposal in pending_proposals %}
                             {% include "proposals/_pending_proposal_row.html" %}
@@ -99,7 +100,7 @@
             </div>
             {% user_reviews as user_reviews %}
             <div class="dashboard-panel-content">
-                <h4>Review Sections</h4>
+                <h4>{% trans "Review Sections" %}</h4>
                 
                 <ul>
                     {% for section in review_sections %}
@@ -107,12 +108,12 @@
                     {% endfor %}
                 </ul>
                 
-                <h4>Proposals you have reviewed</h4>
+                <h4>{% trans "Proposals you have reviewed" %}</h4>
                 <table class="table table-condensed">
                     <thead>
-                        <th>#</th>
-                        <th>Speaker / Title</th>
-                        <th>Your Vote</th>
+                        <th>{% trans "#" %}</th>
+                        <th>{% trans "Speaker / Title" %}</th>
+                        <th>{% trans "Your Vote" %}</th>
                     </thead>
                     <tbody>
                         {% for review in user_reviews %}
@@ -163,7 +164,7 @@
             
             <div class="dashboard-panel-content">
                 {% if user.memberships.exists %}
-                    <h4>Your Teams</h4>
+                    <h4>{% trans "Your Teams" %}</h4>
                     <table class="table table-striped">
                         {% for membership in user.memberships.all %}
                             <tr>
@@ -184,7 +185,7 @@
                     </table>
                 {% endif %}
                 {% if available_teams %}
-                    <h4>Available Teams</h4>
+                    <h4>{% trans "Available Teams" %}</h4>
                     <table class="table table-striped">
                         {% for team in available_teams %}
                             <tr>

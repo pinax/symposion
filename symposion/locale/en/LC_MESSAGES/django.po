@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-15 04:13-0400\n"
+"POT-Creation-Date: 2013-05-22 17:27-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -200,6 +200,18 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
+#: templates/dashboard.html:18
+msgid "Create a speaker profile"
+msgstr ""
+
+#: templates/dashboard.html:23
+msgid "Edit your speaker profile"
+msgstr ""
+
+#: templates/dashboard.html:27
+msgid "Submit a new proposal"
+msgstr ""
+
 #: templates/dashboard.html:32
 msgid "Speaking"
 msgstr ""
@@ -214,17 +226,85 @@ msgid ""
 "everybody-pays'>everyone</a> pays for a ticket to PyCon, including speakers!"
 msgstr ""
 
-#: templates/dashboard.html:97 templates/sponsorship/detail.html:8
-msgid "Sponsorship"
+#: templates/dashboard.html:42
+#, python-format
+msgid ""
+"To submit a proposal, you must first <a href=\"%(speaker_create_url)s"
+"\">create a speaker profile</a>."
 msgstr ""
 
-#: templates/dashboard.html:113 templates/reviews/base.html:6
+#: templates/dashboard.html:44
+msgid "Your Proposals"
+msgstr ""
+
+#: templates/dashboard.html:48 templates/dashboard.html.py:66
+#: templates/dashboard.html:82
+msgid "Title"
+msgstr ""
+
+#: templates/dashboard.html:49 templates/dashboard.html.py:67
+#: templates/dashboard.html:83
+msgid "Session type"
+msgstr ""
+
+#: templates/dashboard.html:50 templates/dashboard.html.py:68
+#: templates/dashboard.html:84 templates/reviews/result_notification.html:47
+msgid "Status"
+msgstr ""
+
+#: templates/dashboard.html:51 templates/dashboard.html.py:69
+#: templates/dashboard.html:85
+msgid "Actions"
+msgstr ""
+
+#: templates/dashboard.html:58
+msgid "No proposals submitted yet."
+msgstr ""
+
+#: templates/dashboard.html:63
+msgid "Proposals you have joined as an additional speaker"
+msgstr ""
+
+#: templates/dashboard.html:79
+msgid "Proposals you have been invited to join"
+msgstr ""
+
+#: templates/dashboard.html:99 templates/reviews/base.html:6
 #: templates/reviews/review_detail.html:75
 msgid "Reviews"
 msgstr ""
 
-#: templates/dashboard.html:177
+#: templates/dashboard.html:103
+msgid "Review Sections"
+msgstr ""
+
+#: templates/dashboard.html:111
+msgid "Proposals you have reviewed"
+msgstr ""
+
+#: templates/dashboard.html:114
+msgid "#"
+msgstr ""
+
+#: templates/dashboard.html:115 templates/reviews/_review_table.html:6
+#: templates/reviews/result_notification.html:45
+msgid "Speaker / Title"
+msgstr ""
+
+#: templates/dashboard.html:116
+msgid "Your Vote"
+msgstr ""
+
+#: templates/dashboard.html:163
 msgid "Teams"
+msgstr ""
+
+#: templates/dashboard.html:168
+msgid "Your Teams"
+msgstr ""
+
+#: templates/dashboard.html:189
+msgid "Available Teams"
 msgstr ""
 
 #: templates/boxes/box.html:9
@@ -440,11 +520,6 @@ msgstr ""
 msgid "Submit a talk"
 msgstr ""
 
-#: templates/reviews/_review_table.html:6
-#: templates/reviews/result_notification.html:45
-msgid "Speaker / Title"
-msgstr ""
-
 #: templates/reviews/_review_table.html:7
 #: templates/reviews/result_notification.html:46
 msgid "Category"
@@ -476,10 +551,6 @@ msgstr ""
 
 #: templates/reviews/base.html:79
 msgid "Voting Status"
-msgstr ""
-
-#: templates/reviews/result_notification.html:47
-msgid "Status"
 msgstr ""
 
 #: templates/reviews/result_notification.html:48
@@ -548,6 +619,10 @@ msgstr ""
 
 #: templates/sponsorship/apply.html:15
 msgid "Apply to Be a Sponsor"
+msgstr ""
+
+#: templates/sponsorship/detail.html:8
+msgid "Sponsorship"
 msgstr ""
 
 #: templates/sponsorship/list.html:7 templates/sponsorship/list.html.py:12
