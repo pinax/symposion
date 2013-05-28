@@ -9,7 +9,7 @@
 
 {% block body %}
 <h3>{% trans "About" %}</h3>
-<h2>{% trans "What is PyCon Canada?" %}</h2>
+<h2 id="whatis">{% trans "What is PyCon Canada?" %}</h2>
 <p>
   {% trans "Our main goals:" %}
 </p>
@@ -27,6 +27,19 @@
   {% trans "ABOUT_VOLUNTEERS" %}
 </p>
 
-<h2>{% trans "Code of Conduct" %}</h2>
+<h2 id="diversity">{% trans "Diversity Grants" %}</h2>
+<p>
+  {% blocktrans %}We want to bring together a range of great people and ideas, so Pythonistas from Canada and beyond are welcome to attend and speak. PyCon Canada is committed to the principles of diversity and inclusion, and is a Silver Founding Supporter of Ladies Learning Code. PyCon Canada is offering $500 CAD diversity grants to offset travel costs for individuals who are underrepresented in the Python community. The application deadline to apply for a grant is July 1, 2013.{% endblocktrans %}
+</p>
+
+<p>
+  {% blocktrans %}Please use the <a href="https://docs.google.com/a/pycon.ca/forms/d/1LZ6oaBQLlA0hOKuPwSIHEgGo1yfF092l_cBU9HVWOU4/viewform">online form</a> to submit an application for a diversity grant.{% endblocktrans %}
+</p>
+
+<p>
+  {% blocktrans %}If you'd like to speak at PyCon Canada, submissions are due June 21, 2013.{% endblocktrans %}
+</p>
+
+<h2 id="codeofconduct">{% trans "Code of Conduct" %}</h2>
 <p>{% trans "ABOUT_CONDUCT" %}</p>
 {% endblock %}

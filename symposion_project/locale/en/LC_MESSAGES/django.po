@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-23 00:09-0400\n"
+"POT-Creation-Date: 2013-05-28 19:04-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -168,12 +168,39 @@ msgstr ""
 "PyCon Canada is entirely run by volunteers who are passionate about these "
 "goals. We hope to see you at the 2012 conference! "
 
-#: templates/about.html:30 templates/conduct.html:6
+#: templates/about.html:30
+msgid "Diversity Grants"
+msgstr ""
+
+#: templates/about.html:32
+msgid ""
+"We want to bring together a range of great people and ideas, so Pythonistas "
+"from Canada and beyond are welcome to attend and speak. PyCon Canada is "
+"committed to the principles of diversity and inclusion, and is a Silver "
+"Founding Supporter of Ladies Learning Code. PyCon Canada is offering $500 "
+"CAD diversity grants to offset travel costs for individuals who are "
+"underrepresented in the Python community. The application deadline to apply "
+"for a grant is July 1, 2013."
+msgstr ""
+
+#: templates/about.html:36
+msgid ""
+"Please use the <a href=\"https://docs.google.com/a/pycon.ca/forms/"
+"d/1LZ6oaBQLlA0hOKuPwSIHEgGo1yfF092l_cBU9HVWOU4/viewform\">online form</a> to "
+"submit an application for a diversity grant."
+msgstr ""
+
+#: templates/about.html:40
+msgid ""
+"If you'd like to speak at PyCon Canada, submissions are due June 21, 2013."
+msgstr ""
+
+#: templates/about.html:43 templates/conduct.html:6
 #: templates/conduct.html.py:9 templates/conduct.html:15
 msgid "Code of Conduct"
 msgstr ""
 
-#: templates/about.html:31
+#: templates/about.html:44
 msgid "ABOUT_CONDUCT"
 msgstr ""
 "Please familiarize yourself with the <a href='/conduct'>Code of Conduct</a> "
