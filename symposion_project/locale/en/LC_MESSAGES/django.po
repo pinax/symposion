@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-28 11:16-0400\n"
+"POT-Creation-Date: 2013-05-28 19:04-0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -184,11 +184,10 @@ msgid ""
 msgstr ""
 
 #: templates/about.html:36
-#, python-format
 msgid ""
-"Applications for the diversity grants can be emailed to <a href=\"mailto:"
-"board@pycon.ca?subject=Diversity%%20grant%%20application\">board@pycon.ca</"
-"a>."
+"Please use the <a href=\"https://docs.google.com/a/pycon.ca/forms/"
+"d/1LZ6oaBQLlA0hOKuPwSIHEgGo1yfF092l_cBU9HVWOU4/viewform\">online form</a> to "
+"submit an application for a diversity grant."
 msgstr ""
 
 #: templates/about.html:40
