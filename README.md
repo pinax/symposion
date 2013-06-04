@@ -8,6 +8,7 @@ See http://eldarion.com/symposion/ for commercial support, customization and hos
 
 ## Quickstart
 
-- `pip install -r requirements.txt`
-- `python manage.py syncdb`
-- `python manage.py loaddata fixtures/*`
+If you're interested in running symposion locally, we have built a [basic
+Django startproject template that includes Symposion][1].
+
+[1]: https://github.com/pinax/pinax-project-symposion
