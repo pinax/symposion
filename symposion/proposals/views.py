@@ -23,7 +23,7 @@ from symposion.proposals.forms import AddSpeakerForm, SupportingDocumentCreateFo
 
 
 def get_form(name):
-    dot = name.rindex('.')
+    dot = name.rindex(".")
     mod_name, form_name = name[:dot], name[dot + 1:]
     __import__(mod_name)
     return getattr(sys.modules[mod_name], form_name)

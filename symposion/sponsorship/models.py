@@ -48,7 +48,7 @@ class Sponsor(models.Model):
     
     # Denormalization (this assumes only one logo)
     sponsor_logo = models.ForeignKey("SponsorBenefit", related_name="+", null=True, blank=True, editable=False)
-
+    
     objects = SponsorManager()
     
     def __unicode__(self):
@@ -121,7 +121,7 @@ class Sponsor(models.Model):
         # Any remaining sponsor benefits that don't normally belong to
         # this level are set to inactive
         self.sponsor_benefits.exclude(pk__in=allowed_benefits).update(active=False, max_words=None, other_limits="")
-
+    
     def send_coordinator_emails(self):
         pass  # @@@ should this just be done centrally?
 
@@ -160,7 +160,7 @@ class BenefitLevel(models.Model):
     
     benefit = models.ForeignKey(Benefit, related_name="benefit_levels", verbose_name=_("benefit"))
     level = models.ForeignKey(SponsorLevel, related_name="benefit_levels", verbose_name=_("level"))
-
+    
     # default limits for this benefit at given level
     max_words = models.PositiveIntegerField(_("max words"), blank=True, null=True)
     other_limits = models.CharField(_("other limits"), max_length=200, blank=True)
@@ -188,7 +188,7 @@ class SponsorBenefit(models.Model):
     upload = models.FileField(_("file"), blank=True, upload_to="sponsor_files")
     
     class Meta:
-        ordering = ['-active']
+        ordering = ["-active"]
     
     def __unicode__(self):
         return u"%s - %s" % (self.sponsor, self.benefit)

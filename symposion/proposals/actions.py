@@ -3,11 +3,12 @@ import csv
 from django.http import HttpResponse
 
 
-def export_as_csv_action(description="Export selected objects as CSV file",
-                         fields=None, exclude=None, header=True):
+def export_as_csv_action(
+    description="Export selected objects as CSV file",
+    fields=None, exclude=None, header=True):
     """
     This function returns an export csv action
-    'fields' and 'exclude' work like in django ModelForm
+    'fields' and 'exclude' work like in Django ModelForm
     'header' is whether or not to output the column names as the first row
     """
     def export_as_csv(modeladmin, request, queryset):
@@ -22,10 +23,8 @@ def export_as_csv_action(description="Export selected objects as CSV file",
         elif exclude:
             excludeset = set(exclude)
             field_names = field_names - excludeset
-
-        response = HttpResponse(mimetype='text/csv')
-        response['Content-Disposition'] = 'attachment; filename=%s.csv' % unicode(opts).replace('.', '_')
-
+        response = HttpResponse(mimetype="text/csv")
+        response["Content-Disposition"] = "attachment; filename=%s.csv" % unicode(opts).replace(".", "_")
         writer = csv.writer(response)
         if header:
             writer.writerow(list(field_names))

@@ -5,6 +5,7 @@ from symposion.reviews.models import Review, ReviewAssignment
 
 register = template.Library()
 
+
 @register.assignment_tag(takes_context=True)
 def review_assignments(context):
     request = context["request"]
