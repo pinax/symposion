@@ -43,6 +43,8 @@ class ReviewAssignment(models.Model):
     AUTO_ASSIGNED_INITIAL = 0
     OPT_IN = 1
     AUTO_ASSIGNED_LATER = 2
+
+    NUM_REVIEWERS = 3
     
     ORIGIN_CHOICES = [
         (AUTO_ASSIGNED_INITIAL, "auto-assigned, initial"),
@@ -66,7 +68,10 @@ class ReviewAssignment(models.Model):
                 speaker.user_id
                 for speaker in speakers
                 if speaker.user_id is not None
-            ]
+            ] + [
+                assignment.user_id
+                for assignment in ReviewAssignment.objects.filter(
+                    proposal_id=proposal.id)]
         ).filter(
             groups__name="reviewers",
         ).filter(
@@ -74,9 +79,11 @@ class ReviewAssignment(models.Model):
         ).annotate(
             num_assignments=models.Count("reviewassignment")
         ).order_by(
-            "num_assignments",
+            "num_assignments", "?",
         )
-        for reviewer in reviewers[:3]:
+        num_assigned_reviewers = ReviewAssignment.objects.filter(
+            proposal_id=proposal.id, opted_out=0).count()
+        for reviewer in reviewers[:max(0, cls.NUM_REVIEWERS - num_assigned_reviewers)]:
             cls._default_manager.create(
                 proposal=proposal,
                 user=reviewer,
