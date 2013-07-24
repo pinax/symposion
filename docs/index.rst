@@ -8,7 +8,7 @@ but has been independently used for a number of other conferences.
 
 We are in the process of cleaning things up and making them more generic.
 
-The project homepage is http://pinax.github.com/symposion/
+The project homepage is http://eldarion.com/symposion/
 
 Apps:
 
