@@ -11,7 +11,7 @@ setup(
     author_email="jtauber@jtauber.com",
     version=symposion.__version__,
     description="A collection of Django apps for conference websites.",
-    url="http://pinax.github.com/symposion/",
+    url="http://eldarion.com/symposion/",
     packages=find_packages(exclude=["symposion_project"]),
     include_package_data=True,
     classifiers=(
