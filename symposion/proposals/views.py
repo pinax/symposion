@@ -6,7 +6,12 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
 from django.http import Http404, HttpResponse, HttpResponseForbidden
 from django.shortcuts import render, redirect, get_object_or_404
-from django.utils.hashcompat import sha_constructor
+
+try:
+    from hashlib import sha1 as sha_constructor
+except ImportError:
+    from django.utils.hashcompat import sha_constructor
+
 from django.views import static
 
 from django.contrib import messages
