@@ -67,28 +67,6 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal('proposals', ['SupportingDocument'])
 
-        # Adding model 'TalkProposal'
-        db.create_table('proposals_talkproposal', (
-            ('proposalbase_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['proposals.ProposalBase'], unique=True, primary_key=True)),
-            ('audience_level', self.gf('django.db.models.fields.IntegerField')()),
-            ('recording_release', self.gf('django.db.models.fields.BooleanField')(default=True)),
-        ))
-        db.send_create_signal('proposals', ['TalkProposal'])
-
-        # Adding model 'TutorialProposal'
-        db.create_table('proposals_tutorialproposal', (
-            ('proposalbase_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['proposals.ProposalBase'], unique=True, primary_key=True)),
-            ('audience_level', self.gf('django.db.models.fields.IntegerField')()),
-            ('recording_release', self.gf('django.db.models.fields.BooleanField')(default=True)),
-        ))
-        db.send_create_signal('proposals', ['TutorialProposal'])
-
-        # Adding model 'OpenSpaceProposal'
-        db.create_table('proposals_openspaceproposal', (
-            ('proposalbase_ptr', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['proposals.ProposalBase'], unique=True, primary_key=True)),
-        ))
-        db.send_create_signal('proposals', ['OpenSpaceProposal'])
-
 
     def backwards(self, orm):
         # Removing unique constraint on 'AdditionalSpeaker', fields ['speaker', 'proposalbase']
@@ -108,16 +86,6 @@ class Migration(SchemaMigration):
 
         # Deleting model 'SupportingDocument'
         db.delete_table('proposals_supportingdocument')
-
-        # Deleting model 'TalkProposal'
-        db.delete_table('proposals_talkproposal')
-
-        # Deleting model 'TutorialProposal'
-        db.delete_table('proposals_tutorialproposal')
-
-        # Deleting model 'OpenSpaceProposal'
-        db.delete_table('proposals_openspaceproposal')
-
 
     models = {
         'auth.group': {
@@ -180,10 +148,6 @@ class Migration(SchemaMigration):
             'speaker': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['speakers.Speaker']"}),
             'status': ('django.db.models.fields.IntegerField', [], {'default': '1'})
         },
-        'proposals.openspaceproposal': {
-            'Meta': {'object_name': 'OpenSpaceProposal', '_ormbases': ['proposals.ProposalBase']},
-            'proposalbase_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['proposals.ProposalBase']", 'unique': 'True', 'primary_key': 'True'})
-        },
         'proposals.proposalbase': {
             'Meta': {'object_name': 'ProposalBase'},
             '_abstract_rendered': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
@@ -223,18 +187,6 @@ class Migration(SchemaMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'proposal': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'supporting_documents'", 'to': "orm['proposals.ProposalBase']"}),
             'uploaded_by': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
-        },
-        'proposals.talkproposal': {
-            'Meta': {'object_name': 'TalkProposal'},
-            'audience_level': ('django.db.models.fields.IntegerField', [], {}),
-            'proposalbase_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['proposals.ProposalBase']", 'unique': 'True', 'primary_key': 'True'}),
-            'recording_release': ('django.db.models.fields.BooleanField', [], {'default': 'True'})
-        },
-        'proposals.tutorialproposal': {
-            'Meta': {'object_name': 'TutorialProposal'},
-            'audience_level': ('django.db.models.fields.IntegerField', [], {}),
-            'proposalbase_ptr': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['proposals.ProposalBase']", 'unique': 'True', 'primary_key': 'True'}),
-            'recording_release': ('django.db.models.fields.BooleanField', [], {'default': 'True'})
         },
         'speakers.speaker': {
             'Meta': {'ordering': "['name']", 'object_name': 'Speaker'},
