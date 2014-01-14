@@ -1,5 +1,4 @@
 import itertools
-import operator
 
 from django.db.models import Count, Min
 
@@ -7,22 +6,22 @@ from symposion.schedule.models import Room, Slot, SlotRoom
 
 
 class TimeTable(object):
-    
+
     def __init__(self, day):
         self.day = day
-    
+
     def slots_qs(self):
         qs = Slot.objects.all()
         qs = qs.filter(day=self.day)
         return qs
-    
+
     def rooms(self):
         qs = Room.objects.all()
         qs = qs.filter(schedule=self.day.schedule)
         qs = qs.filter(pk__in=SlotRoom.objects.filter(slot__in=self.slots_qs().values("pk")).values("room"))
         qs = qs.order_by("order")
         return qs
-    
+
     def __iter__(self):
         times = sorted(set(itertools.chain(*self.slots_qs().values_list("start", "end"))))
         slots = Slot.objects.filter(pk__in=self.slots_qs().values("pk"))
@@ -38,7 +37,7 @@ class TimeTable(object):
                     row["slots"].append(slot)
             if row["slots"] or next_time is None:
                 yield row
-    
+
     @staticmethod
     def rowspan(times, start, end):
         return times.index(end) - times.index(start)
