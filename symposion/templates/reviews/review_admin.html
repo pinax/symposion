@@ -1,5 +1,8 @@
 {% extends "reviews/base.html" %}
 
+{% load url from future %}
+
+
 {% block body %}
     <h1>Reviewers</h1>
     
@@ -30,7 +33,7 @@
         {% for reviewer in reviewers %}
         <tr>
             <td>
-                <a href="{% url review_list_user section_slug reviewer.pk %}">{{ reviewer.get_full_name }}</a>
+                <a href="{% url 'review_list_user' section_slug reviewer.pk %}">{{ reviewer.get_full_name }}</a>
             </td>
             <td>
                 {{ reviewer.total_votes }}

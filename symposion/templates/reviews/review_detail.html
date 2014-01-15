@@ -1,5 +1,8 @@
 {% extends "reviews/base.html" %}
 
+{% load url from future %}
+
+
 {% load i18n %}
 {% load markitup_tags %}
 {% load bootstrap_tags %}
@@ -126,7 +129,7 @@
                             </div>
                             {% if is_manager %}
                                 <div class="pull-right">
-                                    <form class="form-inline" action="{% url review_delete review.id %}" method="POST">
+                                    <form class="form-inline" action="{% url 'review_delete' review.id %}" method="POST">
                                         {% csrf_token %}
                                         <button class="btn btn-mini btn-danger" type="submit">Delete</button>
                                     </form>
