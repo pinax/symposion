@@ -1,5 +1,8 @@
 {% extends "site_base.html" %}
 
+{% load url from future %}
+
+
 {% load i18n %}
 {% load proposal_tags %}
 {% load review_tags %}
@@ -16,14 +19,14 @@
             <h3>{% trans "Speaking" %}</h3>
             <div class="pull-right header-actions">
                 {% if not user.speaker_profile %}
-                    <a href="{% url speaker_create %}" class="btn">
+                    <a href="{% url 'speaker_create' %}" class="btn">
                         <i class="icon-plus-sign"></i> Create a speaker profile
                     </a>
                 {% else %}
-                    <a href="{% url speaker_edit %}" class="btn">
+                    <a href="{% url 'speaker_edit' %}" class="btn">
                         <i class="icon-pencil"></i> Edit your speaker profile
                     </a>
-                    <a href="{% url proposal_submit %}" class="btn">
+                    <a href="{% url 'proposal_submit' %}" class="btn">
                         <i class="icon-plus-sign"></i> Submit a new proposal
                     </a>
                 {% endif %}
@@ -32,7 +35,7 @@
         
         <div class="dashboard-panel-content">
             {% if not user.speaker_profile %}
-                <p>To submit a proposal, you must first <a href="{% url speaker_create %}">create a speaker profile</a>.</p>
+                <p>To submit a proposal, you must first <a href="{% url 'speaker_create' %}">create a speaker profile</a>.</p>
             {% else %}
                 <h4>Your Proposals</h4>
                 {% if user.speaker_profile.proposals.exists %}
@@ -92,7 +95,7 @@
             <h3>{% trans "Sponsorship" %}</h3>
             <div class="pull-right header-actions">
                 {% if not user.sponsorships.exists %}
-                    <a href="{% url sponsor_apply %}" class="btn">
+                    <a href="{% url 'sponsor_apply' %}" class="btn">
                         <i class="icon-plus-sign"></i> Apply to be a sponsor
                     </a>
                 {% endif %}
@@ -101,13 +104,13 @@
         
         <div class="dashboard-panel-content">
             {% if not user.sponsorships.exists %}
-                <p>If you or your organization would be interested in sponsorship opportunities, <a href="{% url sponsor_apply %}">use our online form to apply to be a sponsor</a>.
+                <p>If you or your organization would be interested in sponsorship opportunities, <a href="{% url 'sponsor_apply' %}">use our online form to apply to be a sponsor</a>.
             {% else %}
                 <h4>Your Sponsorship</h4>
                 <ul>
                     {% for sponsorship in user.sponsorships.all %}
                         <li>
-                            <a href="{% url sponsor_detail sponsorship.pk %}"><b>{{ sponsorship.name }}</b></a>
+                            <a href="{% url 'sponsor_detail' sponsorship.pk %}"><b>{{ sponsorship.name }}</b></a>
                             ({{ sponsorship.level }})
                             {% if not sponsorship.active %}
                                 <span class="label label-warning">awaiting approval</span>
@@ -118,7 +121,7 @@
             {% endif %}
             {% if user.is_staff %}
                 <p>
-                    As staff, you can directly <a href="{% url sponsor_add %}">add a sponsor</a> if the organization isn't
+                    As staff, you can directly <a href="{% url 'sponsor_add' %}">add a sponsor</a> if the organization isn't
                     applying themselves.
                 </p>
             {% endif %}
@@ -138,9 +141,9 @@
                 <ul>
                     {% for section in review_sections %}
                         <h5>{{ section }}</h5>
-                            <li><a href="{% url review_section section.section.slug %}">All</a></li>
-                            <li><a href="{% url user_reviewed section.section.slug %}">Reviewed by you</a></li>
-                            <li><a href="{% url user_not_reviewed section.section.slug %}">Not Reviewed by you</a></li>
+                            <li><a href="{% url 'review_section' section.section.slug %}">All</a></li>
+                            <li><a href="{% url 'user_reviewed' section.section.slug %}">Reviewed by you</a></li>
+                            <li><a href="{% url 'user_not_reviewed' section.section.slug %}">Not Reviewed by you</a></li>
                     {% endfor %}
                 </ul>
                 
@@ -183,7 +186,7 @@
                         {% for membership in user.memberships.all %}
                             <tr>
                                 <td>
-                                    <a href="{% url team_detail membership.team.slug %}">{{ membership.team.name }}</a>
+                                    <a href="{% url 'team_detail' membership.team.slug %}">{{ membership.team.name }}</a>
                                     {% if membership.team.description %}<br>{{ membership.team.description }}{% endif %}
                                 </td>
                                 <td>
@@ -204,7 +207,7 @@
                         {% for team in available_teams %}
                             <tr>
                                 <td>
-                                    <a href="{% url team_detail team.slug %}">{{ team }}</a>
+                                    <a href="{% url 'team_detail' team.slug %}">{{ team }}</a>
                                     {% if team.description %}<br>{{ team.description }}{% endif %}
                                 </td>
                                 <td>
