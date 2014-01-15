@@ -1,5 +1,8 @@
 {% extends "site_base.html" %}
 
+{% load url from future %}
+
+
 {% block head_title %}Uploaded Files{% endblock %}
 
 {% block body_outer %}
@@ -9,7 +12,7 @@
                     
             {% for file in files %}
                 <div style="margin-top: 1em;">
-                    <form class="pull-right" action="{% url file_delete file.pk %}" method="post">
+                    <form class="pull-right" action="{% url 'file_delete' file.pk %}" method="post">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-error"><i class="icon-trash"></i> delete</button>
                     </form>
@@ -20,7 +23,7 @@
                 <p>No uploaded files.</p>
             {% endfor %}
             <div style="margin-top: 2em">
-                <a class="btn btn-success" href="{% url file_create %}">
+                <a class="btn btn-success" href="{% url 'file_create' %}">
                     <i class="icon-plus icon-white"></i>
                     Add File
                 </a>

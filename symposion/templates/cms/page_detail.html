@@ -1,5 +1,8 @@
 {% extends "site_base.html" %}
 
+{% load url from future %}
+
+
 {% load sitetree %}
 {% load i18n %}
 
@@ -12,7 +15,7 @@
 {% block body %}
     {% if editable %}
         <div class="pull-right">
-            <a href="{% url cms_page_edit page.path %}" class="btn"><i class="icon-pencil icon-large"></i> Edit this page</a>
+            <a href="{% url 'cms_page_edit' page.path %}" class="btn"><i class="icon-pencil icon-large"></i> Edit this page</a>
         </div>
     {% endif %}
     <h2>{{ page.title }}</h2>

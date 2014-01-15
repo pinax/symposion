@@ -1,5 +1,8 @@
 {% extends "site_base.html" %}
 
+{% load url from future %}
+
+
 {% load bootstrap_tags %}
 
 {% block head_title %}Upload File{% endblock %}
@@ -8,7 +11,7 @@
     <div class="row">
         <div class="span12">
             <h1>Upload File</h1>
-            <form method="POST" action="{% url file_create %}" enctype="multipart/form-data">
+            <form method="POST" action="{% url 'file_create' %}" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form|as_bootstrap }}
                 <div class="form-actions">
