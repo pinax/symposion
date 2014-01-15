@@ -1,6 +1,7 @@
+{% load url from future %}
 <tr>
     <td>
-        <a href="{% url proposal_detail proposal.pk %}">{{ proposal.title }}</a>
+        <a href="{% url 'proposal_detail' proposal.pk %}">{{ proposal.title }}</a>
     </td>
     
     <td>{{ proposal.kind.name }}</td>
@@ -24,8 +25,8 @@
     <td>
         {% if not proposal.cancelled %}
             {% if request.user == proposal.speaker.user and proposal.can_edit %}
-                <a href="{% url proposal_edit proposal.pk %}" class="btn btn-mini"><i class="icon-pencil"></i> Edit</a>
-                <a href="{% url proposal_speaker_manage proposal.id %}" class="btn btn-mini"><i class="icon-user"></i> Manage Additional Speakers</a>
+                <a href="{% url 'proposal_edit' proposal.pk %}" class="btn btn-mini"><i class="icon-pencil"></i> Edit</a>
+                <a href="{% url 'proposal_speaker_manage' proposal.id %}" class="btn btn-mini"><i class="icon-user"></i> Manage Additional Speakers</a>
             {% endif %}
         {% endif %}
     </td>
