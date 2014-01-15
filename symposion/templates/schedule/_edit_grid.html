@@ -1,3 +1,4 @@
+{% load url from future %}
 <table class="calendar table table-bordered">
     <thead>
         <tr>
@@ -15,9 +16,9 @@
                     <td class="slot slot-{{ slot.kind.label }}" colspan="{{ slot.colspan }}" rowspan="{{ slot.rowspan }}">
                         {% if slot.kind.label == "talk" or slot.kind.label == "tutorial" %}
                             {% if not slot.content %}
-                                <a class="btn btn-mini edit-slot" data-action="{% url schedule_slot_edit schedule.section.slug slot.pk %}" href="#">+</a>
+                                <a class="btn btn-mini edit-slot" data-action="{% url 'schedule_slot_edit' schedule.section.slug slot.pk %}" href="#">+</a>
                             {% else %}
-                                <span class="title"><a class="edit-slot" data-action="{% url schedule_slot_edit schedule.section.slug slot.pk %}" href="#">{{ slot.content.title }}</a></span>
+                                <span class="title"><a class="edit-slot" data-action="{% url 'schedule_slot_edit' schedule.section.slug slot.pk %}" href="#">{{ slot.content.title }}</a></span>
                                 <span class="speaker">{{ slot.content.speaker }}</span>
                             {% endif %}
                         {% else %}
@@ -26,7 +27,7 @@
                             {% else %}
                                 {{ slot.kind.label }}
                             {% endif %}
-                            &mdash; <a class="edit-slot" data-action="{% url schedule_slot_edit schedule.section.slug slot.pk %}" href="#">edit</a>
+                            &mdash; <a class="edit-slot" data-action="{% url 'schedule_slot_edit' schedule.section.slug slot.pk %}" href="#">edit</a>
                         {% endif %}
                     </td>
                 {% endfor %}

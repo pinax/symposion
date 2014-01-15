@@ -1,5 +1,8 @@
 {% extends "site_base.html" %}
 
+{% load url from future %}
+
+
 {% load sitetree %}
 
 {% block head_title %}Presentation: {{ presentation.title }}{% endblock %}
@@ -17,7 +20,7 @@
 
     <h4>
         {% for speaker in presentation.speakers %}
-            <a href="{% url speaker_profile speaker.pk %}">{{ speaker }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}
+            <a href="{% url 'speaker_profile' speaker.pk %}">{{ speaker }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}
     </h4>
 
     <dl class="dl-horizontal">
