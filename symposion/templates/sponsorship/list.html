@@ -1,5 +1,8 @@
 {% extends "site_base.html" %}
 
+{% load url from future %}
+
+
 {% load sponsorship_tags %}
 {% load thumbnail %}
 {% load i18n %}
@@ -12,7 +15,7 @@
     <div class="row">
         <div class="span12">
             <h1>{% trans "About Our Sponsors" %}</h1>
-            <a href="{% url cms_page "sponsors/prospectus/" %}" class="btn">Learn how to become a sponsor <span class="arrow"></span></a>
+            <a href="{% url 'cms_page' "sponsors/prospectus/" %}" class="btn">Learn how to become a sponsor <span class="arrow"></span></a>
 
             {% sponsor_levels as levels %}
             {% for level in levels %}

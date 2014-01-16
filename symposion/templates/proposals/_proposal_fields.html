@@ -1,3 +1,4 @@
+{% load url from future %}
 {% load i18n %}
 
 <dl class="dl-horizontal">
@@ -45,7 +46,7 @@
                     <tr>
                         <td><a href="{{ document.download_url }}">{{ document.description }}</a></td>
                         <td>
-                        <form style="margin: 0;" method="post" action="{% url proposal_document_delete document.pk %}">
+                        <form style="margin: 0;" method="post" action="{% url 'proposal_document_delete' document.pk %}">
                             {% csrf_token %}
                             <button type="submit" class="btn btn-mini">delete</button>
                         </form>

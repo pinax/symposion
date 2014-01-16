@@ -1,5 +1,8 @@
 {% extends "speakers/base.html" %}
 
+{% load url from future %}
+
+
 {% load bootstrap_tags %}
 {% load i18n %}
 {% load boxes_tags %}
@@ -17,7 +20,7 @@
         </fieldset>
         <div class="form-actions">
             <input class="btn btn-primary" type="submit" value="Save" />
-            <a class="btn" href="{% url dashboard %}">Cancel</a>
+            <a class="btn" href="{% url 'dashboard' %}">Cancel</a>
         </div>
     </form>
 {% endblock %}

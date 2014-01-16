@@ -1,5 +1,8 @@
 {% extends "proposals/base.html" %}
 
+{% load url from future %}
+
+
 {% load i18n %}
 {% load account_tags %}
 {% load bootstrap_tags %}
@@ -10,14 +13,14 @@
     <div class="pull-right">
         {% if not proposal.cancelled %}
             {% if request.user == proposal.speaker.user %}
-                <a href="{% url proposal_edit proposal.pk %}" class="btn">
+                <a href="{% url 'proposal_edit' proposal.pk %}" class="btn">
                     {% trans "Edit this proposal" %}
                 </a>
-                <a href="{% url proposal_cancel proposal.pk %}" class="btn">
+                <a href="{% url 'proposal_cancel' proposal.pk %}" class="btn">
                     {% trans "Cancel this proposal" %}
                 </a>
             {% else %}
-                <a href="{% url proposal_leave proposal.pk %}" class="btn">
+                <a href="{% url 'proposal_leave' proposal.pk %}" class="btn">
                     {% trans "Remove me from this proposal" %}
                 </a>
             {% endif %}
@@ -52,7 +55,7 @@
                                 <tr>
                                     <td><a href="{{ document.download_url }}">{{ document.description }}</a></td>
                                     <td>
-                                    <form style="margin: 0;" method="post" action="{% url proposal_document_delete document.pk %}">
+                                    <form style="margin: 0;" method="post" action="{% url 'proposal_document_delete' document.pk %}">
                                         {% csrf_token %}
                                         <button type="submit" class="btn btn-mini">{% trans 'delete' %}</button>
                                     </form>
@@ -63,7 +66,7 @@
                     {% else %}
                         <p>{% trans 'No supporting documents attached to this proposal.' %}</p>
                     {% endif %}
-                    <a class="btn btn-small{% if proposal.cancelled %} btn-disabled{% endif %}" href="{% url proposal_document_create proposal.pk %}"><i class="icon-upload"></i> {% trans 'Add Document' %}</a>
+                    <a class="btn btn-small{% if proposal.cancelled %} btn-disabled{% endif %}" href="{% url 'proposal_document_create' proposal.pk %}"><i class="icon-upload"></i> {% trans 'Add Document' %}</a>
                 </div>
             {% endif %}
     

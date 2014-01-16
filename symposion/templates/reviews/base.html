@@ -1,5 +1,8 @@
 {% extends "site_base.html" %}
 
+{% load url from future %}
+
+
 {% load i18n %}
 {% load sitetree %}
 
@@ -60,25 +63,25 @@
                             {{ section }}
                         </li>
                         <li>
-                            <a href="{% url review_section section.section.slug %}">
+                            <a href="{% url 'review_section' section.section.slug %}">
                                 {% trans "All Reviews" %}
                             </a>
                         </li>
                         {% comment %}
                         <li>
-                            <a href="{% url review_section_assignments section.section.slug %}">
+                            <a href="{% url 'review_section_assignments' section.section.slug %}">
                                 {% trans "Your Assignments" %}
                             </a>
                         </li>
                         {% endcomment %}
                         <li>
-                            <a href="{% url review_status section.section.slug %}">
+                            <a href="{% url 'review_status' section.section.slug %}">
                                 {% trans "Voting Status" %}
                             </a>
                         </li>
                         {% if request.user.is_staff %}
                             <li>
-                                <a href="{% url result_notification section.section.slug 'accepted' %}">Result Notification</a>
+                                <a href="{% url 'result_notification' section.section.slug 'accepted' %}">Result Notification</a>
                             </li>
                         {% endif %}
                     {% endfor %}

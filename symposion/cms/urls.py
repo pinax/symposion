@@ -1,6 +1,8 @@
-from django.conf.urls.defaults import url, patterns
+from django.conf.urls import url, patterns
+
 
 PAGE_RE = r"(([\w-]{1,})(/[\w-]{1,})*)/"
+
 
 urlpatterns = patterns("symposion.cms.views",
     url(r"^files/$", "file_index", name="file_index"),

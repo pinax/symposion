@@ -1,5 +1,8 @@
 {% extends "site_base.html" %}
 
+{% load url from future %}
+
+
 {% load markitup_tags %}
 {% load uni_form_tags %}
 
@@ -55,7 +58,7 @@
 
     <h2>Review</h2>
     
-    <form method="POST" action="{% url review_review proposal.pk %}" class="uniForm">
+    <form method="POST" action="{% url 'review_review' proposal.pk %}" class="uniForm">
         {% csrf_token %}
         <fieldset class="inlineLabels">
             {{ review_form|as_uni_form }}
@@ -67,7 +70,7 @@
     
     <h2>Comment</h2>
     
-    <form method="POST" action="{% url review_comment proposal.pk %}" class="uniForm">
+    <form method="POST" action="{% url 'review_comment' proposal.pk %}" class="uniForm">
         {% csrf_token %}
         <fieldset>
             {{ comment_form|as_uni_form }}

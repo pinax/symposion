@@ -1,5 +1,8 @@
 {% extends "reviews/base.html" %}
 
+{% load url from future %}
+
+
 {% load i18n %}
 
 {% block extra_style %}
@@ -13,14 +16,14 @@
 {% block body %}
     
     <ul class="nav nav-pills">
-        <li{% if status == 'accepted' %} class="active"{% endif %}><a href="{% url result_notification section_slug 'accepted' %}">accepted</a>
-        <li{% if status == 'rejected' %} class="active"{% endif %}><a href="{% url result_notification section_slug 'rejected' %}">rejected</a>
-        <li{% if status == 'standby' %} class="active"{% endif %}><a href="{% url result_notification section_slug 'standby' %}">standby</a>
+        <li{% if status == 'accepted' %} class="active"{% endif %}><a href="{% url 'result_notification' section_slug 'accepted' %}">accepted</a>
+        <li{% if status == 'rejected' %} class="active"{% endif %}><a href="{% url 'result_notification' section_slug 'rejected' %}">rejected</a>
+        <li{% if status == 'standby' %} class="active"{% endif %}><a href="{% url 'result_notification' section_slug 'standby' %}">standby</a>
     </ul>
     
     <h1>Result Notification</h1>
     
-    <form method="post" action="{% url result_notification_prepare section_slug status %}">
+    <form method="post" action="{% url 'result_notification_prepare' section_slug status %}">
         
         {% csrf_token %}
         
@@ -54,7 +57,7 @@
                         <td><input class="action-select" type="checkbox" name="_selected_action" value="{{ proposal.pk }}"></td>
                         <td>{{ proposal.number }}</td>
                         <td>
-                            <a href="{% url review_detail proposal.pk %}">
+                            <a href="{% url 'review_detail' proposal.pk %}">
                                 <small><strong>{{ proposal.speaker }}</strong></small>
                                 <br />
                                 {{ proposal.title }}

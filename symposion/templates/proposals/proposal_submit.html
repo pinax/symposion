@@ -1,5 +1,8 @@
 {% extends "proposals/base.html" %}
 
+{% load url from future %}
+
+
 {% load boxes_tags %}
 {% load i18n %}
 
@@ -13,7 +16,7 @@
     
         <ul>
             {% for kind in kinds %}
-                <li><a href="{% url proposal_submit_kind kind.slug %}">{{ kind }}</a></li>
+                <li><a href="{% url 'proposal_submit_kind' kind.slug %}">{{ kind }}</a></li>
             {% endfor %}
         </ul>
     {% else %}

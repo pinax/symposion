@@ -1,3 +1,4 @@
+import hashlib
 import random
 import sys
 
@@ -6,7 +7,6 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.db.models import Q
 from django.http import Http404, HttpResponse, HttpResponseForbidden
 from django.shortcuts import render, redirect, get_object_or_404
-from django.utils.hashcompat import sha_constructor
 from django.views import static
 
 from django.contrib import messages
@@ -37,21 +37,21 @@ def proposal_submit(request):
             request.user.speaker_profile
         except ObjectDoesNotExist:
             return redirect("dashboard")
-    
+
     kinds = []
     for proposal_section in ProposalSection.available():
         for kind in proposal_section.section.proposal_kinds.all():
             kinds.append(kind)
-    
+
     return render(request, "proposals/proposal_submit.html", {
         "kinds": kinds,
     })
 
 
 def proposal_submit_kind(request, kind_slug):
-    
+
     kind = get_object_or_404(ProposalKind, slug=kind_slug)
-    
+
     if not request.user.is_authenticated():
         return redirect("home")  # @@@ unauth'd speaker info page?
     else:
@@ -59,12 +59,12 @@ def proposal_submit_kind(request, kind_slug):
             speaker_profile = request.user.speaker_profile
         except ObjectDoesNotExist:
             return redirect("dashboard")
-    
+
     if not kind.section.proposalsection.is_available():
         return redirect("proposal_submit")
-    
+
     form_class = get_form(settings.PROPOSAL_FORMS[kind_slug])
-    
+
     if request.method == "POST":
         form = form_class(request.POST)
         if form.is_valid():
@@ -79,7 +79,7 @@ def proposal_submit_kind(request, kind_slug):
             return redirect("dashboard")
     else:
         form = form_class()
-    
+
     return render(request, "proposals/proposal_submit_kind.html", {
         "kind": kind,
         "form": form,
@@ -91,17 +91,17 @@ def proposal_speaker_manage(request, pk):
     queryset = ProposalBase.objects.select_related("speaker")
     proposal = get_object_or_404(queryset, pk=pk)
     proposal = ProposalBase.objects.get_subclass(pk=proposal.pk)
-    
+
     if proposal.speaker != request.user.speaker_profile:
         raise Http404()
-    
+
     if request.method == "POST":
         add_speaker_form = AddSpeakerForm(request.POST, proposal=proposal)
         if add_speaker_form.is_valid():
             message_ctx = {
                 "proposal": proposal,
             }
-            
+
             def create_speaker_token(email_address):
                 # create token and look for an existing speaker to prevent
                 # duplicate tokens and confusing the pending speaker
@@ -110,8 +110,8 @@ def proposal_speaker_manage(request, pk):
                         Q(user=None, invite_email=email_address)
                     )
                 except Speaker.DoesNotExist:
-                    salt = sha_constructor(str(random.random())).hexdigest()[:5]
-                    token = sha_constructor(salt + email_address).hexdigest()
+                    salt = hashlib.sha1(str(random.random())).hexdigest()[:5]
+                    token = hashlib.sha1(salt + email_address).hexdigest()
                     pending = Speaker.objects.create(
                         invite_email=email_address,
                         invite_token=token,
@@ -173,14 +173,14 @@ def proposal_edit(request, pk):
 
     if request.user != proposal.speaker.user:
         raise Http404()
-    
+
     if not proposal.can_edit():
         ctx = {
             "title": "Proposal editing closed",
             "body": "Proposal editing is closed for this session type."
         }
         return render(request, "proposals/proposal_error.html", ctx)
-    
+
     form_class = get_form(settings.PROPOSAL_FORMS[proposal.kind.slug])
 
     if request.method == "POST":
@@ -206,7 +206,7 @@ def proposal_edit(request, pk):
             return redirect("proposal_detail", proposal.pk)
     else:
         form = form_class(instance=proposal)
-    
+
     return render(request, "proposals/proposal_edit.html", {
         "proposal": proposal,
         "form": form,
@@ -218,22 +218,22 @@ def proposal_detail(request, pk):
     queryset = ProposalBase.objects.select_related("speaker", "speaker__user")
     proposal = get_object_or_404(queryset, pk=pk)
     proposal = ProposalBase.objects.get_subclass(pk=proposal.pk)
-    
+
     if request.user not in [p.user for p in proposal.speakers()]:
         raise Http404()
-    
+
     if "symposion.reviews" in settings.INSTALLED_APPS:
         from symposion.reviews.forms import SpeakerCommentForm
         message_form = SpeakerCommentForm()
         if request.method == "POST":
             message_form = SpeakerCommentForm(request.POST)
             if message_form.is_valid():
-                
+
                 message = message_form.save(commit=False)
                 message.user = request.user
                 message.proposal = proposal
                 message.save()
-                
+
                 ProposalMessage = SpeakerCommentForm.Meta.model
                 reviewers = User.objects.filter(
                     id__in=ProposalMessage.objects.filter(
@@ -242,7 +242,7 @@ def proposal_detail(request, pk):
                         user=request.user
                     ).distinct().values_list("user", flat=True)
                 )
-                
+
                 for reviewer in reviewers:
                     ctx = {
                         "proposal": proposal,
@@ -253,13 +253,13 @@ def proposal_detail(request, pk):
                         [reviewer.email], "proposal_new_message",
                         context=ctx
                     )
-                
+
                 return redirect(request.path)
         else:
             message_form = SpeakerCommentForm()
     else:
         message_form = None
-    
+
     return render(request, "proposals/proposal_detail.html", {
         "proposal": proposal,
         "message_form": message_form
@@ -271,7 +271,7 @@ def proposal_cancel(request, pk):
     queryset = ProposalBase.objects.select_related("speaker")
     proposal = get_object_or_404(queryset, pk=pk)
     proposal = ProposalBase.objects.get_subclass(pk=proposal.pk)
-    
+
     if proposal.speaker.user != request.user:
         return HttpResponseForbidden()
 
@@ -281,7 +281,7 @@ def proposal_cancel(request, pk):
         # @@@ fire off email to submitter and other speakers
         messages.success(request, "%s has been cancelled" % proposal.title)
         return redirect("dashboard")
-    
+
     return render(request, "proposals/proposal_cancel.html", {
         "proposal": proposal,
     })
@@ -339,10 +339,10 @@ def document_create(request, proposal_pk):
     queryset = ProposalBase.objects.select_related("speaker")
     proposal = get_object_or_404(queryset, pk=proposal_pk)
     proposal = ProposalBase.objects.get_subclass(pk=proposal.pk)
-    
+
     if proposal.cancelled:
         return HttpResponseForbidden()
-    
+
     if request.method == "POST":
         form = SupportingDocumentCreateForm(request.POST, request.FILES)
         if form.is_valid():
@@ -353,7 +353,7 @@ def document_create(request, proposal_pk):
             return redirect("proposal_detail", proposal.pk)
     else:
         form = SupportingDocumentCreateForm()
-        
+
     return render(request, "proposals/document_create.html", {
         "proposal": proposal,
         "form": form,
@@ -378,8 +378,8 @@ def document_download(request, pk, *args):
 def document_delete(request, pk):
     document = get_object_or_404(SupportingDocument, pk=pk, uploaded_by=request.user)
     proposal_pk = document.proposal.pk
-    
+
     if request.method == "POST":
         document.delete()
-    
+
     return redirect("proposal_detail", proposal_pk)
