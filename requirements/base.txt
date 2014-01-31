@@ -8,6 +8,6 @@ django-sitetree==1.0.0
 django-taggit==0.11.2
 django-timezones==0.2
 django-user-accounts==1.0b13
-easy-thumbnails==1.2
+easy-thumbnails==1.4
 html5lib==0.95
 markdown==2.3.1
