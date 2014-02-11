@@ -15,7 +15,16 @@ def sponsor_apply(request):
         form = SponsorApplicationForm(request.POST, user=request.user)
         if form.is_valid():
             sponsor = form.save()
-            return redirect("sponsor_detail", pk=sponsor.pk)
+            if sponsor.sponsor_benefits.all():
+                # Redirect user to sponsor_detail to give extra information.
+                messages.success(request, "Thank you for your sponsorship "
+                                 "application. Please update your "
+                                 "benefit details below.")
+                return redirect("sponsor_detail", pk=sponsor.pk)
+            else:
+                messages.success(request, "Thank you for your sponsorship "
+                                 "application.")
+                return redirect("dashboard")
     else:
         form = SponsorApplicationForm(user=request.user)
     
