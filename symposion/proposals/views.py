@@ -4,6 +4,7 @@ import sys
 
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.http import Http404, HttpResponse, HttpResponseForbidden
 from django.shortcuts import render, redirect, get_object_or_404
@@ -31,11 +32,18 @@ def get_form(name):
 
 def proposal_submit(request):
     if not request.user.is_authenticated():
+        messages.info(request, "To submit a proposal, please "
+                      "<a href='{0}'>log in</a> and create a speaker profile "
+                      "via the dashboard.".format(settings.LOGIN_URL))
         return redirect("home")  # @@@ unauth'd speaker info page?
     else:
         try:
             request.user.speaker_profile
         except ObjectDoesNotExist:
+            url = reverse("speaker_create")
+            messages.info(request, "To submit a proposal, first "
+                          "<a href='{0}'>create a speaker "
+                          "profile</a>.".format(url))
             return redirect("dashboard")
 
     kinds = []
