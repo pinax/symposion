@@ -75,11 +75,15 @@ class ScheduleSectionForm(forms.Form):
 
     def _get_start_end_times(self, data):
         "Return start and end time objects"
-        start_time = time.strptime(data[self.START_KEY], '%I:%M %p')
-        start = datetime(100, 1, 1, start_time.tm_hour, start_time.tm_min, 00)
-        end_time = time.strptime(data[self.END_KEY], '%I:%M %p')
-        end = datetime(100, 1, 1, end_time.tm_hour, end_time.tm_min, 00)
-        return start.time(), end.time()
+        times = []
+        for x in [data[self.START_KEY], data[self.END_KEY]]:
+            try:
+                time_obj = time.strptime(x, '%I:%M %p')
+            except:
+                return messages.ERROR, u'Malformed time found: %s.' % x
+            time_obj = datetime(100, 1, 1, time_obj.tm_hour, time_obj.tm_min, 00)
+            times.append(time_obj.time())
+        return times
 
     def _build_rooms(self, data):
         "Get or Create Rooms based on schedule type and set of Tracks"
@@ -98,7 +102,11 @@ class ScheduleSectionForm(forms.Form):
         created_days = []
         days = set([x[self.DATE_KEY] for x in data])
         for day in days:
-            date = datetime.strptime(day, "%m/%d/%Y")
+            try:
+                date = datetime.strptime(day, "%m/%d/%Y")
+            except ValueError:
+                [x.delete() for x in created_days]
+                return messages.ERROR, u'Malformed data found: %s.' % day
             day, created = Day.objects.get_or_create(
                 schedule=self.schedule, date=date
             )
@@ -139,9 +147,9 @@ class ScheduleSectionForm(forms.Form):
                 )
                 created_items.append(slot)
             try:
-                SlotRoom.objects.create(slot=slot, room=room)
+                with transaction.atomic():
+                    SlotRoom.objects.create(slot=slot, room=room)
             except IntegrityError:
-                transaction.rollback()
                 # delete all created objects and report error
                 for x in created_items:
                     x.delete()
