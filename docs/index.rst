@@ -19,6 +19,7 @@ Apps:
    sponsorship
    speakers
    proposals
+   schedule
 
 
 Indices and tables
