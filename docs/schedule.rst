@@ -11,21 +11,21 @@ structured schedule:
   * Day: A Day associated with a Schedule.
   * Room: A Room associated with a Schedule. 
   * Slot Kind: A type of Slot associated with a Schedule.
-  * Slot: A discreet time period for a Schedule.
+  * Slot: A discrete time period for a Schedule.
   * Slot Room: A mapping of a Room and Slot for a given Schedule.
   * Presentation: A mapping of a Slot to an approved Proposal from the ```proposals``` app.
 
 Schedule Builder Form
 ---------------------
 
-It can be cumbersone to generate a schedule through the admin. With that in mind,
+It can be cumbersome to generate a schedule through the admin. With that in mind,
 a generic schedule builder is available via a Schedule's edit view. For instance,
 if a Conference site has a Talks Section and Schedule, the form would be
 available for Staff at::
 
 /schedule/talks/edit
 
-The form consume a structured CSV file, from which it will build the schedule. 
+The form consumes a structured CSV file, from which it will build the schedule. 
 Sample CSV data is included below::
 
 "date","time_start","time_end","kind"," room "
