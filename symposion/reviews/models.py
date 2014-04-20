@@ -17,7 +17,7 @@ from symposion.schedule.models import Presentation
 class ProposalScoreExpression(object):
     
     def as_sql(self, qn, connection=None):
-        sql = "((3 * plus_one + plus_zero) - (minus_zero + 3 * minus_one))"
+        sql = "((3.0 * plus_one + plus_zero) - (minus_zero + 3.0 * minus_one))"
         return sql, []
     
     def prepare_database_save(self, unused):
