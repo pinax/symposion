@@ -36,6 +36,14 @@ class Votes(object):
         (MINUS_ZERO, u"−0 — Weak proposal, but I will not argue strongly against acceptance."),
         (MINUS_ONE, u"−1 — Serious issues and I will argue to reject this proposal."),
     ]
+
+    CSS_LOOKUP = {
+        PLUS_ONE: "plus-one",
+        PLUS_ZERO: "plus-zero",
+        MINUS_ZERO: "minus-zero",
+        MINUS_ONE: "minus-one",
+    }
+ 
 VOTES = Votes()
 
 
@@ -168,13 +176,9 @@ class Review(models.Model):
         super(Review, self).delete()
     
     def css_class(self):
-        return {
-            self.VOTES.PLUS_ONE: "plus-one",
-            self.VOTES.PLUS_ZERO: "plus-zero",
-            self.VOTES.MINUS_ZERO: "minus-zero",
-            self.VOTES.MINUS_ONE: "minus-one",
-        }[self.vote]
-    
+        # default to "minus-zero" style in the event our database has incorrectly encoded the vote
+        return self.VOTES.CSS_LOOKUP.get(self.vote, "minus-zero")
+
     @property
     def section(self):
         return self.proposal.kind.section.slug
@@ -195,12 +199,8 @@ class LatestVote(models.Model):
         unique_together = [("proposal", "user")]
     
     def css_class(self):
-        return {
-            self.VOTES.PLUS_ONE: "plus-one",
-            self.VOTES.PLUS_ZERO: "plus-zero",
-            self.VOTES.MINUS_ZERO: "minus-zero",
-            self.VOTES.MINUS_ONE: "minus-one",
-        }[self.vote]
+        # default to "minus-zero" style in the event our database has incorrectly encoded the vote
+        return self.VOTES.CSS_LOOKUP.get(self.vote, "minus-zero")
 
 
 class ProposalResult(models.Model):
