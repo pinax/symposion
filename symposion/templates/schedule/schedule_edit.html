@@ -24,7 +24,11 @@
                 {% include "schedule/_edit_grid.html" %}
             {% endfor %}
         </div>
-        
+        <form id="schedule-builder" action="." method="post" enctype="multipart/form-data">{% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" name="submit" value="Submit" />
+            <input type="submit" id="delete" name="delete" value="Delete Schedule" />
+        </form>
         <div class="modal fade hide in" id="slotEditModal"></div>
     </div>
 {% endblock %}
