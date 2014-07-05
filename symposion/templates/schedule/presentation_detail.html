@@ -17,7 +17,7 @@
 
     <h4>
         {% for speaker in presentation.speakers %}
-            <a href="{% url speaker_profile speaker.pk %}">{{ speaker }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}
+            <a href="{% url "speaker_profile" speaker.pk %}">{{ speaker }}</a>{% if not forloop.last %}, {% endif %}{% endfor %}
     </h4>
 
     <dl class="dl-horizontal">

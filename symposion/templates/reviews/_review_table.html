@@ -12,13 +12,13 @@
         <th>{% trans "-1" %}</th>
         <th><a href="#" class="tip" title="{% trans "Your Rating" %}"><i class="icon-user"></i></a></th>
     </thead>
-    
+
     <tbody>
         {% for proposal in proposals %}
             <tr class="{{ proposal.user_vote_css }}">
                 <td>{{ proposal.number }}</td>
                 <td>
-                    <a href="{% url review_detail proposal.pk %}">
+                    <a href="{% url "review_detail" proposal.pk %}">
                         <small><strong>{{ proposal.speaker }}</strong></small>
                         <br />
                         {{ proposal.title }}

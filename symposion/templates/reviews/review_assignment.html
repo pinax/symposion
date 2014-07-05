@@ -2,7 +2,7 @@
 
 {% block body %}
     <h1>Review Assignments</h1>
-    
+
     {% if assignments %}
         <table>
             <tr>
@@ -18,7 +18,7 @@
                         </a>
                     </td>
                     <td>
-                        <form method="post" action="{% url review_assignment_opt_out assignment.pk %}">
+                        <form method="post" action="{% url "review_assignment_opt_out" assignment.pk %}">
                             {% csrf_token %}
                             <input type="submit" value="Opt-out" />
                         </form>
