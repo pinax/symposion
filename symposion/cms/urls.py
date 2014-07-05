@@ -1,8 +1,9 @@
-from django.conf.urls.defaults import url, patterns
+from django.conf.urls import url, patterns
 
 PAGE_RE = r"(([\w-]{1,})(/[\w-]{1,})*)/"
 
-urlpatterns = patterns("symposion.cms.views",
+urlpatterns = patterns(
+    "symposion.cms.views",
     url(r"^files/$", "file_index", name="file_index"),
     url(r"^files/create/$", "file_create", name="file_create"),
     url(r"^files/(\d+)/([^/]+)$", "file_download", name="file_download"),
