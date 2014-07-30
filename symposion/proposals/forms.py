@@ -9,15 +9,15 @@ from symposion.proposals.models import SupportingDocument
 
 
 class AddSpeakerForm(forms.Form):
-    
+
     email = forms.EmailField(
         label="Email address of new speaker (use their email address, not yours)"
     )
-    
+
     def __init__(self, *args, **kwargs):
         self.proposal = kwargs.pop("proposal")
         super(AddSpeakerForm, self).__init__(*args, **kwargs)
-    
+
     def clean_email(self):
         value = self.cleaned_data["email"]
         exists = self.proposal.additional_speakers.filter(
@@ -32,7 +32,7 @@ class AddSpeakerForm(forms.Form):
 
 
 class SupportingDocumentCreateForm(forms.ModelForm):
-    
+
     class Meta:
         model = SupportingDocument
         fields = [

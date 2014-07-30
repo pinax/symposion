@@ -1,8 +1,3 @@
-import csv
-import os
-import random
-
-from django.contrib.auth import models
 from django.core.management.base import BaseCommand
 
 from symposion.reviews.models import ReviewAssignment

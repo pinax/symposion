@@ -23,20 +23,20 @@ def can_upload(user):
 
 
 def page(request, path):
-    
+
     try:
         page = Page.published.get(path=path)
     except Page.DoesNotExist:
         page = None
-    
+
     editable = can_edit(page, request.user)
-    
+
     if page is None:
         if editable:
             return redirect("cms_page_edit", path=path)
         else:
             raise Http404
-    
+
     return render(request, "cms/page_detail.html", {
         "page": page,
         "editable": editable,
@@ -45,15 +45,15 @@ def page(request, path):
 
 @login_required
 def page_edit(request, path):
-    
+
     try:
         page = Page.published.get(path=path)
     except Page.DoesNotExist:
         page = None
-    
+
     if not can_edit(page, request.user):
         raise Http404
-    
+
     if request.method == "POST":
         form = PageForm(request.POST, instance=page)
         if form.is_valid():
@@ -65,7 +65,7 @@ def page_edit(request, path):
             print form.errors
     else:
         form = PageForm(instance=page, initial={"path": path})
-    
+
     return render(request, "cms/page_edit.html", {
         "path": path,
         "form": form
@@ -75,7 +75,7 @@ def page_edit(request, path):
 def file_index(request):
     if not can_upload(request.user):
         raise Http404
-    
+
     ctx = {
         "files": File.objects.all(),
     }
@@ -85,7 +85,7 @@ def file_index(request):
 def file_create(request):
     if not can_upload(request.user):
         raise Http404
-    
+
     if request.method == "POST":
         form = FileUploadForm(request.POST, request.FILES)
         if form.is_valid():
@@ -97,7 +97,7 @@ def file_create(request):
             return redirect("file_index")
     else:
         form = FileUploadForm()
-    
+
     ctx = {
         "form": form,
     }
@@ -106,7 +106,7 @@ def file_create(request):
 
 def file_download(request, pk, *args):
     file = get_object_or_404(File, pk=pk)
-    
+
     if getattr(settings, "USE_X_ACCEL_REDIRECT", False):
         response = HttpResponse()
         response["X-Accel-Redirect"] = file.file.url
@@ -115,14 +115,14 @@ def file_download(request, pk, *args):
         del response["content-type"]
     else:
         response = static.serve(request, file.file.name, document_root=settings.MEDIA_ROOT)
-    
+
     return response
 
 
 def file_delete(request, pk):
     if not can_upload(request.user):
         raise Http404
-    
+
     file = get_object_or_404(File, pk=pk)
     if request.method == "POST":
         file.delete()

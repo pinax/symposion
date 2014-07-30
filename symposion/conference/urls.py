@@ -1,4 +1,5 @@
-from django.conf.urls.defaults import *
+# flake8: noqa
+from django.conf.urls.defaults import patterns, url
 
 
 urlpatterns = patterns("symposion.conference.views",

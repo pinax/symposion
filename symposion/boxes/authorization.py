@@ -13,8 +13,8 @@ def default_can_edit(request, *args, **kwargs):
 
 def load_can_edit():
     import_path = getattr(settings, "BOXES_CAN_EDIT_CALLABLE", None)
-    
+
     if import_path is None:
         return default_can_edit
-    
+
     return load_path_attr(import_path)

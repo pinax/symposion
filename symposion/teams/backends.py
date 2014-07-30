@@ -4,10 +4,10 @@ from .models import Team
 
 
 class TeamPermissionsBackend(object):
-    
+
     def authenticate(self, username=None, password=None):
         return None
-    
+
     def get_team_permissions(self, user_obj, obj=None):
         """
         Returns a set of permission strings that this user has through his/her

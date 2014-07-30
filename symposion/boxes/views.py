@@ -7,7 +7,8 @@ from symposion.boxes.forms import BoxForm
 from symposion.boxes.models import Box
 
 
-# @@@ problem with this is that the box_edit.html and box_create.html won't have domain objects in context
+# @@@ problem with this is that the box_edit.html and box_create.html won't have domain objects in
+# context
 def get_auth_vars(request):
     auth_vars = {}
     if request.method == "POST":
@@ -20,17 +21,17 @@ def get_auth_vars(request):
 
 @require_POST
 def box_edit(request, label):
-    
+
     if not load_can_edit()(request, **get_auth_vars(request)):
         return HttpResponseForbidden()
-    
+
     next = request.GET.get("next")
-    
+
     try:
         box = Box.objects.get(label=label)
     except Box.DoesNotExist:
         box = None
-    
+
     form = BoxForm(request.POST, instance=box, prefix=label)
 
     if form.is_valid():

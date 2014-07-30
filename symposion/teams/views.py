@@ -10,7 +10,7 @@ from symposion.teams.forms import TeamInvitationForm
 from symposion.teams.models import Team, Membership
 
 
-## perm checks
+# perm checks
 #
 # @@@ these can be moved
 
@@ -50,7 +50,7 @@ def can_invite(team, user):
     return False
 
 
-## views
+# views
 
 
 @login_required
@@ -59,7 +59,7 @@ def team_detail(request, slug):
     state = team.get_state_for_user(request.user)
     if team.access == "invitation" and state is None and not request.user.is_staff:
         raise Http404()
-    
+
     if can_invite(team, request.user):
         if request.method == "POST":
             form = TeamInvitationForm(request.POST, team=team)
@@ -72,7 +72,7 @@ def team_detail(request, slug):
             form = TeamInvitationForm(team=team)
     else:
         form = None
-    
+
     return render(request, "teams/team_detail.html", {
         "team": team,
         "state": state,
@@ -89,7 +89,7 @@ def team_join(request, slug):
     state = team.get_state_for_user(request.user)
     if team.access == "invitation" and state is None and not request.user.is_staff:
         raise Http404()
-    
+
     if can_join(team, request.user) and request.method == "POST":
         membership, created = Membership.objects.get_or_create(team=team, user=request.user)
         membership.state = "member"
@@ -106,7 +106,7 @@ def team_leave(request, slug):
     state = team.get_state_for_user(request.user)
     if team.access == "invitation" and state is None and not request.user.is_staff:
         raise Http404()
-    
+
     if can_leave(team, request.user) and request.method == "POST":
         membership = Membership.objects.get(team=team, user=request.user)
         membership.delete()
@@ -122,7 +122,7 @@ def team_apply(request, slug):
     state = team.get_state_for_user(request.user)
     if team.access == "invitation" and state is None and not request.user.is_staff:
         raise Http404()
-    
+
     if can_apply(team, request.user) and request.method == "POST":
         membership, created = Membership.objects.get_or_create(team=team, user=request.user)
         membership.state = "applied"
