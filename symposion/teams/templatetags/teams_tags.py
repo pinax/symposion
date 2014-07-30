@@ -6,7 +6,7 @@ register = template.Library()
 
 
 class AvailableTeamsNode(template.Node):
-    
+
     @classmethod
     def handle_token(cls, parser, token):
         bits = token.split_contents()
@@ -14,10 +14,10 @@ class AvailableTeamsNode(template.Node):
             return cls(bits[2])
         else:
             raise template.TemplateSyntaxError("%r takes 'as var'" % bits[0])
-    
+
     def __init__(self, context_var):
         self.context_var = context_var
-    
+
     def render(self, context):
         request = context["request"]
         teams = []

@@ -7,7 +7,7 @@ from symposion.schedule.models import Presentation
 
 
 class SlotEditForm(forms.Form):
-    
+
     def __init__(self, *args, **kwargs):
         self.slot = kwargs.pop("slot")
         super(SlotEditForm, self).__init__(*args, **kwargs)
@@ -16,7 +16,7 @@ class SlotEditForm(forms.Form):
             self.fields["presentation"] = self.build_presentation_field()
         else:
             self.fields["content_override"] = self.build_content_override_field()
-    
+
     def build_presentation_field(self):
         kwargs = {}
         queryset = Presentation.objects.all()
@@ -31,7 +31,7 @@ class SlotEditForm(forms.Form):
             kwargs["required"] = True
         kwargs["queryset"] = queryset
         return forms.ModelChoiceField(**kwargs)
-    
+
     def build_content_override_field(self):
         kwargs = {
             "label": "Content",

@@ -18,12 +18,12 @@ from .managers import PublishedPageManager
 
 
 class Page(models.Model):
-    
+
     STATUS_CHOICES = (
         (1, _("Draft")),
         (2, _("Public")),
     )
-    
+
     title = models.CharField(max_length=100)
     path = models.CharField(max_length=100, unique=True)
     body = MarkupField()
@@ -32,28 +32,29 @@ class Page(models.Model):
     created = models.DateTimeField(editable=False, default=datetime.datetime.now)
     updated = models.DateTimeField(editable=False, default=datetime.datetime.now)
     tags = TaggableManager(blank=True)
-    
+
     published = PublishedPageManager()
-    
+
     def __unicode__(self):
         return self.title
-    
+
     @models.permalink
     def get_absolute_url(self):
         return ("cms_page", [self.path])
-    
+
     @property
     def is_community(self):
         return self.path.lower().startswith("community/")
-    
+
     def save(self, *args, **kwargs):
         self.updated = datetime.datetime.now()
         super(Page, self).save(*args, **kwargs)
-    
+
     def clean_fields(self, exclude=None):
         super(Page, self).clean_fields(exclude)
         if not re.match(settings.SYMPOSION_PAGE_REGEX, self.path):
-            raise ValidationError({"path": [_("Path can only contain letters, numbers and hyphens and end with /")]})
+            raise ValidationError(
+                {"path": [_("Path can only contain letters, numbers and hyphens and end with /")]})
 
 
 reversion.register(Page)
@@ -64,9 +65,9 @@ def generate_filename(instance, filename):
 
 
 class File(models.Model):
-    
+
     file = models.FileField(upload_to=generate_filename)
     created = models.DateTimeField(default=datetime.datetime.now)
-    
+
     def download_url(self):
         return reverse("file_download", args=[self.pk, os.path.basename(self.file.name).lower()])

@@ -4,6 +4,7 @@ import reversion
 
 from .models import Page
 
+
 class PageAdmin(reversion.VersionAdmin):
 
     pass

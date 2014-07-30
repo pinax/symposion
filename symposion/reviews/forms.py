@@ -9,13 +9,13 @@ class ReviewForm(forms.ModelForm):
     class Meta:
         model = Review
         fields = ["vote", "comment"]
-        widgets = { "comment": MarkItUpWidget() }
-    
+        widgets = {"comment": MarkItUpWidget()}
+
     def __init__(self, *args, **kwargs):
         super(ReviewForm, self).__init__(*args, **kwargs)
         self.fields["vote"] = forms.ChoiceField(
-            widget = forms.RadioSelect(),
-            choices = VOTES.CHOICES
+            widget=forms.RadioSelect(),
+            choices=VOTES.CHOICES
         )
 
 
@@ -23,14 +23,14 @@ class ReviewCommentForm(forms.ModelForm):
     class Meta:
         model = Comment
         fields = ["text"]
-        widgets = { "text": MarkItUpWidget() }
+        widgets = {"text": MarkItUpWidget()}
 
 
 class SpeakerCommentForm(forms.ModelForm):
     class Meta:
         model = ProposalMessage
         fields = ["message"]
-        widgets = { "message": MarkItUpWidget() }
+        widgets = {"message": MarkItUpWidget()}
 
 
 class BulkPresentationForm(forms.Form):

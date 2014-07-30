@@ -1,3 +1,4 @@
+# flake8: noqa
 from django.conf.urls.defaults import url, patterns
 
 PAGE_RE = r"(([\w-]{1,})(/[\w-]{1,})*)/"

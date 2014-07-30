@@ -1,3 +1,4 @@
+# flake8: noqa
 from django.conf.urls.defaults import *
 
 
@@ -11,7 +12,7 @@ urlpatterns = patterns("symposion.proposals.views",
     url(r"^(\d+)/leave/$", "proposal_leave", name="proposal_leave"),
     url(r"^(\d+)/join/$", "proposal_pending_join", name="proposal_pending_join"),
     url(r"^(\d+)/decline/$", "proposal_pending_decline", name="proposal_pending_decline"),
-    
+
     url(r"^(\d+)/document/create/$", "document_create", name="proposal_document_create"),
     url(r"^document/(\d+)/delete/$", "document_delete", name="proposal_document_delete"),
     url(r"^document/(\d+)/([^/]+)$", "document_download", name="proposal_document_download"),

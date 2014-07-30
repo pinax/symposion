@@ -17,7 +17,7 @@ def speaker_create(request):
         return redirect(request.user.speaker_profile)
     except ObjectDoesNotExist:
         pass
-    
+
     if request.method == "POST":
         try:
             speaker = Speaker.objects.get(invite_email=request.user.email)
@@ -26,7 +26,7 @@ def speaker_create(request):
             speaker = None
             found = False
         form = SpeakerForm(request.POST, request.FILES, instance=speaker)
-        
+
         if form.is_valid():
             speaker = form.save(commit=False)
             speaker.user = request.user
@@ -37,7 +37,7 @@ def speaker_create(request):
             return redirect("dashboard")
     else:
         form = SpeakerForm(initial={"name": request.user.get_full_name()})
-    
+
     return render(request, "speakers/speaker_create.html", {
         "form": form,
     })
@@ -48,15 +48,15 @@ def speaker_create_staff(request, pk):
     user = get_object_or_404(User, pk=pk)
     if not request.user.is_staff:
         raise Http404
-    
+
     try:
         return redirect(user.speaker_profile)
     except ObjectDoesNotExist:
         pass
-    
+
     if request.method == "POST":
         form = SpeakerForm(request.POST, request.FILES)
-        
+
         if form.is_valid():
             speaker = form.save(commit=False)
             speaker.user = user
@@ -65,7 +65,7 @@ def speaker_create_staff(request, pk):
             return redirect("user_list")
     else:
         form = SpeakerForm(initial={"name": user.get_full_name()})
-    
+
     return render(request, "speakers/speaker_create.html", {
         "form": form,
     })
@@ -88,8 +88,8 @@ def speaker_create_token(request, token):
             ).update(
                 speaker=existing_speaker
             )
-            messages.info(request, "You have been associated with all pending "
-                "talk proposals")
+            messages.info(request, ("You have been associated with all pending "
+                                    "talk proposals"))
             return redirect("dashboard")
     else:
         if not request.user.is_authenticated():
@@ -109,7 +109,7 @@ def speaker_edit(request, pk=None):
             speaker = get_object_or_404(Speaker, pk=pk)
         else:
             raise Http404()
-    
+
     if request.method == "POST":
         form = SpeakerForm(request.POST, request.FILES, instance=speaker)
         if form.is_valid():
@@ -118,7 +118,7 @@ def speaker_edit(request, pk=None):
             return redirect("dashboard")
     else:
         form = SpeakerForm(instance=speaker)
-    
+
     return render(request, "speakers/speaker_edit.html", {
         "form": form,
     })
@@ -129,7 +129,7 @@ def speaker_profile(request, pk):
     presentations = speaker.all_presentations
     if not presentations and not request.user.is_staff:
         raise Http404()
-    
+
     return render(request, "speakers/speaker_profile.html", {
         "speaker": speaker,
         "presentations": presentations,

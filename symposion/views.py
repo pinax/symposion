@@ -12,12 +12,12 @@ import symposion.forms
 
 
 class SignupView(account.views.SignupView):
-    
+
     form_class = symposion.forms.SignupForm
     form_kwargs = {
         "prefix": "signup",
     }
-    
+
     def create_user(self, form, commit=True):
         user_kwargs = {
             "first_name": form.cleaned_data["first_name"],

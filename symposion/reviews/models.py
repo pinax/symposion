@@ -15,11 +15,11 @@ from symposion.schedule.models import Presentation
 
 
 class ProposalScoreExpression(object):
-    
+
     def as_sql(self, qn, connection=None):
         sql = "((3 * plus_one + plus_zero) - (minus_zero + 3 * minus_one))"
         return sql, []
-    
+
     def prepare_database_save(self, unused):
         return self
 
@@ -29,7 +29,7 @@ class Votes(object):
     PLUS_ZERO = "+0"
     MINUS_ZERO = u"−0"
     MINUS_ONE = u"−1"
-    
+
     CHOICES = [
         (PLUS_ONE, u"+1 — Good proposal and I will argue for it to be accepted."),
         (PLUS_ZERO, u"+0 — OK proposal, but I will not argue for it to be accepted."),
@@ -45,21 +45,21 @@ class ReviewAssignment(models.Model):
     AUTO_ASSIGNED_LATER = 2
 
     NUM_REVIEWERS = 3
-    
+
     ORIGIN_CHOICES = [
         (AUTO_ASSIGNED_INITIAL, "auto-assigned, initial"),
         (OPT_IN, "opted-in"),
         (AUTO_ASSIGNED_LATER, "auto-assigned, later"),
     ]
-    
+
     proposal = models.ForeignKey("proposals.ProposalBase")
     user = models.ForeignKey(User)
-    
+
     origin = models.IntegerField(choices=ORIGIN_CHOICES)
-    
+
     assigned_at = models.DateTimeField(default=datetime.now)
     opted_out = models.BooleanField()
-    
+
     @classmethod
     def create_assignments(cls, proposal, origin=AUTO_ASSIGNED_INITIAL):
         speakers = [proposal.speaker] + list(proposal.additional_speakers.all())
@@ -94,7 +94,7 @@ class ReviewAssignment(models.Model):
 class ProposalMessage(models.Model):
     proposal = models.ForeignKey("proposals.ProposalBase", related_name="messages")
     user = models.ForeignKey(User)
-    
+
     message = MarkupField()
     submitted_at = models.DateTimeField(default=datetime.now, editable=False)
 
@@ -104,24 +104,24 @@ class ProposalMessage(models.Model):
 
 class Review(models.Model):
     VOTES = VOTES
-    
+
     proposal = models.ForeignKey("proposals.ProposalBase", related_name="reviews")
     user = models.ForeignKey(User)
-    
+
     # No way to encode "-0" vs. "+0" into an IntegerField, and I don't feel
     # like some complicated encoding system.
     vote = models.CharField(max_length=2, blank=True, choices=VOTES.CHOICES)
     comment = MarkupField()
     submitted_at = models.DateTimeField(default=datetime.now, editable=False)
-    
+
     def save(self, **kwargs):
         if self.vote:
             vote, created = LatestVote.objects.get_or_create(
-                proposal = self.proposal,
-                user = self.user,
-                defaults = dict(
-                    vote = self.vote,
-                    submitted_at = self.submitted_at,
+                proposal=self.proposal,
+                user=self.user,
+                defaults=dict(
+                    vote=self.vote,
+                    submitted_at=self.submitted_at,
                 )
             )
             if not created:
@@ -130,7 +130,7 @@ class Review(models.Model):
             else:
                 self.proposal.result.update_vote(self.vote)
         super(Review, self).save(**kwargs)
-    
+
     def delete(self):
         model = self.__class__
         user_reviews = model._default_manager.filter(
@@ -152,7 +152,8 @@ class Review(models.Model):
             if self == latest:
                 # self is the latest review; revert the latest vote to the
                 # previous vote
-                previous = user_reviews.filter(submitted_at__lt=self.submitted_at).order_by("-submitted_at")[0]
+                previous = user_reviews.filter(submitted_at__lt=self.submitted_at)\
+                    .order_by("-submitted_at")[0]
                 self.proposal.result.update_vote(self.vote, previous=previous.vote, removal=True)
                 lv = LatestVote.objects.filter(proposal=self.proposal, user=self.user)
                 lv.update(
@@ -166,7 +167,7 @@ class Review(models.Model):
                 self.proposal.result.save()
         # in all cases we need to delete the review; let's do it!
         super(Review, self).delete()
-    
+
     def css_class(self):
         return {
             self.VOTES.PLUS_ONE: "plus-one",
@@ -174,7 +175,7 @@ class Review(models.Model):
             self.VOTES.MINUS_ZERO: "minus-zero",
             self.VOTES.MINUS_ONE: "minus-one",
         }[self.vote]
-    
+
     @property
     def section(self):
         return self.proposal.kind.section.slug
@@ -182,18 +183,18 @@ class Review(models.Model):
 
 class LatestVote(models.Model):
     VOTES = VOTES
-    
+
     proposal = models.ForeignKey("proposals.ProposalBase", related_name="votes")
     user = models.ForeignKey(User)
-    
+
     # No way to encode "-0" vs. "+0" into an IntegerField, and I don't feel
     # like some complicated encoding system.
     vote = models.CharField(max_length=2, choices=VOTES.CHOICES)
     submitted_at = models.DateTimeField(default=datetime.now, editable=False)
-    
+
     class Meta:
         unique_together = [("proposal", "user")]
-    
+
     def css_class(self):
         return {
             self.VOTES.PLUS_ONE: "plus-one",
@@ -223,7 +224,7 @@ class ProposalResult(models.Model):
         ("undecided", "undecided"),
         ("standby", "standby"),
     ], default="undecided")
-    
+
     @classmethod
     def full_calculate(cls):
         for proposal in ProposalBase.objects.all():
@@ -231,24 +232,24 @@ class ProposalResult(models.Model):
             result.comment_count = Review.objects.filter(proposal=proposal).count()
             result.vote_count = LatestVote.objects.filter(proposal=proposal).count()
             result.plus_one = LatestVote.objects.filter(
-                proposal = proposal,
-                vote = VOTES.PLUS_ONE
+                proposal=proposal,
+                vote=VOTES.PLUS_ONE
             ).count()
             result.plus_zero = LatestVote.objects.filter(
-                proposal = proposal,
-                vote = VOTES.PLUS_ZERO
+                proposal=proposal,
+                vote=VOTES.PLUS_ZERO
             ).count()
             result.minus_zero = LatestVote.objects.filter(
-                proposal = proposal,
-                vote = VOTES.MINUS_ZERO
+                proposal=proposal,
+                vote=VOTES.MINUS_ZERO
             ).count()
             result.minus_one = LatestVote.objects.filter(
-                proposal = proposal,
-                vote = VOTES.MINUS_ONE
+                proposal=proposal,
+                vote=VOTES.MINUS_ONE
             ).count()
             result.save()
             cls._default_manager.filter(pk=result.pk).update(score=ProposalScoreExpression())
-    
+
     def update_vote(self, vote, previous=None, removal=False):
         mapping = {
             VOTES.PLUS_ONE: "plus_one",
@@ -283,7 +284,7 @@ class Comment(models.Model):
     proposal = models.ForeignKey("proposals.ProposalBase", related_name="comments")
     commenter = models.ForeignKey(User)
     text = MarkupField()
-    
+
     # Or perhaps more accurately, can the user see this comment.
     public = models.BooleanField(choices=[
         (True, "public"),
@@ -293,7 +294,7 @@ class Comment(models.Model):
 
 
 class NotificationTemplate(models.Model):
-    
+
     label = models.CharField(max_length=100)
     from_address = models.EmailField()
     subject = models.CharField(max_length=100)
@@ -301,15 +302,16 @@ class NotificationTemplate(models.Model):
 
 
 class ResultNotification(models.Model):
-    
+
     proposal = models.ForeignKey("proposals.ProposalBase", related_name="notifications")
-    template = models.ForeignKey(NotificationTemplate, null=True, blank=True, on_delete=models.SET_NULL)
+    template = models.ForeignKey(NotificationTemplate, null=True, blank=True,
+                                 on_delete=models.SET_NULL)
     timestamp = models.DateTimeField(default=datetime.now)
     to_address = models.EmailField()
     from_address = models.EmailField()
     subject = models.CharField(max_length=100)
     body = models.TextField()
-    
+
     @property
     def email_args(self):
         return (self.subject, self.body, self.from_address, [self.to_address])
@@ -321,18 +323,18 @@ def promote_proposal(proposal):
         presentation = proposal.presentation
     else:
         presentation = Presentation(
-            title = proposal.title,
-            description = proposal.description,
-            abstract = proposal.abstract,
-            speaker = proposal.speaker,
-            section = proposal.section,
-            proposal_base = proposal,
+            title=proposal.title,
+            description=proposal.description,
+            abstract=proposal.abstract,
+            speaker=proposal.speaker,
+            section=proposal.section,
+            proposal_base=proposal,
         )
         presentation.save()
         for speaker in proposal.additional_speakers.all():
             presentation.additional_speakers.add(speaker)
             presentation.save()
-    
+
     return presentation
 
 

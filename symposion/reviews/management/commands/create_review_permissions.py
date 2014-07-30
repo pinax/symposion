@@ -7,14 +7,14 @@ from symposion.proposals.models import ProposalSection
 
 
 class Command(BaseCommand):
-    
+
     def handle(self, *args, **options):
         ct, created = ContentType.objects.get_or_create(
             model="",
             app_label="reviews",
             defaults={"name": "reviews"}
         )
-        
+
         for ps in ProposalSection.objects.all():
             for action in ["review", "manage"]:
                 perm, created = Permission.objects.get_or_create(
