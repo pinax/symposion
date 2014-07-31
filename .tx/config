@@ -1,0 +1,7 @@
+[main]
+host = https://www.transifex.com
+
+[symposion.djangopo]
+file_filter = symposion/locale/<lang>/LC_MESSAGES/django.po
+source_lang = en
+source_file = symposion/locale/en/LC_MESSAGES/django.po
