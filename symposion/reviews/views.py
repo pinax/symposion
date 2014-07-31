@@ -167,6 +167,7 @@ def review_admin(request, section_slug):
     return render(request, "reviews/review_admin.html", ctx)
 
 
+# FIXME: This view is too complex according to flake8
 @login_required
 def review_detail(request, pk):
 
