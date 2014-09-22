@@ -175,8 +175,8 @@ def schedule_json(request):
         slot_data = {
             "room": ", ".join(room["name"] for room in slot.rooms.values()),
             "rooms": [room["name"] for room in slot.rooms.values()],
-            "start": datetime.combine(slot.day.date, slot.start).isoformat(),
-            "end": datetime.combine(slot.day.date, slot.end).isoformat(),
+            "start": slot.start_datetime.isoformat(),
+            "end": slot.end_datetime.isoformat(),
             "duration": slot.length_in_minutes,
             "kind": slot.kind.label,
             "section": slot.day.schedule.section.slug,
@@ -195,6 +195,7 @@ def schedule_json(request):
                     Site.objects.get_current().domain,
                     reverse("schedule_presentation_detail", args=[slot.content.pk])
                 ),
+                "cancelled": slot.content.cancelled,
             })
         else:
             slot_data.update({
