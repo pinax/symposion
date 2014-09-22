@@ -102,7 +102,7 @@ class Slot(models.Model):
             self.day.date.day,
             self.start.hour,
             self.start.minute)
-    
+
     @property
     def end_datetime(self):
         return datetime.datetime(
@@ -111,12 +111,12 @@ class Slot(models.Model):
             self.day.date.day,
             self.end.hour,
             self.end.minute)
-    
+
     @property
     def length_in_minutes(self):
         return int(
             (self.end_datetime - self.start_datetime).total_seconds() / 60)
-    
+
     @property
     def rooms(self):
         return Room.objects.filter(pk__in=self.slotroom_set.values("room"))

@@ -164,7 +164,10 @@ def schedule_presentation_detail(request, pk):
 
 
 def schedule_json(request):
-    slots = Slot.objects.filter(day__schedule__published=True, day__schedule__hidden=False).order_by("start")
+    slots = Slot.objects.filter(
+        day__schedule__published=True,
+        day__schedule__hidden=False
+    ).order_by("start")
 
     protocol = request.META.get('HTTP_X_FORWARDED_PROTO', 'http')
     data = []

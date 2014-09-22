@@ -17,7 +17,6 @@ class ScheduleViewTests(TestCase):
         assert 'schedule' in conference
         assert len(conference['schedule']) == 0
 
-
     def test_populated_empty_presentations(self):
 
         factories.SlotFactory.create_batch(size=5)
