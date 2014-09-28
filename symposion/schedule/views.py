@@ -179,6 +179,17 @@ def schedule_json(request):
             "duration": slot.length_in_minutes,
             "kind": slot.kind.label,
             "section": slot.day.schedule.section.slug,
+            "conf_key": slot.pk,
+            # TODO: models should be changed.
+            # these are model features from other conferences that have forked symposion
+            # these have been used almost everywhere and are good candidates for
+            # base proposals
+            "license": "CC BY",
+            "tags": "",
+            "released": True,
+            "contact": [],
+
+
         }
         if hasattr(slot.content, "proposal"):
             slot_data.update({
@@ -189,7 +200,7 @@ def schedule_json(request):
                 ] if request.user.is_staff else ["redacted"],
                 "abstract": slot.content.abstract.raw,
                 "description": slot.content.description.raw,
-                "content_href": "%s://%s%s" % (
+                "conf_url": "%s://%s%s" % (
                     protocol,
                     Site.objects.get_current().domain,
                     reverse("schedule_presentation_detail", args=[slot.content.pk])
