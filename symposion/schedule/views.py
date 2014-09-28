@@ -1,8 +1,12 @@
+import json
+
+from django.core.urlresolvers import reverse
 from django.http import Http404, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template import loader, Context
 
 from django.contrib.auth.decorators import login_required
+from django.contrib.sites.models import Site
 
 from symposion.schedule.forms import SlotEditForm
 from symposion.schedule.models import Schedule, Day, Slot, Presentation
@@ -156,3 +160,49 @@ def schedule_presentation_detail(request, pk):
         "schedule": schedule,
     }
     return render(request, "schedule/presentation_detail.html", ctx)
+
+
+def schedule_json(request):
+    slots = Slot.objects.filter(
+        day__schedule__published=True,
+        day__schedule__hidden=False
+    ).order_by("start")
+
+    protocol = request.META.get('HTTP_X_FORWARDED_PROTO', 'http')
+    data = []
+    for slot in slots:
+        slot_data = {
+            "room": ", ".join(room["name"] for room in slot.rooms.values()),
+            "rooms": [room["name"] for room in slot.rooms.values()],
+            "start": slot.start_datetime.isoformat(),
+            "end": slot.end_datetime.isoformat(),
+            "duration": slot.length_in_minutes,
+            "kind": slot.kind.label,
+            "section": slot.day.schedule.section.slug,
+        }
+        if hasattr(slot.content, "proposal"):
+            slot_data.update({
+                "name": slot.content.title,
+                "authors": [s.name for s in slot.content.speakers()],
+                "contact": [
+                    s.email for s in slot.content.speakers()
+                ] if request.user.is_staff else ["redacted"],
+                "abstract": slot.content.abstract.raw,
+                "description": slot.content.description.raw,
+                "content_href": "%s://%s%s" % (
+                    protocol,
+                    Site.objects.get_current().domain,
+                    reverse("schedule_presentation_detail", args=[slot.content.pk])
+                ),
+                "cancelled": slot.content.cancelled,
+            })
+        else:
+            slot_data.update({
+                "name": slot.content_override.raw if slot.content_override else "Slot",
+            })
+        data.append(slot_data)
+
+    return HttpResponse(
+        json.dumps({'schedule': data}),
+        content_type="application/json"
+    )
