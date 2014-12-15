@@ -1,5 +1,5 @@
-# flake8: noqa
-from django.conf.urls.defaults import url, patterns
+from django.conf.urls import url, patterns
+
 
 urlpatterns = patterns("symposion.schedule.views",
     url(r"^$", "schedule_conference", name="schedule_conference"),
