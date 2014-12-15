@@ -1,4 +1,3 @@
-import datetime
 import os
 import uuid
 
@@ -6,6 +5,7 @@ from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
+from django.utils.timezone import now
 
 from django.contrib.auth.models import User
 
@@ -37,20 +37,18 @@ class ProposalSection(models.Model):
 
     @classmethod
     def available(cls):
-        now = datetime.datetime.now()
         return cls._default_manager.filter(
-            Q(start__lt=now) | Q(start=None),
-            Q(end__gt=now) | Q(end=None),
+            Q(start__lt=now()) | Q(start=None),
+            Q(end__gt=now()) | Q(end=None),
             Q(closed=False) | Q(closed=None),
         )
 
     def is_available(self):
         if self.closed:
             return False
-        now = datetime.datetime.now()
-        if self.start and self.start > now:
+        if self.start and self.start > now():
             return False
-        if self.end and self.end < now:
+        if self.end and self.end < now():
             return False
         return True
 
@@ -102,7 +100,7 @@ class ProposalBase(models.Model):
                     "target='_blank'>Markdown</a>.")
     )
     submitted = models.DateTimeField(
-        default=datetime.datetime.now,
+        default=now,
         editable=False,
     )
     speaker = models.ForeignKey("speakers.Speaker", related_name="proposals")
@@ -175,7 +173,8 @@ class SupportingDocument(models.Model):
     proposal = models.ForeignKey(ProposalBase, related_name="supporting_documents")
 
     uploaded_by = models.ForeignKey(User)
-    created_at = models.DateTimeField(default=datetime.datetime.now)
+
+    created_at = models.DateTimeField(default=now)
 
     file = models.FileField(upload_to=uuid_filename)
     description = models.CharField(max_length=140)
