@@ -3,6 +3,9 @@ from django.utils.translation import ugettext_lazy as _
 
 from timezones.fields import TimeZoneField
 
+from south.modelsinspector import add_introspection_rules
+add_introspection_rules([], [r"^timezones\.fields\.TimeZoneField"])
+
 
 CONFERENCE_CACHE = {}
 

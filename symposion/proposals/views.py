@@ -1,3 +1,4 @@
+import hashlib
 import random
 import sys
 
@@ -8,8 +9,6 @@ from django.db.models import Q
 from django.http import Http404, HttpResponse, HttpResponseForbidden
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views import static
-
-from hashlib import sha1
 
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -123,8 +122,8 @@ def proposal_speaker_manage(request, pk):
                         Q(user=None, invite_email=email_address)
                     )
                 except Speaker.DoesNotExist:
-                    salt = sha1(str(random.random())).hexdigest()[:5]
-                    token = sha1(salt + email_address).hexdigest()
+                    salt = hashlib.sha1(str(random.random())).hexdigest()[:5]
+                    token = hashlib.sha1(salt + email_address).hexdigest()
                     pending = Speaker.objects.create(
                         invite_email=email_address,
                         invite_token=token,

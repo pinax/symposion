@@ -6,9 +6,10 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.template import loader, Context
 
 from django.contrib.auth.decorators import login_required
+from django.contrib import messages
 from django.contrib.sites.models import Site
 
-from symposion.schedule.forms import SlotEditForm
+from symposion.schedule.forms import SlotEditForm, ScheduleSectionForm
 from symposion.schedule.models import Schedule, Day, Slot, Presentation
 from symposion.schedule.timetable import TimeTable
 
@@ -81,8 +82,8 @@ def schedule_list_csv(request, slug=None):
 
     presentations = Presentation.objects.filter(section=schedule.section)
     presentations = presentations.exclude(cancelled=True).order_by("id")
+    response = HttpResponse(content_type="text/csv")
 
-    response = HttpResponse(mimetype="text/csv")
     if slug:
         file_slug = slug
     else:
@@ -104,11 +105,24 @@ def schedule_edit(request, slug=None):
 
     schedule = fetch_schedule(slug)
 
+    if request.method == "POST":
+        form = ScheduleSectionForm(
+            request.POST, request.FILES, schedule=schedule
+        )
+        if form.is_valid():
+            if 'submit' in form.data:
+                msg = form.build_schedule()
+            elif 'delete' in form.data:
+                msg = form.delete_schedule()
+            messages.add_message(request, msg[0], msg[1])
+    else:
+        form = ScheduleSectionForm(schedule=schedule)
     days_qs = Day.objects.filter(schedule=schedule)
     days = [TimeTable(day) for day in days_qs]
     ctx = {
         "schedule": schedule,
         "days": days,
+        "form": form
     }
     return render(request, "schedule/schedule_edit.html", ctx)
 
