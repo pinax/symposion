@@ -66,9 +66,9 @@
             </form>
         </div>
     {% endif %}
-    
+
     <h3>#{{ proposal.number }}: {{ proposal.title }} ({{ proposal.speaker }})</h3>
-    
+
     <div class="tabbable">
         <ul class="nav nav-tabs">
             <li class="active"><a href="#proposal-detail" data-toggle="tab">{% trans "Proposal Details" %}</a></li>
@@ -80,7 +80,7 @@
                 {% include "proposals/_proposal_fields.html" %}
             </div>
             <div class="tab-pane" id="proposal-reviews">
-                
+
                 <h4>{% trans "Current Results" %}</h4>
                 <table class="table table-striped">
                     <thead>
@@ -100,9 +100,9 @@
                         </tr>
                     </tbody>
                 </table>
-                
+
                 <hr />
-                
+
                 {% if review_form %}
                     <form method="POST" action="" class="review-form">
                         <legend>{% trans "Submit Review" %}</legend>
@@ -126,7 +126,7 @@
                             </div>
                             {% if is_manager %}
                                 <div class="pull-right">
-                                    <form class="form-inline" action="{% url review_delete review.id %}" method="POST">
+                                    <form class="form-inline" action="{% url "review_delete" review.id %}" method="POST">
                                         {% csrf_token %}
                                         <button class="btn btn-mini btn-danger" type="submit">Delete</button>
                                     </form>
@@ -157,7 +157,7 @@
                     {% endfor %}
                     <hr />
                 {% endif %}
-                
+
                 <form action="" method="POST"accept-charset="utf-8">
                     <legend>{% trans "Send a message" %}</legend>
                     <p>
@@ -182,11 +182,11 @@
     <script type="text/javascript">
         $(function() {
             var History = window.History;
-            
+
             $(window).bind("anchorchange", function() {
                 $(".nav-tabs a[href='" + location.hash + "']").click();
             });
-            
+
             $('#.nav-tabs a[data-toggle="tab"]').on('shown', function (e) {
                 if (History.enabled) {
                     History.pushState(null, null, $(e.target).attr("href"));
@@ -194,5 +194,5 @@
             });
         });
     </script>
-    
+
 {% endblock %}

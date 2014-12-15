@@ -60,7 +60,7 @@
                     <th>{% trans "Name" %}</th>
                     <th>{% trans "Speaker Profile?" %}</th>
                 </thead>
-                
+
                 <tbody>
                     {% for user in users %}
                         <tr>
@@ -68,9 +68,9 @@
                             <td>{{ user.get_full_name }}</td>
                             <td>
                                 {% if user.speaker_profile %}
-                                    <a href="{% url speaker_profile user.speaker_profile.pk %}">{{ user.speaker_profile }}</a>
+                                    <a href="{% url "speaker_profile" user.speaker_profile.pk %}">{{ user.speaker_profile }}</a>
                                 {% else %}
-                                    <a href="{% url speaker_create_staff user.pk %}" class="btn btn-mini">create</a>
+                                    <a href="{% url "speaker_create_staff" user.pk %}" class="btn btn-mini">create</a>
                                 {% endif %}
                             </td>
                         </tr>

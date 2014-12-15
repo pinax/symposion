@@ -7,25 +7,25 @@ from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.http import Http404, HttpResponse, HttpResponseForbidden
 from django.shortcuts import render, redirect, get_object_or_404
-
-try:
-    from hashlib import sha1 as sha_constructor
-except ImportError:
-    from django.utils.hashcompat import sha_constructor
-
 from django.views import static
+
+from hashlib import sha1
 
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 
 from account.models import EmailAddress
-from symposion.proposals.models import ProposalBase, ProposalSection, ProposalKind
+from symposion.proposals.models import (
+    ProposalBase, ProposalSection, ProposalKind
+)
 from symposion.proposals.models import SupportingDocument, AdditionalSpeaker
 from symposion.speakers.models import Speaker
 from symposion.utils.mail import send_email
 
-from symposion.proposals.forms import AddSpeakerForm, SupportingDocumentCreateForm
+from symposion.proposals.forms import (
+    AddSpeakerForm, SupportingDocumentCreateForm
+)
 
 
 def get_form(name):
@@ -123,8 +123,8 @@ def proposal_speaker_manage(request, pk):
                         Q(user=None, invite_email=email_address)
                     )
                 except Speaker.DoesNotExist:
-                    salt = sha_constructor(str(random.random())).hexdigest()[:5]
-                    token = sha_constructor(salt + email_address).hexdigest()
+                    salt = sha1(str(random.random())).hexdigest()[:5]
+                    token = sha1(salt + email_address).hexdigest()
                     pending = Speaker.objects.create(
                         invite_email=email_address,
                         invite_token=token,

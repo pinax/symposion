@@ -1,7 +1,8 @@
 from django.conf.urls import patterns, url
 
 
-urlpatterns = patterns("symposion.teams.views",
+urlpatterns = patterns(
+    "symposion.teams.views",
     # team specific
     url(r"^(?P<slug>[\w\-]+)/$", "team_detail", name="team_detail"),
     url(r"^(?P<slug>[\w\-]+)/join/$", "team_join", name="team_join"),
