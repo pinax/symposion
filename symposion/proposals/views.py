@@ -7,17 +7,9 @@ from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.http import Http404, HttpResponse, HttpResponseForbidden
 from django.shortcuts import render, redirect, get_object_or_404
-<<<<<<< HEAD
-
-try:
-    from hashlib import sha1 as sha_constructor
-except ImportError:
-    from django.utils.hashcompat import sha_constructor
-
-=======
-from hashlib import sha256
->>>>>>> fb26371362751584eb8352d06a840b914d24e3fc
 from django.views import static
+
+from hashlib import sha1
 
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -131,8 +123,8 @@ def proposal_speaker_manage(request, pk):
                         Q(user=None, invite_email=email_address)
                     )
                 except Speaker.DoesNotExist:
-                    salt = sha256(str(random.random())).hexdigest()[:5]
-                    token = sha256(salt + email_address).hexdigest()
+                    salt = sha1(str(random.random())).hexdigest()[:5]
+                    token = sha1(salt + email_address).hexdigest()
                     pending = Speaker.objects.create(
                         invite_email=email_address,
                         invite_token=token,
