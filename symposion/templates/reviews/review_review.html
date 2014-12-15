@@ -7,31 +7,31 @@
 
 {% block body %}
     <h1>Proposal Review</h1>
-    
+
     <div class="proposal">
         <h2>{{ proposal.title }}</h2>
-        
+
         <p>
             {% if proposal.cancelled %}
                 Cancelled
             {% endif %}
         </p>
-        
+
         <div>
             {{ proposal.description }}
         </div>
-        
+
         <p><b>Type</b>: {{ proposal.get_session_type_display }}</p>
-        
+
         <h3>Abstract</h3>
         <div class="abstract">
             {{ proposal.abstract_html|safe }}
         </div>
-        
+
         <p><b>Audience level</b>: {{ proposal.get_audience_level_display }}</p>
-        
+
         <p><b>Submitting speaker</b>: {{ proposal.speaker }}</p> {# @@@ bio? #}
-        
+
         {% if proposal.additional_speakers.all %}
             <p><b>Additional speakers</b>:</p>
             <ul>
@@ -44,18 +44,18 @@
             {% endfor %}
             </ul>
         {% endif %}
-        
+
         <h3>Additional Notes (private from submitter)</h3>
         <div class="additional_notes">
             {{ proposal.additional_notes }}
         </div>
     </div>
-    
+
     {% markitup_media %}
 
     <h2>Review</h2>
-    
-    <form method="POST" action="{% url review_review proposal.pk %}" class="uniForm">
+
+    <form method="POST" action="{% url "review_review" proposal.pk %}" class="uniForm">
         {% csrf_token %}
         <fieldset class="inlineLabels">
             {{ review_form|as_uni_form }}
@@ -64,10 +64,10 @@
             </div>
         </fieldset>
     </form>
-    
+
     <h2>Comment</h2>
-    
-    <form method="POST" action="{% url review_comment proposal.pk %}" class="uniForm">
+
+    <form method="POST" action="{% url "review_comment" proposal.pk %}" class="uniForm">
         {% csrf_token %}
         <fieldset>
             {{ comment_form|as_uni_form }}
@@ -76,5 +76,5 @@
             </div>
         </fieldset>
     </form>
-    
+
 {% endblock %}

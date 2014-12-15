@@ -6,6 +6,6 @@
     {{ message.message|safe }}
 </blockquote>
 <p>
-    {% if reviewer %}{% url review_detail proposal.pk as detail_url %}{% else %}{% url proposal_detail proposal.pk as detail_url %}{% endif %}
+    {% if reviewer %}{% url "review_detail" proposal.pk as detail_url %}{% else %}{% url "proposal_detail" proposal.pk as detail_url %}{% endif %}
     Respond online at <a href="http://{{ current_site }}{{ detail_url }}#proposal-feedback">http://{{ current_site }}{{ detail_url }}#proposal-feedback</a>
 </p>
