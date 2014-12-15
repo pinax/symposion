@@ -69,7 +69,7 @@ def review_section(request, section_slug, assigned=False, reviewed="all"):
         return access_not_permitted(request)
 
     section = get_object_or_404(ProposalSection, section__slug=section_slug)
-    queryset = ProposalBase.objects.filter(kind__section=section)
+    queryset = ProposalBase.objects.filter(kind__section=section.section)
 
     if assigned:
         assignments = ReviewAssignment.objects.filter(user=request.user)\
@@ -343,8 +343,7 @@ def review_status(request, section_slug=None, key=None):
     for status in proposals:
         if key and key != status:
             continue
-        proposals[status] = list(proposals_generator(request, proposals[status],
-                                                     check_speaker=not admin))
+        proposals[status] = list(proposals_generator(request, proposals[status], check_speaker=not admin))
 
     if key:
         ctx.update({
@@ -409,9 +408,7 @@ def result_notification(request, section_slug, status):
     if not request.user.has_perm("reviews.can_manage_%s" % section_slug):
         return access_not_permitted(request)
 
-    proposals = ProposalBase.objects.filter(kind__section__slug=section_slug,
-                                            result__status=status)\
-        .select_related("speaker__user", "result").select_subclasses()
+    proposals = ProposalBase.objects.filter(kind__section__slug=section_slug, result__status=status).select_related("speaker__user", "result").select_subclasses()
     notification_templates = NotificationTemplate.objects.all()
 
     ctx = {

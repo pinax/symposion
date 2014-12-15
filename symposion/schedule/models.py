@@ -79,10 +79,10 @@ class Slot(models.Model):
         """
         Unassign the associated content with this slot.
         """
-        if self.content and self.content.slot_id:
-            presentation = self.content
-            presentation.slot = None
-            presentation.save()
+        content = self.content
+        if content and content.slot_id:
+            content.slot = None
+            content.save()
 
     @property
     def content(self):

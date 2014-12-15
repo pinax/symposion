@@ -1,15 +1,17 @@
 import csv
 import time
+
 from datetime import datetime
 
 from django import forms
 from django.contrib import messages
-from django.db import IntegrityError
+from django.db import IntegrityError, transaction
 from django.db.models import Q
 
 from markitup.widgets import MarkItUpWidget
 
-from symposion.schedule.models import (Day, Presentation, Room, SlotKind, Slot, SlotRoom)
+from symposion.schedule.models import (Day, Presentation, Room, SlotKind, Slot,
+                                       SlotRoom)
 
 
 class SlotEditForm(forms.Form):
@@ -145,10 +147,8 @@ class ScheduleSectionForm(forms.Form):
                 )
                 created_items.append(slot)
             try:
-                # @@@ TODO - upgrade Django, use atomic transactions
-                # with transaction.atomic():
-                #    SlotRoom.objects.create(slot=slot, room=room)
-                SlotRoom.objects.create(slot=slot, room=room)
+                with transaction.atomic():
+                    SlotRoom.objects.create(slot=slot, room=room)
             except IntegrityError:
                 # delete all created objects and report error
                 for x in created_items:
