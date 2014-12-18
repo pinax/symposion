@@ -158,7 +158,6 @@ class AdditionalSpeaker(models.Model):
     status = models.IntegerField(choices=SPEAKING_STATUS, default=SPEAKING_STATUS_PENDING)
 
     class Meta:
-        db_table = "proposals_proposalbase_additional_speakers"
         unique_together = ("speaker", "proposalbase")
 
 
