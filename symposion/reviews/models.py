@@ -52,13 +52,13 @@ class ReviewAssignment(models.Model):
         (AUTO_ASSIGNED_LATER, "auto-assigned, later"),
     ]
 
-    proposal = models.ForeignKey("proposals.ProposalBase")
+    proposal = models.ForeignKey(ProposalBase)
     user = models.ForeignKey(User)
 
     origin = models.IntegerField(choices=ORIGIN_CHOICES)
 
     assigned_at = models.DateTimeField(default=datetime.now)
-    opted_out = models.BooleanField()
+    opted_out = models.BooleanField(default=False)
 
     @classmethod
     def create_assignments(cls, proposal, origin=AUTO_ASSIGNED_INITIAL):
@@ -92,7 +92,7 @@ class ReviewAssignment(models.Model):
 
 
 class ProposalMessage(models.Model):
-    proposal = models.ForeignKey("proposals.ProposalBase", related_name="messages")
+    proposal = models.ForeignKey(ProposalBase, related_name="messages")
     user = models.ForeignKey(User)
 
     message = MarkupField()
@@ -105,7 +105,7 @@ class ProposalMessage(models.Model):
 class Review(models.Model):
     VOTES = VOTES
 
-    proposal = models.ForeignKey("proposals.ProposalBase", related_name="reviews")
+    proposal = models.ForeignKey(ProposalBase, related_name="reviews")
     user = models.ForeignKey(User)
 
     # No way to encode "-0" vs. "+0" into an IntegerField, and I don't feel
@@ -184,7 +184,7 @@ class Review(models.Model):
 class LatestVote(models.Model):
     VOTES = VOTES
 
-    proposal = models.ForeignKey("proposals.ProposalBase", related_name="votes")
+    proposal = models.ForeignKey(ProposalBase, related_name="votes")
     user = models.ForeignKey(User)
 
     # No way to encode "-0" vs. "+0" into an IntegerField, and I don't feel
@@ -205,7 +205,7 @@ class LatestVote(models.Model):
 
 
 class ProposalResult(models.Model):
-    proposal = models.OneToOneField("proposals.ProposalBase", related_name="result")
+    proposal = models.OneToOneField(ProposalBase, related_name="result")
     score = models.DecimalField(max_digits=5, decimal_places=2, default=Decimal("0.00"))
     comment_count = models.PositiveIntegerField(default=0)
     vote_count = models.PositiveIntegerField(default=0)
@@ -281,15 +281,12 @@ class ProposalResult(models.Model):
 
 
 class Comment(models.Model):
-    proposal = models.ForeignKey("proposals.ProposalBase", related_name="comments")
+    proposal = models.ForeignKey(ProposalBase, related_name="comments")
     commenter = models.ForeignKey(User)
     text = MarkupField()
 
     # Or perhaps more accurately, can the user see this comment.
-    public = models.BooleanField(choices=[
-        (True, "public"),
-        (False, "private"),
-    ])
+    public = models.BooleanField(choices=[(True, "public"), (False, "private")], default=False)
     commented_at = models.DateTimeField(default=datetime.now)
 
 
@@ -303,7 +300,7 @@ class NotificationTemplate(models.Model):
 
 class ResultNotification(models.Model):
 
-    proposal = models.ForeignKey("proposals.ProposalBase", related_name="notifications")
+    proposal = models.ForeignKey(ProposalBase, related_name="notifications")
     template = models.ForeignKey(NotificationTemplate, null=True, blank=True,
                                  on_delete=models.SET_NULL)
     timestamp = models.DateTimeField(default=datetime.now)

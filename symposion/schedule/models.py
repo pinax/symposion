@@ -7,6 +7,7 @@ from markitup.fields import MarkupField
 
 from symposion.proposals.models import ProposalBase
 from symposion.conference.models import Section
+from symposion.speakers.models import Speaker
 
 
 class Schedule(models.Model):
@@ -151,8 +152,8 @@ class Presentation(models.Model):
     title = models.CharField(max_length=100)
     description = MarkupField()
     abstract = MarkupField()
-    speaker = models.ForeignKey("speakers.Speaker", related_name="presentations")
-    additional_speakers = models.ManyToManyField("speakers.Speaker", related_name="copresentations",
+    speaker = models.ForeignKey(Speaker, related_name="presentations")
+    additional_speakers = models.ManyToManyField(Speaker, related_name="copresentations",
                                                  blank=True)
     cancelled = models.BooleanField(default=False)
     proposal_base = models.OneToOneField(ProposalBase, related_name="presentation")

@@ -16,6 +16,7 @@ from markitup.fields import MarkupField
 from model_utils.managers import InheritanceManager
 
 from symposion.conference.models import Section
+from symposion.speakers.models import Speaker
 
 
 class ProposalSection(models.Model):
@@ -103,8 +104,8 @@ class ProposalBase(models.Model):
         default=now,
         editable=False,
     )
-    speaker = models.ForeignKey("speakers.Speaker", related_name="proposals")
-    additional_speakers = models.ManyToManyField("speakers.Speaker", through="AdditionalSpeaker",
+    speaker = models.ForeignKey(Speaker, related_name="proposals")
+    additional_speakers = models.ManyToManyField(Speaker, through="AdditionalSpeaker",
                                                  blank=True)
     cancelled = models.BooleanField(default=False)
 
@@ -153,7 +154,7 @@ class AdditionalSpeaker(models.Model):
         (SPEAKING_STATUS_DECLINED, _("Declined")),
     ]
 
-    speaker = models.ForeignKey("speakers.Speaker")
+    speaker = models.ForeignKey(Speaker)
     proposalbase = models.ForeignKey(ProposalBase)
     status = models.IntegerField(choices=SPEAKING_STATUS, default=SPEAKING_STATUS_PENDING)
 
