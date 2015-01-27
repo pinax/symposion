@@ -1,6 +1,5 @@
 Django>=1.7.1
 django-appconf==0.6
-django-markitup==2.2.2
 django-model-utils==2.2
 django-reversion==1.8.5
 django-sitetree==1.2.1
@@ -8,6 +7,4 @@ django-taggit==0.12.2
 django-timezones==0.2
 django-user-accounts==1.0
 easy-thumbnails==2.2
-html5lib==0.999
-markdown==2.5.2
 pytz==2014.10
