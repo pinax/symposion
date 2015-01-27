@@ -8,8 +8,6 @@ from django.db.models.signals import post_save
 
 from django.contrib.auth.models import User
 
-from markitup.fields import MarkupField
-
 from symposion.proposals.models import ProposalBase
 from symposion.schedule.models import Presentation
 
@@ -95,7 +93,7 @@ class ProposalMessage(models.Model):
     proposal = models.ForeignKey(ProposalBase, related_name="messages")
     user = models.ForeignKey(User)
 
-    message = MarkupField()
+    message = models.TextField()
     submitted_at = models.DateTimeField(default=datetime.now, editable=False)
 
     class Meta:
@@ -111,7 +109,7 @@ class Review(models.Model):
     # No way to encode "-0" vs. "+0" into an IntegerField, and I don't feel
     # like some complicated encoding system.
     vote = models.CharField(max_length=2, blank=True, choices=VOTES.CHOICES)
-    comment = MarkupField()
+    comment = models.TextField()
     submitted_at = models.DateTimeField(default=datetime.now, editable=False)
 
     def save(self, **kwargs):
@@ -283,7 +281,7 @@ class ProposalResult(models.Model):
 class Comment(models.Model):
     proposal = models.ForeignKey(ProposalBase, related_name="comments")
     commenter = models.ForeignKey(User)
-    text = MarkupField()
+    text = models.TextField()
 
     # Or perhaps more accurately, can the user see this comment.
     public = models.BooleanField(choices=[(True, "public"), (False, "private")], default=False)

@@ -3,8 +3,6 @@ import datetime
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 
-from markitup.fields import MarkupField
-
 from symposion.proposals.models import ProposalBase
 from symposion.conference.models import Section
 from symposion.speakers.models import Speaker
@@ -65,7 +63,7 @@ class Slot(models.Model):
     kind = models.ForeignKey(SlotKind)
     start = models.TimeField()
     end = models.TimeField()
-    content_override = MarkupField(blank=True)
+    content_override = models.TextField()
 
     def assign(self, content):
         """
@@ -150,8 +148,8 @@ class Presentation(models.Model):
 
     slot = models.OneToOneField(Slot, null=True, blank=True, related_name="content_ptr")
     title = models.CharField(max_length=100)
-    description = MarkupField()
-    abstract = MarkupField()
+    description = models.TextField()
+    abstract = models.TextField()
     speaker = models.ForeignKey(Speaker, related_name="presentations")
     additional_speakers = models.ManyToManyField(Speaker, related_name="copresentations",
                                                  blank=True)
