@@ -59,7 +59,7 @@ class Section(models.Model):
     end_date = models.DateField(_("end date"), null=True, blank=True)
 
     def __unicode__(self):
-        return "%s %s" % (self.conference, self.name)
+        return u"%s %s" % (self.conference, self.name)
 
     class Meta(object):
         verbose_name = _("section")
