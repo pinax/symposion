@@ -309,9 +309,13 @@ class ResultNotification(models.Model):
     subject = models.CharField(max_length=100)
     body = models.TextField()
 
+    def recipients(self):
+        for speaker in self.proposal.speakers():
+            yield speaker.email
+
     @property
     def email_args(self):
-        return (self.subject, self.body, self.from_address, [self.to_address])
+        return (self.subject, self.body, self.from_address, self.recipients())
 
 
 def promote_proposal(proposal):
