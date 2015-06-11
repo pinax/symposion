@@ -135,6 +135,7 @@ class ProposalBase(models.Model):
         return {
             "title": self.title,
             "speaker": self.speaker.name,
+            "speakers": ', '.join([x.name for x in self.speakers()]),
             "kind": self.kind.name,
         }
 
