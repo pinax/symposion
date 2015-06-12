@@ -1,4 +1,6 @@
 from django import forms
+from django.conf import settings
+from django.utils.translation import ugettext_lazy as _
 
 import account.forms
 
@@ -29,3 +31,19 @@ class SignupForm(account.forms.SignupForm):
                 raise forms.ValidationError(
                     "Email address must match previously typed email address")
         return email_confirm
+
+
+def get_language_choices():
+    # In settings, we had to mark the language names for translation using
+    # a dummy ugettext to avoid circular imports, so now we need to actually
+    # retrieve their translations
+    return [(value, _(name))
+            for value, name
+            in settings.LANGUAGES]
+
+
+class LanguageForm(forms.Form):
+    language = forms.ChoiceField(
+        choices=get_language_choices(),
+        help_text=_(u"Change language for this session")
+    )
