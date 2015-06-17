@@ -13,6 +13,7 @@ from symposion.conf import settings
 import symposion.forms
 from symposion.proposals.models import ProposalSection
 
+
 class SignupView(account.views.SignupView):
 
     form_class = symposion.forms.SignupForm
