@@ -8,10 +8,9 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 
 import account.views
-import constance
 
+from symposion.conf import settings
 import symposion.forms
-from symposion.forms import LanguageForm
 from symposion.proposals.models import ProposalSection
 
 class SignupView(account.views.SignupView):
@@ -58,8 +57,8 @@ def dashboard(request):
         return redirect("speaker_create_token",
                         request.session["pending-token"])
     context = {'proposals_are_open': bool(ProposalSection.available()), }
-    if constance.config.SHOW_LANGUAGE_SELECTOR:
-        context['language_form'] = LanguageForm(
+    if settings.SYMPOSION_SHOW_LANGUAGE_SELECTOR:
+        context['language_form'] = symposion.forms.LanguageForm(
             initial={'language': request.LANGUAGE_CODE})
     return render(
         request, "dashboard.html",
@@ -69,7 +68,7 @@ def dashboard(request):
 
 @require_POST
 def change_language(request):
-    form = LanguageForm(request.POST)
+    form = symposion.forms.LanguageForm(request.POST)
     if form.is_valid():
         request.session['django_language'] = form.cleaned_data['language']
     return redirect(request.POST['next'])
