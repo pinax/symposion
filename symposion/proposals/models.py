@@ -130,7 +130,7 @@ class ProposalBase(models.Model):
         try:
             return self.result.status
         except ObjectDoesNotExist:
-            return 'undecided'
+            return _('Undecided')
 
     def speakers(self):
         yield self.speaker
