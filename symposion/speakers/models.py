@@ -38,7 +38,7 @@ class Speaker(models.Model):
         if self.user:
             return self.name
         else:
-            return "?"
+            return u"?"
 
     def get_absolute_url(self):
         return reverse("speaker_edit")
