@@ -8,6 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.utils.timezone import now
 
 from django.contrib.auth.models import User
+from django.core.exceptions import ObjectDoesNotExist
 
 import reversion
 
@@ -123,6 +124,13 @@ class ProposalBase(models.Model):
     @property
     def number(self):
         return str(self.pk).zfill(3)
+
+    @property
+    def status(self):
+        try:
+            return self.result.status
+        except ObjectDoesNotExist:
+            return _('Undecided')
 
     def speakers(self):
         yield self.speaker
