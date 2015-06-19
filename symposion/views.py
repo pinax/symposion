@@ -5,10 +5,13 @@ from django.shortcuts import render, redirect
 
 from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 
 import account.views
 
+from symposion.conf import settings
 import symposion.forms
+from symposion.proposals.models import ProposalSection
 
 
 class SignupView(account.views.SignupView):
@@ -54,4 +57,19 @@ def dashboard(request):
     if request.session.get("pending-token"):
         return redirect("speaker_create_token",
                         request.session["pending-token"])
-    return render(request, "dashboard.html")
+    context = {'proposals_are_open': bool(ProposalSection.available()), }
+    if settings.SYMPOSION_SHOW_LANGUAGE_SELECTOR:
+        context['language_form'] = symposion.forms.LanguageForm(
+            initial={'language': request.LANGUAGE_CODE})
+    return render(
+        request, "dashboard.html",
+        context,
+    )
+
+
+@require_POST
+def change_language(request):
+    form = symposion.forms.LanguageForm(request.POST)
+    if form.is_valid():
+        request.session['django_language'] = form.cleaned_data['language']
+    return redirect(request.POST['next'])
