@@ -131,7 +131,13 @@ def proposal_speaker_manage(request, pk):
                 else:
                     token = pending.invite_token
                 return pending, token
+
             email_address = add_speaker_form.cleaned_data["email"]
+            # django-selectable widget will return a User for emails that are
+            # associated with a current User, else a string
+            if isinstance(email_address, User):
+                email_address = email_address.email
+
             # check if email is on the site now
             users = EmailAddress.objects.get_users_for(email_address)
             if users:
