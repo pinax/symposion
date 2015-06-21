@@ -39,6 +39,7 @@ class Sponsor(models.Model):
                                   null=True)
 
     name = models.CharField(_("Sponsor Name"), max_length=100)
+    display_url = models.URLField(_("display URL"), blank=True)
     external_url = models.URLField(_("external URL"))
     annotation = models.TextField(_("annotation"), blank=True)
     contact_name = models.CharField(_("Contact Name"), max_length=100)
@@ -64,6 +65,12 @@ class Sponsor(models.Model):
         if self.active:
             return reverse("sponsor_detail", kwargs={"pk": self.pk})
         return reverse("sponsor_list")
+
+    def get_display_url(self):
+        if self.display_url:
+            return self.display_url
+        else:
+            return self.external_url
 
     @property
     def website_logo(self):
