@@ -1,7 +1,9 @@
 from django.contrib import admin
+from django.utils.translation import ugettext_lazy as _
 
-from symposion.sponsorship.models import SponsorLevel, Sponsor, Benefit, BenefitLevel, \
-    SponsorBenefit
+from symposion.sponsorship.models import SponsorLevel, Sponsor, Benefit, \
+    BenefitLevel, SponsorBenefit
+from symposion.sponsorship.views import sponsor_email
 
 
 class BenefitLevelInline(admin.TabularInline):
@@ -24,9 +26,18 @@ class SponsorBenefitInline(admin.StackedInline):
     ]
 
 
+def email_selected_sponsors_action(modeladmin, request, queryset):
+    """Action invoked from admin to email selected sponsors"""
+    pks = ",".join([str(pk) for pk in queryset.values_list('pk', flat=True)])
+    return sponsor_email(request, pks)
+email_selected_sponsors_action.short_description = _(u"Email selected sponsors")
+
+
 class SponsorAdmin(admin.ModelAdmin):
 
     save_on_top = True
+    actions = [email_selected_sponsors_action]
+    list_per_page = 1000000  # Do not limit sponsors per page, just one big page
     fieldsets = [
         (None, {
             "fields": [
@@ -44,6 +55,7 @@ class SponsorAdmin(admin.ModelAdmin):
     ]
     inlines = [SponsorBenefitInline]
     list_display = ["name", "external_url", "level", "active"]
+    ordering = ["active", "level", "name"]
 
     def get_form(self, *args, **kwargs):
         # @@@ kinda ugly but using choices= on NullBooleanField is broken
