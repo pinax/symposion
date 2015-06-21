@@ -9,8 +9,15 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 
 from symposion.conference.models import Conference
-
 from symposion.sponsorship.managers import SponsorManager
+from symposion.utils.mail import send_email
+
+
+SPONSOR_COORDINATORS = "sponsor-coordinators"
+
+AUTH_GROUPS = [
+    SPONSOR_COORDINATORS
+]
 
 
 class SponsorLevel(models.Model):
@@ -64,6 +71,13 @@ class Sponsor(models.Model):
         if self.active:
             return reverse("sponsor_detail", kwargs={"pk": self.pk})
         return reverse("sponsor_list")
+
+    def render_email(self, text):
+        """Replace special strings in text with values from the sponsor.
+
+        %%NAME%% --> Sponsor name
+        """
+        return text.replace("%%NAME%%", self.name)
 
     @property
     def website_logo(self):
@@ -126,8 +140,13 @@ class Sponsor(models.Model):
         self.sponsor_benefits.exclude(pk__in=allowed_benefits)\
             .update(active=False, max_words=None, other_limits="")
 
+    # @@@ should this just be done centrally?
     def send_coordinator_emails(self):
-        pass  # @@@ should this just be done centrally?
+        for user in User.objects.filter(groups__name=SPONSOR_COORDINATORS):
+            send_email(
+                [user.email], "sponsor_signup",
+                context={"sponsor": self}
+            )
 
 
 def _store_initial_level(sender, instance, **kwargs):
