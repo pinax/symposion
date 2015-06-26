@@ -7,6 +7,7 @@ from django.db.models import Q
 from django.db.models.signals import post_save
 
 from django.contrib.auth.models import User
+from django.utils.translation import ugettext_lazy as _
 
 from markitup.fields import MarkupField
 
@@ -100,6 +101,8 @@ class ProposalMessage(models.Model):
 
     class Meta:
         ordering = ["submitted_at"]
+        verbose_name = _("proposal message")
+        verbose_name_plural = _("proposal messages")
 
 
 class Review(models.Model):
@@ -180,6 +183,10 @@ class Review(models.Model):
     def section(self):
         return self.proposal.kind.section.slug
 
+    class Meta:
+        verbose_name = _("review")
+        verbose_name_plural = _("reviews")
+
 
 class LatestVote(models.Model):
     VOTES = VOTES
@@ -194,6 +201,8 @@ class LatestVote(models.Model):
 
     class Meta:
         unique_together = [("proposal", "user")]
+        verbose_name = _("latest vote")
+        verbose_name_plural = _("latest votes")
 
     def css_class(self):
         return {
@@ -279,6 +288,10 @@ class ProposalResult(models.Model):
         model = self.__class__
         model._default_manager.filter(pk=self.pk).update(score=ProposalScoreExpression())
 
+    class Meta:
+        verbose_name = _("proposal_result")
+        verbose_name_plural = _("proposal_results")
+
 
 class Comment(models.Model):
     proposal = models.ForeignKey(ProposalBase, related_name="comments")
@@ -289,6 +302,10 @@ class Comment(models.Model):
     public = models.BooleanField(choices=[(True, "public"), (False, "private")], default=False)
     commented_at = models.DateTimeField(default=datetime.now)
 
+    class Meta:
+        verbose_name = _("comment")
+        verbose_name_plural = _("comments")
+
 
 class NotificationTemplate(models.Model):
 
@@ -296,6 +313,10 @@ class NotificationTemplate(models.Model):
     from_address = models.EmailField()
     subject = models.CharField(max_length=100)
     body = models.TextField()
+
+    class Meta:
+        verbose_name = _("notification template")
+        verbose_name_plural = _("notification templates")
 
 
 class ResultNotification(models.Model):

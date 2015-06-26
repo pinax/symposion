@@ -5,6 +5,7 @@ from django.db import models
 import reversion
 
 from django.contrib.auth.models import Permission, User
+from django.utils.translation import ugettext_lazy as _
 
 
 TEAM_ACCESS_CHOICES = [
@@ -55,6 +56,9 @@ class Team(models.Model):
     def managers(self):
         return self.memberships.filter(state="manager")
 
+    class Meta:
+        verbose_name = _('team')
+        verbose_name_plural = _('teams')
 
 MEMBERSHIP_STATE_CHOICES = [
     ("applied", "applied"),
@@ -73,5 +77,8 @@ class Membership(models.Model):
     state = models.CharField(max_length=20, choices=MEMBERSHIP_STATE_CHOICES)
     message = models.TextField(blank=True)
 
+    class Meta:
+        verbose_name = _('membership')
+        verbose_name_plural = _('memberships')
 
 reversion.register(Membership)

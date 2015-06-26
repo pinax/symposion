@@ -3,6 +3,7 @@ import datetime
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.translation import ugettext_lazy as _
 
 from markitup.fields import MarkupField
 
@@ -22,6 +23,8 @@ class Schedule(models.Model):
 
     class Meta:
         ordering = ["section"]
+        verbose_name = _('schedule')
+        verbose_name_plural = _('schedules')
 
 
 class Day(models.Model):
@@ -35,6 +38,8 @@ class Day(models.Model):
     class Meta:
         unique_together = [("schedule", "date")]
         ordering = ["date"]
+        verbose_name = _("date")
+        verbose_name_plural = _("dates")
 
 
 class Room(models.Model):
@@ -45,6 +50,10 @@ class Room(models.Model):
 
     def __unicode__(self):
         return self.name
+
+    class Meta:
+        verbose_name = _("room")
+        verbose_name_plural = _("rooms")
 
 
 class SlotKind(models.Model):
@@ -58,6 +67,10 @@ class SlotKind(models.Model):
 
     def __unicode__(self):
         return self.label
+
+    class Meta:
+        verbose_name = _("slot kind")
+        verbose_name_plural = _("slot kinds")
 
 
 class Slot(models.Model):
@@ -129,6 +142,8 @@ class Slot(models.Model):
 
     class Meta:
         ordering = ["day", "start", "end"]
+        verbose_name = _("slot")
+        verbose_name_plural = _("slots")
 
 
 class SlotRoom(models.Model):
@@ -145,6 +160,8 @@ class SlotRoom(models.Model):
     class Meta:
         unique_together = [("slot", "room")]
         ordering = ["slot", "room__order"]
+        verbose_name = _("slot room")
+        verbose_name_plural = _("slot rooms")
 
 
 class Presentation(models.Model):
@@ -181,6 +198,8 @@ class Presentation(models.Model):
 
     class Meta:
         ordering = ["slot"]
+        verbose_name = _("presentation")
+        verbose_name_plural = _("presentations")
 
 
 class Session(models.Model):
@@ -216,6 +235,10 @@ class Session(models.Model):
             )
         return u""
 
+    class Meta:
+        verbose_name = _("session")
+        verbose_name_plural = _("sessions")
+
 
 class SessionRole(models.Model):
 
@@ -236,6 +259,8 @@ class SessionRole(models.Model):
 
     class Meta:
         unique_together = [("session", "user", "role")]
+        verbose_name = _("session role")
+        verbose_name_plural = _("session roles")
 
     def __unicode__(self):
         return u"%s %s: %s" % (self.user, self.session,

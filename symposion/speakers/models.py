@@ -1,4 +1,5 @@
 import datetime
+from django.utils.translation import ugettext_lazy as _
 
 from django.db import models
 from django.core.urlresolvers import reverse
@@ -33,6 +34,8 @@ class Speaker(models.Model):
 
     class Meta:
         ordering = ['name']
+        verbose_name = _("speaker")
+        verbose_name_plural = _("speakers")
 
     def __unicode__(self):
         if self.user:

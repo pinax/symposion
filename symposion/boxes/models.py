@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils.translation import ugettext_lazy as _
 
 import reversion
 
@@ -18,7 +19,7 @@ class Box(models.Model):
         return self.label
 
     class Meta:
-        verbose_name_plural = "boxes"
-
+        verbose_name = _("box")
+        verbose_name_plural = _("boxes")
 
 reversion.register(Box)
