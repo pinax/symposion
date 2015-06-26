@@ -1,5 +1,6 @@
 from django import forms
 from django.db.models import Q
+from django.utils.translation import ugettext_lazy as _
 
 from symposion.proposals.models import SupportingDocument
 # from markitup.widgets import MarkItUpWidget
@@ -11,7 +12,7 @@ from symposion.proposals.models import SupportingDocument
 class AddSpeakerForm(forms.Form):
 
     email = forms.EmailField(
-        label="Email address of new speaker (use their email address, not yours)"
+        label=_("Email address of new speaker (use their email address, not yours)")
     )
 
     def __init__(self, *args, **kwargs):
@@ -26,7 +27,7 @@ class AddSpeakerForm(forms.Form):
         ).exists()
         if exists:
             raise forms.ValidationError(
-                "This email address has already been invited to your talk proposal"
+                _("This email address has already been invited to your talk proposal")
             )
         return value
 

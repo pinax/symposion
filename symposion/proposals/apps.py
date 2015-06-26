@@ -1,7 +1,8 @@
 from django.apps import AppConfig
+from django.utils.translation import ugettext_lazy as _
 
 
 class ProposalsConfig(AppConfig):
     name = "symposion.proposals"
     label = "symposion_proposals"
-    verbose_name = "Symposion Proposals"
+    verbose_name = _("Symposion Proposals")

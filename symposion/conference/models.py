@@ -12,14 +12,14 @@ class Conference(models.Model):
     the full conference for a specific year, e.g. US PyCon 2012.
     """
 
-    title = models.CharField(_("title"), max_length=100)
+    title = models.CharField(_("Title"), max_length=100)
 
     # when the conference runs
-    start_date = models.DateField(_("start date"), null=True, blank=True)
-    end_date = models.DateField(_("end date"), null=True, blank=True)
+    start_date = models.DateField(_("Start date"), null=True, blank=True)
+    end_date = models.DateField(_("End date"), null=True, blank=True)
 
     # timezone the conference is in
-    timezone = TimeZoneField(_("timezone"), blank=True)
+    timezone = TimeZoneField(_("Timezone"), blank=True)
 
     def __unicode__(self):
         return self.title
@@ -49,14 +49,14 @@ class Section(models.Model):
     scheduling process.
     """
 
-    conference = models.ForeignKey(Conference, verbose_name=_("conference"))
+    conference = models.ForeignKey(Conference, verbose_name=_("Conference"))
 
-    name = models.CharField(_("name"), max_length=100)
-    slug = models.SlugField()
+    name = models.CharField(_("Name"), max_length=100)
+    slug = models.SlugField(verbose_name=_("Slug"))
 
     # when the section runs
-    start_date = models.DateField(_("start date"), null=True, blank=True)
-    end_date = models.DateField(_("end date"), null=True, blank=True)
+    start_date = models.DateField(_("Start date"), null=True, blank=True)
+    end_date = models.DateField(_("End date"), null=True, blank=True)
 
     def __unicode__(self):
         return u"%s %s" % (self.conference, self.name)

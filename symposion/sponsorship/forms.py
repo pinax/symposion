@@ -2,6 +2,7 @@ from django import forms
 from django.forms.models import inlineformset_factory, BaseInlineFormSet
 
 from django.contrib.admin.widgets import AdminFileWidget
+from django.utils.translation import ugettext_lazy as _
 
 from symposion.sponsorship.models import Sponsor, SponsorBenefit
 
@@ -61,7 +62,7 @@ class SponsorBenefitsInlineFormSet(BaseInlineFormSet):
 
             # provide word limit as help_text
             if form.instance.benefit.type == "text" and form.instance.max_words:
-                form.fields[field].help_text = u"maximum %s words" % form.instance.max_words
+                form.fields[field].help_text = _("maximum %s words") % form.instance.max_words
 
             # use admin file widget that shows currently uploaded file
             if field == "upload":

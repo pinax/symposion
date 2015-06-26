@@ -6,15 +6,13 @@ import time
 from zipfile import ZipFile, ZipInfo
 
 from django.conf import settings
-
+from django.contrib import messages
+from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth.decorators import login_required
 from django.http import Http404, HttpResponse
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.template import RequestContext
 from django.utils.translation import ugettext_lazy as _
-
-from django.contrib import messages
-from django.contrib.admin.views.decorators import staff_member_required
-from django.contrib.auth.decorators import login_required
 
 from symposion.sponsorship.forms import SponsorApplicationForm, \
     SponsorDetailsForm, SponsorBenefitsFormSet
@@ -90,7 +88,7 @@ def sponsor_detail(request, pk):
             form.save()
             formset.save()
 
-            messages.success(request, "Sponsorship details have been updated")
+            messages.success(request, _("Sponsorship details have been updated"))
 
             return redirect("dashboard")
     else:
