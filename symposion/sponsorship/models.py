@@ -213,8 +213,8 @@ class SponsorBenefit(models.Model):
         num_words = len(self.text.split())
         if self.max_words and num_words > self.max_words:
             raise ValidationError(
-                _("Sponsorship level only allows for %s words, you provided %d.") % (
-                    self.max_words, num_words))
+                _("Sponsorship level only allows for %(word)s words, you provided %(num)d.") % {
+                    "word": self.max_words, "num": num_words})
 
     def data_fields(self):
         """
