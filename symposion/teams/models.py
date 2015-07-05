@@ -78,7 +78,6 @@ MEMBERSHIP_STATE_CHOICES = [
 ]
 
 
-@python_2_unicode_compatible
 class Membership(models.Model):
 
     user = models.ForeignKey(User, related_name="memberships",

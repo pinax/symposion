@@ -36,8 +36,8 @@ class Day(models.Model):
     schedule = models.ForeignKey(Schedule, verbose_name=_("Schedule"))
     date = models.DateField(verbose_name=_("Date"))
 
-    def __unicode__(self):
-        return u"%s" % self.date
+    def __str__(self):
+        return "%s" % self.date
 
     class Meta:
         unique_together = [("schedule", "date")]
@@ -53,7 +53,7 @@ class Room(models.Model):
     name = models.CharField(max_length=65, verbose_name=_("Name"))
     order = models.PositiveIntegerField(verbose_name=_("Order"))
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     class Meta:
@@ -71,7 +71,7 @@ class SlotKind(models.Model):
     schedule = models.ForeignKey(Schedule, verbose_name=_("schedule"))
     label = models.CharField(max_length=50, verbose_name=_("Label"))
 
-    def __unicode__(self):
+    def __str__(self):
         return self.label
 
     class Meta:

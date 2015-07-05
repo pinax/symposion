@@ -162,7 +162,7 @@ class Benefit(models.Model):
     type = models.CharField(_("Type"), choices=BENEFIT_TYPE_CHOICES, max_length=10,
                             default="simple")
 
-    def __str_(self):
+    def __str__(self):
         return self.name
 
 
