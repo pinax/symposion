@@ -1,9 +1,11 @@
+from __future__ import unicode_literals
 import os
 import uuid
 
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Q
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from django.utils.timezone import now
 
@@ -20,6 +22,7 @@ from symposion.conference.models import Section
 from symposion.speakers.models import Speaker
 
 
+@python_2_unicode_compatible
 class ProposalSection(models.Model):
     """
     configuration of proposal submissions for a specific Section.
@@ -30,12 +33,12 @@ class ProposalSection(models.Model):
       * closed is NULL or False
     """
 
-    section = models.OneToOneField(Section)
+    section = models.OneToOneField(Section, verbose_name=_("Section"))
 
-    start = models.DateTimeField(null=True, blank=True)
-    end = models.DateTimeField(null=True, blank=True)
-    closed = models.NullBooleanField()
-    published = models.NullBooleanField()
+    start = models.DateTimeField(null=True, blank=True, verbose_name=_("Start"))
+    end = models.DateTimeField(null=True, blank=True, verbose_name=_("End"))
+    closed = models.NullBooleanField(verbose_name=_("Closed"))
+    published = models.NullBooleanField(verbose_name=_("Published"))
 
     @classmethod
     def available(cls):
@@ -54,10 +57,11 @@ class ProposalSection(models.Model):
             return False
         return True
 
-    def __unicode__(self):
+    def __str__(self):
         return self.section.name
 
 
+@python_2_unicode_compatible
 class ProposalKind(models.Model):
     """
     e.g. talk vs panel vs tutorial vs poster
@@ -66,22 +70,23 @@ class ProposalKind(models.Model):
     to distinguish the section as well as the kind.
     """
 
-    section = models.ForeignKey(Section, related_name="proposal_kinds")
+    section = models.ForeignKey(Section, related_name="proposal_kinds", verbose_name=_("Section"))
 
     name = models.CharField(_("Name"), max_length=100)
-    slug = models.SlugField()
+    slug = models.SlugField(verbose_name=_("Slug"))
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
+@python_2_unicode_compatible
 class ProposalBase(models.Model):
 
     objects = InheritanceManager()
 
-    kind = models.ForeignKey(ProposalKind)
+    kind = models.ForeignKey(ProposalKind, verbose_name=_("Kind"))
 
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=100, verbose_name=_("Title"))
     description = models.TextField(
         _("Brief Description"),
         max_length=400,  # @@@ need to enforce 400 in UI
@@ -95,6 +100,7 @@ class ProposalBase(models.Model):
                     "target='_blank'>Markdown</a>.")
     )
     additional_notes = MarkupField(
+        _("Addtional Notes"),
         blank=True,
         help_text=_("Anything else you'd like the program committee to know when making their "
                     "selection: your past experience, etc. This is not made public. Edit using "
@@ -104,11 +110,12 @@ class ProposalBase(models.Model):
     submitted = models.DateTimeField(
         default=now,
         editable=False,
+        verbose_name=_("Submitted")
     )
-    speaker = models.ForeignKey(Speaker, related_name="proposals")
+    speaker = models.ForeignKey(Speaker, related_name="proposals", verbose_name=_("Speaker"))
     additional_speakers = models.ManyToManyField(Speaker, through="AdditionalSpeaker",
-                                                 blank=True)
-    cancelled = models.BooleanField(default=False)
+                                                 blank=True, verbose_name_plural=_("Addtional speakers"))
+    cancelled = models.BooleanField(default=False, verbose_name=_("Cancelled"))
 
     def can_edit(self):
         return True
@@ -151,6 +158,7 @@ class ProposalBase(models.Model):
 reversion.register(ProposalBase)
 
 
+@python_2_unicode_compatible
 class AdditionalSpeaker(models.Model):
 
     SPEAKING_STATUS_PENDING = 1
@@ -163,12 +171,14 @@ class AdditionalSpeaker(models.Model):
         (SPEAKING_STATUS_DECLINED, _("Declined")),
     ]
 
-    speaker = models.ForeignKey(Speaker)
-    proposalbase = models.ForeignKey(ProposalBase)
-    status = models.IntegerField(choices=SPEAKING_STATUS, default=SPEAKING_STATUS_PENDING)
+    speaker = models.ForeignKey(Speaker, verbose_name=_("Speaker"))
+    proposalbase = models.ForeignKey(ProposalBase, verbose_name=_("Proposalbase"))
+    status = models.IntegerField(choices=SPEAKING_STATUS, default=SPEAKING_STATUS_PENDING, verbose_name=_("Status"))
 
     class Meta:
         unique_together = ("speaker", "proposalbase")
+        verbose_name = _("Addtional speaker")
+        verbose_name_plural = _("Additional speakers")
 
 
 def uuid_filename(instance, filename):
@@ -177,16 +187,17 @@ def uuid_filename(instance, filename):
     return os.path.join("document", filename)
 
 
+@python_2_unicode_compatible
 class SupportingDocument(models.Model):
 
-    proposal = models.ForeignKey(ProposalBase, related_name="supporting_documents")
+    proposal = models.ForeignKey(ProposalBase, related_name="supporting_documents", verbose_name=_("Proposal"))
 
-    uploaded_by = models.ForeignKey(User)
+    uploaded_by = models.ForeignKey(User, verbose_name=_("Uploaded by"))
 
-    created_at = models.DateTimeField(default=now)
+    created_at = models.DateTimeField(default=now, verbose_name=_("Created at"))
 
-    file = models.FileField(upload_to=uuid_filename)
-    description = models.CharField(max_length=140)
+    file = models.FileField(upload_to=uuid_filename, verbose_name=_("File"))
+    description = models.CharField(max_length=140, verbose_name=_("Description"))
 
     def download_url(self):
         return reverse("proposal_document_download",

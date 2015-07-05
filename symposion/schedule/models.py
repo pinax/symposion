@@ -1,9 +1,11 @@
+from __future__ import unicode_literals
 import datetime
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.utils.encoding import python_2_unicode_compatible
 
 from markitup.fields import MarkupField
 
@@ -12,25 +14,27 @@ from symposion.conference.models import Section
 from symposion.speakers.models import Speaker
 
 
+@python_2_unicode_compatible
 class Schedule(models.Model):
 
-    section = models.OneToOneField(Section)
-    published = models.BooleanField(default=True)
-    hidden = models.BooleanField("Hide schedule from overall conference view", default=False)
+    section = models.OneToOneField(Section, verbose_name=_("Section"))
+    published = models.BooleanField(default=True, verbose_name=_("Published"))
+    hidden = models.BooleanField(_("Hide schedule from overall conference view"), default=False)
 
-    def __unicode__(self):
-        return u"%s Schedule" % self.section
+    def __str__(self):
+        return "%s Schedule" % self.section
 
     class Meta:
         ordering = ["section"]
-        verbose_name = _('schedule')
-        verbose_name_plural = _('schedules')
+        verbose_name = _('Schedule')
+        verbose_name_plural = _('Schedules')
 
 
+@python_2_unicode_compatible
 class Day(models.Model):
 
-    schedule = models.ForeignKey(Schedule)
-    date = models.DateField()
+    schedule = models.ForeignKey(Schedule, verbose_name=_("Schedule"))
+    date = models.DateField(verbose_name=_("Date"))
 
     def __unicode__(self):
         return u"%s" % self.date
@@ -42,44 +46,47 @@ class Day(models.Model):
         verbose_name_plural = _("dates")
 
 
+@python_2_unicode_compatible
 class Room(models.Model):
 
-    schedule = models.ForeignKey(Schedule)
-    name = models.CharField(max_length=65)
-    order = models.PositiveIntegerField()
+    schedule = models.ForeignKey(Schedule, verbose_name=_("Schedule"))
+    name = models.CharField(max_length=65, verbose_name=_("Name"))
+    order = models.PositiveIntegerField(verbose_name=_("Order"))
 
     def __unicode__(self):
         return self.name
 
     class Meta:
-        verbose_name = _("room")
-        verbose_name_plural = _("rooms")
+        verbose_name = _("Room")
+        verbose_name_plural = _("Rooms")
 
 
+@python_2_unicode_compatible
 class SlotKind(models.Model):
     """
     A slot kind represents what kind a slot is. For example, a slot can be a
     break, lunch, or X-minute talk.
     """
 
-    schedule = models.ForeignKey(Schedule)
-    label = models.CharField(max_length=50)
+    schedule = models.ForeignKey(Schedule, verbose_name=_("schedule"))
+    label = models.CharField(max_length=50, verbose_name=_("Label"))
 
     def __unicode__(self):
         return self.label
 
     class Meta:
-        verbose_name = _("slot kind")
-        verbose_name_plural = _("slot kinds")
+        verbose_name = _("Slot kind")
+        verbose_name_plural = _("Slot kinds")
 
 
+@python_2_unicode_compatible
 class Slot(models.Model):
 
-    day = models.ForeignKey(Day)
-    kind = models.ForeignKey(SlotKind)
-    start = models.TimeField()
-    end = models.TimeField()
-    content_override = MarkupField(blank=True)
+    day = models.ForeignKey(Day, verbose_name=_("Day"))
+    kind = models.ForeignKey(SlotKind, verbose_name=_("Kind"))
+    start = models.TimeField(verbose_name=_("Start"))
+    end = models.TimeField(verbose_name=_("End"))
+    content_override = MarkupField(blank=True, verbose_name=_("Content override"))
 
     def assign(self, content):
         """
@@ -137,8 +144,8 @@ class Slot(models.Model):
     def rooms(self):
         return Room.objects.filter(pk__in=self.slotroom_set.values("room"))
 
-    def __unicode__(self):
-        return u"%s %s (%s - %s)" % (self.day, self.kind, self.start, self.end)
+    def __str__(self):
+        return "%s %s (%s - %s)" % (self.day, self.kind, self.start, self.end)
 
     class Meta:
         ordering = ["day", "start", "end"]
@@ -146,36 +153,38 @@ class Slot(models.Model):
         verbose_name_plural = _("slots")
 
 
+@python_2_unicode_compatible
 class SlotRoom(models.Model):
     """
     Links a slot with a room.
     """
 
-    slot = models.ForeignKey(Slot)
-    room = models.ForeignKey(Room)
+    slot = models.ForeignKey(Slot, verbose_name=_("Slot"))
+    room = models.ForeignKey(Room, verbose_name=_("Room"))
 
-    def __unicode__(self):
-        return u"%s %s" % (self.room, self.slot)
+    def __str__(self):
+        return "%s %s" % (self.room, self.slot)
 
     class Meta:
         unique_together = [("slot", "room")]
         ordering = ["slot", "room__order"]
-        verbose_name = _("slot room")
-        verbose_name_plural = _("slot rooms")
+        verbose_name = _("Slot room")
+        verbose_name_plural = _("Slot rooms")
 
 
+@python_2_unicode_compatible
 class Presentation(models.Model):
 
-    slot = models.OneToOneField(Slot, null=True, blank=True, related_name="content_ptr")
-    title = models.CharField(max_length=100)
-    description = MarkupField()
-    abstract = MarkupField()
-    speaker = models.ForeignKey(Speaker, related_name="presentations")
+    slot = models.OneToOneField(Slot, null=True, blank=True, related_name="content_ptr", verbose_name=_("Slot"))
+    title = models.CharField(max_length=100, verbose_name=_("Title"))
+    description = MarkupField(verbose_name=_("Description"))
+    abstract = MarkupField(verbose_name=_("Abstract"))
+    speaker = models.ForeignKey(Speaker, related_name="presentations", verbose_name=_("Speaker"))
     additional_speakers = models.ManyToManyField(Speaker, related_name="copresentations",
-                                                 blank=True)
-    cancelled = models.BooleanField(default=False)
-    proposal_base = models.OneToOneField(ProposalBase, related_name="presentation")
-    section = models.ForeignKey(Section, related_name="presentations")
+                                                 blank=True, verbose_name=_("Additional speakers"))
+    cancelled = models.BooleanField(default=False, verbose_name=_("Cancelled"))
+    proposal_base = models.OneToOneField(ProposalBase, related_name="presentation", verbose_name=_("Proposal base"))
+    section = models.ForeignKey(Section, related_name="presentations", verbose_name=_("Section"))
 
     @property
     def number(self):
@@ -193,8 +202,8 @@ class Presentation(models.Model):
             if speaker.user:
                 yield speaker
 
-    def __unicode__(self):
-        return u"#%s %s (%s)" % (self.number, self.title, self.speaker)
+    def __str__(self):
+        return "#%s %s (%s)" % (self.number, self.title, self.speaker)
 
     class Meta:
         ordering = ["slot"]
@@ -202,10 +211,11 @@ class Presentation(models.Model):
         verbose_name_plural = _("presentations")
 
 
+@python_2_unicode_compatible
 class Session(models.Model):
 
-    day = models.ForeignKey(Day, related_name="sessions")
-    slots = models.ManyToManyField(Slot, related_name="sessions")
+    day = models.ForeignKey(Day, related_name="sessions", verbose_name=_("Day"))
+    slots = models.ManyToManyField(Slot, related_name="sessions", verbose_name=_("Slots"))
 
     def sorted_slots(self):
         return self.slots.order_by("start")
@@ -224,44 +234,45 @@ class Session(models.Model):
         else:
             return None
 
-    def __unicode__(self):
+    def __str__(self):
         start = self.start()
         end = self.end()
         if start and end:
-            return u"%s: %s - %s" % (
+            return "%s: %s - %s" % (
                 self.day.date.strftime("%a"),
                 start.strftime("%X"),
                 end.strftime("%X")
             )
-        return u""
+        return ""
 
     class Meta:
-        verbose_name = _("session")
-        verbose_name_plural = _("sessions")
+        verbose_name = _("Session")
+        verbose_name_plural = _("Sessions")
 
 
+@python_2_unicode_compatible
 class SessionRole(models.Model):
 
     SESSION_ROLE_CHAIR = 1
     SESSION_ROLE_RUNNER = 2
 
     SESSION_ROLE_TYPES = [
-        (SESSION_ROLE_CHAIR, "Session Chair"),
-        (SESSION_ROLE_RUNNER, "Session Runner"),
+        (SESSION_ROLE_CHAIR, _("Session Chair")),
+        (SESSION_ROLE_RUNNER, _("Session Runner")),
     ]
 
-    session = models.ForeignKey(Session)
-    user = models.ForeignKey(User)
-    role = models.IntegerField(choices=SESSION_ROLE_TYPES)
-    status = models.NullBooleanField()
+    session = models.ForeignKey(Session, verbose_name=_("Session"))
+    user = models.ForeignKey(User, verbose_name=_("User"))
+    role = models.IntegerField(choices=SESSION_ROLE_TYPES, verbose_name=_("Role"))
+    status = models.NullBooleanField(verbose_name=_("Status"))
 
     submitted = models.DateTimeField(default=datetime.datetime.now)
 
     class Meta:
         unique_together = [("session", "user", "role")]
-        verbose_name = _("session role")
-        verbose_name_plural = _("session roles")
+        verbose_name = _("Session role")
+        verbose_name_plural = _("Session roles")
 
-    def __unicode__(self):
-        return u"%s %s: %s" % (self.user, self.session,
-                               self.SESSION_ROLE_TYPES[self.role - 1][1])
+    def __str__(self):
+        return "%s %s: %s" % (self.user, self.session,
+                              self.SESSION_ROLE_TYPES[self.role - 1][1])

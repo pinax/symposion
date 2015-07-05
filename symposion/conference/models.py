@@ -1,5 +1,7 @@
+from __future__ import unicode_literals
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.utils.encoding import python_2_unicode_compatible
 
 from timezones.fields import TimeZoneField
 
@@ -7,21 +9,22 @@ from timezones.fields import TimeZoneField
 CONFERENCE_CACHE = {}
 
 
+@python_2_unicode_compatible
 class Conference(models.Model):
     """
     the full conference for a specific year, e.g. US PyCon 2012.
     """
 
-    title = models.CharField(_("title"), max_length=100)
+    title = models.CharField(_("Title"), max_length=100)
 
     # when the conference runs
-    start_date = models.DateField(_("start date"), null=True, blank=True)
-    end_date = models.DateField(_("end date"), null=True, blank=True)
+    start_date = models.DateField(_("Start date"), null=True, blank=True)
+    end_date = models.DateField(_("End date"), null=True, blank=True)
 
     # timezone the conference is in
-    timezone = TimeZoneField(_("timezone"), blank=True)
+    timezone = TimeZoneField(_("Timezone"), blank=True)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     def save(self, *args, **kwargs):
@@ -42,6 +45,7 @@ class Conference(models.Model):
         verbose_name_plural = _("conferences")
 
 
+@python_2_unicode_compatible
 class Section(models.Model):
     """
     a section of the conference such as "Tutorials", "Workshops",
@@ -49,17 +53,17 @@ class Section(models.Model):
     scheduling process.
     """
 
-    conference = models.ForeignKey(Conference, verbose_name=_("conference"))
+    conference = models.ForeignKey(Conference, verbose_name=_("Conference"))
 
-    name = models.CharField(_("name"), max_length=100)
-    slug = models.SlugField()
+    name = models.CharField(_("Name"), max_length=100)
+    slug = models.SlugField(verbose_name=_("Slug"))
 
     # when the section runs
-    start_date = models.DateField(_("start date"), null=True, blank=True)
-    end_date = models.DateField(_("end date"), null=True, blank=True)
+    start_date = models.DateField(_("Start date"), null=True, blank=True)
+    end_date = models.DateField(_("End date"), null=True, blank=True)
 
-    def __unicode__(self):
-        return u"%s %s" % (self.conference, self.name)
+    def __str__(self):
+        return "%s %s" % (self.conference, self.name)
 
     class Meta(object):
         verbose_name = _("section")

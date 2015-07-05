@@ -1,9 +1,11 @@
+from __future__ import unicode_literals
 import datetime
 
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models.signals import post_init, post_save
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from django.contrib.auth.models import User
@@ -13,52 +15,54 @@ from symposion.conference.models import Conference
 from symposion.sponsorship.managers import SponsorManager
 
 
+@python_2_unicode_compatible
 class SponsorLevel(models.Model):
 
-    conference = models.ForeignKey(Conference, verbose_name=_("conference"))
-    name = models.CharField(_("name"), max_length=100)
-    order = models.IntegerField(_("order"), default=0)
-    cost = models.PositiveIntegerField(_("cost"))
-    description = models.TextField(_("description"), blank=True, help_text=_("This is private."))
+    conference = models.ForeignKey(Conference, verbose_name=_("Conference"))
+    name = models.CharField(_("Name"), max_length=100)
+    order = models.IntegerField(_("Order"), default=0)
+    cost = models.PositiveIntegerField(_("Cost"))
+    description = models.TextField(_("Description"), blank=True, help_text=_("This is private."))
 
     class Meta:
         ordering = ["conference", "order"]
-        verbose_name = _("sponsor level")
-        verbose_name_plural = _("sponsor levels")
+        verbose_name = _("Sponsor level")
+        verbose_name_plural = _("Sponsor levels")
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     def sponsors(self):
         return self.sponsor_set.filter(active=True).order_by("added")
 
 
+@python_2_unicode_compatible
 class Sponsor(models.Model):
 
-    applicant = models.ForeignKey(User, related_name="sponsorships", verbose_name=_("applicant"),
+    applicant = models.ForeignKey(User, related_name="sponsorships", verbose_name=_("Applicant"),
                                   null=True)
 
     name = models.CharField(_("Sponsor Name"), max_length=100)
-    external_url = models.URLField(_("external URL"))
-    annotation = models.TextField(_("annotation"), blank=True)
+    external_url = models.URLField(_("External URL"))
+    annotation = models.TextField(_("Annotation"), blank=True)
     contact_name = models.CharField(_("Contact Name"), max_length=100)
-    contact_email = models.EmailField(_(u"Contact Email"))
+    contact_email = models.EmailField(_("Contact Email"))
     level = models.ForeignKey(SponsorLevel, verbose_name=_("level"))
     added = models.DateTimeField(_("added"), default=datetime.datetime.now)
     active = models.BooleanField(_("active"), default=False)
 
     # Denormalization (this assumes only one logo)
     sponsor_logo = models.ForeignKey("SponsorBenefit", related_name="+", null=True, blank=True,
-                                     editable=False)
+                                     editable=False, verbose_name=_("Sponsor logo"))
 
     objects = SponsorManager()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     class Meta:
-        verbose_name = _("sponsor")
-        verbose_name_plural = _("sponsors")
+        verbose_name = _("Sponsor")
+        verbose_name_plural = _("Sponsors")
 
     def get_absolute_url(self):
         if self.active:
@@ -143,66 +147,73 @@ post_save.connect(_check_level_change, sender=Sponsor)
 
 
 BENEFIT_TYPE_CHOICES = [
-    ("text", "Text"),
-    ("file", "File"),
-    ("weblogo", "Web Logo"),
-    ("simple", "Simple")
+    ("text", _("Text")),
+    ("file", _("File")),
+    ("weblogo", _("Web Logo")),
+    ("simple", _("Simple"))
 ]
 
 
+@python_2_unicode_compatible
 class Benefit(models.Model):
 
-    name = models.CharField(_("name"), max_length=100)
-    description = models.TextField(_("description"), blank=True)
-    type = models.CharField(_("type"), choices=BENEFIT_TYPE_CHOICES, max_length=10,
+    name = models.CharField(_("Name"), max_length=100)
+    description = models.TextField(_("Description"), blank=True)
+    type = models.CharField(_("Type"), choices=BENEFIT_TYPE_CHOICES, max_length=10,
                             default="simple")
 
-    def __unicode__(self):
+    def __str_(self):
         return self.name
 
 
+@python_2_unicode_compatible
 class BenefitLevel(models.Model):
 
-    benefit = models.ForeignKey(Benefit, related_name="benefit_levels", verbose_name=_("benefit"))
-    level = models.ForeignKey(SponsorLevel, related_name="benefit_levels", verbose_name=_("level"))
+    benefit = models.ForeignKey(Benefit, related_name="benefit_levels", verbose_name=_("Benefit"))
+    level = models.ForeignKey(SponsorLevel, related_name="benefit_levels", verbose_name=_("Level"))
 
     # default limits for this benefit at given level
-    max_words = models.PositiveIntegerField(_("max words"), blank=True, null=True)
-    other_limits = models.CharField(_("other limits"), max_length=200, blank=True)
+    max_words = models.PositiveIntegerField(_("Max words"), blank=True, null=True)
+    other_limits = models.CharField(_("Other limits"), max_length=200, blank=True)
 
     class Meta:
         ordering = ["level"]
+        verbose_name = _("Benefit level")
+        verbose_name_plural = _("Benefit levels")
 
-    def __unicode__(self):
-        return u"%s - %s" % (self.level, self.benefit)
+    def __str__(self):
+        return "%s - %s" % (self.level, self.benefit)
 
 
+@python_2_unicode_compatible
 class SponsorBenefit(models.Model):
 
-    sponsor = models.ForeignKey(Sponsor, related_name="sponsor_benefits", verbose_name=_("sponsor"))
-    benefit = models.ForeignKey(Benefit, related_name="sponsor_benefits", verbose_name=_("benefit"))
-    active = models.BooleanField(default=True)
+    sponsor = models.ForeignKey(Sponsor, related_name="sponsor_benefits", verbose_name=_("Sponsor"))
+    benefit = models.ForeignKey(Benefit, related_name="sponsor_benefits", verbose_name=_("Benefit"))
+    active = models.BooleanField(default=True, verbose_name=_("Active"))
 
     # Limits: will initially be set to defaults from corresponding BenefitLevel
-    max_words = models.PositiveIntegerField(_("max words"), blank=True, null=True)
-    other_limits = models.CharField(_("other limits"), max_length=200, blank=True)
+    max_words = models.PositiveIntegerField(_("Max words"), blank=True, null=True)
+    other_limits = models.CharField(_("Other limits"), max_length=200, blank=True)
 
     # Data: zero or one of these fields will be used, depending on the
     # type of the Benefit (text, file, or simple)
-    text = models.TextField(_("text"), blank=True)
-    upload = models.FileField(_("file"), blank=True, upload_to="sponsor_files")
+    text = models.TextField(_("Text"), blank=True)
+    upload = models.FileField(_("File"), blank=True, upload_to="sponsor_files")
 
     class Meta:
         ordering = ["-active"]
+        verbose_name = _("Sponsor benefit")
+        verbose_name_plural = _("Sponsor benefits")
 
-    def __unicode__(self):
-        return u"%s - %s" % (self.sponsor, self.benefit)
+    def __str__(self):
+        return "%s - %s" % (self.sponsor, self.benefit)
 
     def clean(self):
         num_words = len(self.text.split())
         if self.max_words and num_words > self.max_words:
             raise ValidationError(
-                "Sponsorship level only allows for %s words, you provided %d." % (
+                _("Sponsorship level only allows for %s words, you provided %d.") % (
                     self.max_words, num_words))
 
     def data_fields(self):

@@ -1,10 +1,12 @@
+from __future__ import unicode_literals
 import csv
 
 from django.http import HttpResponse
+from django.utils.translation import ugettext_lazy as _
 
 
-def export_as_csv_action(description="Export selected objects as CSV file",
-                         fields=None, exclude=None, header=True):
+def export_as_csv_action(description=None, fields=None, exclude=None,
+                         header=True):
     """
     This function returns an export csv action
     'fields' and 'exclude' work like in Django ModelForm
@@ -31,5 +33,7 @@ def export_as_csv_action(description="Export selected objects as CSV file",
             writer.writerow(
                 [unicode(getattr(obj, field)).encode("utf-8", "replace") for field in field_names])
         return response
+    if description is None:
+        description = _("Export selected objects as CSV file")
     export_as_csv.short_description = description
     return export_as_csv
