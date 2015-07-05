@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 from datetime import datetime
 from decimal import Decimal
 
@@ -7,6 +8,7 @@ from django.db.models import Q
 from django.db.models.signals import post_save
 
 from django.contrib.auth.models import User
+from django.utils.translation import ugettext_lazy as _
 
 from markitup.fields import MarkupField
 
@@ -27,14 +29,14 @@ class ProposalScoreExpression(object):
 class Votes(object):
     PLUS_ONE = "+1"
     PLUS_ZERO = "+0"
-    MINUS_ZERO = u"−0"
-    MINUS_ONE = u"−1"
+    MINUS_ZERO = "−0"
+    MINUS_ONE = "−1"
 
     CHOICES = [
-        (PLUS_ONE, u"+1 — Good proposal and I will argue for it to be accepted."),
-        (PLUS_ZERO, u"+0 — OK proposal, but I will not argue for it to be accepted."),
-        (MINUS_ZERO, u"−0 — Weak proposal, but I will not argue strongly against acceptance."),
-        (MINUS_ONE, u"−1 — Serious issues and I will argue to reject this proposal."),
+        (PLUS_ONE, _("+1 — Good proposal and I will argue for it to be accepted.")),
+        (PLUS_ZERO, _("+0 — OK proposal, but I will not argue for it to be accepted.")),
+        (MINUS_ZERO, _("−0 — Weak proposal, but I will not argue strongly against acceptance.")),
+        (MINUS_ONE, _("−1 — Serious issues and I will argue to reject this proposal.")),
     ]
 VOTES = Votes()
 
@@ -47,18 +49,18 @@ class ReviewAssignment(models.Model):
     NUM_REVIEWERS = 3
 
     ORIGIN_CHOICES = [
-        (AUTO_ASSIGNED_INITIAL, "auto-assigned, initial"),
-        (OPT_IN, "opted-in"),
-        (AUTO_ASSIGNED_LATER, "auto-assigned, later"),
+        (AUTO_ASSIGNED_INITIAL, _("auto-assigned, initial")),
+        (OPT_IN, _("opted-in")),
+        (AUTO_ASSIGNED_LATER, _("auto-assigned, later")),
     ]
 
-    proposal = models.ForeignKey(ProposalBase)
-    user = models.ForeignKey(User)
+    proposal = models.ForeignKey(ProposalBase, verbose_name=_("Proposal"))
+    user = models.ForeignKey(User, verbose_name=_("User"))
 
-    origin = models.IntegerField(choices=ORIGIN_CHOICES)
+    origin = models.IntegerField(choices=ORIGIN_CHOICES, verbose_name=_("Origin"))
 
-    assigned_at = models.DateTimeField(default=datetime.now)
-    opted_out = models.BooleanField(default=False)
+    assigned_at = models.DateTimeField(default=datetime.now, verbose_name=_("Assigned at"))
+    opted_out = models.BooleanField(default=False, verbose_name=_("Opted out"))
 
     @classmethod
     def create_assignments(cls, proposal, origin=AUTO_ASSIGNED_INITIAL):
@@ -92,27 +94,29 @@ class ReviewAssignment(models.Model):
 
 
 class ProposalMessage(models.Model):
-    proposal = models.ForeignKey(ProposalBase, related_name="messages")
-    user = models.ForeignKey(User)
+    proposal = models.ForeignKey(ProposalBase, related_name="messages", verbose_name=_("Proposal"))
+    user = models.ForeignKey(User, verbose_name=_("User"))
 
-    message = MarkupField()
-    submitted_at = models.DateTimeField(default=datetime.now, editable=False)
+    message = MarkupField(verbose_name=_("Message"))
+    submitted_at = models.DateTimeField(default=datetime.now, editable=False, verbose_name=_("Submitted at"))
 
     class Meta:
         ordering = ["submitted_at"]
+        verbose_name = _("proposal message")
+        verbose_name_plural = _("proposal messages")
 
 
 class Review(models.Model):
     VOTES = VOTES
 
-    proposal = models.ForeignKey(ProposalBase, related_name="reviews")
-    user = models.ForeignKey(User)
+    proposal = models.ForeignKey(ProposalBase, related_name="reviews", verbose_name=_("Proposal"))
+    user = models.ForeignKey(User, verbose_name=_("User"))
 
     # No way to encode "-0" vs. "+0" into an IntegerField, and I don't feel
     # like some complicated encoding system.
-    vote = models.CharField(max_length=2, blank=True, choices=VOTES.CHOICES)
-    comment = MarkupField()
-    submitted_at = models.DateTimeField(default=datetime.now, editable=False)
+    vote = models.CharField(max_length=2, blank=True, choices=VOTES.CHOICES, verbose_name=_("Vote"))
+    comment = MarkupField(verbose_name=_("Comment"))
+    submitted_at = models.DateTimeField(default=datetime.now, editable=False, verbose_name=_("Submitted at"))
 
     def save(self, **kwargs):
         if self.vote:
@@ -180,20 +184,26 @@ class Review(models.Model):
     def section(self):
         return self.proposal.kind.section.slug
 
+    class Meta:
+        verbose_name = _("review")
+        verbose_name_plural = _("reviews")
+
 
 class LatestVote(models.Model):
     VOTES = VOTES
 
-    proposal = models.ForeignKey(ProposalBase, related_name="votes")
-    user = models.ForeignKey(User)
+    proposal = models.ForeignKey(ProposalBase, related_name="votes", verbose_name=_("Proposal"))
+    user = models.ForeignKey(User, verbose_name=_("User"))
 
     # No way to encode "-0" vs. "+0" into an IntegerField, and I don't feel
     # like some complicated encoding system.
-    vote = models.CharField(max_length=2, choices=VOTES.CHOICES)
-    submitted_at = models.DateTimeField(default=datetime.now, editable=False)
+    vote = models.CharField(max_length=2, choices=VOTES.CHOICES, verbose_name=_("Vote"))
+    submitted_at = models.DateTimeField(default=datetime.now, editable=False, verbose_name=_("Submitted at"))
 
     class Meta:
         unique_together = [("proposal", "user")]
+        verbose_name = _("latest vote")
+        verbose_name_plural = _("latest votes")
 
     def css_class(self):
         return {
@@ -205,25 +215,25 @@ class LatestVote(models.Model):
 
 
 class ProposalResult(models.Model):
-    proposal = models.OneToOneField(ProposalBase, related_name="result")
-    score = models.DecimalField(max_digits=5, decimal_places=2, default=Decimal("0.00"))
-    comment_count = models.PositiveIntegerField(default=0)
-    vote_count = models.PositiveIntegerField(default=0)
-    plus_one = models.PositiveIntegerField(default=0)
-    plus_zero = models.PositiveIntegerField(default=0)
-    minus_zero = models.PositiveIntegerField(default=0)
-    minus_one = models.PositiveIntegerField(default=0)
+    proposal = models.OneToOneField(ProposalBase, related_name="result", verbose_name=_("Proposal"))
+    score = models.DecimalField(max_digits=5, decimal_places=2, default=Decimal("0.00"), verbose_name=_("Score"))
+    comment_count = models.PositiveIntegerField(default=0, verbose_name=_("Comment count"))
+    vote_count = models.PositiveIntegerField(default=0, verbose_name=_("Vote count"))
+    plus_one = models.PositiveIntegerField(default=0, verbose_name=_("Plus one"))
+    plus_zero = models.PositiveIntegerField(default=0, verbose_name=_("Plus zero"))
+    minus_zero = models.PositiveIntegerField(default=0, verbose_name=_("Minus zero"))
+    minus_one = models.PositiveIntegerField(default=0, verbose_name=_("Minus one"))
     accepted = models.NullBooleanField(choices=[
         (True, "accepted"),
         (False, "rejected"),
         (None, "undecided"),
-    ], default=None)
+    ], default=None, verbose_name=_("Accepted"))
     status = models.CharField(max_length=20, choices=[
-        ("accepted", "accepted"),
-        ("rejected", "rejected"),
-        ("undecided", "undecided"),
-        ("standby", "standby"),
-    ], default="undecided")
+        ("accepted", _("accepted")),
+        ("rejected", _("rejected")),
+        ("undecided", _("undecided")),
+        ("standby", _("standby")),
+    ], default="undecided", verbose_name=_("Status"))
 
     @classmethod
     def full_calculate(cls):
@@ -279,35 +289,47 @@ class ProposalResult(models.Model):
         model = self.__class__
         model._default_manager.filter(pk=self.pk).update(score=ProposalScoreExpression())
 
+    class Meta:
+        verbose_name = _("proposal_result")
+        verbose_name_plural = _("proposal_results")
+
 
 class Comment(models.Model):
-    proposal = models.ForeignKey(ProposalBase, related_name="comments")
-    commenter = models.ForeignKey(User)
-    text = MarkupField()
+    proposal = models.ForeignKey(ProposalBase, related_name="comments", verbose_name=_("Proposal"))
+    commenter = models.ForeignKey(User, verbose_name=_("Commenter"))
+    text = MarkupField(verbose_name=_("Text"))
 
     # Or perhaps more accurately, can the user see this comment.
-    public = models.BooleanField(choices=[(True, "public"), (False, "private")], default=False)
-    commented_at = models.DateTimeField(default=datetime.now)
+    public = models.BooleanField(choices=[(True, _("public")), (False, _("private"))], default=False, verbose_name=_("Public"))
+    commented_at = models.DateTimeField(default=datetime.now, verbose_name=_("Commented at"))
+
+    class Meta:
+        verbose_name = _("comment")
+        verbose_name_plural = _("comments")
 
 
 class NotificationTemplate(models.Model):
 
-    label = models.CharField(max_length=100)
-    from_address = models.EmailField()
-    subject = models.CharField(max_length=100)
-    body = models.TextField()
+    label = models.CharField(max_length=100, verbose_name=_("Label"))
+    from_address = models.EmailField(verbose_name=_("From address"))
+    subject = models.CharField(max_length=100, verbose_name=_("Subject"))
+    body = models.TextField(verbose_name=_("Body"))
+
+    class Meta:
+        verbose_name = _("notification template")
+        verbose_name_plural = _("notification templates")
 
 
 class ResultNotification(models.Model):
 
-    proposal = models.ForeignKey(ProposalBase, related_name="notifications")
+    proposal = models.ForeignKey(ProposalBase, related_name="notifications", verbose_name=_("Proposal"))
     template = models.ForeignKey(NotificationTemplate, null=True, blank=True,
-                                 on_delete=models.SET_NULL)
-    timestamp = models.DateTimeField(default=datetime.now)
-    to_address = models.EmailField()
-    from_address = models.EmailField()
-    subject = models.CharField(max_length=100)
-    body = models.TextField()
+                                 on_delete=models.SET_NULL, verbose_name=_("Template"))
+    timestamp = models.DateTimeField(default=datetime.now, verbose_name=_("Timestamp"))
+    to_address = models.EmailField(verbose_name=_("To address"))
+    from_address = models.EmailField(verbose_name=_("From address"))
+    subject = models.CharField(max_length=100, verbose_name=_("Subject"))
+    body = models.TextField(verbose_name=_("Body"))
 
     def recipients(self):
         for speaker in self.proposal.speakers():

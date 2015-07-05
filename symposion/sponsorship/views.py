@@ -1,9 +1,11 @@
+from __future__ import unicode_literals
 from django.http import Http404
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.template import RequestContext
 
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.utils.translation import ugettext_lazy as _
 
 from symposion.sponsorship.forms import SponsorApplicationForm, SponsorDetailsForm, \
     SponsorBenefitsFormSet
@@ -18,13 +20,13 @@ def sponsor_apply(request):
             sponsor = form.save()
             if sponsor.sponsor_benefits.all():
                 # Redirect user to sponsor_detail to give extra information.
-                messages.success(request, "Thank you for your sponsorship "
-                                 "application. Please update your "
-                                 "benefit details below.")
+                messages.success(request, _("Thank you for your sponsorship "
+                                            "application. Please update your "
+                                            "benefit details below."))
                 return redirect("sponsor_detail", pk=sponsor.pk)
             else:
-                messages.success(request, "Thank you for your sponsorship "
-                                 "application.")
+                messages.success(request, _("Thank you for your sponsorship "
+                                            "application."))
                 return redirect("dashboard")
     else:
         form = SponsorApplicationForm(user=request.user)
@@ -75,7 +77,7 @@ def sponsor_detail(request, pk):
             form.save()
             formset.save()
 
-            messages.success(request, "Sponsorship details have been updated")
+            messages.success(request, _("Sponsorship details have been updated"))
 
             return redirect("dashboard")
     else:

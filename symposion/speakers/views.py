@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
@@ -5,6 +6,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.utils.translation import ugettext_lazy as _
 
 from symposion.proposals.models import ProposalBase
 from symposion.speakers.forms import SpeakerForm
@@ -33,7 +35,7 @@ def speaker_create(request):
             if not found:
                 speaker.invite_email = None
             speaker.save()
-            messages.success(request, "Speaker profile created.")
+            messages.success(request, _("Speaker profile created."))
             return redirect("dashboard")
     else:
         form = SpeakerForm(initial={"name": request.user.get_full_name()})
@@ -61,7 +63,7 @@ def speaker_create_staff(request, pk):
             speaker = form.save(commit=False)
             speaker.user = user
             speaker.save()
-            messages.success(request, "Speaker profile created.")
+            messages.success(request, _("Speaker profile created."))
             return redirect("user_list")
     else:
         form = SpeakerForm(initial={"name": user.get_full_name()})
@@ -88,8 +90,8 @@ def speaker_create_token(request, token):
             ).update(
                 speaker=existing_speaker
             )
-            messages.info(request, ("You have been associated with all pending "
-                                    "talk proposals"))
+            messages.info(request, _("You have been associated with all pending "
+                                     "talk proposals"))
             return redirect("dashboard")
     else:
         if not request.user.is_authenticated():
