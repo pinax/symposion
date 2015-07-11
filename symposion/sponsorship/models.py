@@ -97,6 +97,14 @@ class Sponsor(models.Model):
         verbose_name_plural = _("sponsors")
         ordering = ['name']
 
+    def save(self, *args, **kwargs):
+        # Set fields related to benefits being complete
+        for benefit in BENEFITS:
+            field_name = benefit['field_name']
+            benefit_name = benefit['name']
+            setattr(self, field_name, self.benefit_is_complete(benefit_name))
+            super(Sponsor, self).save(*args, **kwargs)
+
     def get_absolute_url(self):
         if self.active:
             return reverse("sponsor_detail", kwargs={"pk": self.pk})
@@ -166,6 +174,19 @@ class Sponsor(models.Model):
     def send_coordinator_emails(self):
         pass  # @@@ should this just be done centrally?
 
+    def benefit_is_complete(self, name):
+        """Return True - benefit is complete, False - benefit is not complete,
+         or None - benefit not applicable for this sponsor's level """
+        if BenefitLevel.objects.filter(level=self.level, benefit__name=name).exists():
+            try:
+                benefit = self.sponsor_benefits.get(benefit__name=name)
+            except SponsorBenefit.DoesNotExist:
+                return False
+            else:
+                return benefit.is_complete
+        else:
+            return None   # Not an applicable benefit for this sponsor's level
+
 
 def _store_initial_level(sender, instance, **kwargs):
     if instance:
@@ -229,11 +250,22 @@ class SponsorBenefit(models.Model):
     text = models.TextField(_("text"), blank=True)
     upload = models.FileField(_("file"), blank=True, upload_to="sponsor_files")
 
+    # Whether any assets required from the sponsor have been provided
+    # (e.g. a logo file for a Web logo benefit).
+    is_complete = models.NullBooleanField(_("Complete?"), help_text=_(u"True - benefit complete; False - benefit incomplete; Null - n/a"))
+
     class Meta:
         ordering = ["-active"]
 
     def __unicode__(self):
         return u"%s - %s" % (self.sponsor, self.benefit)
+
+    def save(self, *args, **kwargs):
+        # Validate - save() doesn't clean your model by default, so call
+        # it explicitly before saving
+        self.full_clean()
+        self.is_complete = self._is_complete()
+        super(SponsorBenefit, self).save(*args, **kwargs)
 
     def clean(self):
         num_words = len(self.text.split())
@@ -252,3 +284,17 @@ class SponsorBenefit(models.Model):
         elif self.benefit.type == "text":
             return ["text"]
         return []
+
+    def _is_complete(self):
+        return self.active and \
+            ((self.benefit.type in ('text', 'richtext', 'simple') and bool(self.text))
+                or (self.benefit.type in ('file', 'weblogo') and bool(self.upload)))
+
+
+def _denorm_weblogo(sender, instance, created, **kwargs):
+    if instance:
+        if instance.benefit.type == "weblogo" and instance.upload:
+            sponsor = instance.sponsor
+            sponsor.sponsor_logo = instance
+            sponsor.save()
+post_save.connect(_denorm_weblogo, sender=SponsorBenefit)
