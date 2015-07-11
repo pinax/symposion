@@ -258,7 +258,8 @@ class SponsorBenefit(models.Model):
         ordering = ["-active"]
 
     def __unicode__(self):
-        return u"%s - %s" % (self.sponsor, self.benefit)
+        return u"%s - %s (%s)" % (self.sponsor, self.benefit,
+                                  self.benefit.type)
 
     def save(self, *args, **kwargs):
         # Validate - save() doesn't clean your model by default, so call
@@ -281,7 +282,7 @@ class SponsorBenefit(models.Model):
         """
         if self.benefit.type == "file" or self.benefit.type == "weblogo":
             return ["upload"]
-        elif self.benefit.type == "text":
+        elif self.benefit.type in ("text", "richtext", "simple", "option"):
             return ["text"]
         return []
 
