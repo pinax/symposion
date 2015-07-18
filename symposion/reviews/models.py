@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+from __future__ import unicode_literals
 from datetime import datetime
 from decimal import Decimal
 
@@ -27,8 +28,8 @@ class ProposalScoreExpression(object):
 class Votes(object):
     PLUS_ONE = "+1"
     PLUS_ZERO = "+0"
-    MINUS_ZERO = u"−0"
-    MINUS_ONE = u"−1"
+    MINUS_ZERO = "−0"
+    MINUS_ONE = "−1"
 
     CHOICES = [
         (PLUS_ONE, u"+1 — Good proposal and I will argue for it to be accepted."),

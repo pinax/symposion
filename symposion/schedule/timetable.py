@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 import itertools
 
 from django.db.models import Count, Min

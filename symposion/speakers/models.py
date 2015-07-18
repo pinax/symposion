@@ -1,4 +1,6 @@
+from __future__ import unicode_literals
 import datetime
+from django.utils.encoding import python_2_unicode_compatible
 
 from django.db import models
 from django.core.urlresolvers import reverse
@@ -8,6 +10,7 @@ from django.contrib.auth.models import User
 from markitup.fields import MarkupField
 
 
+@python_2_unicode_compatible
 class Speaker(models.Model):
 
     SESSION_COUNT_CHOICES = [
@@ -34,11 +37,11 @@ class Speaker(models.Model):
     class Meta:
         ordering = ['name']
 
-    def __unicode__(self):
+    def __str__(self):
         if self.user:
             return self.name
         else:
-            return u"?"
+            return "?"
 
     def get_absolute_url(self):
         return reverse("speaker_edit")
