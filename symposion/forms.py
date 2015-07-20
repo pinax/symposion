@@ -1,7 +1,9 @@
-from collections import OrderedDict
+try:
+    from collections import OrderedDict
+except ImportError:
+    OrderedDict = None
 
 from django import forms
-from django import VERSION as django_VERSION
 
 import account.forms
 
@@ -46,7 +48,7 @@ def reorder_fields(fields, order):
         if key not in order:
             del fields[key]
 
-    if django_VERSION < (1, 7, 0):
+    if not OrderedDict or hasattr(fields, "keyOrder"):
         # fields is SortedDict
         fields.keyOrder.sort(key=lambda k: order.index(k[0]))
         return fields
