@@ -164,7 +164,7 @@ class ProposalBase(models.Model):
         }
 
     def __str__(self):
-        return self.title
+        return "%s - %s(%s)" % (self.title, self.speaker.name, self.kind.name)
 
 reversion.register(ProposalBase)
 
