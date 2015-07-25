@@ -83,6 +83,7 @@ class SlotKind(models.Model):
 @python_2_unicode_compatible
 class Slot(models.Model):
 
+    name = models.CharField(max_length=100, editable=False)
     day = models.ForeignKey(Day, verbose_name=_("Day"))
     kind = models.ForeignKey(SlotKind, verbose_name=_("Kind"))
     start = models.TimeField(verbose_name=_("Start"))
@@ -145,9 +146,13 @@ class Slot(models.Model):
     def rooms(self):
         return Room.objects.filter(pk__in=self.slotroom_set.values("room"))
 
-    def __str__(self):
+    def save(self, *args, **kwargs):
         roomlist = ' '.join(map(lambda r: r.__unicode__(), self.rooms))
-        return "%s %s (%s - %s) %s" % (self.day, self.kind, self.start, self.end, roomlist)
+        self.name = "%s %s (%s - %s) %s" % (self.day, self.kind, self.start, self.end, roomlist)
+        super(Slot, self).save(*args, **kwargs)
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         ordering = ["day", "start", "end"]
