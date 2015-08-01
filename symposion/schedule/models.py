@@ -125,7 +125,8 @@ class Slot(models.Model):
         return Room.objects.filter(pk__in=self.slotroom_set.values("room"))
 
     def __unicode__(self):
-        return u"%s %s (%s - %s)" % (self.day, self.kind, self.start, self.end)
+        roomlist = ' '.join(map(lambda r: r.__unicode__(), self.rooms))
+        return u"%s %s (%s - %s) %s" % (self.day, self.kind, self.start, self.end, roomlist)
 
     class Meta:
         ordering = ["day", "start", "end"]
