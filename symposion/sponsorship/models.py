@@ -1,5 +1,6 @@
 import datetime
 
+from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.db import models
@@ -144,9 +145,17 @@ post_save.connect(_check_level_change, sender=Sponsor)
 
 BENEFIT_TYPE_CHOICES = [
     ("text", "Text"),
+    ("richtext", "Rich Text"),
     ("file", "File"),
     ("weblogo", "Web Logo"),
-    ("simple", "Simple")
+    ("simple", "Simple"),
+    ("option", "Option")
+]
+
+CONTENT_TYPE_CHOICES = [
+    ("simple", "Simple"),
+] + [
+    ("listing_text_%s" % lang, "Listing Text (%s)" % label) for lang, label in settings.LANGUAGES
 ]
 
 
@@ -154,8 +163,10 @@ class Benefit(models.Model):
 
     name = models.CharField(_("name"), max_length=100)
     description = models.TextField(_("description"), blank=True)
-    type = models.CharField(_("type"), choices=BENEFIT_TYPE_CHOICES, max_length=10,
-                            default="simple")
+    type = models.CharField(_("type"), choices=BENEFIT_TYPE_CHOICES,
+                            max_length=10, default="simple")
+    content_type = models.CharField(_("content type"), choices=CONTENT_TYPE_CHOICES,
+                                    max_length=20, default="simple")
 
     def __unicode__(self):
         return self.name
