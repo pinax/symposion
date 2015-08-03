@@ -3,7 +3,18 @@ from django.contrib import admin
 from symposion.conference.models import Conference, Section
 
 
-admin.site.register(Conference, list_display=("title", "start_date", "end_date"))
+class SectionInline(admin.TabularInline):
+    model = Section
+    prepopulated_fields = {"slug": ("name",)}
+    extra = 1
+
+
+class ConferenceAdmin(admin.ModelAdmin):
+    list_display = ("title", "start_date", "end_date")
+    inlines = [SectionInline, ]
+
+
+admin.site.register(Conference, ConferenceAdmin)
 admin.site.register(
     Section,
     prepopulated_fields={"slug": ("name",)},
