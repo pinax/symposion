@@ -21,11 +21,20 @@ Symposion
 
 
 
-A conference management solution from Eldarion.
+symposion is a conference management solution from Eldarion.
 
-Built with the generous support of the Python Software Foundation.
+It was built with the generous support of the Python Software Foundation.
 
 See http://eldarion.com/symposion/ for commercial support, customization and hosting
+
+Pinax is an open-source platform built on the Django Web Framework. It is an ecosystem of reusable Django apps, themes, and starter project templates. 
+This collection can be found at http://pinaxproject.com.
+
+In order to foster a kind, inclusive, and harassment-free community, the Pinax Project has a code of conduct, which can be found here  http://pinaxproject.com/pinax/code_of_conduct/.
+
+The Pinax documentation is available at http://pinaxproject.com/pinax/.
+
+For updates and news regarding the Pinax Project, please follow us on Twitter at @pinaxproject and check out our blog http://blog.pinaxproject.com.
 
 Quickstart
 ==========
