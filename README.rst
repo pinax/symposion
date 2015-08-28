@@ -20,21 +20,18 @@ Symposion
     :target:  https://pypi.python.org/pypi/symposion/
 
 
-
-symposion is a conference management solution from Eldarion.
-
-It was built with the generous support of the Python Software Foundation.
-
-See http://eldarion.com/symposion/ for commercial support, customization and hosting
+Pinax
+------
 
 Pinax is an open-source platform built on the Django Web Framework. It is an ecosystem of reusable Django apps, themes, and starter project templates. 
 This collection can be found at http://pinaxproject.com.
 
-In order to foster a kind, inclusive, and harassment-free community, the Pinax Project has a code of conduct, which can be found here  http://pinaxproject.com/pinax/code_of_conduct/.
 
-The Pinax documentation is available at http://pinaxproject.com/pinax/.
+symposion
+----------
 
-For updates and news regarding the Pinax Project, please follow us on Twitter at @pinaxproject and check out our blog http://blog.pinaxproject.com.
+symposion is a conference management solution from Eldarion. It was built with the generous support of the Python Software Foundation. See http://eldarion.com/symposion/ for commercial support, customization and hosting.
+
 
 Quickstart
 ==========
@@ -48,3 +45,23 @@ customize and manage your Symposion installation. We have built a [basic
 Django startproject template that includes Symposion][1].
 
 [1]: https://github.com/pinax/pinax-project-symposion
+
+
+Documentation
+---------------
+
+The Pinax documentation is available at http://pinaxproject.com/pinax/.
+
+
+Code of Conduct
+----------------
+
+In order to foster a kind, inclusive, and harassment-free community, the Pinax Project has a code of conduct, which can be found here  http://pinaxproject.com/pinax/code_of_conduct/.
+
+
+Pinax Project Blog and Twitter
+-------------------------------
+
+For updates and news regarding the Pinax Project, please follow us on Twitter at @pinaxproject and check out our blog http://blog.pinaxproject.com.
+
+
