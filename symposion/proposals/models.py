@@ -9,6 +9,7 @@ from django.utils.timezone import now
 
 from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ValidationError
 
 import reversion
 
@@ -106,8 +107,15 @@ class ProposalBase(models.Model):
         editable=False,
     )
     speaker = models.ForeignKey(Speaker, related_name="proposals")
+
+    def additional_speaker_validator(self, a_speaker):
+        if a_speaker.speaker.email == self.speaker.email:
+            raise ValidationError(_("%s is same as primary speaker.") % a_speaker.speaker.email)
+        if a_speaker in [self.additional_speakers]:
+            raise ValidationError(_("%s has already been in speakers.") % a_speaker.speaker.email)
+
     additional_speakers = models.ManyToManyField(Speaker, through="AdditionalSpeaker",
-                                                 blank=True)
+                                                 blank=True, validators=[additional_speaker_validator])
     cancelled = models.BooleanField(default=False)
 
     def can_edit(self):
@@ -147,7 +155,6 @@ class ProposalBase(models.Model):
             "kind": self.kind.name,
         }
 
-
 reversion.register(ProposalBase)
 
 
@@ -169,6 +176,14 @@ class AdditionalSpeaker(models.Model):
 
     class Meta:
         unique_together = ("speaker", "proposalbase")
+
+    def __unicode__(self):
+        if self.status is self.SPEAKING_STATUS_PENDING:
+            return _(u"pending speaker (%s)") % self.speaker.email
+        elif self.status is self.SPEAKING_STATUS_DECLINED:
+            return _(u"declined speaker (%s)") % self.speaker.email
+        else:
+            return self.speaker.name
 
 
 def uuid_filename(instance, filename):

@@ -1,3 +1,8 @@
+try:
+    from collections import OrderedDict
+except ImportError:
+    OrderedDict = None
+
 from django import forms
 
 import account.forms
@@ -11,8 +16,7 @@ class SignupForm(account.forms.SignupForm):
 
     def __init__(self, *args, **kwargs):
         super(SignupForm, self).__init__(*args, **kwargs)
-        del self.fields["username"]
-        self.fields.keyOrder = [
+        key_order = [
             "email",
             "email_confirm",
             "first_name",
@@ -20,6 +24,7 @@ class SignupForm(account.forms.SignupForm):
             "password",
             "password_confirm"
         ]
+        self.fields = reorder_fields(self.fields, key_order)
 
     def clean_email_confirm(self):
         email = self.cleaned_data.get("email")
@@ -29,3 +34,24 @@ class SignupForm(account.forms.SignupForm):
                 raise forms.ValidationError(
                     "Email address must match previously typed email address")
         return email_confirm
+
+
+def reorder_fields(fields, order):
+    """Reorder form fields by order, removing items not in order.
+
+    >>> reorder_fields(
+    ...     OrderedDict([('a', 1), ('b', 2), ('c', 3)]),
+    ...     ['b', 'c', 'a'])
+    OrderedDict([('b', 2), ('c', 3), ('a', 1)])
+    """
+    for key, v in fields.items():
+        if key not in order:
+            del fields[key]
+
+    if not OrderedDict or hasattr(fields, "keyOrder"):
+        # fields is SortedDict
+        fields.keyOrder.sort(key=lambda k: order.index(k[0]))
+        return fields
+    else:
+        # fields is OrderedDict
+        return OrderedDict(sorted(fields.items(), key=lambda k: order.index(k[0])))

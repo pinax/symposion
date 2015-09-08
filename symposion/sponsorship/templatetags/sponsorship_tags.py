@@ -1,4 +1,5 @@
 from django import template
+from django.template.defaultfilters import linebreaks, urlize
 
 from symposion.conference.models import current_conference
 from symposion.sponsorship.models import Sponsor, SponsorLevel
@@ -75,3 +76,45 @@ def sponsor_levels(parser, token):
     {% sponsor_levels as levels %}
     """
     return SponsorLevelNode.handle_token(parser, token)
+
+
+class LocalizedTextNode(template.Node):
+
+    @classmethod
+    def handle_token(cls, parser, token):
+        bits = token.split_contents()
+        if len(bits) == 3:
+            return cls(bits[2], bits[1][1:-1])
+        elif len(bits) == 5 and bits[-2] == "as":
+            return cls(bits[2], bits[1][1:-1], bits[4])
+        else:
+            raise template.TemplateSyntaxError("%r takes 'as var'" % bits[0])
+
+    def __init__(self, sponsor, content_type, context_var=None):
+        self.sponsor_var = template.Variable(sponsor)
+        self.content_type = content_type
+        self.content_var = context_var
+
+    def render(self, context):
+        s = ''
+        try:
+            sponsor = self.sponsor_var.resolve(context)
+            content_type = '%s_%s' % (self.content_type, context['request'].LANGUAGE_CODE)
+            texts = sponsor.sponsor_benefits.filter(benefit__content_type=content_type)
+            if texts.count() > 0:
+                s = linebreaks(urlize(texts[0].text, autoescape=True))
+            if self.content_var:
+                context[self.content_var] = s
+                s = ''
+        except:
+            pass
+        return s
+
+
+@register.tag
+def localized_text(parser, token):
+    """
+    {% localized_text "content_type" sponsor %}
+    {% localized_text "content_type" sponsor as localized_text %}
+    """
+    return LocalizedTextNode.handle_token(parser, token)
