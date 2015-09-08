@@ -3,7 +3,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 from django.utils.encoding import python_2_unicode_compatible
 
-from timezones.fields import TimeZoneField
+from timezone_field import TimeZoneField
 
 
 CONFERENCE_CACHE = {}
@@ -22,7 +22,7 @@ class Conference(models.Model):
     end_date = models.DateField(_("end date"), null=True, blank=True)
 
     # timezone the conference is in
-    timezone = TimeZoneField(_("timezone"), blank=True)
+    timezone = TimeZoneField(blank=True, verbose_name=_("timezone"))
 
     def __str__(self):
         return self.title

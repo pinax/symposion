@@ -5,7 +5,7 @@ django-model-utils==2.2
 django-reversion==1.8.5
 django-sitetree==1.2.1
 django-taggit==0.12.2
-django-timezones==0.2
+django-timezone-field==1.2
 django-user-accounts==1.0
 easy-thumbnails==2.2
 html5lib==0.999
