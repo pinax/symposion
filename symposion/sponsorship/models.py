@@ -1,4 +1,5 @@
 from __future__ import unicode_literals
+
 import datetime
 
 from django.conf import settings
@@ -12,8 +13,36 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 
 from symposion.conference.models import Conference
-
 from symposion.sponsorship.managers import SponsorManager
+
+
+# The benefits we track as individual fields on sponsors
+# Names are the names in the database as defined by organizers.
+# Field names are the benefit names, lowercased, with
+# spaces changed to _, and with "_benefit" appended.
+# Column titles are arbitrary.
+
+# "really just care about the ones we have today: print logo, web logo, print description, web description and the ad."
+
+BENEFITS = [
+    {
+        'name': 'Web logo',
+        'field_name': 'web_logo_benefit',
+        'column_title': _(u"Web Logo"),
+    }, {
+        'name': 'Print logo',
+        'field_name': 'print_logo_benefit',
+        'column_title': _(u"Print Logo"),
+    }, {
+        'name': 'Company Description',
+        'field_name': 'company_description_benefit',
+        'column_title': _(u"Web Desc"),
+    }, {
+        'name': 'Print Description',
+        'field_name': 'print_description_benefit',
+        'column_title': _(u"Print Desc"),
+    }
+]
 
 
 @python_2_unicode_compatible
@@ -31,7 +60,7 @@ class SponsorLevel(models.Model):
         verbose_name_plural = _("sponsor levels")
 
     def __str__(self):
-        return self.name
+        return "%s %s" % (self.conference, self.name)
 
     def sponsors(self):
         return self.sponsor_set.filter(active=True).order_by("added")
@@ -57,6 +86,13 @@ class Sponsor(models.Model):
     sponsor_logo = models.ForeignKey("SponsorBenefit", related_name="+", null=True, blank=True,
                                      editable=False)
 
+    # Whether things are complete
+    # True = complete, False = incomplate, Null = n/a for this sponsor level
+    web_logo_benefit = models.NullBooleanField(_("Web logo benefit"), help_text=_(u"Web logo benefit is complete"))
+    print_logo_benefit = models.NullBooleanField(_("Print logo benefit"), help_text=_(u"Print logo benefit is complete"))
+    print_description_benefit = models.NullBooleanField(_("Print description benefit"), help_text=_(u"Print description benefit is complete"))
+    company_description_benefit = models.NullBooleanField(_("Company description benefit"), help_text=_(u"Company description benefit is complete"))
+
     objects = SponsorManager()
 
     def __str__(self):
@@ -65,6 +101,15 @@ class Sponsor(models.Model):
     class Meta:
         verbose_name = _("sponsor")
         verbose_name_plural = _("sponsors")
+        ordering = ['name']
+
+    def save(self, *args, **kwargs):
+        # Set fields related to benefits being complete
+        for benefit in BENEFITS:
+            field_name = benefit['field_name']
+            benefit_name = benefit['name']
+            setattr(self, field_name, self.benefit_is_complete(benefit_name))
+            super(Sponsor, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
         if self.active:
@@ -140,6 +185,19 @@ class Sponsor(models.Model):
 
     def send_coordinator_emails(self):
         pass  # @@@ should this just be done centrally?
+
+    def benefit_is_complete(self, name):
+        """Return True - benefit is complete, False - benefit is not complete,
+         or None - benefit not applicable for this sponsor's level """
+        if BenefitLevel.objects.filter(level=self.level, benefit__name=name).exists():
+            try:
+                benefit = self.sponsor_benefits.get(benefit__name=name)
+            except SponsorBenefit.DoesNotExist:
+                return False
+            else:
+                return benefit.is_complete
+        else:
+            return None   # Not an applicable benefit for this sponsor's level
 
 
 def _store_initial_level(sender, instance, **kwargs):
@@ -217,11 +275,22 @@ class SponsorBenefit(models.Model):
     text = models.TextField(_("text"), blank=True)
     upload = models.FileField(_("file"), blank=True, upload_to="sponsor_files")
 
+    # Whether any assets required from the sponsor have been provided
+    # (e.g. a logo file for a Web logo benefit).
+    is_complete = models.NullBooleanField(_("Complete?"), help_text=_(u"True - benefit complete; False - benefit incomplete; Null - n/a"))
+
     class Meta:
         ordering = ["-active"]
 
     def __str__(self):
-        return "%s - %s" % (self.sponsor, self.benefit)
+        return "%s - %s (%s)" % (self.sponsor, self.benefit, self.benefit_type)
+
+    def save(self, *args, **kwargs):
+        # Validate - save() doesn't clean your model by default, so call
+        # it explicitly before saving
+        self.full_clean()
+        self.is_complete = self._is_complete()
+        super(SponsorBenefit, self).save(*args, **kwargs)
 
     def clean(self):
         num_words = len(self.text.split())
@@ -237,6 +306,20 @@ class SponsorBenefit(models.Model):
         """
         if self.benefit.type == "file" or self.benefit.type == "weblogo":
             return ["upload"]
-        elif self.benefit.type == "text":
+        elif self.benefit.type in ("text", "richtext", "simple", "option"):
             return ["text"]
         return []
+
+    def _is_complete(self):
+        return self.active and \
+            ((self.benefit.type in ('text', 'richtext', 'simple') and bool(self.text))
+                or (self.benefit.type in ('file', 'weblogo') and bool(self.upload)))
+
+
+def _denorm_weblogo(sender, instance, created, **kwargs):
+    if instance:
+        if instance.benefit.type == "weblogo" and instance.upload:
+            sponsor = instance.sponsor
+            sponsor.sponsor_logo = instance
+            sponsor.save()
+post_save.connect(_denorm_weblogo, sender=SponsorBenefit)
