@@ -69,9 +69,9 @@ class SponsorAdmin(admin.ModelAdmin):
         # @@@ kinda ugly but using choices= on NullBooleanField is broken
         form = super(SponsorAdmin, self).get_form(*args, **kwargs)
         form.base_fields["active"].widget.choices = [
-            (u"1", _("unreviewed")),
-            (u"2", _("approved")),
-            (u"3", _("rejected"))
+            ("1", _("unreviewed")),
+            ("2", _("approved")),
+            ("3", _("rejected"))
         ]
         return form
 
