@@ -25,11 +25,12 @@ class SlotRoomInline(admin.TabularInline):
 class SlotAdmin(admin.ModelAdmin):
     list_filter = ("day", "kind")
     list_display = ("day", "start", "end", "kind", "content")
-    inlines = [SlotRoomInline, ]
-
+    inlines = [SlotRoomInline]
 
 class RoomAdmin(admin.ModelAdmin):
-    inlines = [SlotRoomInline, ]
+    list_display = ["name", "order", "schedule"]
+    list_filter = ["schedule"]
+    inlines = [SlotRoomInline]
 
 
 class PresentationAdmin(admin.ModelAdmin):
@@ -37,6 +38,15 @@ class PresentationAdmin(admin.ModelAdmin):
     list_filter = ("section", "cancelled", "slot")
 
 
+admin.site.register(Day)
+admin.site.register(
+    SlotKind,
+    list_display=["label", "schedule"],
+)
+admin.site.register(
+    SlotRoom,
+    list_display=["slot", "room"]
+)
 admin.site.register(Schedule, ScheduleAdmin)
 admin.site.register(Room, RoomAdmin)
 admin.site.register(Slot, SlotAdmin)
