@@ -1,8 +1,10 @@
+from __future__ import unicode_literals
 import datetime
 
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 
 from markitup.fields import MarkupField
 
@@ -11,42 +13,46 @@ from symposion.conference.models import Section
 from symposion.speakers.models import Speaker
 
 
+@python_2_unicode_compatible
 class Schedule(models.Model):
 
     section = models.OneToOneField(Section)
     published = models.BooleanField(default=True)
     hidden = models.BooleanField("Hide schedule from overall conference view", default=False)
 
-    def __unicode__(self):
-        return u"%s Schedule" % self.section
+    def __str__(self):
+        return "%s Schedule" % self.section
 
     class Meta:
         ordering = ["section"]
 
 
+@python_2_unicode_compatible
 class Day(models.Model):
 
     schedule = models.ForeignKey(Schedule)
     date = models.DateField()
 
-    def __unicode__(self):
-        return u"%s" % self.date
+    def __str__(self):
+        return "%s" % self.date
 
     class Meta:
         unique_together = [("schedule", "date")]
         ordering = ["date"]
 
 
+@python_2_unicode_compatible
 class Room(models.Model):
 
     schedule = models.ForeignKey(Schedule)
     name = models.CharField(max_length=65)
     order = models.PositiveIntegerField()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
+@python_2_unicode_compatible
 class SlotKind(models.Model):
     """
     A slot kind represents what kind a slot is. For example, a slot can be a
@@ -56,10 +62,11 @@ class SlotKind(models.Model):
     schedule = models.ForeignKey(Schedule)
     label = models.CharField(max_length=50)
 
-    def __unicode__(self):
+    def __str__(self):
         return self.label
 
 
+@python_2_unicode_compatible
 class Slot(models.Model):
 
     day = models.ForeignKey(Day)
@@ -124,14 +131,15 @@ class Slot(models.Model):
     def rooms(self):
         return Room.objects.filter(pk__in=self.slotroom_set.values("room"))
 
-    def __unicode__(self):
+    def __str__(self):
         roomlist = ' '.join(map(lambda r: r.__unicode__(), self.rooms))
-        return u"%s %s (%s - %s) %s" % (self.day, self.kind, self.start, self.end, roomlist)
+        return "%s %s (%s - %s) %s" % (self.day, self.kind, self.start, self.end, roomlist)
 
     class Meta:
         ordering = ["day", "start", "end"]
 
 
+@python_2_unicode_compatible
 class SlotRoom(models.Model):
     """
     Links a slot with a room.
@@ -140,14 +148,15 @@ class SlotRoom(models.Model):
     slot = models.ForeignKey(Slot)
     room = models.ForeignKey(Room)
 
-    def __unicode__(self):
-        return u"%s %s" % (self.room, self.slot)
+    def __str__(self):
+        return "%s %s" % (self.room, self.slot)
 
     class Meta:
         unique_together = [("slot", "room")]
         ordering = ["slot", "room__order"]
 
 
+@python_2_unicode_compatible
 class Presentation(models.Model):
 
     slot = models.OneToOneField(Slot, null=True, blank=True, related_name="content_ptr")
@@ -177,13 +186,14 @@ class Presentation(models.Model):
             if speaker.user:
                 yield speaker
 
-    def __unicode__(self):
-        return u"#%s %s (%s)" % (self.number, self.title, self.speaker)
+    def __str__(self):
+        return "#%s %s (%s)" % (self.number, self.title, self.speaker)
 
     class Meta:
         ordering = ["slot"]
 
 
+@python_2_unicode_compatible
 class Session(models.Model):
 
     day = models.ForeignKey(Day, related_name="sessions")
@@ -206,18 +216,19 @@ class Session(models.Model):
         else:
             return None
 
-    def __unicode__(self):
+    def __str__(self):
         start = self.start()
         end = self.end()
         if start and end:
-            return u"%s: %s - %s" % (
+            return "%s: %s - %s" % (
                 self.day.date.strftime("%a"),
                 start.strftime("%X"),
                 end.strftime("%X")
             )
-        return u""
+        return ""
 
 
+@python_2_unicode_compatible
 class SessionRole(models.Model):
 
     SESSION_ROLE_CHAIR = 1
@@ -238,6 +249,6 @@ class SessionRole(models.Model):
     class Meta:
         unique_together = [("session", "user", "role")]
 
-    def __unicode__(self):
-        return u"%s %s: %s" % (self.user, self.session,
-                               self.SESSION_ROLE_TYPES[self.role - 1][1])
+    def __str__(self):
+        return "%s %s: %s" % (self.user, self.session,
+                              self.SESSION_ROLE_TYPES[self.role - 1][1])

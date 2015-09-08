@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 import datetime
 
 from django.conf import settings
@@ -5,6 +6,7 @@ from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models.signals import post_init, post_save
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from django.contrib.auth.models import User
@@ -14,6 +16,7 @@ from symposion.conference.models import Conference
 from symposion.sponsorship.managers import SponsorManager
 
 
+@python_2_unicode_compatible
 class SponsorLevel(models.Model):
 
     conference = models.ForeignKey(Conference, verbose_name=_("conference"))
@@ -27,13 +30,14 @@ class SponsorLevel(models.Model):
         verbose_name = _("sponsor level")
         verbose_name_plural = _("sponsor levels")
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     def sponsors(self):
         return self.sponsor_set.filter(active=True).order_by("added")
 
 
+@python_2_unicode_compatible
 class Sponsor(models.Model):
 
     applicant = models.ForeignKey(User, related_name="sponsorships", verbose_name=_("applicant"),
@@ -55,7 +59,7 @@ class Sponsor(models.Model):
 
     objects = SponsorManager()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     class Meta:
@@ -166,6 +170,7 @@ CONTENT_TYPE_CHOICES = [
 ]
 
 
+@python_2_unicode_compatible
 class Benefit(models.Model):
 
     name = models.CharField(_("name"), max_length=100)
@@ -175,10 +180,11 @@ class Benefit(models.Model):
     content_type = models.CharField(_("content type"), choices=CONTENT_TYPE_CHOICES,
                                     max_length=20, default="simple")
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
+@python_2_unicode_compatible
 class BenefitLevel(models.Model):
 
     benefit = models.ForeignKey(Benefit, related_name="benefit_levels", verbose_name=_("benefit"))
@@ -191,10 +197,11 @@ class BenefitLevel(models.Model):
     class Meta:
         ordering = ["level"]
 
-    def __unicode__(self):
-        return u"%s - %s" % (self.level, self.benefit)
+    def __str__(self):
+        return "%s - %s" % (self.level, self.benefit)
 
 
+@python_2_unicode_compatible
 class SponsorBenefit(models.Model):
 
     sponsor = models.ForeignKey(Sponsor, related_name="sponsor_benefits", verbose_name=_("sponsor"))
@@ -213,8 +220,8 @@ class SponsorBenefit(models.Model):
     class Meta:
         ordering = ["-active"]
 
-    def __unicode__(self):
-        return u"%s - %s" % (self.sponsor, self.benefit)
+    def __str__(self):
+        return "%s - %s" % (self.sponsor, self.benefit)
 
     def clean(self):
         num_words = len(self.text.split())

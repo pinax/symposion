@@ -6,6 +6,7 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
 from markitup.fields import MarkupField
@@ -17,6 +18,7 @@ import reversion
 from .managers import PublishedPageManager
 
 
+@python_2_unicode_compatible
 class Page(models.Model):
 
     STATUS_CHOICES = (
@@ -35,7 +37,7 @@ class Page(models.Model):
 
     published = PublishedPageManager()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.title
 
     @models.permalink

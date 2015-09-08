@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 import datetime
 
 from django.db import models
@@ -5,6 +6,7 @@ from django.db import models
 import reversion
 
 from django.contrib.auth.models import Permission, User
+from django.utils.encoding import python_2_unicode_compatible
 
 
 TEAM_ACCESS_CHOICES = [
@@ -14,6 +16,7 @@ TEAM_ACCESS_CHOICES = [
 ]
 
 
+@python_2_unicode_compatible
 class Team(models.Model):
 
     slug = models.SlugField(unique=True)
@@ -34,7 +37,7 @@ class Team(models.Model):
     def get_absolute_url(self):
         return ("team_detail", [self.slug])
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
     def get_state_for_user(self, user):

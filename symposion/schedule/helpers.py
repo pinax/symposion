@@ -2,6 +2,7 @@
 This file contains functions that are useful to humans at the shell for
 manipulating the database in more natural ways.
 """
+from __future__ import unicode_literals
 from django.db import transaction
 
 from .models import Schedule, Day, Room, Slot, SlotKind, SlotRoom

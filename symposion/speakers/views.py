@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404

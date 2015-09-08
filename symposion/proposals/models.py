@@ -1,9 +1,11 @@
+from __future__ import unicode_literals
 import os
 import uuid
 
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models import Q
+from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from django.utils.timezone import now
 
@@ -21,6 +23,7 @@ from symposion.conference.models import Section
 from symposion.speakers.models import Speaker
 
 
+@python_2_unicode_compatible
 class ProposalSection(models.Model):
     """
     configuration of proposal submissions for a specific Section.
@@ -55,10 +58,11 @@ class ProposalSection(models.Model):
             return False
         return True
 
-    def __unicode__(self):
+    def __str__(self):
         return self.section.name
 
 
+@python_2_unicode_compatible
 class ProposalKind(models.Model):
     """
     e.g. talk vs panel vs tutorial vs poster
@@ -72,10 +76,11 @@ class ProposalKind(models.Model):
     name = models.CharField(_("Name"), max_length=100)
     slug = models.SlugField()
 
-    def __unicode__(self):
+    def __str__(self):
         return self.name
 
 
+@python_2_unicode_compatible
 class ProposalBase(models.Model):
 
     objects = InheritanceManager()
@@ -155,9 +160,13 @@ class ProposalBase(models.Model):
             "kind": self.kind.name,
         }
 
+    def __str__(self):
+        return self.title
+
 reversion.register(ProposalBase)
 
 
+@python_2_unicode_compatible
 class AdditionalSpeaker(models.Model):
 
     SPEAKING_STATUS_PENDING = 1
@@ -177,7 +186,7 @@ class AdditionalSpeaker(models.Model):
     class Meta:
         unique_together = ("speaker", "proposalbase")
 
-    def __unicode__(self):
+    def __str__(self):
         if self.status is self.SPEAKING_STATUS_PENDING:
             return _(u"pending speaker (%s)") % self.speaker.email
         elif self.status is self.SPEAKING_STATUS_DECLINED:

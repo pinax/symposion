@@ -1,3 +1,6 @@
+from __future__ import unicode_literals
+
+
 def has_permission(user, proposal, speaker=False, reviewer=False):
     """
     Returns whether or not ther user has permission to review this proposal,

@@ -1,3 +1,4 @@
+from __future__ import unicode_literals
 from cStringIO import StringIO
 import itertools
 import logging
