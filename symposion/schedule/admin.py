@@ -28,6 +28,7 @@ class SlotAdmin(admin.ModelAdmin):
     list_display = ("day", "start", "end", "kind", "content")
     inlines = [SlotRoomInline]
 
+
 class RoomAdmin(admin.ModelAdmin):
     list_display = ["name", "order", "schedule"]
     list_filter = ["schedule"]

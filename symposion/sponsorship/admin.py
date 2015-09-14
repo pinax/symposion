@@ -1,9 +1,10 @@
 from __future__ import unicode_literals
 
-from django.contrib import admin
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext_lazy as _
+
+from django.contrib import admin
 
 from symposion.sponsorship.models import (
     Benefit,
@@ -13,6 +14,7 @@ from symposion.sponsorship.models import (
     SponsorBenefit,
     SponsorLevel,
 )
+
 
 class BenefitLevelInline(admin.TabularInline):
     model = BenefitLevel

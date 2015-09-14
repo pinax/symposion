@@ -314,10 +314,14 @@ class SponsorBenefit(models.Model):
             return ["text"]
         return []
 
+    def _is_text_benefit(self):
+        return self.benefit.type in ["text", "richtext", "simple"] and bool(self.text)
+
+    def _is_upload_benefit(self):
+        return self.benefit.type in ["file", "weblogo"] and bool(self.upload)
+
     def _is_complete(self):
-        return self.active and \
-            ((self.benefit.type in ('text', 'richtext', 'simple') and bool(self.text))
-                or (self.benefit.type in ('file', 'weblogo') and bool(self.upload)))
+        return self.active and (self._is_text_benefit() or self._is_upload_benefit())
 
 
 def _denorm_weblogo(sender, instance, created, **kwargs):

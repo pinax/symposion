@@ -2,6 +2,7 @@ import datetime
 import random
 
 import factory
+
 from factory import fuzzy
 
 from symposion.schedule.models import Schedule, Day, Slot, SlotKind
@@ -11,8 +12,9 @@ from symposion.conference.models import Section, Conference
 class ConferenceFactory(factory.DjangoModelFactory):
     title = fuzzy.FuzzyText()
     start_date = fuzzy.FuzzyDate(datetime.date(2014, 1, 1))
-    end_date = fuzzy.FuzzyDate(datetime.date(2014, 1, 1)
-                               + datetime.timedelta(days=random.randint(1, 10)))
+    end_date = fuzzy.FuzzyDate(
+        datetime.date(2014, 1, 1) + datetime.timedelta(days=random.randint(1, 10))
+    )
     # timezone = TimeZoneField("UTC")
 
     class Meta:
