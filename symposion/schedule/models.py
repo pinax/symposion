@@ -12,7 +12,6 @@ from markitup.fields import MarkupField
 
 from symposion.proposals.models import ProposalBase
 from symposion.conference.models import Section
-from symposion.speakers.models import Speaker
 
 
 @python_2_unicode_compatible
@@ -178,25 +177,51 @@ class SlotRoom(models.Model):
 class Presentation(models.Model):
 
     slot = models.OneToOneField(Slot, null=True, blank=True, related_name="content_ptr", verbose_name=_("Slot"))
-    title = models.CharField(max_length=100, verbose_name=_("Title"))
-    description = MarkupField(verbose_name=_("Description"))
-    abstract = MarkupField(verbose_name=_("Abstract"))
-    speaker = models.ForeignKey(Speaker, related_name="presentations", verbose_name=_("Speaker"))
-    additional_speakers = models.ManyToManyField(Speaker, related_name="copresentations",
-                                                 blank=True, verbose_name=_("Additional speakers"))
     cancelled = models.BooleanField(default=False, verbose_name=_("Cancelled"))
     proposal_base = models.OneToOneField(ProposalBase, related_name="presentation", verbose_name=_("Proposal base"))
     section = models.ForeignKey(Section, related_name="presentations", verbose_name=_("Section"))
-
-    @property
-    def number(self):
-        return self.proposal.number
 
     @property
     def proposal(self):
         if self.proposal_base_id is None:
             return None
         return ProposalBase.objects.get_subclass(pk=self.proposal_base_id)
+
+    @property
+    def number(self):
+        if self.proposal is None:
+            return None
+        return self.proposal.number
+
+    @property
+    def speaker(self):
+        if self.proposal is None:
+            return None
+        return self.proposal.speaker
+
+    @property
+    def title(self):
+        if self.proposal is None:
+            return None
+        return self.proposal.title
+
+    @property
+    def description(self):
+        if self.proposal is None:
+            return None
+        return self.proposal.description
+
+    @property
+    def abstract(self):
+        if self.proposal is None:
+            return None
+        return self.proposal.abstract
+
+    @property
+    def additional_speakers(self):
+        if self.proposal is None:
+            return None
+        return self.proposal.additional_speakers
 
     def speakers(self):
         yield self.speaker

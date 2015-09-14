@@ -88,6 +88,8 @@ class ProposalBase(models.Model):
     kind = models.ForeignKey(ProposalKind, verbose_name=_("Kind"))
 
     title = models.CharField(max_length=100, verbose_name=_("Title"))
+    name = models.CharField(max_length=100, editable=False)
+
     description = models.TextField(
         _("Brief Description"),
         max_length=400,  # @@@ need to enforce 400 in UI
@@ -163,8 +165,12 @@ class ProposalBase(models.Model):
             "kind": self.kind.name,
         }
 
+    def save(self, *args, **kwargs):
+        self.name = "%s - %s(%s)" % (self.title, self.speaker.name, self.kind.name)
+        super(ProposalBase, self).save(*args, **kwargs)
+
     def __str__(self):
-        return self.title
+        return self.name
 
 reversion.register(ProposalBase)
 
