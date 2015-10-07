@@ -41,10 +41,8 @@ To install Symposion, run:
     pip install symposion
 
 Symposion is a Django app. You will need to create a Django project to
-customize and manage your Symposion installation. We have built a [basic
-Django startproject template that includes Symposion][1].
-
-[1]: https://github.com/pinax/pinax-project-symposion
+customize and manage your Symposion installation. We have built a basic
+Django startproject template that includes Symposion (https://github.com/pinax/pinax-project-symposion).
 
 
 Documentation
