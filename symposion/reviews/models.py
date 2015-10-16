@@ -4,26 +4,22 @@ from datetime import datetime
 from decimal import Decimal
 
 from django.db import models
-from django.db.models import Q
+from django.db.models import Q, F
 from django.db.models.signals import post_save
 
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
 
-from markitup.fields import MarkupField
-
+from symposion.markdown_parser import parse
 from symposion.proposals.models import ProposalBase
 from symposion.schedule.models import Presentation
 
 
-class ProposalScoreExpression(object):
-
-    def as_sql(self, qn, connection=None):
-        sql = "((3 * plus_one + plus_zero) - (minus_zero + 3 * minus_one))"
-        return sql, []
-
-    def prepare_database_save(self, unused):
-        return self
+def score_expression():
+    return (
+        (3 * F("plus_one") + F("plus_zero")) -
+        (F("minus_zero") + 3 * F("minus_one"))
+    )
 
 
 class Votes(object):
@@ -97,8 +93,13 @@ class ProposalMessage(models.Model):
     proposal = models.ForeignKey(ProposalBase, related_name="messages", verbose_name=_("Proposal"))
     user = models.ForeignKey(User, verbose_name=_("User"))
 
-    message = MarkupField(verbose_name=_("Message"))
+    message = models.TextField(verbose_name=_("Message"))
+    message_html = models.TextField(blank=True)
     submitted_at = models.DateTimeField(default=datetime.now, editable=False, verbose_name=_("Submitted at"))
+
+    def save(self, *args, **kwargs):
+        self.message_html = parse(self.message)
+        return super(ProposalMessage, self).save(*args, **kwargs)
 
     class Meta:
         ordering = ["submitted_at"]
@@ -115,10 +116,12 @@ class Review(models.Model):
     # No way to encode "-0" vs. "+0" into an IntegerField, and I don't feel
     # like some complicated encoding system.
     vote = models.CharField(max_length=2, blank=True, choices=VOTES.CHOICES, verbose_name=_("Vote"))
-    comment = MarkupField(verbose_name=_("Comment"))
+    comment = models.TextField(verbose_name=_("Comment"))
+    comment_html = models.TextField(blank=True)
     submitted_at = models.DateTimeField(default=datetime.now, editable=False, verbose_name=_("Submitted at"))
 
     def save(self, **kwargs):
+        self.comment_html = parse(self.comment)
         if self.vote:
             vote, created = LatestVote.objects.get_or_create(
                 proposal=self.proposal,
@@ -258,7 +261,7 @@ class ProposalResult(models.Model):
                 vote=VOTES.MINUS_ONE
             ).count()
             result.save()
-            cls._default_manager.filter(pk=result.pk).update(score=ProposalScoreExpression())
+            cls._default_manager.filter(pk=result.pk).update(score=score_expression())
 
     def update_vote(self, vote, previous=None, removal=False):
         mapping = {
@@ -287,7 +290,7 @@ class ProposalResult(models.Model):
             self.comment_count = models.F("comment_count") + 1
         self.save()
         model = self.__class__
-        model._default_manager.filter(pk=self.pk).update(score=ProposalScoreExpression())
+        model._default_manager.filter(pk=self.pk).update(score=score_expression())
 
     class Meta:
         verbose_name = _("proposal_result")
@@ -297,7 +300,8 @@ class ProposalResult(models.Model):
 class Comment(models.Model):
     proposal = models.ForeignKey(ProposalBase, related_name="comments", verbose_name=_("Proposal"))
     commenter = models.ForeignKey(User, verbose_name=_("Commenter"))
-    text = MarkupField(verbose_name=_("Text"))
+    text = models.TextField(verbose_name=_("Text"))
+    text_html = models.TextField(blank=True)
 
     # Or perhaps more accurately, can the user see this comment.
     public = models.BooleanField(choices=[(True, _("public")), (False, _("private"))], default=False, verbose_name=_("Public"))
@@ -306,6 +310,10 @@ class Comment(models.Model):
     class Meta:
         verbose_name = _("comment")
         verbose_name_plural = _("comments")
+
+    def save(self, *args, **kwargs):
+        self.comment_html = parse(self.comment)
+        return super(Comment, self).save(*args, **kwargs)
 
 
 class NotificationTemplate(models.Model):

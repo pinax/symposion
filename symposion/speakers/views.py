@@ -4,9 +4,10 @@ from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
+
+from account.decorators import login_required
 
 from symposion.proposals.models import ProposalBase
 from symposion.speakers.forms import SpeakerForm
@@ -39,9 +40,8 @@ def speaker_create(request):
             return redirect("dashboard")
     else:
         form = SpeakerForm(initial={"name": request.user.get_full_name()})
-
-    return render(request, "speakers/speaker_create.html", {
-        "form": form,
+    return render(request, "symposion/speakers/speaker_create.html", {
+        "speaker_form": form,
     })
 
 
@@ -68,8 +68,8 @@ def speaker_create_staff(request, pk):
     else:
         form = SpeakerForm(initial={"name": user.get_full_name()})
 
-    return render(request, "speakers/speaker_create.html", {
-        "form": form,
+    return render(request, "symposion/speakers/speaker_create.html", {
+        "speaker_form": form,
     })
 
 
@@ -121,8 +121,8 @@ def speaker_edit(request, pk=None):
     else:
         form = SpeakerForm(instance=speaker)
 
-    return render(request, "speakers/speaker_edit.html", {
-        "form": form,
+    return render(request, "symposion/speakers/speaker_edit.html", {
+        "speaker_form": form,
     })
 
 
@@ -132,7 +132,7 @@ def speaker_profile(request, pk):
     if not presentations and not request.user.is_staff:
         raise Http404()
 
-    return render(request, "speakers/speaker_profile.html", {
+    return render(request, "symposion/speakers/speaker_profile.html", {
         "speaker": speaker,
         "presentations": presentations,
     })

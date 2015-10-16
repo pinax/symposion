@@ -4,7 +4,6 @@ from django.db.models import Q
 from django.utils.translation import ugettext_lazy as _
 
 from symposion.proposals.models import SupportingDocument
-# from markitup.widgets import MarkItUpWidget
 
 
 # @@@ generic proposal form

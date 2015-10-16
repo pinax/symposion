@@ -22,7 +22,6 @@ try:
             "django.contrib.contenttypes",
             "django.contrib.sites",
 
-            "markitup",
             "reversion",
 
             "symposion",
@@ -34,8 +33,6 @@ try:
         ],
         SITE_ID=1,
         NOSE_ARGS=['-s'],
-
-        MARKITUP_FILTER=('django.contrib.markup.templatetags.markup.textile', {}),
     )
 
     try:

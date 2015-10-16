@@ -17,10 +17,10 @@ def send_email(to, kind, **kwargs):
     ctx.update(kwargs.get("context", {}))
     subject = "[%s] %s" % (
         current_site.name,
-        render_to_string("emails/%s/subject.txt" % kind, ctx).strip()
+        render_to_string("symposion/emails/%s/subject.txt" % kind, ctx).strip()
     )
 
-    message_html = render_to_string("emails/%s/message.html" % kind, ctx)
+    message_html = render_to_string("symposion/emails/%s/message.html" % kind, ctx)
     message_plaintext = strip_tags(message_html)
 
     from_email = settings.DEFAULT_FROM_EMAIL

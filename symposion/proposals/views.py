@@ -13,11 +13,12 @@ from django.views import static
 
 from django.contrib import messages
 from django.contrib.auth.models import User
-from django.contrib.auth.decorators import login_required
 
 from django.utils.translation import ugettext_lazy as _
 
+from account.decorators import login_required
 from account.models import EmailAddress
+
 from symposion.proposals.models import (
     ProposalBase, ProposalSection, ProposalKind
 )
@@ -58,7 +59,7 @@ def proposal_submit(request):
         for kind in proposal_section.section.proposal_kinds.all():
             kinds.append(kind)
 
-    return render(request, "proposals/proposal_submit.html", {
+    return render(request, "symposion/proposals/proposal_submit.html", {
         "kinds": kinds,
     })
 
@@ -95,9 +96,9 @@ def proposal_submit_kind(request, kind_slug):
     else:
         form = form_class()
 
-    return render(request, "proposals/proposal_submit_kind.html", {
+    return render(request, "symposion/proposals/proposal_submit_kind.html", {
         "kind": kind,
-        "form": form,
+        "proposal_form": form,
     })
 
 
@@ -178,7 +179,7 @@ def proposal_speaker_manage(request, pk):
         "speakers": proposal.speakers(),
         "add_speaker_form": add_speaker_form,
     }
-    return render(request, "proposals/proposal_speaker_manage.html", ctx)
+    return render(request, "symposion/proposals/proposal_speaker_manage.html", ctx)
 
 
 @login_required
@@ -195,7 +196,7 @@ def proposal_edit(request, pk):
             "title": "Proposal editing closed",
             "body": "Proposal editing is closed for this session type."
         }
-        return render(request, "proposals/proposal_error.html", ctx)
+        return render(request, "symposion/proposals/proposal_error.html", ctx)
 
     form_class = get_form(settings.PROPOSAL_FORMS[proposal.kind.slug])
 
@@ -223,7 +224,7 @@ def proposal_edit(request, pk):
     else:
         form = form_class(instance=proposal)
 
-    return render(request, "proposals/proposal_edit.html", {
+    return render(request, "symposion/proposals/proposal_edit.html", {
         "proposal": proposal,
         "form": form,
     })
@@ -276,7 +277,7 @@ def proposal_detail(request, pk):
     else:
         message_form = None
 
-    return render(request, "proposals/proposal_detail.html", {
+    return render(request, "symposion/proposals/proposal_detail.html", {
         "proposal": proposal,
         "message_form": message_form
     })
@@ -298,7 +299,7 @@ def proposal_cancel(request, pk):
         messages.success(request, "%s has been cancelled" % proposal.title)
         return redirect("dashboard")
 
-    return render(request, "proposals/proposal_cancel.html", {
+    return render(request, "symposion/proposals/proposal_cancel.html", {
         "proposal": proposal,
     })
 
@@ -321,7 +322,7 @@ def proposal_leave(request, pk):
     ctx = {
         "proposal": proposal,
     }
-    return render(request, "proposals/proposal_leave.html", ctx)
+    return render(request, "symposion/proposals/proposal_leave.html", ctx)
 
 
 @login_required
@@ -372,7 +373,7 @@ def document_create(request, proposal_pk):
     else:
         form = SupportingDocumentCreateForm()
 
-    return render(request, "proposals/document_create.html", {
+    return render(request, "symposion/proposals/document_create.html", {
         "proposal": proposal,
         "form": form,
     })

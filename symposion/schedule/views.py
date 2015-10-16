@@ -6,10 +6,11 @@ from django.http import Http404, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.template import loader, Context
 
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.sites.models import Site
+
+from account.decorators import login_required
 
 from symposion.schedule.forms import SlotEditForm, ScheduleSectionForm
 from symposion.schedule.models import Schedule, Day, Slot, Presentation, Session, SessionRole
@@ -47,7 +48,7 @@ def schedule_conference(request):
     ctx = {
         "sections": sections,
     }
-    return render(request, "schedule/schedule_conference.html", ctx)
+    return render(request, "symposion/schedule/schedule_conference.html", ctx)
 
 
 def schedule_detail(request, slug=None):
@@ -63,7 +64,7 @@ def schedule_detail(request, slug=None):
         "schedule": schedule,
         "days": days,
     }
-    return render(request, "schedule/schedule_detail.html", ctx)
+    return render(request, "symposion/schedule/schedule_detail.html", ctx)
 
 
 def schedule_list(request, slug=None):
@@ -76,7 +77,7 @@ def schedule_list(request, slug=None):
         "schedule": schedule,
         "presentations": presentations,
     }
-    return render(request, "schedule/schedule_list.html", ctx)
+    return render(request, "symposion/schedule/schedule_list.html", ctx)
 
 
 def schedule_list_csv(request, slug=None):
@@ -92,7 +93,7 @@ def schedule_list_csv(request, slug=None):
         file_slug = "presentations"
     response["Content-Disposition"] = 'attachment; filename="%s.csv"' % file_slug
 
-    response.write(loader.get_template("schedule/schedule_list.csv").render(Context({
+    response.write(loader.get_template("symposion/schedule/schedule_list.csv").render(Context({
         "presentations": presentations,
 
     })))
@@ -126,7 +127,7 @@ def schedule_edit(request, slug=None):
         "days": days,
         "form": form
     }
-    return render(request, "schedule/schedule_edit.html", ctx)
+    return render(request, "symposion/schedule/schedule_edit.html", ctx)
 
 
 @login_required
@@ -160,7 +161,7 @@ def schedule_slot_edit(request, slug, slot_pk):
             "form": form,
             "slot": slot,
         }
-        return render(request, "schedule/_slot_edit.html", ctx)
+        return render(request, "symposion/schedule/_slot_edit.html", ctx)
 
 
 def schedule_presentation_detail(request, pk):
@@ -175,7 +176,7 @@ def schedule_presentation_detail(request, pk):
         "presentation": presentation,
         "schedule": schedule,
     }
-    return render(request, "schedule/presentation_detail.html", ctx)
+    return render(request, "symposion/schedule/presentation_detail.html", ctx)
 
 
 def schedule_json(request):
@@ -230,7 +231,7 @@ def schedule_json(request):
         data.append(slot_data)
 
     return HttpResponse(
-        json.dumps({'schedule': data}),
+        json.dumps({"schedule": data}),
         content_type="application/json"
     )
 
@@ -238,7 +239,7 @@ def schedule_json(request):
 def session_list(request):
     sessions = Session.objects.all().order_by('pk')
 
-    return render(request, "schedule/session_list.html", {
+    return render(request, "symposion/schedule/session_list.html", {
         "sessions": sessions,
     })
 
@@ -306,7 +307,7 @@ def session_detail(request, session_id):
 
         return redirect("schedule_session_detail", session_id)
 
-    return render(request, "schedule/session_detail.html", {
+    return render(request, "symposion/schedule/session_detail.html", {
         "session": session,
         "chair": chair,
         "chair_denied": chair_denied,

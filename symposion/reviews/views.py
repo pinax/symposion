@@ -5,11 +5,13 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.template import Context, Template
 from django.views.decorators.http import require_POST
 
-from django.contrib.auth.decorators import login_required
+from account.decorators import login_required
+
+# @@@ switch to pinax-teams
+from symposion.teams.models import Team
 
 from symposion.conf import settings
 from symposion.proposals.models import ProposalBase, ProposalSection
-from symposion.teams.models import Team
 from symposion.utils.mail import send_email
 
 from symposion.reviews.forms import ReviewForm, SpeakerCommentForm
@@ -21,7 +23,7 @@ from symposion.reviews.models import (
 
 
 def access_not_permitted(request):
-    return render(request, "reviews/access_not_permitted.html")
+    return render(request, "symposion/reviews/access_not_permitted.html")
 
 
 def proposals_generator(request, queryset, user_pk=None, check_speaker=True):
@@ -96,7 +98,7 @@ def review_section(request, section_slug, assigned=False, reviewed="all"):
         "reviewed": reviewed,
     }
 
-    return render(request, "reviews/review_list.html", ctx)
+    return render(request, "symposion/reviews/review_list.html", ctx)
 
 
 @login_required
@@ -120,7 +122,7 @@ def review_list(request, section_slug, user_pk):
     ctx = {
         "proposals": proposals,
     }
-    return render(request, "reviews/review_list.html", ctx)
+    return render(request, "symposion/reviews/review_list.html", ctx)
 
 
 @login_required
@@ -164,7 +166,7 @@ def review_admin(request, section_slug):
         "section_slug": section_slug,
         "reviewers": reviewers(),
     }
-    return render(request, "reviews/review_admin.html", ctx)
+    return render(request, "symposion/reviews/review_admin.html", ctx)
 
 
 # FIXME: This view is too complex according to flake8
@@ -273,7 +275,7 @@ def review_detail(request, pk):
     reviews = Review.objects.filter(proposal=proposal).order_by("-submitted_at")
     messages = proposal.messages.order_by("submitted_at")
 
-    return render(request, "reviews/review_detail.html", {
+    return render(request, "symposion/reviews/review_detail.html", {
         "proposal": proposal,
         "latest_vote": latest_vote,
         "reviews": reviews,
@@ -353,7 +355,7 @@ def review_status(request, section_slug=None, key=None):
     else:
         ctx["proposals"] = proposals
 
-    return render(request, "reviews/review_stats.html", ctx)
+    return render(request, "symposion/reviews/review_stats.html", ctx)
 
 
 @login_required
@@ -364,7 +366,7 @@ def review_assignments(request):
         user=request.user,
         opted_out=False
     )
-    return render(request, "reviews/review_assignment.html", {
+    return render(request, "symposion/reviews/review_assignment.html", {
         "assignments": assignments,
     })
 
@@ -398,7 +400,7 @@ def review_bulk_accept(request, section_slug):
     else:
         form = BulkPresentationForm()
 
-    return render(request, "reviews/review_bulk_accept.html", {
+    return render(request, "symposion/reviews/review_bulk_accept.html", {
         "form": form,
     })
 
@@ -417,7 +419,7 @@ def result_notification(request, section_slug, status):
         "proposals": proposals,
         "notification_templates": notification_templates,
     }
-    return render(request, "reviews/result_notification.html", ctx)
+    return render(request, "symposion/reviews/result_notification.html", ctx)
 
 
 @login_required
@@ -455,7 +457,7 @@ def result_notification_prepare(request, section_slug, status):
         "proposals": proposals,
         "proposal_pks": ",".join([str(pk) for pk in proposal_pks]),
     }
-    return render(request, "reviews/result_notification_prepare.html", ctx)
+    return render(request, "symposion/reviews/result_notification_prepare.html", ctx)
 
 
 @login_required

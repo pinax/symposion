@@ -9,11 +9,12 @@ from zipfile import ZipFile, ZipInfo
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
-from django.contrib.auth.decorators import login_required
 from django.http import Http404, HttpResponse
 from django.shortcuts import render_to_response, redirect, get_object_or_404
 from django.template import RequestContext
 from django.utils.translation import ugettext_lazy as _
+
+from account.decorators import login_required
 
 from symposion.sponsorship.forms import SponsorApplicationForm, \
     SponsorDetailsForm, SponsorBenefitsFormSet
@@ -43,7 +44,7 @@ def sponsor_apply(request):
     else:
         form = SponsorApplicationForm(user=request.user)
 
-    return render_to_response("sponsorship/apply.html", {
+    return render_to_response("symposion/sponsorship/apply.html", {
         "form": form,
     }, context_instance=RequestContext(request))
 
@@ -63,7 +64,7 @@ def sponsor_add(request):
     else:
         form = SponsorApplicationForm(user=request.user)
 
-    return render_to_response("sponsorship/add.html", {
+    return render_to_response("symposion/sponsorship/add.html", {
         "form": form,
     }, context_instance=RequestContext(request))
 
@@ -96,7 +97,7 @@ def sponsor_detail(request, pk):
         form = SponsorDetailsForm(instance=sponsor)
         formset = SponsorBenefitsFormSet(**formset_kwargs)
 
-    return render_to_response("sponsorship/detail.html", {
+    return render_to_response("symposion/sponsorship/detail.html", {
         "sponsor": sponsor,
         "form": form,
         "formset": formset,

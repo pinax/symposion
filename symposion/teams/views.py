@@ -2,12 +2,12 @@ from __future__ import unicode_literals
 from django.http import Http404, HttpResponseNotAllowed
 from django.shortcuts import render, redirect, get_object_or_404
 
-from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-
-from symposion.utils.mail import send_email
 from django.utils.translation import ugettext_lazy as _
 
+from account.decorators import login_required
+
+from symposion.utils.mail import send_email
 from symposion.teams.forms import TeamInvitationForm
 from symposion.teams.models import Team, Membership
 
@@ -75,7 +75,7 @@ def team_detail(request, slug):
     else:
         form = None
 
-    return render(request, "teams/team_detail.html", {
+    return render(request, "symposion/teams/team_detail.html", {
         "team": team,
         "state": state,
         "invite_form": form,

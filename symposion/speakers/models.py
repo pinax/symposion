@@ -9,7 +9,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from django.contrib.auth.models import User
 
-from markitup.fields import MarkupField
+from symposion.markdown_parser import parse
 
 
 @python_2_unicode_compatible
@@ -24,10 +24,11 @@ class Speaker(models.Model):
     name = models.CharField(verbose_name=_("Name"), max_length=100,
                             help_text=_("As you would like it to appear in the"
                                         " conference program."))
-    biography = MarkupField(blank=True, help_text=_("A little bit about you.  Edit using "
+    biography = models.TextField(blank=True, help_text=_("A little bit about you.  Edit using "
                                                     "<a href='http://warpedvisions.org/projects/"
                                                     "markdown-cheat-sheet/target='_blank'>"
                                                     "Markdown</a>."), verbose_name=_("Biography"))
+    biography_html = models.TextField(blank=True)
     photo = models.ImageField(upload_to="speaker_photos", blank=True, verbose_name=_("Photo"))
     annotation = models.TextField(verbose_name=_("Annotation"))  # staff only
     invite_email = models.CharField(max_length=200, unique=True, null=True, db_index=True, verbose_name=_("Invite_email"))
@@ -42,6 +43,10 @@ class Speaker(models.Model):
         ordering = ['name']
         verbose_name = _("Speaker")
         verbose_name_plural = _("Speakers")
+
+    def save(self, *args, **kwargs):
+        self.biography_html = parse(self.biography)
+        return super(Speaker, self).save(*args, **kwargs)
 
     def __str__(self):
         if self.user:

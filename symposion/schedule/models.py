@@ -8,8 +8,7 @@ from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
-from markitup.fields import MarkupField
-
+from symposion.markdown_parser import parse
 from symposion.proposals.models import ProposalBase
 from symposion.conference.models import Section
 from symposion.speakers.models import Speaker
@@ -87,7 +86,12 @@ class Slot(models.Model):
     kind = models.ForeignKey(SlotKind, verbose_name=_("Kind"))
     start = models.TimeField(verbose_name=_("Start"))
     end = models.TimeField(verbose_name=_("End"))
-    content_override = MarkupField(blank=True, verbose_name=_("Content override"))
+    content_override = models.TextField(blank=True, verbose_name=_("Content override"))
+    content_override_html = models.TextField(blank=True)
+
+    def save(self, *args, **kwargs):
+        self.content_override_html = parse(self.content_override)
+        return super(Slot, self).save(*args, **kwargs)
 
     def assign(self, content):
         """
@@ -179,14 +183,21 @@ class Presentation(models.Model):
 
     slot = models.OneToOneField(Slot, null=True, blank=True, related_name="content_ptr", verbose_name=_("Slot"))
     title = models.CharField(max_length=100, verbose_name=_("Title"))
-    description = MarkupField(verbose_name=_("Description"))
-    abstract = MarkupField(verbose_name=_("Abstract"))
+    description = models.TextField(verbose_name=_("Description"))
+    description_html = models.TextField(blank=True)
+    abstract = models.TextField(verbose_name=_("Abstract"))
+    abstract_html = models.TextField(blank=True)
     speaker = models.ForeignKey(Speaker, related_name="presentations", verbose_name=_("Speaker"))
     additional_speakers = models.ManyToManyField(Speaker, related_name="copresentations",
                                                  blank=True, verbose_name=_("Additional speakers"))
     cancelled = models.BooleanField(default=False, verbose_name=_("Cancelled"))
     proposal_base = models.OneToOneField(ProposalBase, related_name="presentation", verbose_name=_("Proposal base"))
     section = models.ForeignKey(Section, related_name="presentations", verbose_name=_("Section"))
+
+    def save(self, *args, **kwargs):
+        self.description_html = parse(self.description)
+        self.abstract_html = parse(self.abstract)
+        return super(Presentation, self).save(*args, **kwargs)
 
     @property
     def number(self):

@@ -15,10 +15,9 @@ from django.core.exceptions import ValidationError
 
 import reversion
 
-from markitup.fields import MarkupField
-
 from model_utils.managers import InheritanceManager
 
+from symposion.markdown_parser import parse
 from symposion.conference.models import Section
 from symposion.speakers.models import Speaker
 
@@ -94,13 +93,14 @@ class ProposalBase(models.Model):
         help_text=_("If your proposal is accepted this will be made public and printed in the "
                     "program. Should be one paragraph, maximum 400 characters.")
     )
-    abstract = MarkupField(
+    abstract = models.TextField(
         _("Detailed Abstract"),
         help_text=_("Detailed outline. Will be made public if your proposal is accepted. Edit "
                     "using <a href='http://daringfireball.net/projects/markdown/basics' "
                     "target='_blank'>Markdown</a>.")
     )
-    additional_notes = MarkupField(
+    abstract_html = models.TextField(blank=True)
+    additional_notes = models.TextField(
         _("Addtional Notes"),
         blank=True,
         help_text=_("Anything else you'd like the program committee to know when making their "
@@ -108,6 +108,7 @@ class ProposalBase(models.Model):
                     "<a href='http://daringfireball.net/projects/markdown/basics' "
                     "target='_blank'>Markdown</a>.")
     )
+    additional_notes_html = models.TextField(blank=True)
     submitted = models.DateTimeField(
         default=now,
         editable=False,
@@ -115,6 +116,9 @@ class ProposalBase(models.Model):
     )
     speaker = models.ForeignKey(Speaker, related_name="proposals", verbose_name=_("Speaker"))
 
+    # @@@ this validation used to exist as a validators keyword on additional_speakers
+    #     M2M field but that is no longer supported by Django. Should be moved to
+    #     the form level
     def additional_speaker_validator(self, a_speaker):
         if a_speaker.speaker.email == self.speaker.email:
             raise ValidationError(_("%s is same as primary speaker.") % a_speaker.speaker.email)
@@ -122,9 +126,13 @@ class ProposalBase(models.Model):
             raise ValidationError(_("%s has already been in speakers.") % a_speaker.speaker.email)
 
     additional_speakers = models.ManyToManyField(Speaker, through="AdditionalSpeaker",
-                                                 blank=True, verbose_name=_("Addtional speakers"),
-                                                 validators=[additional_speaker_validator])
+                                                 blank=True, verbose_name=_("Addtional speakers"))
     cancelled = models.BooleanField(default=False, verbose_name=_("Cancelled"))
+
+    def save(self, *args, **kwargs):
+        self.abstract_html = parse(self.abstract)
+        self.additional_notes_html = parse(self.additional_notes)
+        return super(ProposalBase, self).save(*args, **kwargs)
 
     def can_edit(self):
         return True
