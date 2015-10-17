@@ -312,7 +312,7 @@ class Comment(models.Model):
         verbose_name_plural = _("comments")
 
     def save(self, *args, **kwargs):
-        self.comment_html = parse(self.comment)
+        self.text_html = parse(self.text)
         return super(Comment, self).save(*args, **kwargs)
 
 
