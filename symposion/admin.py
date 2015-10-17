@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from symposion.conference.models import Conference, Section
+from .models import Conference, Section
 
 
 class SectionInline(admin.TabularInline):
