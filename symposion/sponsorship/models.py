@@ -287,7 +287,7 @@ class SponsorBenefit(models.Model):
         verbose_name_plural = _("Sponsor benefits")
 
     def __str__(self):
-        return "%s - %s (%s)" % (self.sponsor, self.benefit, self.benefit_type)
+        return "%s - %s (%s)" % (self.sponsor, self.benefit, self.benefit.type)
 
     def save(self, *args, **kwargs):
         # Validate - save() doesn't clean your model by default, so call
