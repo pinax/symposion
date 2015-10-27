@@ -47,7 +47,7 @@ Django startproject template that includes Symposion (https://github.com/pinax/p
 
 Documentation
 ---------------
-
+The symposion documentation is available at https://symposion.readthedocs.org/en/latest/.
 The Pinax documentation is available at http://pinaxproject.com/pinax/.
 
 
