@@ -1,5 +1,4 @@
 from __future__ import unicode_literals
-from html5lib import html5parser, sanitizer
 
 import markdown
 

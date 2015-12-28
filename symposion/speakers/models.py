@@ -25,9 +25,9 @@ class Speaker(models.Model):
                             help_text=_("As you would like it to appear in the"
                                         " conference program."))
     biography = models.TextField(blank=True, help_text=_("A little bit about you.  Edit using "
-                                                    "<a href='http://warpedvisions.org/projects/"
-                                                    "markdown-cheat-sheet/target='_blank'>"
-                                                    "Markdown</a>."), verbose_name=_("Biography"))
+                                                         "<a href='http://warpedvisions.org/projects/"
+                                                         "markdown-cheat-sheet/target='_blank'>"
+                                                         "Markdown</a>."), verbose_name=_("Biography"))
     biography_html = models.TextField(blank=True)
     photo = models.ImageField(upload_to="speaker_photos", blank=True, verbose_name=_("Photo"))
     annotation = models.TextField(verbose_name=_("Annotation"))  # staff only
