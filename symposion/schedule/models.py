@@ -90,10 +90,6 @@ class Slot(models.Model):
     content_override = models.TextField(blank=True, verbose_name=_("Content override"))
     content_override_html = models.TextField(blank=True)
 
-    def save(self, *args, **kwargs):
-        self.content_override_html = parse(self.content_override)
-        return super(Slot, self).save(*args, **kwargs)
-
     def assign(self, content):
         """
         Assign the given content to this slot and if a previous slot content
