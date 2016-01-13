@@ -1,5 +1,9 @@
 from __future__ import unicode_literals
-from cStringIO import StringIO
+try:
+    from io import StringIO
+except:
+    # Python 2
+    from cStringIO import StringIO
 import itertools
 import logging
 import os
