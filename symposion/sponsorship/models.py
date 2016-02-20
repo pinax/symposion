@@ -136,7 +136,7 @@ class Sponsor(models.Model):
     @property
     def listing_text(self):
         if not hasattr(self, "_listing_text"):
-            self._listing_text = None
+            self._listing_text = ""
             # @@@ better than hard-coding a pk but still not good
             benefits = self.sponsor_benefits.filter(benefit__name="Sponsor Description")
             if benefits.count():
