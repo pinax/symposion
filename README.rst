@@ -30,24 +30,24 @@ This collection can be found at http://pinaxproject.com.
 symposion
 ----------
 
-symposion is a conference management solution from Eldarion. It was built with the generous support of the Python Software Foundation. See http://eldarion.com/symposion/ for commercial support, customization and hosting.
+``symposion`` is a conference management solution from Eldarion. It was built with the generous support of the Python Software Foundation. See http://eldarion.com/symposion/ for commercial support, customization and hosting.
 
 
 Quickstart
 ==========
 
-To install Symposion, run:
+To install ``symposion``, run:
 
     pip install symposion
 
-Symposion is a Django app. You will need to create a Django project to
+``symposion`` is a Django app. You will need to create a Django project to
 customize and manage your Symposion installation. We have built a basic
-Django startproject template that includes Symposion (https://github.com/pinax/pinax-project-symposion).
+Django startproject template that includes ``symposion`` (https://github.com/pinax/pinax-project-symposion).
 
 
 Documentation
 ---------------
-The symposion documentation is available at https://symposion.readthedocs.org/en/latest/.
+The ``symposion`` documentation is available at https://symposion.readthedocs.org/en/latest/.
 The Pinax documentation is available at http://pinaxproject.com/pinax/.
 
 Contribute
