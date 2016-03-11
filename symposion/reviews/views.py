@@ -87,7 +87,8 @@ def review_section(request, section_slug, assigned=False, reviewed="all"):
         queryset = queryset.filter(reviews__user=request.user)
         reviewed = "user_reviewed"
     else:
-        queryset = queryset.exclude(reviews__user=request.user).exclude(speaker=request.user)
+        queryset = queryset.exclude(reviews__user=request.user).exclude(
+            speaker__user=request.user)
         reviewed = "user_not_reviewed"
 
     proposals = proposals_generator(request, queryset)
