@@ -12,4 +12,11 @@ class SpeakerForm(forms.ModelForm):
             "name",
             "biography",
             "photo",
+            "twitter_username",
         ]
+
+    def clean_twitter_username(self):
+        value = self.cleaned_data["twitter_username"]
+        if value.startswith("@"):
+            value = value[1:]
+        return value
