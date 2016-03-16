@@ -34,7 +34,10 @@ def fetch_schedule(slug):
 
 def schedule_conference(request):
 
-    schedules = Schedule.objects.filter(published=True, hidden=False)
+    if request.user.is_staff:
+        schedules = Schedule.objects.filter(hidden=False)
+    else:
+        schedules = Schedule.objects.filter(published=True, hidden=False)
 
     sections = []
     for schedule in schedules:
