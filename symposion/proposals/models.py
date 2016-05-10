@@ -13,9 +13,8 @@ from django.contrib.auth.models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.core.exceptions import ValidationError
 
-import reversion
-
 from model_utils.managers import InheritanceManager
+from reversion import revisions as reversion
 
 from symposion.markdown_parser import parse
 from symposion.conference.models import Section

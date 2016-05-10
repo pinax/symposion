@@ -34,7 +34,10 @@ def fetch_schedule(slug):
 
 def schedule_conference(request):
 
-    schedules = Schedule.objects.filter(published=True, hidden=False)
+    if request.user.is_staff:
+        schedules = Schedule.objects.filter(hidden=False)
+    else:
+        schedules = Schedule.objects.filter(published=True, hidden=False)
 
     sections = []
     for schedule in schedules:
@@ -69,6 +72,8 @@ def schedule_detail(request, slug=None):
 
 def schedule_list(request, slug=None):
     schedule = fetch_schedule(slug)
+    if not schedule.published and not request.user.is_staff:
+        raise Http404()
 
     presentations = Presentation.objects.filter(section=schedule.section)
     presentations = presentations.exclude(cancelled=True)
@@ -82,6 +87,8 @@ def schedule_list(request, slug=None):
 
 def schedule_list_csv(request, slug=None):
     schedule = fetch_schedule(slug)
+    if not schedule.published and not request.user.is_staff:
+        raise Http404()
 
     presentations = Presentation.objects.filter(section=schedule.section)
     presentations = presentations.exclude(cancelled=True).order_by("id")
@@ -169,6 +176,8 @@ def schedule_presentation_detail(request, pk):
     presentation = get_object_or_404(Presentation, pk=pk)
     if presentation.slot:
         schedule = presentation.slot.day.schedule
+        if not schedule.published and not request.user.is_staff:
+            raise Http404()
     else:
         schedule = None
 

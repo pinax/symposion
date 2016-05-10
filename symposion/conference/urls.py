@@ -1,7 +1,7 @@
-from django.conf.urls import patterns, url
+from django.conf.urls import url
 
+from .views import user_list
 
-urlpatterns = patterns(
-    "symposion.conference.views",
-    url(r"^users/$", "user_list", name="user_list"),
-)
+urlpatterns = [
+    url(r"^users/$", user_list, name="user_list"),
+]

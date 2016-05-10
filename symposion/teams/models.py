@@ -8,7 +8,7 @@ from django.utils.translation import ugettext_lazy as _
 
 from django.contrib.auth.models import Permission, User
 
-import reversion
+from reversion import revisions as reversion
 
 
 TEAM_ACCESS_CHOICES = [
