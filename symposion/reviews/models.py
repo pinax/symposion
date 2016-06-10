@@ -3,8 +3,12 @@ from __future__ import unicode_literals
 from datetime import datetime
 from decimal import Decimal
 
+from django.core.exceptions import ValidationError
+
 from django.db import models
 from django.db.models import Q, F
+from django.db.models import Case, When, Value
+from django.db.models import Count
 from django.db.models.signals import post_save
 
 from django.contrib.auth.models import User
@@ -16,23 +20,38 @@ from symposion.schedule.models import Presentation
 
 
 def score_expression():
-    return (
-        (3 * F("plus_one") + F("plus_zero")) -
-        (F("minus_zero") + 3 * F("minus_one"))
+    ''' Produces a score range centred around 0 with a minimum of -1 and a
+    maximum of + 1.
+
+    This function can be overridden.
+    '''
+
+    score = (
+        (1.0 * F("strong_accept") + 0.5 * F("weak_accept")) -
+        (0.5 * F("weak_reject") + 1.0 * F("strong_reject"))
+    ) / (
+        F("vote_count") - F("abstain") * 1.0
+    )
+
+    return Case(
+        When(vote_count=F("abstain"), then=Value("0")),  # no divide by zero
+        default=score,
     )
 
 
 class Votes(object):
-    PLUS_ONE = "+1"
-    PLUS_ZERO = "+0"
-    MINUS_ZERO = "−0"
-    MINUS_ONE = "−1"
+    ABSTAIN = "0"
+    STRONG_ACCEPT = "++"
+    WEAK_ACCEPT = "+"
+    WEAK_REJECT = "-"
+    STRONG_REJECT = "--"
 
     CHOICES = [
-        (PLUS_ONE, _("+1 — Good proposal and I will argue for it to be accepted.")),
-        (PLUS_ZERO, _("+0 — OK proposal, but I will not argue for it to be accepted.")),
-        (MINUS_ZERO, _("−0 — Weak proposal, but I will not argue strongly against acceptance.")),
-        (MINUS_ONE, _("−1 — Serious issues and I will argue to reject this proposal.")),
+        (STRONG_ACCEPT, _("++ : Good proposal and I will argue for it to be accepted.")),
+        (WEAK_ACCEPT, _("+ : OK proposal, but I will not argue for it to be accepted.")),
+        (WEAK_REJECT, _("− : Weak proposal, but I will not argue strongly against acceptance.")),
+        (STRONG_REJECT, _("−- : Serious issues and I will argue to reject this proposal.")),
+        (ABSTAIN, _("Abstain : I do not want to review this proposal and I do not want to see it again.")),
     ]
 VOTES = Votes()
 
@@ -116,9 +135,20 @@ class Review(models.Model):
     # No way to encode "-0" vs. "+0" into an IntegerField, and I don't feel
     # like some complicated encoding system.
     vote = models.CharField(max_length=2, blank=True, choices=VOTES.CHOICES, verbose_name=_("Vote"))
-    comment = models.TextField(verbose_name=_("Comment"))
+    comment = models.TextField(
+        blank=True,
+        verbose_name=_("Comment")
+    )
     comment_html = models.TextField(blank=True)
     submitted_at = models.DateTimeField(default=datetime.now, editable=False, verbose_name=_("Submitted at"))
+
+    def clean(self):
+        err = {}
+        if self.vote != VOTES.ABSTAIN and not self.comment.strip():
+            err["comment"] = ValidationError(_("You must provide a comment"))
+
+        if err:
+            raise ValidationError(err)
 
     def save(self, **kwargs):
         self.comment_html = parse(self.comment)
@@ -177,10 +207,11 @@ class Review(models.Model):
 
     def css_class(self):
         return {
-            self.VOTES.PLUS_ONE: "plus-one",
-            self.VOTES.PLUS_ZERO: "plus-zero",
-            self.VOTES.MINUS_ZERO: "minus-zero",
-            self.VOTES.MINUS_ONE: "minus-one",
+            self.VOTES.ABSTAIN: "abstain",
+            self.VOTES.STRONG_ACCEPT: "strong-accept",
+            self.VOTES.WEAK_ACCEPT: "weak-accept",
+            self.VOTES.WEAK_REJECT: "weak-reject",
+            self.VOTES.STRONG_REJECT: "strong-reject",
         }[self.vote]
 
     @property
@@ -210,10 +241,11 @@ class LatestVote(models.Model):
 
     def css_class(self):
         return {
-            self.VOTES.PLUS_ONE: "plus-one",
-            self.VOTES.PLUS_ZERO: "plus-zero",
-            self.VOTES.MINUS_ZERO: "minus-zero",
-            self.VOTES.MINUS_ONE: "minus-one",
+            self.VOTES.ABSTAIN: "abstain",
+            self.VOTES.STRONG_ACCEPT: "strong-accept",
+            self.VOTES.WEAK_ACCEPT: "weak-accept",
+            self.VOTES.WEAK_REJECT: "weak-reject",
+            self.VOTES.STRONG_REJECT: "strong-reject",
         }[self.vote]
 
 
@@ -221,11 +253,13 @@ class ProposalResult(models.Model):
     proposal = models.OneToOneField(ProposalBase, related_name="result", verbose_name=_("Proposal"))
     score = models.DecimalField(max_digits=5, decimal_places=2, default=Decimal("0.00"), verbose_name=_("Score"))
     comment_count = models.PositiveIntegerField(default=0, verbose_name=_("Comment count"))
+    # vote_count only counts non-abstain votes.
     vote_count = models.PositiveIntegerField(default=0, verbose_name=_("Vote count"))
-    plus_one = models.PositiveIntegerField(default=0, verbose_name=_("Plus one"))
-    plus_zero = models.PositiveIntegerField(default=0, verbose_name=_("Plus zero"))
-    minus_zero = models.PositiveIntegerField(default=0, verbose_name=_("Minus zero"))
-    minus_one = models.PositiveIntegerField(default=0, verbose_name=_("Minus one"))
+    abstain = models.PositiveIntegerField(default=0, verbose_name=_("Abstain"))
+    strong_accept = models.PositiveIntegerField(default=0, verbose_name=_("Strong accept"))
+    weak_accept = models.PositiveIntegerField(default=0, verbose_name=_("Weak accept"))
+    weak_reject = models.PositiveIntegerField(default=0, verbose_name=_("Weak reject"))
+    strong_reject = models.PositiveIntegerField(default=0, verbose_name=_("Strong reject"))
     accepted = models.NullBooleanField(choices=[
         (True, "accepted"),
         (False, "rejected"),
@@ -242,52 +276,30 @@ class ProposalResult(models.Model):
     def full_calculate(cls):
         for proposal in ProposalBase.objects.all():
             result, created = cls._default_manager.get_or_create(proposal=proposal)
-            result.comment_count = Review.objects.filter(proposal=proposal).count()
-            result.vote_count = LatestVote.objects.filter(proposal=proposal).count()
-            result.plus_one = LatestVote.objects.filter(
-                proposal=proposal,
-                vote=VOTES.PLUS_ONE
-            ).count()
-            result.plus_zero = LatestVote.objects.filter(
-                proposal=proposal,
-                vote=VOTES.PLUS_ZERO
-            ).count()
-            result.minus_zero = LatestVote.objects.filter(
-                proposal=proposal,
-                vote=VOTES.MINUS_ZERO
-            ).count()
-            result.minus_one = LatestVote.objects.filter(
-                proposal=proposal,
-                vote=VOTES.MINUS_ONE
-            ).count()
-            result.save()
-            cls._default_manager.filter(pk=result.pk).update(score=score_expression())
+            result.update_vote()
 
-    def update_vote(self, vote, previous=None, removal=False):
-        mapping = {
-            VOTES.PLUS_ONE: "plus_one",
-            VOTES.PLUS_ZERO: "plus_zero",
-            VOTES.MINUS_ZERO: "minus_zero",
-            VOTES.MINUS_ONE: "minus_one",
-        }
-        if previous:
-            if previous == vote:
-                return
-            if removal:
-                setattr(self, mapping[previous], models.F(mapping[previous]) + 1)
-            else:
-                setattr(self, mapping[previous], models.F(mapping[previous]) - 1)
-        else:
-            if removal:
-                self.vote_count = models.F("vote_count") - 1
-            else:
-                self.vote_count = models.F("vote_count") + 1
-        if removal:
-            setattr(self, mapping[vote], models.F(mapping[vote]) - 1)
-            self.comment_count = models.F("comment_count") - 1
-        else:
-            setattr(self, mapping[vote], models.F(mapping[vote]) + 1)
-            self.comment_count = models.F("comment_count") + 1
+    def update_vote(self, *a, **k):
+        proposal = self.proposal
+        self.comment_count = Review.objects.filter(proposal=proposal).count()
+        agg = LatestVote.objects.filter(proposal=proposal).values(
+            "vote"
+        ).annotate(
+            count=Count("vote")
+        )
+        vote_count = {}
+        # Set the defaults
+        for option in VOTES.CHOICES:
+            vote_count[option[0]] = 0
+        # Set the actual values if present
+        for d in agg:
+            vote_count[d["vote"]] = d["count"]
+
+        self.abstain = vote_count[VOTES.ABSTAIN]
+        self.strong_accept = vote_count[VOTES.STRONG_ACCEPT]
+        self.weak_accept = vote_count[VOTES.WEAK_ACCEPT]
+        self.weak_reject = vote_count[VOTES.WEAK_REJECT]
+        self.strong_reject = vote_count[VOTES.STRONG_REJECT]
+        self.vote_count = sum(i[1] for i in vote_count.items()) - self.abstain
         self.save()
         model = self.__class__
         model._default_manager.filter(pk=self.pk).update(score=score_expression())
