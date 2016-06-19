@@ -262,7 +262,7 @@ class ProposalResult(models.Model):
             vote_count[d["vote"]] = d["count"]
 
         self.plus_one = vote_count[VOTES.PLUS_ONE]
-        self.plus_zero = vote_count[VOTES.PLUS_ZEO]
+        self.plus_zero = vote_count[VOTES.PLUS_ZERO]
         self.minus_zero = vote_count[VOTES.MINUS_ZERO]
         self.minus_one = vote_count[VOTES.MINUS_ONE]
         self.vote_count = sum(i[1] for i in vote_count.items())
