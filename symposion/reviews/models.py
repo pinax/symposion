@@ -4,6 +4,7 @@ from datetime import datetime
 from decimal import Decimal
 
 from django.db import models
+from django.db.models import Count
 from django.db.models import Q, F
 from django.db.models.signals import post_save
 
@@ -242,55 +243,33 @@ class ProposalResult(models.Model):
     def full_calculate(cls):
         for proposal in ProposalBase.objects.all():
             result, created = cls._default_manager.get_or_create(proposal=proposal)
-            result.comment_count = Review.objects.filter(proposal=proposal).count()
-            result.vote_count = LatestVote.objects.filter(proposal=proposal).count()
-            result.plus_one = LatestVote.objects.filter(
-                proposal=proposal,
-                vote=VOTES.PLUS_ONE
-            ).count()
-            result.plus_zero = LatestVote.objects.filter(
-                proposal=proposal,
-                vote=VOTES.PLUS_ZERO
-            ).count()
-            result.minus_zero = LatestVote.objects.filter(
-                proposal=proposal,
-                vote=VOTES.MINUS_ZERO
-            ).count()
-            result.minus_one = LatestVote.objects.filter(
-                proposal=proposal,
-                vote=VOTES.MINUS_ONE
-            ).count()
-            result.save()
-            cls._default_manager.filter(pk=result.pk).update(score=score_expression())
+            result.update_vote()
 
-    def update_vote(self, vote, previous=None, removal=False):
-        mapping = {
-            VOTES.PLUS_ONE: "plus_one",
-            VOTES.PLUS_ZERO: "plus_zero",
-            VOTES.MINUS_ZERO: "minus_zero",
-            VOTES.MINUS_ONE: "minus_one",
-        }
-        if previous:
-            if previous == vote:
-                return
-            if removal:
-                setattr(self, mapping[previous], models.F(mapping[previous]) + 1)
-            else:
-                setattr(self, mapping[previous], models.F(mapping[previous]) - 1)
-        else:
-            if removal:
-                self.vote_count = models.F("vote_count") - 1
-            else:
-                self.vote_count = models.F("vote_count") + 1
-        if removal:
-            setattr(self, mapping[vote], models.F(mapping[vote]) - 1)
-            self.comment_count = models.F("comment_count") - 1
-        else:
-            setattr(self, mapping[vote], models.F(mapping[vote]) + 1)
-            self.comment_count = models.F("comment_count") + 1
+    def update_vote(self, *a, **k):
+        proposal = self.proposal
+        self.comment_count = Review.objects.filter(proposal=proposal).count()
+        aggregated_votes = LatestVote.objects.filter(proposal=proposal).values(
+            "vote"
+        ).annotate(
+            count=Count("vote")
+        )
+        vote_count = {}
+        # Set the defaults
+        for option in VOTES.CHOICES:
+            vote_count[option[0]] = 0
+        # Set the actual values if present
+        for d in aggregated_votes:
+            vote_count[d["vote"]] = d["count"]
+
+        self.plus_one = vote_count[VOTES.PLUS_ONE]
+        self.plus_zero = vote_count[VOTES.PLUS_ZEO]
+        self.minus_zero = vote_count[VOTES.MINUS_ZERO]
+        self.minus_one = vote_count[VOTES.MINUS_ONE]
+        self.vote_count = sum(i[1] for i in vote_count.items())
         self.save()
         model = self.__class__
         model._default_manager.filter(pk=self.pk).update(score=score_expression())
+
 
     class Meta:
         verbose_name = _("proposal_result")
