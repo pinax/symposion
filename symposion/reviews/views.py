@@ -290,7 +290,7 @@ def review_detail(request, pk):
 @require_POST
 def review_delete(request, pk):
     review = get_object_or_404(Review, pk=pk)
-    section_slug = review.section.slug
+    section_slug = review.section
 
     if not request.user.has_perm("reviews.can_manage_%s" % section_slug):
         return access_not_permitted(request)
