@@ -270,7 +270,6 @@ class ProposalResult(models.Model):
         model = self.__class__
         model._default_manager.filter(pk=self.pk).update(score=score_expression())
 
-
     class Meta:
         verbose_name = _("proposal_result")
         verbose_name_plural = _("proposal_results")
