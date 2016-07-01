@@ -77,7 +77,7 @@ def sponsor_add(request):
 def sponsor_detail(request, pk):
     sponsor = get_object_or_404(Sponsor, pk=pk)
 
-    if sponsor.applicant != request.user:
+    if sponsor.applicant != request.user and not request.user.is_superuser:
         return redirect("sponsor_list")
 
     formset_kwargs = {
