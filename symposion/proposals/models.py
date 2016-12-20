@@ -173,6 +173,7 @@ class ProposalBase(models.Model):
     def __str__(self):
         return self.title
 
+
 reversion.register(ProposalBase)
 
 

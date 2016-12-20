@@ -203,12 +203,16 @@ class Sponsor(models.Model):
 def _store_initial_level(sender, instance, **kwargs):
     if instance:
         instance._initial_level_id = instance.level_id
+
+
 post_init.connect(_store_initial_level, sender=Sponsor)
 
 
 def _check_level_change(sender, instance, created, **kwargs):
     if instance and (created or instance.level_id != instance._initial_level_id):
         instance.reset_benefits()
+
+
 post_save.connect(_check_level_change, sender=Sponsor)
 
 
@@ -330,4 +334,6 @@ def _denorm_weblogo(sender, instance, created, **kwargs):
             sponsor = instance.sponsor
             sponsor.sponsor_logo = instance
             sponsor.save()
+
+
 post_save.connect(_denorm_weblogo, sender=SponsorBenefit)
