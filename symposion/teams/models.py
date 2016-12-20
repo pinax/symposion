@@ -69,6 +69,7 @@ class Team(models.Model):
         verbose_name = _('Team')
         verbose_name_plural = _('Teams')
 
+
 MEMBERSHIP_STATE_CHOICES = [
     ("applied", _("applied")),
     ("invited", _("invited")),
@@ -92,5 +93,6 @@ class Membership(models.Model):
     class Meta:
         verbose_name = _("Membership")
         verbose_name_plural = _("Memberships")
+
 
 reversion.register(Membership)

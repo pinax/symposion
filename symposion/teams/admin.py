@@ -13,4 +13,5 @@ class MembershipAdmin(VersionAdmin):
     list_filter = ["team"]
     search_fields = ["user__username"]
 
+
 admin.site.register(Membership, MembershipAdmin)
