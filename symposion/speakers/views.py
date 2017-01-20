@@ -34,7 +34,7 @@ def speaker_create(request):
             speaker = form.save(commit=False)
             speaker.user = request.user
             if not found:
-                speaker.invite_email = None
+                speaker.invite_email = ""
             speaker.save()
             messages.success(request, _("Speaker profile created."))
             return redirect("dashboard")
