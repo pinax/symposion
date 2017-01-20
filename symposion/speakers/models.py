@@ -20,7 +20,7 @@ class Speaker(models.Model):
         (2, "Two")
     ]
 
-    user = models.OneToOneField(User, null=True, related_name="speaker_profile", verbose_name=_("User"))
+    user = models.OneToOneField(User, blank=True, null=True, related_name="speaker_profile", verbose_name=_("User"))
     name = models.CharField(verbose_name=_("Name"), max_length=100,
                             help_text=_("As you would like it to appear in the"
                                         " conference program."))
@@ -35,9 +35,9 @@ class Speaker(models.Model):
         blank=True,
         help_text=_(u"Your Twitter account")
     )
-    annotation = models.TextField(verbose_name=_("Annotation"))  # staff only
-    invite_email = models.CharField(max_length=200, unique=True, null=True, db_index=True, verbose_name=_("Invite_email"))
-    invite_token = models.CharField(max_length=40, db_index=True, verbose_name=_("Invite token"))
+    annotation = models.TextField(blank=True, verbose_name=_("Annotation"))  # staff only
+    invite_email = models.CharField(blank=True, default="", max_length=200, db_index=True, verbose_name=_("Invite_email"))
+    invite_token = models.CharField(blank=True, max_length=40, db_index=True, verbose_name=_("Invite token"))
     created = models.DateTimeField(
         default=datetime.datetime.now,
         editable=False,
