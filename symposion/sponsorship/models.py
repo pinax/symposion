@@ -131,7 +131,8 @@ class Sponsor(models.Model):
                 if benefits[0].upload:
                     self.sponsor_logo = benefits[0]
                     self.save()
-        return self.sponsor_logo.upload
+        if self.sponsor_logo:
+            return self.sponsor_logo.upload
 
     @property
     def listing_text(self):
