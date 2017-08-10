@@ -18,7 +18,7 @@ from reversion import revisions as reversion
 
 from symposion.markdown_parser import parse
 from symposion.conference.models import Section
-from symposion.speakers.models import Speaker
+from symposion.speakers.models import SpeakerBase as Speaker
 
 
 @python_2_unicode_compatible

@@ -16,7 +16,7 @@ from symposion.utils.loader import object_from_settings
 
 
 def speaker_model():
-    default = "symposion.speakers.model.DefaultSpeaker"
+    default = "symposion.speakers.models.DefaultSpeaker"
     return object_from_settings("SYMPOSION_SPEAKER_MODEL", default)
 
 
@@ -59,7 +59,7 @@ class SpeakerBase(models.Model):
 
     def save(self, *args, **kwargs):
         self.biography_html = parse(self.biography)
-        return super(Speaker, self).save(*args, **kwargs)
+        return super(SpeakerBase, self).save(*args, **kwargs)
 
     def __str__(self):
         if self.user:

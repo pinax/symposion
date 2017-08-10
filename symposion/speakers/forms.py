@@ -2,7 +2,7 @@ from __future__ import unicode_literals
 from django import forms
 
 from symposion.speakers.models import DefaultSpeaker
-
+from symposion.utils.loader import object_from_settings
 
 def speaker_form():
     default = "symposion.speakers.forms.DefaultSpeakerForm"

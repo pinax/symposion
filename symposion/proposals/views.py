@@ -23,13 +23,16 @@ from symposion.proposals.models import (
     ProposalBase, ProposalSection, ProposalKind
 )
 from symposion.proposals.models import SupportingDocument, AdditionalSpeaker
-from symposion.speakers.models import Speaker
+from symposion.speakers.models import speaker_model
 from symposion.utils.loader import import_named_object
 from symposion.utils.mail import send_email
 
 from symposion.proposals.forms import (
     AddSpeakerForm, SupportingDocumentCreateForm
 )
+
+
+SpeakerModel = speaker_model()
 
 
 def proposal_submit(request):
@@ -116,13 +119,13 @@ def proposal_speaker_manage(request, pk):
                 # create token and look for an existing speaker to prevent
                 # duplicate tokens and confusing the pending speaker
                 try:
-                    pending = Speaker.objects.get(
+                    pending = SpeakerModel.objects.get(
                         Q(user=None, invite_email=email_address)
                     )
-                except Speaker.DoesNotExist:
+                except SpeakerModel.DoesNotExist:
                     salt = hashlib.sha1(str(random.random())).hexdigest()[:5]
                     token = hashlib.sha1(salt + email_address).hexdigest()
-                    pending = Speaker.objects.create(
+                    pending = SpeakerModel.objects.create(
                         invite_email=email_address,
                         invite_token=token,
                     )
