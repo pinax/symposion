@@ -29,9 +29,31 @@ class SpeakerBase(models.Model):
 
     objects = InheritanceManager()
 
+
     def subclass(self):
         ''' Returns the subclassed version of this model '''
-        return self.__class__.objects.get_subclass(id=self.id)
+
+        try:
+            # The cached subclass instance so we don't need to query frequently
+            return self.__subclass_instance__
+        except AttributeError:
+            instance = self.__class__.objects.get_subclass(id=self.id)
+            if type(instance) == type(self):
+                instance = self
+            self.__subclass_instance__ = instance
+            return instance
+
+    def __getattr__(self, attr):
+        ''' Overrides getattr to allow us to return subclass properties
+        from the base class. '''
+
+        try:
+            return super(SpeakerBase, self).__getattr__(attr)
+        except AttributeError:
+            if attr == "__subclass_instance__":
+                raise
+            subclass = self.subclass()
+            return getattr(subclass, attr)
 
     user = models.OneToOneField(User, null=True, related_name="speaker_profile", verbose_name=_("User"))
     name = models.CharField(verbose_name=_("Name"), max_length=100,
