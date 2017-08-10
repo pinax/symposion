@@ -1,9 +1,9 @@
 from __future__ import unicode_literals
 from django.contrib import admin
 
-from symposion.speakers.models import DefaultSpeaker
+from symposion.speakers.models import speaker_model
 
-# TODO: Allow DefaultSpeaker to be switched off in admin.
-admin.site.register(DefaultSpeaker,
-                    list_display=["name", "email", "created", "twitter_username"],
+
+admin.site.register(speaker_model(),
+                    list_display=["name", "email", "created"],
                     search_fields=["name"])
