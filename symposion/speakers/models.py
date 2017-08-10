@@ -15,10 +15,6 @@ from symposion.markdown_parser import parse
 @python_2_unicode_compatible
 class SpeakerBase(models.Model):
 
-    SESSION_COUNT_CHOICES = [
-        (1, "One"),
-        (2, "Two")
-    ]
 
     user = models.OneToOneField(User, null=True, related_name="speaker_profile", verbose_name=_("User"))
     name = models.CharField(verbose_name=_("Name"), max_length=100,
