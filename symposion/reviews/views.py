@@ -147,19 +147,19 @@ def review_admin(request, section_slug):
                 user.total_votes = LatestVote.objects.filter(user=user).count()
                 user.strong_accept = LatestVote.objects.filter(
                     user=user,
-                    vote=LatestVote.VOTES.PLUS_TWO
+                    vote=LatestVote.VOTES.STRONG_ACCEPT
                 ).count()
                 user.weak_accept = LatestVote.objects.filter(
                     user=user,
-                    vote=LatestVote.VOTES.PLUS_ONE
+                    vote=LatestVote.VOTES.WEAK_ACCEPT
                 ).count()
                 user.weak_reject = LatestVote.objects.filter(
                     user=user,
-                    vote=LatestVote.VOTES.MINUS_ONE
+                    vote=LatestVote.VOTES.WEAK_REJECT
                 ).count()
                 user.strong_reject = LatestVote.objects.filter(
                     user=user,
-                    vote=LatestVote.VOTES.MINUS_TWO
+                    vote=LatestVote.VOTES.STRONG_REJECT
                 ).count()
 
                 yield user
