@@ -91,6 +91,16 @@ class SpeakerBase(models.Model):
 #@python_2_unicode_compatible
 class DefaultSpeaker(SpeakerBase):
 
+    def clean_twitter_username(self):
+        value = self.twitter_username
+        if value.startswith("@"):
+            value = value[1:]
+        return value
+
+    def save(self, *args, **kwargs):
+        self.twitter_username = self.clean_twitter_username()
+        return super(DefaultSpeaker, self).save(*args, **kwargs)
+
     twitter_username = models.CharField(
         max_length=15,
         blank=True,

@@ -110,7 +110,7 @@ def speaker_create_token(request, token):
 def speaker_edit(request, pk=None):
     if pk is None:
         try:
-            speaker = request.user.speaker_profile
+            speaker = request.user.speaker_profile.subclass()
         except SpeakerModel.DoesNotExist:
             return redirect("speaker_create")
     else:
