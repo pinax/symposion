@@ -320,19 +320,19 @@ def review_status(request, section_slug=None, key=None):
         queryset = queryset.filter(kind__section__slug=section_slug)
 
     proposals = {
-        # proposals with at least VOTE_THRESHOLD reviews and at least one +2 and no -2s, sorted by
+        # proposals with at least VOTE_THRESHOLD reviews and at least one ++ and no --s, sorted by
         # the 'score'
         "positive": queryset.filter(result__vote_count__gte=VOTE_THRESHOLD, result__strong_accept__gt=0,
                                     result__strong_reject=0).order_by("-result__score"),
-        # proposals with at least VOTE_THRESHOLD reviews and at least one -2 and no +2s, reverse
+        # proposals with at least VOTE_THRESHOLD reviews and at least one -- and no ++s, reverse
         # sorted by the 'score'
         "negative": queryset.filter(result__vote_count__gte=VOTE_THRESHOLD, result__strong_reject__gt=0,
                                     result__strong_accept=0).order_by("result__score"),
-        # proposals with at least VOTE_THRESHOLD reviews and neither a +2 or a -2, sorted by total
+        # proposals with at least VOTE_THRESHOLD reviews and neither a ++ or a --, sorted by total
         # votes (lowest first)
         "indifferent": queryset.filter(result__vote_count__gte=VOTE_THRESHOLD, result__strong_reject=0,
                                        result__strong_accept=0).order_by("result__vote_count"),
-        # proposals with at least VOTE_THRESHOLD reviews and both a +2 and -2, sorted by total
+        # proposals with at least VOTE_THRESHOLD reviews and both a ++ and --, sorted by total
         # votes (highest first)
         "controversial": queryset.filter(result__vote_count__gte=VOTE_THRESHOLD,
                                          result__strong_accept__gt=0, result__strong_reject__gt=0)
