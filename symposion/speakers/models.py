@@ -13,7 +13,7 @@ from symposion.markdown_parser import parse
 
 
 @python_2_unicode_compatible
-class Speaker(models.Model):
+class SpeakerBase(models.Model):
 
     SESSION_COUNT_CHOICES = [
         (1, "One"),
@@ -30,11 +30,6 @@ class Speaker(models.Model):
                                                          "Markdown</a>."), verbose_name=_("Biography"))
     biography_html = models.TextField(blank=True)
     photo = models.ImageField(upload_to="speaker_photos", blank=True, verbose_name=_("Photo"))
-    twitter_username = models.CharField(
-        max_length=15,
-        blank=True,
-        help_text=_(u"Your Twitter account")
-    )
     annotation = models.TextField(verbose_name=_("Annotation"))  # staff only
     invite_email = models.CharField(max_length=200, unique=True, null=True, db_index=True, verbose_name=_("Invite_email"))
     invite_token = models.CharField(max_length=40, db_index=True, verbose_name=_("Invite token"))
@@ -78,3 +73,16 @@ class Speaker(models.Model):
             for p in self.copresentations.all():
                 presentations.append(p)
         return presentations
+
+
+# TODO: Remove
+Speaker = SpeakerBase
+
+#@python_2_unicode_compatible
+class DefaultSpeaker(SpeakerBase):
+
+    twitter_username = models.CharField(
+        max_length=15,
+        blank=True,
+        help_text=_(u"Your Twitter account")
+    )

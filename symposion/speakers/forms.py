@@ -1,13 +1,13 @@
 from __future__ import unicode_literals
 from django import forms
 
-from symposion.speakers.models import Speaker
+from symposion.speakers.models import DefaultSpeaker
 
 
-class SpeakerForm(forms.ModelForm):
+class DefaultSpeakerForm(forms.ModelForm):
 
     class Meta:
-        model = Speaker
+        model = DefaultSpeaker
         fields = [
             "name",
             "biography",

@@ -10,8 +10,12 @@ from django.utils.translation import ugettext_lazy as _
 from account.decorators import login_required
 
 from symposion.proposals.models import ProposalBase
-from symposion.speakers.forms import SpeakerForm
+from symposion.speakers.forms import DefaultSpeakerForm
 from symposion.speakers.models import Speaker
+
+
+# TODO: Allow users to override SpeakerForm in settings.
+SpeakerForm = DefaultSpeakerForm
 
 
 @login_required
