@@ -24,18 +24,12 @@ from symposion.proposals.models import (
 )
 from symposion.proposals.models import SupportingDocument, AdditionalSpeaker
 from symposion.speakers.models import Speaker
+from symposion.utils.loader import import_named_object
 from symposion.utils.mail import send_email
 
 from symposion.proposals.forms import (
     AddSpeakerForm, SupportingDocumentCreateForm
 )
-
-
-def get_form(name):
-    dot = name.rindex(".")
-    mod_name, form_name = name[:dot], name[dot + 1:]
-    __import__(mod_name)
-    return getattr(sys.modules[mod_name], form_name)
 
 
 def proposal_submit(request):
@@ -79,7 +73,7 @@ def proposal_submit_kind(request, kind_slug):
     if not kind.section.proposalsection.is_available():
         return redirect("proposal_submit")
 
-    form_class = get_form(settings.PROPOSAL_FORMS[kind_slug])
+    form_class = import_named_object(settings.PROPOSAL_FORMS[kind_slug])
 
     if request.method == "POST":
         form = form_class(request.POST)

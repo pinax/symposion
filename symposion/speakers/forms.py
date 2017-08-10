@@ -4,6 +4,11 @@ from django import forms
 from symposion.speakers.models import DefaultSpeaker
 
 
+def speaker_form():
+    default = "symposion.speakers.forms.DefaultSpeakerForm"
+    return object_from_settings("SYMPOSION_SPEAKER_FORM", default)
+
+
 class DefaultSpeakerForm(forms.ModelForm):
 
     class Meta:

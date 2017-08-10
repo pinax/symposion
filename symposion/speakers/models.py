@@ -12,6 +12,12 @@ from django.contrib.auth.models import User
 from model_utils.managers import InheritanceManager
 
 from symposion.markdown_parser import parse
+from symposion.utils.loader import object_from_settings
+
+
+def speaker_model():
+    default = "symposion.speakers.model.DefaultSpeaker"
+    return object_from_settings("SYMPOSION_SPEAKER_MODEL", default)
 
 
 @python_2_unicode_compatible
@@ -81,9 +87,6 @@ class SpeakerBase(models.Model):
                 presentations.append(p)
         return presentations
 
-
-# TODO: Remove
-Speaker = SpeakerBase
 
 #@python_2_unicode_compatible
 class DefaultSpeaker(SpeakerBase):
