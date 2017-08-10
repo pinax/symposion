@@ -9,12 +9,23 @@ from django.utils.translation import ugettext_lazy as _
 
 from django.contrib.auth.models import User
 
+from model_utils.managers import InheritanceManager
+
 from symposion.markdown_parser import parse
 
 
 @python_2_unicode_compatible
 class SpeakerBase(models.Model):
+    ''' Base class for conference speaker profiles. This model is not meant to
+    be used directly; it merely contains the default fields that every
+    conference would want. You should instead subclass this model.
+    DefaultSpeaker is a minimal subclass that may be useful. '''
 
+    objects = InheritanceManager()
+
+    def subclass(self):
+        ''' Returns the subclassed version of this model '''
+        return self.__class__.objects.get_subclass(id=self.id)
 
     user = models.OneToOneField(User, null=True, related_name="speaker_profile", verbose_name=_("User"))
     name = models.CharField(verbose_name=_("Name"), max_length=100,
