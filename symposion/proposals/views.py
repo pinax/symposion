@@ -269,7 +269,6 @@ def proposal_detail(request, pk):
                 )
 
                 for reviewer in reviewers:
-                    print "BOOP"
                     ctx = {
                         "proposal": proposal.redacted(),
                         "message": message.redacted(),
