@@ -11,7 +11,7 @@ class ProposalProxy(object):
         ''' Overridden __getattr__ that hides the available speakers. '''
 
         if attr == "speaker":
-            return BlindProposalSpeaker("Primary Speaker")
+            return Parrot("Primary Speaker")
         elif attr == "additional_speakers":
             return None
         elif attr == "speakers":
@@ -24,7 +24,7 @@ class ProposalProxy(object):
             if i == 0:
                 yield self.speaker
             else:
-                yield BlindProposalSpeaker("Additional speaker " + str(i))
+                yield Parrot("Additional speaker " + str(i))
 
 
 class MessageProxy(object):
@@ -38,13 +38,14 @@ class MessageProxy(object):
 
         if attr == "user":
             if message.user.speaker_profile in message.proposal.speakers():
-                return BlindProposalSpeaker("A Speaker")
+                return Parrot("A Speaker")
 
         return getattr(message, attr)
 
 
-class BlindProposalSpeaker(object):
-    ''' Placeholder object for speakers. '''
+class Parrot(object):
+    ''' Placeholder object for speakers. For *any* __getattr__ call, it will
+    repeat back the name it was given. '''
 
     def __init__(self, name):
         self.name = name

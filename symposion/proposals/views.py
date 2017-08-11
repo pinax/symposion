@@ -215,7 +215,7 @@ def proposal_edit(request, pk):
                 message_user = request.user
 
                 if proposal.anonymous_review():
-                    message_user = anonymous_review.BlindProposalSpeaker("A Speaker")
+                    message_user = anonymous_review.Parrot("A Speaker")
 
                 for user in users:
                     ctx = {
