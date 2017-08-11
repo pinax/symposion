@@ -426,7 +426,7 @@ def result_notification(request, section_slug, status):
     ctx = {
         "section_slug": section_slug,
         "status": status,
-        "proposals": proposals,
+        "proposals": [proposal.redacted() for proposal in proposals],
         "notification_templates": notification_templates,
     }
     return render(request, "symposion/reviews/result_notification.html", ctx)
