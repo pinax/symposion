@@ -211,10 +211,16 @@ def proposal_edit(request, pk):
                     Q(proposalmessage__proposal=proposal)
                 )
                 users = users.exclude(id=request.user.id).distinct()
+
+                message_user = request.user
+
+                if proposal.anonymous_review():
+                    message_user = anonymous_review.BlindProposalSpeaker("A Speaker")
+
                 for user in users:
                     ctx = {
-                        "user": request.user,
-                        "proposal": proposal,
+                        "user": message_user,
+                        "proposal": proposal.redacted(),
                     }
                     send_email(
                         [user.email], "proposal_updated",
