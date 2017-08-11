@@ -181,20 +181,22 @@ class ProposalBase(models.Model):
     def __str__(self):
         return self.title
 
+    def anonymous_review(self):
+        ''' Returns true if this proposal's ProposalSection is set to
+        anonymous review. '''
+
+        return self.kind.section.proposalsection.anonymous
+
     def redacted(self):
-        ''' If this proposal's ProposalSection is set to anonymous, then
+        ''' If this proposal has anonymous_review switched on, then
         return a read-only proxy that hides the speakers. Otherwise, return
         this proposal.
         '''
 
-        anonymous = self.kind.section.proposalsection.anonymous
+        if self.anonymous_review():
+            return anonymous_review.ProposalProxy(self)
 
-        proposal = self
-
-        if anonymous:
-            proposal = anonymous_review.ProposalProxy(proposal)
-
-        return proposal
+        return self
 
 
 reversion.register(ProposalBase)

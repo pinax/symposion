@@ -24,6 +24,7 @@ from symposion.proposals.models import (
 )
 from symposion.proposals.models import SupportingDocument, AdditionalSpeaker
 from symposion.speakers.models import Speaker
+from symposion.utils import anonymous_review
 from symposion.utils.mail import send_email
 
 from symposion.proposals.forms import (
@@ -239,6 +240,7 @@ def proposal_detail(request, pk):
     if request.user not in [p.user for p in proposal.speakers()]:
         raise Http404()
 
+    # TODO Why on earth is this not using a Signal?
     if "symposion.reviews" in settings.INSTALLED_APPS:
         from symposion.reviews.forms import SpeakerCommentForm
         message_form = SpeakerCommentForm()
@@ -261,9 +263,10 @@ def proposal_detail(request, pk):
                 )
 
                 for reviewer in reviewers:
+                    print "BOOP"
                     ctx = {
-                        "proposal": proposal,
-                        "message": message,
+                        "proposal": proposal.redacted(),
+                        "message": message.redacted(),
                         "reviewer": True,
                     }
                     send_email(
