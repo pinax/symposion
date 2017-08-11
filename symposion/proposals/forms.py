@@ -8,6 +8,25 @@ from symposion.proposals.models import SupportingDocument
 
 # @@@ generic proposal form
 
+class ProposalMixIn(forms.Form):
+    ''' A MixIn form that allows apps that subclass ProposalBase to set
+    the abstract, description, or additional notes fields to be required.
+
+    See proposals.rst for information.
+    '''
+
+    def _set_field_required(self, key, required):
+        self.fields[key].required = required
+
+    def abstract_required(self, required=True):
+        self._set_field_required("abstract", required)
+
+    def description_required(self, required=True):
+        self._set_field_required("description", required)
+
+    def additional_notes_required(self, required=True):
+        self._set_field_required("additional_notes", required)
+
 
 class AddSpeakerForm(forms.Form):
 
