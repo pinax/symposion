@@ -20,72 +20,7 @@ from symposion.reviews.models import (
     ReviewAssignment, Review, LatestVote, ProposalResult, NotificationTemplate,
     ResultNotification
 )
-
-
-def anonymize(proposal):
-    ''' Takes a proposal and returns it unchanged if review is non-anonymous,
-    or wraps it inside a read-only proxy and anonymises the speakers. '''
-    anonymous = proposal.kind.section.proposalsection.anonymous
-
-    if anonymous:
-        proposal = ProposalProxy(proposal)
-
-    return proposal
-
-
-class ProposalProxy(object):
-    ''' Proxy object that allows for proposals to have their speaker
-    redacted. '''
-
-    def __init__(self, proposal):
-        self.__proposal__ = proposal
-
-    def __getattr__(self, attr):
-
-        if attr == "speaker":
-            return BlindProposalSpeaker("Primary Speaker")
-        elif attr == "additional_speakers":
-            return self._additional_speakers
-        elif attr == "speakers":
-            pass
-        else:
-            return getattr(self.__proposal__, attr)
-
-    def _additional_speakers(self):
-        for i, j in enumerate(self.__proposal__.speakers()):
-            if i == 0:
-                yield self.speaker
-            else:
-                yield BlindProposalSpeaker("Additional speaker " + str(i))
-
-
-class MessageProxy(object):
-    ''' Proxy object that allows messages to redact the speaker name. '''
-
-    def __init__(self, message):
-        self.__message__ = message
-
-    def __getattr__(self, attr):
-        message = self.__message__
-
-        if attr == "user":
-            if message.user.speaker_profile in message.proposal.speakers():
-                return BlindProposalSpeaker(object)
-
-        return getattr(message, attr)
-
-
-class BlindProposalSpeaker(object):
-    ''' Placeholder object for speakers. '''
-
-    def __init__(self, name):
-        self.name = name
-
-    def __str__(self):
-        return self.name
-
-    def __getattr__(self, attr):
-        return "Redacted"
+from symposion.utils import anonymous_review
 
 
 def access_not_permitted(request):
@@ -126,7 +61,7 @@ def proposals_generator(request, queryset, user_pk=None, check_speaker=True):
             obj.user_vote_css = "no-vote"
 
         # Anonymize the speakers if we're doing blind review.
-        obj = anonymize(obj)
+        obj = obj.redacted()
 
         yield obj
 
@@ -346,9 +281,9 @@ def review_detail(request, pk):
     messages = proposal.messages.order_by("submitted_at")
 
     # Anonymize the proposal if needs be.
-    proposal = anonymize(proposal)
+    proposal = proposal.redacted()
 
-    messages = [MessageProxy(message) for message in messages]
+    messages = [anonymous_review.MessageProxy(message) for message in messages]
 
     return render(request, "symposion/reviews/review_detail.html", {
         "proposal": proposal,

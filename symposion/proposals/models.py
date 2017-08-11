@@ -19,6 +19,7 @@ from reversion import revisions as reversion
 from symposion.markdown_parser import parse
 from symposion.conference.models import Section
 from symposion.speakers.models import Speaker
+from symposion.utils import anonymous_review
 
 
 @python_2_unicode_compatible
@@ -179,6 +180,22 @@ class ProposalBase(models.Model):
 
     def __str__(self):
         return self.title
+
+    def redacted(self):
+        ''' If this proposal's ProposalSection is set to anonymous, then
+        return a read-only proxy that hides the speakers. Otherwise, return
+        this proposal.
+        '''
+
+        anonymous = self.kind.section.proposalsection.anonymous
+
+        proposal = self
+
+        if anonymous:
+            proposal = anonymous_review.ProposalProxy(proposal)
+
+        return proposal
+
 
 reversion.register(ProposalBase)
 
