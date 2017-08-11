@@ -22,6 +22,60 @@ from symposion.reviews.models import (
 )
 
 
+def anonymize(proposal):
+    ''' Takes a proposal and returns it unchanged if review is non-anonymous,
+    or wraps it inside a read-only proxy and anonymises the speakers. '''
+    anonymous = proposal.kind.section.proposalsection.anonymous
+
+    if anonymous:
+        proposal = ProposalProxy(proposal)
+
+    return proposal
+
+
+class ProposalProxy(object):
+    ''' Proxy object that allows for proposals to have their speaker
+    redacted. '''
+
+    def __init__(self, proposal):
+        self.__proposal__ = proposal
+
+
+    def __getattr__(self, attr):
+
+        if attr == "speaker":
+            return BlindProposalSpeaker("Primary Speaker")
+        elif attr == "additional_speakers":
+            return self._additional_speakers
+        elif attr == "speakers":
+            pass
+        elif attr == "__proposal__":
+            print "This shouldn't happen"
+            pass
+        else:
+            return getattr(self.__proposal__, attr)
+
+    def _additional_speakers(self):
+        for i, j in enumerate(self.__proposal__.speakers()):
+            if i == 0:
+                yield self.speaker
+            else:
+                yield BlindProposalSpeaker("Additional speaker " + str(i))
+
+
+class BlindProposalSpeaker(object):
+    ''' Placeholder object for speakers. '''
+
+    def __init__(self, name):
+        self.name = name
+
+    def __str__(self):
+        return self.name
+
+    def __getattr__(self, attr):
+        return "Redacted"
+
+
 def access_not_permitted(request):
     return render(request, "symposion/reviews/access_not_permitted.html")
 
@@ -58,6 +112,9 @@ def proposals_generator(request, queryset, user_pk=None, check_speaker=True):
         except LatestVote.DoesNotExist:
             obj.user_vote = None
             obj.user_vote_css = "no-vote"
+
+        # Anonymize the speakers if we're doing blind review.
+        obj = anonymize(obj)
 
         yield obj
 
@@ -275,6 +332,9 @@ def review_detail(request, pk):
 
     reviews = Review.objects.filter(proposal=proposal).order_by("-submitted_at")
     messages = proposal.messages.order_by("submitted_at")
+
+    # Anonymize the proposal if needs be.
+    proposal = anonymize(proposal)
 
     return render(request, "symposion/reviews/review_detail.html", {
         "proposal": proposal,
