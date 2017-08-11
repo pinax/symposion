@@ -14,7 +14,7 @@ from django.conf import settings
 from django.contrib import messages
 from django.contrib.admin.views.decorators import staff_member_required
 from django.http import Http404, HttpResponse
-from django.shortcuts import render_to_response, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.template import RequestContext
 from django.utils.translation import ugettext_lazy as _
 
@@ -48,9 +48,9 @@ def sponsor_apply(request):
     else:
         form = SponsorApplicationForm(user=request.user)
 
-    return render_to_response("symposion/sponsorship/apply.html", {
+    return render(request, "symposion/sponsorship/apply.html", {
         "form": form,
-    }, context_instance=RequestContext(request))
+    })
 
 
 @login_required
@@ -68,9 +68,9 @@ def sponsor_add(request):
     else:
         form = SponsorApplicationForm(user=request.user)
 
-    return render_to_response("symposion/sponsorship/add.html", {
+    return render(request, "symposion/sponsorship/add.html", {
         "form": form,
-    }, context_instance=RequestContext(request))
+    })
 
 
 @login_required
@@ -101,11 +101,11 @@ def sponsor_detail(request, pk):
         form = SponsorDetailsForm(instance=sponsor)
         formset = SponsorBenefitsFormSet(**formset_kwargs)
 
-    return render_to_response("symposion/sponsorship/detail.html", {
+    return render(request, "symposion/sponsorship/detail.html", {
         "sponsor": sponsor,
         "form": form,
         "formset": formset,
-    }, context_instance=RequestContext(request))
+    })
 
 
 @staff_member_required
