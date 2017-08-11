@@ -64,6 +64,10 @@ There is also an ``additional_notes`` field which can be used for speakers to
 communicate additional information about their proposal to reviewers that is
 not intended to be shared with others.
 
+The ``description``, ``abstract``, and ``additional_notes`` fields are
+not required in the model. See "How To Add Custom Proposal Kinds" for
+information on how make these required for end-users.
+
 This base model supports each proposal having multiple speakers (although
 the submitting speaker is always treated differently) and also supports
 the attachments of supporting documents for reviewers that are, like the
@@ -102,10 +106,28 @@ For each kind:
    name of your ``ModelForm``.
 
 For example::
-    
+
     PROPOSAL_FORMS = {
         "tutorial": "pycon.forms.PyConTutorialProposalForm",
         "talk": "pycon.forms.PyConTalkProposalForm",
         "poster": "pycon.forms.PyConPosterProposalForm",
     }
 
+ You may wish to make some of the pre-defined fields required fields. By default
+ neither ``description``, ``abstract``, or ``additional_notes`` are required.
+
+ You can make your proposal form include ``ProposalMixIn`` as a base class
+ which can let you make these fields required within the form in the form's
+ initializer. For example::
+
+     from symposion.proposals.forms import ProposalMixIn
+
+
+     class ProposalForm(forms.ModelForm, ProposalMixIn):
+
+         def __init__(self, *a, **k):
+             super(ProposalForm, self).__init__(*a, **k)
+             print "Hello!"
+             self.description_required()
+
+  will create a form whose ``description`` field is required.
