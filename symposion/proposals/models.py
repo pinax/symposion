@@ -38,6 +38,13 @@ class ProposalSection(models.Model):
     end = models.DateTimeField(null=True, blank=True, verbose_name=_("End"))
     closed = models.NullBooleanField(verbose_name=_("Closed"))
     published = models.NullBooleanField(verbose_name=_("Published"))
+    anonymous = models.BooleanField(
+        verbose_name=_("Anonymous review"),
+        help_text=_("If this option is switched on, reviewers will not be "
+                    "able to see the names of the proposers or coproposers of "
+                    "any proposal in this section."),
+        default=False,
+    )
 
     @classmethod
     def available(cls):
