@@ -40,7 +40,6 @@ class ProposalProxy(object):
     def __init__(self, proposal):
         self.__proposal__ = proposal
 
-
     def __getattr__(self, attr):
 
         if attr == "speaker":
@@ -48,9 +47,6 @@ class ProposalProxy(object):
         elif attr == "additional_speakers":
             return self._additional_speakers
         elif attr == "speakers":
-            pass
-        elif attr == "__proposal__":
-            print "This shouldn't happen"
             pass
         else:
             return getattr(self.__proposal__, attr)
@@ -61,6 +57,22 @@ class ProposalProxy(object):
                 yield self.speaker
             else:
                 yield BlindProposalSpeaker("Additional speaker " + str(i))
+
+
+class MessageProxy(object):
+    ''' Proxy object that allows messages to redact the speaker name. '''
+
+    def __init__(self, message):
+        self.__message__ = message
+
+    def __getattr__(self, attr):
+        message = self.__message__
+
+        if attr == "user":
+            if message.user.speaker_profile in message.proposal.speakers():
+                return BlindProposalSpeaker(object)
+
+        return getattr(message, attr)
 
 
 class BlindProposalSpeaker(object):
@@ -335,6 +347,8 @@ def review_detail(request, pk):
 
     # Anonymize the proposal if needs be.
     proposal = anonymize(proposal)
+
+    messages = [MessageProxy(message) for message in messages]
 
     return render(request, "symposion/reviews/review_detail.html", {
         "proposal": proposal,
