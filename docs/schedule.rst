@@ -1,5 +1,5 @@
 Schedule App
-===========
+============
 
 The ``schedule`` app allows staff members to create the schedule for the 
 conference's presentations, breaks, lunches, etc.
