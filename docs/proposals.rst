@@ -9,8 +9,8 @@ Models
 ProposalSection
 ~~~~~~~~~~~~~~~
 
-Recall that a symposion instance consists of one or more ``Conference``s each
-made up of one or more ``Section``s.
+Recall that a symposion instance consists of one or more ``Conference``\s each
+made up of one or more ``Section``\s.
 
 Different sections can have different open / close dates for proposals.
 This is managed through a ``ProposalSection`` which is a one-to-one with
@@ -38,7 +38,7 @@ A conference, even within a section, may have different kinds of
 presentations, e.g. talks, panels, tutorials, posters.
 
 If these have different requirements for what fields should be in the
-proposal form, they should be modeled as different ``ProposalKind``s. For
+proposal form, they should be modeled as different ``ProposalKind``\s. For
 example, you may want talk proposals to include an intended audience level
 but not require that for poster submissions.
 
