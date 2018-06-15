@@ -42,7 +42,7 @@ class TimeTable(object):
 
     @staticmethod
     def rowspan(times, start, end):
-        return times.index(end) - times.index(start)
+        return max(1, (times.index(end) - times.index(start))/2)
 
 
 def pairwise(iterable):
