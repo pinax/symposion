@@ -13,6 +13,7 @@ from django.utils.translation import ugettext_lazy as _
 from symposion.markdown_parser import parse
 from symposion.proposals.models import ProposalBase
 from symposion.schedule.models import Presentation
+from symposion.utils import anonymous_review
 
 
 def score_expression():
@@ -105,6 +106,18 @@ class ProposalMessage(models.Model):
         ordering = ["submitted_at"]
         verbose_name = _("proposal message")
         verbose_name_plural = _("proposal messages")
+
+
+    def redacted(self):
+        ''' If this message's proposal has anonymous_review switched on, then
+        return a read-only proxy that hides the user *if* the user is a
+        proposer. Otherwise, return this proposal.
+        '''
+
+        if self.proposal.anonymous_review():
+            return anonymous_review.MessageProxy(self)
+
+        return self
 
 
 class Review(models.Model):

@@ -20,6 +20,7 @@ from symposion.reviews.models import (
     ReviewAssignment, Review, LatestVote, ProposalResult, NotificationTemplate,
     ResultNotification
 )
+from symposion.utils import anonymous_review
 
 
 def access_not_permitted(request):
@@ -58,6 +59,9 @@ def proposals_generator(request, queryset, user_pk=None, check_speaker=True):
         except LatestVote.DoesNotExist:
             obj.user_vote = None
             obj.user_vote_css = "no-vote"
+
+        # Anonymize the speakers if we're doing blind review.
+        obj = obj.redacted()
 
         yield obj
 
@@ -276,6 +280,11 @@ def review_detail(request, pk):
     reviews = Review.objects.filter(proposal=proposal).order_by("-submitted_at")
     messages = proposal.messages.order_by("submitted_at")
 
+    # Anonymize the proposal if needs be.
+    proposal = proposal.redacted()
+
+    messages = [anonymous_review.MessageProxy(message) for message in messages]
+
     return render(request, "symposion/reviews/review_detail.html", {
         "proposal": proposal,
         "latest_vote": latest_vote,
@@ -417,7 +426,7 @@ def result_notification(request, section_slug, status):
     ctx = {
         "section_slug": section_slug,
         "status": status,
-        "proposals": proposals,
+        "proposals": [proposal.redacted() for proposal in proposals],
         "notification_templates": notification_templates,
     }
     return render(request, "symposion/reviews/result_notification.html", ctx)

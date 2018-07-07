@@ -30,6 +30,23 @@ This model is currently managed by conference staff via the Django admin
 although given it's part of "conference setup", it may often just be a
 fixture that's loaded.
 
+Anonymous Review
+----------------
+
+ProposalSections can be configured to allow anonymous review. When anonymous
+review is set, no reviewer will be able to see the names, biographies,
+or any other identifying material from the people proposing the talk.
+
+This is achieved by replacing Proposals with a read-only proxy object that
+replaces the ``Speaker`` attribute with an object that returns a given string
+for all of its attributes.
+
+Anonymous review can be switched, which will display the names of the proposers
+to all reviewers.
+
+Note that this information is not suppressed in the database, and may still
+be viewed by looking at a proposal detail in the Django admin.
+
 
 ProposalKind
 ~~~~~~~~~~~~
@@ -102,10 +119,9 @@ For each kind:
    name of your ``ModelForm``.
 
 For example::
-    
+
     PROPOSAL_FORMS = {
         "tutorial": "pycon.forms.PyConTutorialProposalForm",
         "talk": "pycon.forms.PyConTalkProposalForm",
         "poster": "pycon.forms.PyConPosterProposalForm",
     }
-

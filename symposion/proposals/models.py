@@ -19,6 +19,7 @@ from reversion import revisions as reversion
 from symposion.markdown_parser import parse
 from symposion.conference.models import Section
 from symposion.speakers.models import Speaker
+from symposion.utils import anonymous_review
 
 
 @python_2_unicode_compatible
@@ -38,6 +39,13 @@ class ProposalSection(models.Model):
     end = models.DateTimeField(null=True, blank=True, verbose_name=_("End"))
     closed = models.NullBooleanField(verbose_name=_("Closed"))
     published = models.NullBooleanField(verbose_name=_("Published"))
+    anonymous = models.BooleanField(
+        verbose_name=_("Anonymous review"),
+        help_text=_("If this option is switched on, reviewers will not be "
+                    "able to see the names of the proposers or coproposers of "
+                    "any proposal in this section."),
+        default=False,
+    )
 
     @classmethod
     def available(cls):
@@ -172,6 +180,24 @@ class ProposalBase(models.Model):
 
     def __str__(self):
         return self.title
+
+    def anonymous_review(self):
+        ''' Returns true if this proposal's ProposalSection is set to
+        anonymous review. '''
+
+        return self.kind.section.proposalsection.anonymous
+
+    def redacted(self):
+        ''' If this proposal has anonymous_review switched on, then
+        return a read-only proxy that hides the speakers. Otherwise, return
+        this proposal.
+        '''
+
+        if self.anonymous_review():
+            return anonymous_review.ProposalProxy(self)
+
+        return self
+
 
 reversion.register(ProposalBase)
 
