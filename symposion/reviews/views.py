@@ -40,11 +40,12 @@ def proposals_generator(request, queryset, user_pk=None, check_speaker=True):
             ProposalResult.objects.get_or_create(proposal=obj)
 
         obj.comment_count = obj.result.comment_count
+        obj.score = obj.result.score
         obj.total_votes = obj.result.vote_count
-        obj.plus_one = obj.result.plus_one
-        obj.plus_zero = obj.result.plus_zero
-        obj.minus_zero = obj.result.minus_zero
-        obj.minus_one = obj.result.minus_one
+        obj.strong_accept = obj.result.strong_accept
+        obj.weak_accept = obj.result.weak_accept
+        obj.weak_reject = obj.result.weak_reject
+        obj.strong_reject = obj.result.strong_reject
         lookup_params = dict(proposal=obj)
 
         if user_pk:
@@ -144,21 +145,21 @@ def review_admin(request, section_slug):
 
                 user.comment_count = Review.objects.filter(user=user).count()
                 user.total_votes = LatestVote.objects.filter(user=user).count()
-                user.plus_one = LatestVote.objects.filter(
+                user.strong_accept = LatestVote.objects.filter(
                     user=user,
-                    vote=LatestVote.VOTES.PLUS_ONE
+                    vote=LatestVote.VOTES.STRONG_ACCEPT
                 ).count()
-                user.plus_zero = LatestVote.objects.filter(
+                user.weak_accept = LatestVote.objects.filter(
                     user=user,
-                    vote=LatestVote.VOTES.PLUS_ZERO
+                    vote=LatestVote.VOTES.WEAK_ACCEPT
                 ).count()
-                user.minus_zero = LatestVote.objects.filter(
+                user.weak_reject = LatestVote.objects.filter(
                     user=user,
-                    vote=LatestVote.VOTES.MINUS_ZERO
+                    vote=LatestVote.VOTES.WEAK_REJECT
                 ).count()
-                user.minus_one = LatestVote.objects.filter(
+                user.strong_reject = LatestVote.objects.filter(
                     user=user,
-                    vote=LatestVote.VOTES.MINUS_ONE
+                    vote=LatestVote.VOTES.STRONG_REJECT
                 ).count()
 
                 yield user
@@ -268,10 +269,10 @@ def review_detail(request, pk):
 
     proposal.comment_count = proposal.result.comment_count
     proposal.total_votes = proposal.result.vote_count
-    proposal.plus_one = proposal.result.plus_one
-    proposal.plus_zero = proposal.result.plus_zero
-    proposal.minus_zero = proposal.result.minus_zero
-    proposal.minus_one = proposal.result.minus_one
+    proposal.strong_accept = proposal.result.strong_accept
+    proposal.weak_accept = proposal.result.weak_accept
+    proposal.weak_reject = proposal.result.weak_reject
+    proposal.strong_reject = proposal.result.strong_reject
 
     reviews = Review.objects.filter(proposal=proposal).order_by("-submitted_at")
     messages = proposal.messages.order_by("submitted_at")
@@ -319,22 +320,22 @@ def review_status(request, section_slug=None, key=None):
         queryset = queryset.filter(kind__section__slug=section_slug)
 
     proposals = {
-        # proposals with at least VOTE_THRESHOLD reviews and at least one +1 and no -1s, sorted by
+        # proposals with at least VOTE_THRESHOLD reviews and at least one ++ and no --s, sorted by
         # the 'score'
-        "positive": queryset.filter(result__vote_count__gte=VOTE_THRESHOLD, result__plus_one__gt=0,
-                                    result__minus_one=0).order_by("-result__score"),
-        # proposals with at least VOTE_THRESHOLD reviews and at least one -1 and no +1s, reverse
+        "positive": queryset.filter(result__vote_count__gte=VOTE_THRESHOLD, result__strong_accept__gt=0,
+                                    result__strong_reject=0).order_by("-result__score"),
+        # proposals with at least VOTE_THRESHOLD reviews and at least one -- and no ++s, reverse
         # sorted by the 'score'
-        "negative": queryset.filter(result__vote_count__gte=VOTE_THRESHOLD, result__minus_one__gt=0,
-                                    result__plus_one=0).order_by("result__score"),
-        # proposals with at least VOTE_THRESHOLD reviews and neither a +1 or a -1, sorted by total
+        "negative": queryset.filter(result__vote_count__gte=VOTE_THRESHOLD, result__strong_reject__gt=0,
+                                    result__strong_accept=0).order_by("result__score"),
+        # proposals with at least VOTE_THRESHOLD reviews and neither a ++ or a --, sorted by total
         # votes (lowest first)
-        "indifferent": queryset.filter(result__vote_count__gte=VOTE_THRESHOLD, result__minus_one=0,
-                                       result__plus_one=0).order_by("result__vote_count"),
-        # proposals with at least VOTE_THRESHOLD reviews and both a +1 and -1, sorted by total
+        "indifferent": queryset.filter(result__vote_count__gte=VOTE_THRESHOLD, result__strong_reject=0,
+                                       result__strong_accept=0).order_by("result__vote_count"),
+        # proposals with at least VOTE_THRESHOLD reviews and both a ++ and --, sorted by total
         # votes (highest first)
         "controversial": queryset.filter(result__vote_count__gte=VOTE_THRESHOLD,
-                                         result__plus_one__gt=0, result__minus_one__gt=0)
+                                         result__strong_accept__gt=0, result__strong_reject__gt=0)
         .order_by("-result__vote_count"),
         # proposals with fewer than VOTE_THRESHOLD reviews
         "too_few": queryset.filter(result__vote_count__lt=VOTE_THRESHOLD)
