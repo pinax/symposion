@@ -1,8 +1,13 @@
 from __future__ import unicode_literals
+
+from . import forms
+from . import models
+
 from django.core.exceptions import ObjectDoesNotExist
 from django.http import Http404
 from django.shortcuts import render, redirect, get_object_or_404
 
+from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.utils.translation import ugettext_lazy as _
@@ -10,8 +15,10 @@ from django.utils.translation import ugettext_lazy as _
 from account.decorators import login_required
 
 from symposion.proposals.models import ProposalBase
-from symposion.speakers.forms import SpeakerForm
-from symposion.speakers.models import Speaker
+
+
+SpeakerForm = forms.speaker_form()
+SpeakerModel = models.speaker_model()
 
 
 @login_required
@@ -23,9 +30,9 @@ def speaker_create(request):
 
     if request.method == "POST":
         try:
-            speaker = Speaker.objects.get(invite_email=request.user.email)
+            speaker = SpeakerModel.objects.get(invite_email=request.user.email)
             found = True
-        except Speaker.DoesNotExist:
+        except SpeakerModel.DoesNotExist:
             speaker = None
             found = False
         form = SpeakerForm(request.POST, request.FILES, instance=speaker)
@@ -103,8 +110,8 @@ def speaker_create_token(request, token):
 def speaker_edit(request, pk=None):
     if pk is None:
         try:
-            speaker = request.user.speaker_profile
-        except Speaker.DoesNotExist:
+            speaker = request.user.speaker_profile.subclass()
+        except SpeakerModel.DoesNotExist:
             return redirect("speaker_create")
     else:
         if request.user.is_staff:

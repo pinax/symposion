@@ -9,16 +9,51 @@ from django.utils.translation import ugettext_lazy as _
 
 from django.contrib.auth.models import User
 
+from model_utils.managers import InheritanceManager
+
 from symposion.markdown_parser import parse
+from symposion.utils.loader import object_from_settings
+
+
+def speaker_model():
+    default = "symposion.speakers.models.DefaultSpeaker"
+    return object_from_settings("SYMPOSION_SPEAKER_MODEL", default)
 
 
 @python_2_unicode_compatible
-class Speaker(models.Model):
+class SpeakerBase(models.Model):
+    ''' Base class for conference speaker profiles. This model is not meant to
+    be used directly; it merely contains the default fields that every
+    conference would want. You should instead subclass this model.
+    DefaultSpeaker is a minimal subclass that may be useful. '''
 
-    SESSION_COUNT_CHOICES = [
-        (1, "One"),
-        (2, "Two")
-    ]
+    objects = InheritanceManager()
+
+
+    def subclass(self):
+        ''' Returns the subclassed version of this model '''
+
+        try:
+            # The cached subclass instance so we don't need to query frequently
+            return self.__subclass_instance__
+        except AttributeError:
+            instance = self.__class__.objects.get_subclass(id=self.id)
+            if type(instance) == type(self):
+                instance = self
+            self.__subclass_instance__ = instance
+            return instance
+
+    def __getattr__(self, attr):
+        ''' Overrides getattr to allow us to return subclass properties
+        from the base class. '''
+
+        try:
+            return super(SpeakerBase, self).__getattr__(attr)
+        except AttributeError:
+            if attr == "__subclass_instance__":
+                raise
+            subclass = self.subclass()
+            return getattr(subclass, attr)
 
     user = models.OneToOneField(User, null=True, related_name="speaker_profile", verbose_name=_("User"))
     name = models.CharField(verbose_name=_("Name"), max_length=100,
@@ -30,11 +65,6 @@ class Speaker(models.Model):
                                                          "Markdown</a>."), verbose_name=_("Biography"))
     biography_html = models.TextField(blank=True)
     photo = models.ImageField(upload_to="speaker_photos", blank=True, verbose_name=_("Photo"))
-    twitter_username = models.CharField(
-        max_length=15,
-        blank=True,
-        help_text=_(u"Your Twitter account")
-    )
     annotation = models.TextField(verbose_name=_("Annotation"))  # staff only
     invite_email = models.CharField(max_length=200, unique=True, null=True, db_index=True, verbose_name=_("Invite_email"))
     invite_token = models.CharField(max_length=40, db_index=True, verbose_name=_("Invite token"))
@@ -51,7 +81,7 @@ class Speaker(models.Model):
 
     def save(self, *args, **kwargs):
         self.biography_html = parse(self.biography)
-        return super(Speaker, self).save(*args, **kwargs)
+        return super(SpeakerBase, self).save(*args, **kwargs)
 
     def __str__(self):
         if self.user:
@@ -78,3 +108,23 @@ class Speaker(models.Model):
             for p in self.copresentations.all():
                 presentations.append(p)
         return presentations
+
+
+#@python_2_unicode_compatible
+class DefaultSpeaker(SpeakerBase):
+
+    def clean_twitter_username(self):
+        value = self.twitter_username
+        if value.startswith("@"):
+            value = value[1:]
+        return value
+
+    def save(self, *args, **kwargs):
+        self.twitter_username = self.clean_twitter_username()
+        return super(DefaultSpeaker, self).save(*args, **kwargs)
+
+    twitter_username = models.CharField(
+        max_length=15,
+        blank=True,
+        help_text=_(u"Your Twitter account")
+    )

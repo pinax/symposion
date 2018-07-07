@@ -11,7 +11,7 @@ from django.utils.translation import ugettext_lazy as _
 from symposion.markdown_parser import parse
 from symposion.proposals.models import ProposalBase
 from symposion.conference.models import Section
-from symposion.speakers.models import Speaker
+from symposion.speakers.models import SpeakerBase as Speaker
 
 
 @python_2_unicode_compatible

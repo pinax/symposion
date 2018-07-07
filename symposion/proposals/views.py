@@ -23,7 +23,8 @@ from symposion.proposals.models import (
     ProposalBase, ProposalSection, ProposalKind
 )
 from symposion.proposals.models import SupportingDocument, AdditionalSpeaker
-from symposion.speakers.models import Speaker
+from symposion.speakers.models import speaker_model
+from symposion.utils.loader import import_named_object
 from symposion.utils.mail import send_email
 
 from symposion.proposals.forms import (
@@ -31,11 +32,7 @@ from symposion.proposals.forms import (
 )
 
 
-def get_form(name):
-    dot = name.rindex(".")
-    mod_name, form_name = name[:dot], name[dot + 1:]
-    __import__(mod_name)
-    return getattr(sys.modules[mod_name], form_name)
+SpeakerModel = speaker_model()
 
 
 def proposal_submit(request):
@@ -79,7 +76,7 @@ def proposal_submit_kind(request, kind_slug):
     if not kind.section.proposalsection.is_available():
         return redirect("proposal_submit")
 
-    form_class = get_form(settings.PROPOSAL_FORMS[kind_slug])
+    form_class = import_named_object(settings.PROPOSAL_FORMS[kind_slug])
 
     if request.method == "POST":
         form = form_class(request.POST)
@@ -122,13 +119,13 @@ def proposal_speaker_manage(request, pk):
                 # create token and look for an existing speaker to prevent
                 # duplicate tokens and confusing the pending speaker
                 try:
-                    pending = Speaker.objects.get(
+                    pending = SpeakerModel.objects.get(
                         Q(user=None, invite_email=email_address)
                     )
-                except Speaker.DoesNotExist:
+                except SpeakerModel.DoesNotExist:
                     salt = hashlib.sha1(str(random.random())).hexdigest()[:5]
                     token = hashlib.sha1(salt + email_address).hexdigest()
-                    pending = Speaker.objects.create(
+                    pending = SpeakerModel.objects.create(
                         invite_email=email_address,
                         invite_token=token,
                     )
