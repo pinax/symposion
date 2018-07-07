@@ -198,7 +198,7 @@ def proposal_edit(request, pk):
         }
         return render(request, "symposion/proposals/proposal_error.html", ctx)
 
-    form_class = get_form(settings.PROPOSAL_FORMS[proposal.kind.slug])
+    form_class = import_named_object(settings.PROPOSAL_FORMS[proposal.kind.slug])
 
     if request.method == "POST":
         form = form_class(request.POST, instance=proposal)
