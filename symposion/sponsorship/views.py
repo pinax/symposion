@@ -24,6 +24,7 @@ from symposion.sponsorship.forms import SponsorApplicationForm, \
     SponsorDetailsForm, SponsorBenefitsFormSet
 from symposion.sponsorship.models import Benefit, Sponsor, SponsorBenefit, \
     SponsorLevel
+from symposion.utils.mail import send_email
 
 
 log = logging.getLogger(__name__)
@@ -35,6 +36,11 @@ def sponsor_apply(request):
         form = SponsorApplicationForm(request.POST, user=request.user)
         if form.is_valid():
             sponsor = form.save()
+            # Send email notification of successful application.
+            for manager in settings.MANAGERS:
+                send_email([manager[1]],
+                           "sponsor_signup",
+                           context={"sponsor": sponsor})
             if sponsor.sponsor_benefits.all():
                 # Redirect user to sponsor_detail to give extra information.
                 messages.success(request, _("Thank you for your sponsorship "
