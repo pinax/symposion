@@ -62,9 +62,17 @@ class SponsorAdmin(admin.ModelAdmin):
         return mark_safe('<a href="mailto:%s">%s</a>' % (escape(sponsor.contact_email), escape(sponsor.contact_name)))
 
     def applicant_field(self, sponsor):
-        name = sponsor.applicant.get_full_name()
-        email = sponsor.applicant.email
-        return mark_safe('<a href="mailto:%s">%s</a>' % (escape(email), escape(name)))
+        if sponsor.applicant:
+            name = sponsor.applicant.get_full_name()
+            email = sponsor.applicant.email
+            # If applicants do not have a name set, we print
+            # the email address.
+            if not name:
+                name = email
+            return mark_safe("<a href='mailto:{}'>{}</a>".format(
+                             escape(email), escape(name)))
+        else:
+            return mark_safe("")
     applicant_field.short_description = _(u"Applicant")
 
     def get_form(self, *args, **kwargs):
