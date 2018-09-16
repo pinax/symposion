@@ -16,15 +16,27 @@ class TeamPermissionsBackend(object):
         if user_obj.is_anonymous() or obj is not None:
             return set()
         if not hasattr(user_obj, "_team_perm_cache"):
+            # Member permissions        
             memberships = Team.objects.filter(
                 Q(memberships__user=user_obj),
-                Q(memberships__state="manager") | Q(memberships__state="member"),
+                Q(memberships__state="member"),
             )
             perms = memberships.values_list(
                 "permissions__content_type__app_label",
                 "permissions__codename"
             ).order_by()
-            user_obj._team_perm_cache = set(["%s.%s" % (ct, name) for ct, name in perms])
+            permissions = ["%s.%s" % (ct, name) for ct, name in perms] 
+            # Manager permissions
+            memberships = Team.objects.filter(
+                Q(memberships__user=user_obj),
+                Q(memberships__state="manager"),
+            )
+            perms = memberships.values_list(
+                "manager_permissions__content_type__app_label",
+                "manager_permissions__codename"
+            ).order_by()
+            permissions += ["%s.%s" % (ct, name) for ct, name in perms]  
+            user_obj._team_perm_cache = set(permissions)
         return user_obj._team_perm_cache
 
     def has_perm(self, user_obj, perm, obj=None):
