@@ -1,8 +1,7 @@
 from __future__ import unicode_literals
 
-import datetime
-
 from django.db import models
+from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
@@ -37,7 +36,7 @@ class Team(models.Model):
                                                  related_name="manager_teams",
                                                  verbose_name=_("Manager permissions"))
 
-    created = models.DateTimeField(default=datetime.datetime.now,
+    created = models.DateTimeField(default=timezone.now,
                                    editable=False, verbose_name=_("Created"))
 
     @models.permalink

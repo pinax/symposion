@@ -1,12 +1,11 @@
 from __future__ import unicode_literals
 
-import datetime
-
 from django.conf import settings
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.db.models.signals import post_init, post_save
+from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
@@ -79,7 +78,7 @@ class Sponsor(models.Model):
     contact_name = models.CharField(_("Contact Name"), max_length=100)
     contact_email = models.EmailField(_("Contact Email"))
     level = models.ForeignKey(SponsorLevel, verbose_name=_("level"))
-    added = models.DateTimeField(_("added"), default=datetime.datetime.now)
+    added = models.DateTimeField(_("added"), default=timezone.now)
     active = models.BooleanField(_("active"), default=False)
 
     # Denormalization (this assumes only one logo)

@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from datetime import datetime
 from decimal import Decimal
 
 from django.db import models
@@ -8,6 +7,7 @@ from django.db.models import Q, F
 from django.db.models.signals import post_save
 
 from django.contrib.auth.models import User
+from django.utils import timezone
 from django.utils.translation import ugettext_lazy as _
 
 from symposion.markdown_parser import parse
@@ -55,7 +55,7 @@ class ReviewAssignment(models.Model):
 
     origin = models.IntegerField(choices=ORIGIN_CHOICES, verbose_name=_("Origin"))
 
-    assigned_at = models.DateTimeField(default=datetime.now, verbose_name=_("Assigned at"))
+    assigned_at = models.DateTimeField(default=timezone.now, verbose_name=_("Assigned at"))
     opted_out = models.BooleanField(default=False, verbose_name=_("Opted out"))
 
     @classmethod
@@ -95,7 +95,7 @@ class ProposalMessage(models.Model):
 
     message = models.TextField(verbose_name=_("Message"))
     message_html = models.TextField(blank=True)
-    submitted_at = models.DateTimeField(default=datetime.now, editable=False, verbose_name=_("Submitted at"))
+    submitted_at = models.DateTimeField(default=timezone.now, editable=False, verbose_name=_("Submitted at"))
 
     def save(self, *args, **kwargs):
         self.message_html = parse(self.message)
@@ -118,7 +118,7 @@ class Review(models.Model):
     vote = models.CharField(max_length=2, blank=True, choices=VOTES.CHOICES, verbose_name=_("Vote"))
     comment = models.TextField(verbose_name=_("Comment"))
     comment_html = models.TextField(blank=True)
-    submitted_at = models.DateTimeField(default=datetime.now, editable=False, verbose_name=_("Submitted at"))
+    submitted_at = models.DateTimeField(default=timezone.now, editable=False, verbose_name=_("Submitted at"))
 
     def save(self, **kwargs):
         self.comment_html = parse(self.comment)
@@ -201,7 +201,7 @@ class LatestVote(models.Model):
     # No way to encode "-0" vs. "+0" into an IntegerField, and I don't feel
     # like some complicated encoding system.
     vote = models.CharField(max_length=2, choices=VOTES.CHOICES, verbose_name=_("Vote"))
-    submitted_at = models.DateTimeField(default=datetime.now, editable=False, verbose_name=_("Submitted at"))
+    submitted_at = models.DateTimeField(default=timezone.now, editable=False, verbose_name=_("Submitted at"))
 
     class Meta:
         unique_together = [("proposal", "user")]
@@ -305,7 +305,7 @@ class Comment(models.Model):
 
     # Or perhaps more accurately, can the user see this comment.
     public = models.BooleanField(choices=[(True, _("public")), (False, _("private"))], default=False, verbose_name=_("Public"))
-    commented_at = models.DateTimeField(default=datetime.now, verbose_name=_("Commented at"))
+    commented_at = models.DateTimeField(default=timezone.now, verbose_name=_("Commented at"))
 
     class Meta:
         verbose_name = _("comment")
@@ -333,7 +333,7 @@ class ResultNotification(models.Model):
     proposal = models.ForeignKey(ProposalBase, related_name="notifications", verbose_name=_("Proposal"))
     template = models.ForeignKey(NotificationTemplate, null=True, blank=True,
                                  on_delete=models.SET_NULL, verbose_name=_("Template"))
-    timestamp = models.DateTimeField(default=datetime.now, verbose_name=_("Timestamp"))
+    timestamp = models.DateTimeField(default=timezone.now, verbose_name=_("Timestamp"))
     to_address = models.EmailField(verbose_name=_("To address"))
     from_address = models.EmailField(verbose_name=_("From address"))
     subject = models.CharField(max_length=100, verbose_name=_("Subject"))

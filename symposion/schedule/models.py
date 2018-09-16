@@ -5,6 +5,7 @@ import datetime
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.models import User
 from django.db import models
+from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
@@ -281,7 +282,7 @@ class SessionRole(models.Model):
     role = models.IntegerField(choices=SESSION_ROLE_TYPES, verbose_name=_("Role"))
     status = models.NullBooleanField(verbose_name=_("Status"))
 
-    submitted = models.DateTimeField(default=datetime.datetime.now)
+    submitted = models.DateTimeField(default=timezone.now)
 
     class Meta:
         unique_together = [("session", "user", "role")]
