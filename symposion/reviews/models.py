@@ -34,6 +34,8 @@ class Votes(object):
         (MINUS_ZERO, _("−0 — Weak proposal, but I will not argue strongly against acceptance.")),
         (MINUS_ONE, _("−1 — Serious issues and I will argue to reject this proposal.")),
     ]
+
+
 VOTES = Votes()
 
 
@@ -381,4 +383,6 @@ def accepted_proposal(sender, instance=None, **kwargs):
         promote_proposal(instance.proposal)
     else:
         unpromote_proposal(instance.proposal)
+
+
 post_save.connect(accepted_proposal, sender=ProposalResult)
