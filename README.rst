@@ -30,7 +30,7 @@ This collection can be found at http://pinaxproject.com.
 symposion
 ----------
 
-``symposion`` is a conference management solution from Eldarion. It was built with the generous support of the Python Software Foundation. See http://eldarion.com/symposion/ for commercial support, customization and hosting.
+``symposion`` is a conference management solution from Eldarion. It was built with the generous support of the Python Software Foundation. See http://eldarion.com/symposion/ for the benefit and commercial support, customization and hosting.
 
 
 Quickstart
@@ -57,7 +57,7 @@ See this blog post http://blog.pinaxproject.com/2016/02/26/recap-february-pinax-
 
 In case of any questions, we recommend you join our Pinax Slack team (http://slack.pinaxproject.com) and ping us there instead of creating an issue on GitHub. Creating issues on GitHub is of course also valid but we are usually able to help you faster if you ping us in Slack.
 
-We also highly recommend reading our Open Source and Self-Care blog post (http://blog.pinaxproject.com/2016/01/19/open-source-and-self-care/).  
+We also highly recommend reading our Open Source and Self-Care blog post on (http://blog.pinaxproject.com/2016/01/19/open-source-and-self-care/).  
 
 
 Code of Conduct
