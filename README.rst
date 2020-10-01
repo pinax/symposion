@@ -1,4 +1,4 @@
-Symposion
+Symposion An amazing Project...
 ---------
 
 .. image:: http://slack.pinaxproject.com/badge.svg
