@@ -1,4 +1,5 @@
-Symposion
+Symposion 
+This is a brief introduction to my website and the wok we are doing. 
 ---------
 
 .. image:: http://slack.pinaxproject.com/badge.svg
@@ -23,7 +24,7 @@ Symposion
 Pinax
 ------
 
-Pinax is an open-source platform built on the Django Web Framework. It is an ecosystem of reusable Django apps, themes, and starter project templates. 
+Pinax is an open-source platform built on the Django Web Framework. It is an ecosystem of reusable Django apps, amazing themes, and starter project templates. 
 This collection can be found at http://pinaxproject.com.
 
 
