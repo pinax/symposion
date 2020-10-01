@@ -50,7 +50,7 @@ Documentation
 The ``symposion`` documentation is available at https://symposion.readthedocs.org/en/latest/.
 The Pinax documentation is available at http://pinaxproject.com/pinax/.
 
-Contribute
+Our Contribute
 ----------------
 
 See this blog post http://blog.pinaxproject.com/2016/02/26/recap-february-pinax-hangout/ including a video, or our How to Contribute (http://pinaxproject.com/pinax/how_to_contribute/) section for an overview on how contributing to Pinax works. For concrete contribution ideas, please see our Ways to Contribute/What We Need Help With (http://pinaxproject.com/pinax/ways_to_contribute/) section.
