@@ -1,4 +1,4 @@
-Symposion
+Symposion-super work
 ---------
 
 .. image:: http://slack.pinaxproject.com/badge.svg
@@ -20,7 +20,7 @@ Symposion
     :target:  https://pypi.python.org/pypi/symposion/
 
 
-Pinax
+Pinax-a web framework
 ------
 
 Pinax is an open-source platform built on the Django Web Framework. It is an ecosystem of reusable Django apps, themes, and starter project templates. 
