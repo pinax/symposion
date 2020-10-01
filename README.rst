@@ -27,7 +27,7 @@ Pinax is an open-source platform built on the Django Web Framework. It is an eco
 This collection can be found at http://pinaxproject.com.
 
 
-symposion
+Symposion
 ----------
 
 ``symposion`` is a conference management solution from Eldarion. It was built with the generous support of the Python Software Foundation. See http://eldarion.com/symposion/ for commercial support, customization and hosting.
