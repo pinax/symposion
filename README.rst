@@ -27,7 +27,7 @@ Pinax is an open-source platform built on the Django Web Framework. It is an eco
 This collection can be found at http://pinaxproject.com.
 
 
-symposion
+Symposion
 ----------
 
 ``symposion`` is a conference management solution from Eldarion. It was built with the generous support of the Python Software Foundation. See http://eldarion.com/symposion/ for commercial support, customization and hosting.
@@ -60,7 +60,7 @@ In case of any questions, we recommend you join our Pinax Slack team (http://sla
 We also highly recommend reading our Open Source and Self-Care blog post (http://blog.pinaxproject.com/2016/01/19/open-source-and-self-care/).  
 
 
-Code of Conduct
+Code Of Conduct
 ----------------
 
 In order to foster a kind, inclusive, and harassment-free community, the Pinax Project has a code of conduct, which can be found here  http://pinaxproject.com/pinax/code_of_conduct/. We ask you to treat everyone as a smart human programmer that shares an interest in Python, Django, and Pinax with you.
@@ -69,6 +69,6 @@ In order to foster a kind, inclusive, and harassment-free community, the Pinax P
 Pinax Project Blog and Twitter
 -------------------------------
 
-For updates and news regarding the Pinax Project, please follow us on Twitter at @pinaxproject and check out our blog http://blog.pinaxproject.com.
+For Updates and news regarding the Pinax Project, please follow us on Twitter:- @pinaxproject and Check out our blog:- http://blog.pinaxproject.com.
 
 
