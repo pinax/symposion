@@ -1,4 +1,4 @@
-# How to Contribute
+# How to Contribute us
 
 There are many ways you can help contribute to symposion and the various apps,
 themes, and starter projects that it is made up of. Contributing code, writing
