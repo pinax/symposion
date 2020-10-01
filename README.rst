@@ -71,4 +71,7 @@ Pinax Project Blog and Twitter
 
 For updates and news regarding the Pinax Project, please follow us on Twitter at @pinaxproject and check out our blog http://blog.pinaxproject.com.
 
+Revew 
+Nice project bro.
+
 
