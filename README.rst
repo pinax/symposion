@@ -1,4 +1,4 @@
-Symposion
+Symposion an amazing website
 ---------
 
 .. image:: http://slack.pinaxproject.com/badge.svg
