@@ -1,4 +1,4 @@
-# How to Contribute
+# How to Contribute & Help
 
 There are many ways you can help contribute to symposion and the various apps,
 themes, and starter projects that it is made up of. Contributing code, writing
@@ -18,11 +18,7 @@ are ready to work on a bug or a new feature create yourself a new branch. The
 reason why this is important is you can commit as often you like. When you are
 ready you can merge in the change. Let's take a look at a common workflow:
 
-    git checkout -b task-566
-    ... fix and git commit often ...
-    git push origin task-566
-
-The reason we have created two new branches is to stay off of `master`.
+    git checkout -b task-566 is to stay off of `master`.
 Keeping master clean of only upstream changes makes yours and ours lives
 easier. You can then send us a pull request for the fix/feature. Then we can
 easily review it and merge it when ready.
