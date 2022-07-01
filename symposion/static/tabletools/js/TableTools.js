@@ -208,7 +208,7 @@ TableTools = function( oDT, oOpts )
 		
 		/**
 		 * Tag names that are used for creating collections and buttons
-		 *  @namesapce
+		 *  @namespace
 		 */
 		"tags": {}
 	};
