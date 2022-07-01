@@ -87,7 +87,7 @@ class Sponsor(models.Model):
                                      editable=False, verbose_name=_("Sponsor logo"))
 
     # Whether things are complete
-    # True = complete, False = incomplate, Null = n/a for this sponsor level
+    # True = complete, False = incomplete, Null = n/a for this sponsor level
     web_logo_benefit = models.NullBooleanField(_("Web logo benefit"), help_text=_(u"Web logo benefit is complete"))
     print_logo_benefit = models.NullBooleanField(_("Print logo benefit"), help_text=_(u"Print logo benefit is complete"))
     print_description_benefit = models.NullBooleanField(_("Print description benefit"), help_text=_(u"Print description benefit is complete"))
