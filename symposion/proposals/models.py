@@ -100,7 +100,7 @@ class ProposalBase(models.Model):
     )
     abstract_html = models.TextField(blank=True)
     additional_notes = models.TextField(
-        _("Addtional Notes"),
+        _("Additional Notes"),
         blank=True,
         help_text=_("Anything else you'd like the program committee to know when making their "
                     "selection: your past experience, etc. This is not made public. Edit using "
@@ -125,7 +125,7 @@ class ProposalBase(models.Model):
             raise ValidationError(_("%s has already been in speakers.") % a_speaker.speaker.email)
 
     additional_speakers = models.ManyToManyField(Speaker, through="AdditionalSpeaker",
-                                                 blank=True, verbose_name=_("Addtional speakers"))
+                                                 blank=True, verbose_name=_("Additional speakers"))
     cancelled = models.BooleanField(default=False, verbose_name=_("Cancelled"))
 
     def save(self, *args, **kwargs):
@@ -195,7 +195,7 @@ class AdditionalSpeaker(models.Model):
 
     class Meta:
         unique_together = ("speaker", "proposalbase")
-        verbose_name = _("Addtional speaker")
+        verbose_name = _("Additional speaker")
         verbose_name_plural = _("Additional speakers")
 
     def __str__(self):

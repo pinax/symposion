@@ -155,7 +155,7 @@ class Review(models.Model):
             lv.delete()
         else:
             # handle that we've found a latest vote
-            # check if self is the lastest vote
+            # check if self is the latest vote
             if self == latest:
                 # self is the latest review; revert the latest vote to the
                 # previous vote

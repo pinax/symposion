@@ -34,5 +34,5 @@ class BulkPresentationForm(forms.Form):
     talk_ids = forms.CharField(
         label=_("Talk ids"),
         max_length=500,
-        help_text=_("Provide a comma seperated list of talk ids to accept.")
+        help_text=_("Provide a comma separated list of talk ids to accept.")
     )
