@@ -79,7 +79,7 @@ class ScheduleSectionForm(forms.Form):
                 time_obj = time.strptime(x, '%I:%M %p')
             except:
                 return messages.ERROR, u'Malformed time found: %s.' % x
-            time_obj = datetime(100, 1, 1, time_obj.tm_hour, time_obj.tm_min, 00)
+            time_obj = datetime(100, 1, 1, time_obj.tm_hour, time_obj.tm_min, 0)
             times.append(time_obj.time())
         return times
 
